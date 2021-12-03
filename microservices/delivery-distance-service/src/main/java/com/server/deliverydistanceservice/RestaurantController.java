@@ -1,33 +1,37 @@
 package com.server.deliverydistanceservice;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
+import java.net.URI;
 
+@Slf4j
 @RestController
 @AllArgsConstructor
-class RestaurantController {
+public class RestaurantController {
 
-    private DistanceService distanceService;
+    private RestaurantRepository restaurantRepository;
 
-    @GetMapping("/restaurants/nearest/{cep}")
-    public List<RestaurantWithDistanceDto> getNearestRestaurants(@PathVariable("cep") String cep) {
-        return distanceService.getNearestRestaurants(cep);
+    @PostMapping("/restaurants")
+    public ResponseEntity<Restaurant> addRestaurant(@RequestBody Restaurant restaurant, UriComponentsBuilder uriBuilder) {
+        log.info("Add new restaurant: " + restaurant);
+        Restaurant salvo = restaurantRepository.insert(restaurant);
+        UriComponents uriComponents = uriBuilder.path("/restaurants/{id}").buildAndExpand(salvo.getId());
+        URI uri = uriComponents.toUri();
+        return ResponseEntity.created(uri).contentType(MediaType.APPLICATION_JSON).body(salvo);
     }
 
-    @GetMapping("/restaurants/nearest/{cep}/cuisine-type/{cuisineTypeId}")
-    public List<RestaurantWithDistanceDto> getNearestRestaurantsFilteredByCuisineType(@PathVariable("cep") String cep,
-                                                                                      @PathVariable("cuisineTypeId") Long cuisineTypeId) {
-        return distanceService.getNearestRestaurantsFilteredByCuisineType(cuisineTypeId, cep);
+    @PutMapping("/restaurants/{id}")
+    public Restaurant updateRestaurant(@PathVariable("id") Long id, @RequestBody Restaurant restaurant) {
+        if (!restaurantRepository.existsById(id)) {
+            throw new ResourceNotFoundException();
+        }
+        log.info("Update restaurant: " + restaurant);
+        return restaurantRepository.save(restaurant);
     }
-
-    @GetMapping("/restaurants/{cep}/restaurant/{restaurantId}")
-    public RestaurantWithDistanceDto getRestaurantDistance(@PathVariable("cep") String cep,
-                                                           @PathVariable("restaurantId") Long restaurantId) {
-        return distanceService.getRestaurantDistance(restaurantId, cep);
-    }
-
 }
