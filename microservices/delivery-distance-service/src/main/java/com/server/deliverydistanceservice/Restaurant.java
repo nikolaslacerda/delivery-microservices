@@ -4,27 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Document(collection = "restaurants")
 public class Restaurant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String cep;
 
-    private Boolean approved;
-
-    @Column(nullable = false)
     private Long cuisineTypeId;
 
 }

@@ -18,12 +18,12 @@ class DistanceService {
     private RestaurantRepository restaurantRepository;
 
     public List<RestaurantWithDistanceDto> getNearestRestaurants(String cep) {
-        List<Restaurant> restaurants = restaurantRepository.findAllByApproved(true, LIMIT).getContent();
+        List<Restaurant> restaurants = restaurantRepository.findAll(LIMIT).getContent();
         return calculateDistanceToAllRestaurants(restaurants, cep);
     }
 
     public List<RestaurantWithDistanceDto> getNearestRestaurantsFilteredByCuisineType(Long cuisineType, String cep) {
-        List<Restaurant> restaurants = restaurantRepository.findAllByApprovedAndCuisineTypeId(true, cuisineType, LIMIT)
+        List<Restaurant> restaurants = restaurantRepository.findAllByCuisineTypeId(cuisineType, LIMIT)
                 .getContent();
         return calculateDistanceToAllRestaurants(restaurants, cep);
     }

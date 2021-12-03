@@ -2,12 +2,12 @@ package com.server.deliverydistanceservice;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
+public interface RestaurantRepository extends MongoRepository<Restaurant, Long> {
 
-    Page<Restaurant> findAllByApprovedAndCuisineTypeId(boolean approved, Long cuisineTypeId, Pageable limit);
+    Page<Restaurant> findAllByCuisineTypeId(Long cuisineTypeId, Pageable limit);
 
-    Page<Restaurant> findAllByApproved(boolean approved, Pageable limit);
+    Page<Restaurant> findAll(Pageable limit);
 }
 
