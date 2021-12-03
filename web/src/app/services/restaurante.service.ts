@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 export class RestauranteService {
 
   private API = environment.baseUrl;
+  private DISTANCE_API = environment.distanceUrl;
 
   constructor(private http: HttpClient) {
   }
@@ -23,15 +24,15 @@ export class RestauranteService {
   }
 
   maisProximosPorCep(cep: string): Observable<any> {
-    return this.http.get(`${this.API}/restaurantes/mais-proximos/${cep}`);
+    return this.http.get(`${this.DISTANCE_API}/restaurantes/mais-proximos/${cep}`);
   }
 
   maisProximosPorCepETipoDeCozinha(cep: string, tipoDeCozinhaId: string): Observable<any> {
-    return this.http.get(`${this.API}/restaurantes/mais-proximos/${cep}/tipos-de-cozinha/${tipoDeCozinhaId}`);
+    return this.http.get(`${this.DISTANCE_API}/restaurantes/mais-proximos/${cep}/tipos-de-cozinha/${tipoDeCozinhaId}`);
   }
 
   distanciaPorCepEId(cep: string, restauranteId: string): Observable<any> {
-    return this.http.get(`${this.API}/restaurantes/${cep}/restaurante/${restauranteId}`);
+    return this.http.get(`${this.DISTANCE_API}/restaurantes/${cep}/restaurante/${restauranteId}`);
   }
 
   formasDePagamento(restaurante): Observable<any>  {
