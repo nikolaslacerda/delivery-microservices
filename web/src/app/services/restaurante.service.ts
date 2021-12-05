@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class RestauranteService {
 
   private API = environment.baseUrl;
-  private DISTANCE_API = environment.distanceUrl;
+  private DISTANCE_API = environment.baseUrl;
 
   constructor(private http: HttpClient) {
   }
@@ -60,6 +60,10 @@ export class RestauranteService {
 
   aprova(restaurante): Observable<any> {
     return this.http.patch(`${this.API}/admin/restaurantes/${restaurante.id}`, restaurante);
+  }
+
+  porCepEIdComDistancia(cep: string, restauranteId: string): Observable<any> {
+    return this.http.get(`${this.API}/restaurants-with-distance/${cep}/restaurant/${restauranteId}`);
   }
 
 }

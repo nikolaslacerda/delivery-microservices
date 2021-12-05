@@ -1,10 +1,10 @@
-package com.server.deliverypaymentservice;
+package com.server.deliverypaymentservice.integration;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@FeignClient(url = "${delivery.order.service.url}", name = "order")
+@FeignClient(url = "${monolith}", name = "order")
 public interface OrderRestClient {
 
     @PutMapping("/orders/{orderId}/paid")

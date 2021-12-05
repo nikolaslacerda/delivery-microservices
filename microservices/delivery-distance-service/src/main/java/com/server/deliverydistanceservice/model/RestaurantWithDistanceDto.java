@@ -1,4 +1,4 @@
-package com.server.deliverydistanceservice;
+package com.server.deliverydistanceservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-class RestaurantWithDistanceDto {
+public class RestaurantWithDistanceDto {
 
     private Long restaurantId;
 

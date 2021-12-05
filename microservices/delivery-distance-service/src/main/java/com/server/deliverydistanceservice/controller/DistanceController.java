@@ -1,5 +1,7 @@
-package com.server.deliverydistanceservice;
+package com.server.deliverydistanceservice.controller;
 
+import com.server.deliverydistanceservice.model.RestaurantWithDistanceDto;
+import com.server.deliverydistanceservice.service.DistanceService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

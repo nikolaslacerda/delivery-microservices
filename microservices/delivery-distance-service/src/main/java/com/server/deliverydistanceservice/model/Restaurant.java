@@ -1,4 +1,4 @@
-package com.server.deliverydistanceservice;
+package com.server.deliverydistanceservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.server.deliverypaymentservice;
+package com.server.deliverypaymentservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-class Payment {
+public class Payment {
 
     public enum Status {
         CREATED,

@@ -1,5 +1,10 @@
-package com.server.deliverypaymentservice;
+package com.server.deliverypaymentservice.controller;
 
+import com.server.deliverypaymentservice.exception.ResourceNotFoundException;
+import com.server.deliverypaymentservice.integration.OrderRestClient;
+import com.server.deliverypaymentservice.model.Payment;
+import com.server.deliverypaymentservice.model.PaymentDto;
+import com.server.deliverypaymentservice.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
@@ -18,7 +23,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/payment")
-class PaymentController {
+public class PaymentController {
 
     private PaymentRepository paymentRepository;
     private OrderRestClient orderRestClient;

@@ -1,5 +1,9 @@
-package com.server.deliverydistanceservice;
+package com.server.deliverydistanceservice.service;
 
+import com.server.deliverydistanceservice.repository.RestaurantRepository;
+import com.server.deliverydistanceservice.exception.ResourceNotFoundException;
+import com.server.deliverydistanceservice.model.Restaurant;
+import com.server.deliverydistanceservice.model.RestaurantWithDistanceDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-class DistanceService {
+public class DistanceService {
 
     private static final Pageable LIMIT = PageRequest.of(0, 5);
 
