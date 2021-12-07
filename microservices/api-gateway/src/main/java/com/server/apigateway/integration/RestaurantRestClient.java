@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Map;
 
-@FeignClient("monolith")
+@FeignClient(name = "monolith", fallback = RestaurantRestClientFallback.class)
 public interface RestaurantRestClient {
 
     @GetMapping("/restaurants/{id}")
