@@ -1,6 +1,7 @@
 package br.com.caelum.eats.pedido;
 
 import lombok.AllArgsConstructor;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -8,11 +9,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static br.com.caelum.eats.pedido.amqp.OrderConfig.UpdateOrderSource;
+
 @RestController
 @AllArgsConstructor
 class PedidoController {
 
     private PedidoRepository repo;
+    private UpdateOrderSource updateOrderSource;
 
     @GetMapping("/pedidos")
     List<PedidoDto> lista() {
@@ -40,7 +44,9 @@ class PedidoController {
     @PutMapping("/pedidos/{id}/status")
     PedidoDto atualizaStatus(@RequestBody Pedido pedido) {
         repo.atualizaStatus(pedido.getStatus(), pedido);
-        return new PedidoDto(pedido);
+        PedidoDto dto = new PedidoDto(pedido);
+        updateOrderSource.orderWithUpdatedStatus().send(MessageBuilder.withPayload(dto).build());
+        return dto;
     }
 
     @GetMapping("/parceiros/restaurantes/{restauranteId}/pedidos/pendentes")
@@ -57,6 +63,9 @@ class PedidoController {
         }
         pedido.setStatus(Pedido.Status.PAGO);
         repo.atualizaStatus(Pedido.Status.PAGO, pedido);
+
+        PedidoDto dto = new PedidoDto(pedido);
+        updateOrderSource.orderWithUpdatedStatus().send(MessageBuilder.withPayload(dto).build());
     }
 
 }

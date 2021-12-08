@@ -1,5 +1,6 @@
 package com.server.deliverypaymentservice.controller;
 
+import com.server.deliverypaymentservice.amqp.NotifierConfirmedPayment;
 import com.server.deliverypaymentservice.exception.ResourceNotFoundException;
 import com.server.deliverypaymentservice.integration.OrderRestClient;
 import com.server.deliverypaymentservice.model.Payment;
@@ -27,6 +28,7 @@ public class PaymentController {
 
     private PaymentRepository paymentRepository;
     private OrderRestClient orderRestClient;
+    private NotifierConfirmedPayment paymentNotifier;
 
     @GetMapping("/{id}")
     public EntityModel<PaymentDto> detail(@PathVariable("id") Long id) {
@@ -79,6 +81,8 @@ public class PaymentController {
         Payment payment = paymentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         payment.setStatus(Payment.Status.CONFIRM);
         paymentRepository.save(payment);
+
+        paymentNotifier.notifyConfirmedPayment(payment);
 
         Long orderId = payment.getOrderId();
         orderRestClient.sendPaidStatus(orderId);
