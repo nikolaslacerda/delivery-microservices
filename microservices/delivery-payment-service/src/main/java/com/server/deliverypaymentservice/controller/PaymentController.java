@@ -7,8 +7,8 @@ import com.server.deliverypaymentservice.model.Payment;
 import com.server.deliverypaymentservice.model.PaymentDto;
 import com.server.deliverypaymentservice.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,8 +17,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 
 @RestController
@@ -31,7 +31,7 @@ public class PaymentController {
     private NotifierConfirmedPayment paymentNotifier;
 
     @GetMapping("/{id}")
-    public EntityModel<PaymentDto> detail(@PathVariable("id") Long id) {
+    public Resource<PaymentDto> detail(@PathVariable("id") Long id) {
         Payment payment = paymentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 
         List<Link> links = new ArrayList<>();
@@ -48,15 +48,15 @@ public class PaymentController {
         }
 
         PaymentDto dto = new PaymentDto(payment);
-        return EntityModel.of(dto, links);
+        return new Resource<>(dto, links);
     }
 
     @PostMapping
-    public ResponseEntity<EntityModel<PaymentDto>> create(@RequestBody Payment pagamento,
-                                                          UriComponentsBuilder uriBuilder) {
-        pagamento.setStatus(Payment.Status.CREATED);
-        Payment salvo = paymentRepository.save(pagamento);
-        URI path = uriBuilder.path("/payments/{id}").buildAndExpand(salvo.getId()).toUri();
+    public ResponseEntity<Resource<PaymentDto>> create(@RequestBody Payment payment,
+                                                       UriComponentsBuilder uriBuilder) {
+        payment.setStatus(Payment.Status.CREATED);
+        Payment salvo = paymentRepository.save(payment);
+        URI path = uriBuilder.path("/payment/{id}").buildAndExpand(salvo.getId()).toUri();
         PaymentDto dto = new PaymentDto(salvo);
 
         Long id = salvo.getId();
@@ -72,12 +72,12 @@ public class PaymentController {
         Link cancel = linkTo(methodOn(PaymentController.class).cancel(id)).withRel("cancel");
         links.add(cancel);
 
-        EntityModel<PaymentDto> resource = EntityModel.of(dto, links);
+        Resource<PaymentDto> resource = new Resource<>(dto, links);
         return ResponseEntity.created(path).body(resource);
     }
 
     @PutMapping("/{id}")
-    public EntityModel<PaymentDto> confirm(@PathVariable Long id) {
+    public Resource<PaymentDto> confirm(@PathVariable Long id) {
         Payment payment = paymentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         payment.setStatus(Payment.Status.CONFIRM);
         paymentRepository.save(payment);
@@ -93,11 +93,11 @@ public class PaymentController {
         links.add(self);
 
         PaymentDto dto = new PaymentDto(payment);
-        return EntityModel.of(dto, links);
+        return new Resource<>(dto, links);
     }
 
     @DeleteMapping("/{id}")
-    public EntityModel<PaymentDto> cancel(@PathVariable Long id) {
+    public Resource<PaymentDto> cancel(@PathVariable Long id) {
         Payment payment = paymentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         payment.setStatus(Payment.Status.CANCELED);
         paymentRepository.save(payment);
@@ -108,7 +108,7 @@ public class PaymentController {
         links.add(self);
 
         PaymentDto dto = new PaymentDto(payment);
-        return EntityModel.of(dto, links);
+        return new Resource<>(dto, links);
     }
 
 }

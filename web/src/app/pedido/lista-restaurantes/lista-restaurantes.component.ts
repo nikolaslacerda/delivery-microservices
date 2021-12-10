@@ -56,7 +56,7 @@ export class ListaRestaurantesComponent implements OnInit {
   }
 
   obtemDetalhesDosRestaurantes() {
-    const idsDosRestaurantes = this.restaurantesMaisProximos.map(maisProximo => maisProximo.restauranteId).join(',');
+    const idsDosRestaurantes = this.restaurantesMaisProximos.map(maisProximo => maisProximo.restaurantId).join(',');
     this.restaurantesService.porIds(idsDosRestaurantes)
       .subscribe(restaurantes => {
         this.restaurantesComDetalhes = restaurantes;
@@ -67,8 +67,8 @@ export class ListaRestaurantesComponent implements OnInit {
 
   agregaDistanciaAosDetalhesDosRestaurantes() {
     this.restaurantesComDetalhes.forEach(restaurante => {
-      const maisProximo = this.restaurantesMaisProximos.find(maisProximo => restaurante.id === maisProximo.restauranteId);
-      restaurante.distancia = maisProximo.distancia;
+      const maisProximo = this.restaurantesMaisProximos.find(maisProximo => restaurante.id == maisProximo.restaurantId);
+      restaurante.distance = maisProximo.distance;
     });
   }
 
@@ -83,6 +83,6 @@ export class ListaRestaurantesComponent implements OnInit {
   }
 
   escolher(restaurante) {
-    this.router.navigateByUrl(`/pedidos/${this.cep}/restaurante/${restaurante.id}`);
+    this.router.navigateByUrl(`/orders/${this.cep}/restaurant/${restaurante.id}`);
   }
 }

@@ -9,23 +9,23 @@ import { environment } from 'src/environments/environment';
 })
 export class AvaliacoesService {
 
-  private API = environment.baseUrl + '/restaurantes';
+  private API = environment.baseUrl + '/restaurants';
 
   constructor(private http: HttpClient) {
   }
 
   porIdDoRestaurante(restauranteId: string): Observable<any> {
-    return this.http.get(`${this.API}/${restauranteId}/avaliacoes`);
+    return this.http.get(`${this.API}/${restauranteId}/reviews`);
   }
 
   salva(avaliacao: any): Observable<any> {
     const restauranteId = avaliacao.pedido.restaurante.id;
-    return this.http.post(`${this.API}/${restauranteId}/avaliacoes`, avaliacao);
+    return this.http.post(`${this.API}/${restauranteId}/reviews`, avaliacao);
   }
 
   mediaDasAvaliacoesDosRestaurantes(restaurantes: any[]): Observable<any> {
     const idsDosRestaurantes = restaurantes.map(restaurante => restaurante.id).join(',');
-    return this.http.get(`${this.API}/media-avaliacoes?idsDosRestaurantes=${idsDosRestaurantes}`);
+    return this.http.get(`${this.API}/rating?restaurants=${idsDosRestaurantes}`);
   }
 
 }

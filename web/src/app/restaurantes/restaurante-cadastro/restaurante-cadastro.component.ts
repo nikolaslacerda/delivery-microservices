@@ -47,7 +47,7 @@ export class RestauranteCadastroComponent implements OnInit {
         .subscribe((restaurante: any) => {
           if (restaurante) {
             this.restaurante = restaurante;
-            this.router.navigate([`/restaurantes/${restaurante.id}`]);
+            this.router.navigate([`/restaurants/${restaurante.id}`]);
           }
         }, () => this.router.navigate(['']));
     }
@@ -77,7 +77,7 @@ export class RestauranteCadastroComponent implements OnInit {
         if (this.estaAdicionando()) {
           this.authenticationService.login(this.userInfo)
             .subscribe(() => {
-              this.router.navigate([`/restaurantes/${restaurante.id}`]);
+              this.router.navigate([`/restaurants/${restaurante.id}`]);
             });
         }
       });

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Component
+//@Component
 public class RateLimitingZuulFilter extends ZuulFilter {
 
     private final RateLimiter rateLimiter = RateLimiter.create(1.0 / 30.0); // permits per second

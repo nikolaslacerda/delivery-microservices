@@ -4,10 +4,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name="monolito")
+@FeignClient(name="monolith")
 public interface PedidoRestClient {
 
-	@GetMapping("/pedidos/{pedidoId}")	
+	@GetMapping("/orders/{pedidoId}")
 	public PedidoDto detalhaPorId(@PathVariable("pedidoId") Long pedidoId);
 
 }

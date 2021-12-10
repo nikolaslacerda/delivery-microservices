@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
-import static com.server.deliverypaymentservice.amqp.PaymentConfig.*;
+import static com.server.deliverypaymentservice.amqp.PaymentConfig.PaymentSource;
 
 @Service
 @AllArgsConstructor

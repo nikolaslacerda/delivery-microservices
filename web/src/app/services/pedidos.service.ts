@@ -15,19 +15,19 @@ export class PedidosService {
   }
 
   porId(pedidoId) {
-    return this.http.get(`${this.API}/pedidos/${pedidoId}`);
+    return this.http.get(`${this.API}/orders/${pedidoId}`);
   }
 
   adiciona(pedido): Observable<any> {
-    return this.http.post(`${this.API}/pedidos`, pedido);
+    return this.http.post(`${this.API}/orders`, pedido);
   }
 
   atualizaStatus(pedido): Observable<any> {
-    return this.http.put(`${this.API}/pedidos/${pedido.id}/status`, pedido);
+    return this.http.put(`${this.API}/orders/${pedido.id}/status`, pedido);
   }
 
   pendentes(restauranteId): Observable<any> {
-    return this.http.get(`${this.API}/parceiros/restaurantes/${restauranteId}/pedidos/pendentes`);
+    return this.http.get(`${this.API}/partners/restaurants/${restauranteId}/orders/pending`);
   }
 
 }

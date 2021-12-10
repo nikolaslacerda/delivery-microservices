@@ -29,7 +29,7 @@ public class Payment {
 
     @NotNull
     @Positive
-    private BigDecimal value;
+    private BigDecimal totalValue;
 
     @NotBlank
     @Size(max = 100)

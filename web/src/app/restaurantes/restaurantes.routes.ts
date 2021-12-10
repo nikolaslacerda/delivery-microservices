@@ -8,35 +8,35 @@ import { AuthorizationGuard } from '../guards/authorization.guard';
 
 const routes: Routes = [
   {
-    path: 'restaurantes',
+    path: 'restaurants',
     component: RestauranteCadastroComponent
   },
   {
-    path: 'restaurantes/:id',
+    path: 'restaurants/:id',
     component: RestauranteCadastroComponent,
     canActivate: [AuthorizationGuard],
     data: { role: 'PARCEIRO'}
   },
   {
-    path: 'restaurantes/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId',
+    path: 'restaurants/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId',
     component: CategoriaDoCardapioCadastroComponent,
     canActivate: [AuthorizationGuard],
     data: { role: 'PARCEIRO'}
   },
   {
-    path: 'restaurantes/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId/item',
+    path: 'restaurants/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId/item',
     component: ItemDoCardapioCadastroComponent,
     canActivate: [AuthorizationGuard],
     data: { role: 'PARCEIRO'}
   },
   {
-    path: 'restaurantes/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId/item/:itemId',
+    path: 'restaurants/:restauranteId/cardapio/:cardapioId/categoria/:categoriaId/item/:itemId',
     component: ItemDoCardapioCadastroComponent,
     canActivate: [AuthorizationGuard],
     data: { role: 'PARCEIRO'}
   },
   {
-    path: 'restaurantes/:restauranteId/pedidos/pendentes',
+    path: 'restaurants/:restauranteId/orders/pending',
     component: PedidosPendentesComponent,
     canActivate: [AuthorizationGuard],
     data: { role: 'PARCEIRO'}

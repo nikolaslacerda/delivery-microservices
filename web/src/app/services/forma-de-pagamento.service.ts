@@ -15,34 +15,34 @@ export class FormaDePagamentoService {
   }
 
   todas(): Observable<any> {
-    return this.http.get(`${this.API}/formas-de-pagamento`);
+    return this.http.get(`${this.API}/payment-methods`);
   }
 
   salva(formaDePagamento: any): Observable<any> {
     if (formaDePagamento.id) {
-      return this.http.put(`${this.API}/admin/formas-de-pagamento/${formaDePagamento.id}`, formaDePagamento);
+      return this.http.put(`${this.API}/admin/payment-methods/${formaDePagamento.id}`, formaDePagamento);
     }
-    return this.http.post(`${this.API}/admin/formas-de-pagamento`, formaDePagamento);
+    return this.http.post(`${this.API}/admin/payment-methods`, formaDePagamento);
   }
 
   remove(formaDePagamento: any) {
-    return this.http.delete(`${this.API}/admin/formas-de-pagamento/${formaDePagamento.id}`);
+    return this.http.delete(`${this.API}/admin/payment-methods/${formaDePagamento.id}`);
   }
 
   tipos(): Observable<any> {
-    return this.http.get(`${this.API}/admin/formas-de-pagamento/tipos`);
+    return this.http.get(`${this.API}/admin/payment-methods/tipos`);
   }
 
   doRestaurante(restaurante): Observable<any> {
-    return this.http.get(`${this.API}/restaurantes/${restaurante.id}/formas-de-pagamento`);
+    return this.http.get(`${this.API}/restaurants/${restaurante.id}/payment-methods`);
   }
 
   adicionaAoRestaurante(formaDePagamento): Observable<any> {
-    return this.http.post(`${this.API}/parceiros/restaurantes/${formaDePagamento.restaurante.id}/formas-de-pagamento`, formaDePagamento);
+    return this.http.post(`${this.API}/partners/restaurants/${formaDePagamento.restaurante.id}/payment-methods`, formaDePagamento);
   }
 
   removeDoRestaurante(formaDePagamento) {
-    return this.http.delete(`${this.API}/parceiros/restaurantes/${formaDePagamento.restaurante.id}/formas-de-pagamento/${formaDePagamento.id}`);
+    return this.http.delete(`${this.API}/partners/restaurants/${formaDePagamento.restaurante.id}/payment-methods/${formaDePagamento.id}`);
   }
 
 

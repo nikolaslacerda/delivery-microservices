@@ -30,7 +30,7 @@ export class PagamentoPedidoComponent implements OnInit {
     this.pedidoService.porId(pedidoId)
       .subscribe((pedido: any) => {
         this.pedido = pedido;
-        this.pagamento = { pedido, valor: pedido.total };
+        this.pagamento = { pedido, totalValue: pedido.total };
         this.restaurantesService.formasDePagamento(pedido.restaurante)
           .subscribe(formasDePagamento => this.formasDePagamento = formasDePagamento);
       });
@@ -45,7 +45,7 @@ export class PagamentoPedidoComponent implements OnInit {
 
   confirmaPagamento() {
     this.pagamentoService.confirma(this.pagamento)
-      .subscribe(pagamento => this.router.navigateByUrl(`pedidos/${pagamento.pedidoId}/status`));
+      .subscribe(pagamento => this.router.navigateByUrl(`orders/${pagamento.orderId}/status`));
   }
 
   cancelaPagamento() {

@@ -22,7 +22,7 @@ public class PaymentDto {
     private Long orderId;
 
     public PaymentDto(Payment p) {
-        this(p.getId(), p.getValue(), p.getName(), p.getNumber(), p.getExpiration(), p.getCode(), p.getStatus(), p.getPaymentMethodId(), p.getOrderId());
+        this(p.getId(), p.getTotalValue(), p.getName(), p.getNumber(), p.getExpiration(), p.getCode(), p.getStatus(), p.getPaymentMethodId(), p.getOrderId());
     }
 
 }

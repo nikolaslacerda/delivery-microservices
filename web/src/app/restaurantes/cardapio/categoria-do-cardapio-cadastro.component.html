@@ -18,7 +18,7 @@
       <td>{{ item.preco  | currency:'BRL'  }}</td>
       <td>{{ item.precoPromocional  | currency:'BRL'  }}</td>
       <td class="text-right">
-        <button class="btn btn-secondary mr-1 mb-1 mb-lg-0" [routerLink]="['/restaurantes',restaurante.id, 'cardapio', cardapio.id, 'categoria', categoria.id, 'item', item.id]">Editar</button>
+        <button class="btn btn-secondary mr-1 mb-1 mb-lg-0" [routerLink]="['/restaurants',restaurante.id, 'cardapio', cardapio.id, 'categoria', categoria.id, 'item', item.id]">Editar</button>
         <button class="btn btn-danger" (click)="removerItemCardapio(item)">Remover</button>
       </td>
     </tr>

@@ -5,12 +5,14 @@ import com.server.deliverydistanceservice.service.DistanceService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/distances")
 class DistanceController {
 
     private DistanceService distanceService;
@@ -28,7 +30,7 @@ class DistanceController {
 
     @GetMapping("/restaurants/{cep}/restaurant/{restaurantId}")
     public RestaurantWithDistanceDto getRestaurantDistance(@PathVariable("cep") String cep,
-                                                           @PathVariable("restaurantId") Long restaurantId) {
+                                                           @PathVariable("restaurantId") String restaurantId) {
         return distanceService.getRestaurantDistance(restaurantId, cep);
     }
 

@@ -24,6 +24,8 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {
 		logger.error("Um acesso não autorizado foi verificado. Mensagem: {}", authException.getMessage());
+		logger.error(request.getRequestURI());
+		logger.error(request.getRequestURL().toString());
 		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Você não está autorizado a acessar esse recurso.");
 	}
 }

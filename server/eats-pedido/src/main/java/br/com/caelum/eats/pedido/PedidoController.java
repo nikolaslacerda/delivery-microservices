@@ -18,20 +18,20 @@ class PedidoController {
     private PedidoRepository repo;
     private UpdateOrderSource updateOrderSource;
 
-    @GetMapping("/pedidos")
+    @GetMapping("/orders")
     List<PedidoDto> lista() {
         return repo.findAll().stream()
                 .map(pedido -> new PedidoDto(pedido)).collect(Collectors.toList());
     }
 
 
-    @GetMapping("/pedidos/{id}")
+    @GetMapping("/orders/{id}")
     PedidoDto porId(@PathVariable("id") Long id) {
         Pedido pedido = repo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
         return new PedidoDto(pedido);
     }
 
-    @PostMapping("/pedidos")
+    @PostMapping("/orders")
     PedidoDto adiciona(@RequestBody Pedido pedido) {
         pedido.setDataHora(LocalDateTime.now());
         pedido.setStatus(Pedido.Status.REALIZADO);
@@ -41,7 +41,7 @@ class PedidoController {
         return new PedidoDto(salvo);
     }
 
-    @PutMapping("/pedidos/{id}/status")
+    @PutMapping("/orders/{id}/status")
     PedidoDto atualizaStatus(@RequestBody Pedido pedido) {
         repo.atualizaStatus(pedido.getStatus(), pedido);
         PedidoDto dto = new PedidoDto(pedido);
@@ -49,14 +49,14 @@ class PedidoController {
         return dto;
     }
 
-    @GetMapping("/parceiros/restaurantes/{restauranteId}/pedidos/pendentes")
+    @GetMapping("/partners/restaurants/{restauranteId}/orders/pending")
     List<PedidoDto> pendentes(@PathVariable("restauranteId") Long restauranteId) {
         return repo.doRestauranteSemOsStatus(restauranteId, Arrays.asList(Pedido.Status.REALIZADO, Pedido.Status.ENTREGUE)).stream()
                 .map(pedido -> new PedidoDto(pedido)).collect(Collectors.toList());
     }
 
-    @PutMapping("/pedidos/{id}/pago")
-    void pago(@PathVariable("id") Long id) {
+    @PutMapping("/orders/{id}/paid")
+    void setPaid(@PathVariable("id") Long id) {
         Pedido pedido = repo.porIdComItens(id);
         if (pedido == null) {
             throw new ResourceNotFoundException();

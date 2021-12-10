@@ -2,7 +2,7 @@
     <h3>Tipos de Cozinha</h3>
     <ul class="list-inline">
       <li class="list-inline-item border rounded p-2" *ngFor="let tipoDeCozinha of tiposDeCozinha"><a
-          [routerLink]="['/pedidos', cep, 'tipos-de-cozinha', tipoDeCozinha.id]">{{tipoDeCozinha.nome}}</a></li>
+          [routerLink]="['/orders', cep, 'tipos-de-cozinha', tipoDeCozinha.id]">{{tipoDeCozinha.nome}}</a></li>
     </ul>
   </section>
 
@@ -20,7 +20,7 @@
           <span *ngIf="restaurante.distancia"> • {{ restaurante.distancia | number:'1.1-1' }} km</span>
         </p>
         <p class="card-text">{{ restaurante.taxaDeEntregaEmReais | currency:'BRL' }}</p>
-        <a [routerLink]="['/pedidos', this.cep, 'restaurante', restaurante.id]"
+        <a [routerLink]="['/orders', this.cep, 'restaurant', restaurante.id]"
           class="btn btn-primary stretched-link">Escolher</a>
       </div>
     </div>

@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@FeignClient(url = "${monolith}", name = "order")
+@FeignClient("monolith")
 public interface OrderRestClient {
 
     @PutMapping("/orders/{orderId}/paid")

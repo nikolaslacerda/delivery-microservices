@@ -19,7 +19,7 @@ class TipoDeCozinhaController {
 
 	private TipoDeCozinhaRepository repo;
 
-	@GetMapping("/tipos-de-cozinha")
+	@GetMapping("/cuisine-types")
 	List<TipoDeCozinhaDto> lista() {
 		return repo.findAllByOrderByNomeAsc().stream().map(TipoDeCozinhaDto::new).collect(Collectors.toList());
 	}

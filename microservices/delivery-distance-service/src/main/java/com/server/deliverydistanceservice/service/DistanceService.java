@@ -1,9 +1,9 @@
 package com.server.deliverydistanceservice.service;
 
-import com.server.deliverydistanceservice.repository.RestaurantRepository;
 import com.server.deliverydistanceservice.exception.ResourceNotFoundException;
 import com.server.deliverydistanceservice.model.Restaurant;
 import com.server.deliverydistanceservice.model.RestaurantWithDistanceDto;
+import com.server.deliverydistanceservice.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,7 +32,7 @@ public class DistanceService {
         return calculateDistanceToAllRestaurants(restaurants, cep);
     }
 
-    public RestaurantWithDistanceDto getRestaurantDistance(Long restaurantId, String cep) {
+    public RestaurantWithDistanceDto getRestaurantDistance(String restaurantId, String cep) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(ResourceNotFoundException::new);
         String restaurantCep = restaurant.getCep();
         BigDecimal distance = getDistance(restaurantCep, cep);
@@ -45,7 +45,7 @@ public class DistanceService {
                 .map(restaurant -> {
                     String restaurantCep = restaurant.getCep();
                     BigDecimal distance = getDistance(restaurantCep, cep);
-                    Long restaurantId = restaurant.getId();
+                    String restaurantId = restaurant.getId();
                     return new RestaurantWithDistanceDto(restaurantId, distance);
                 })
                 .collect(Collectors.toList());

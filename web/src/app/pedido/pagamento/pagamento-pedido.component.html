@@ -7,34 +7,34 @@
       <h3>Dados do pagamento</h3>
       <div class="form-group">
         <label for="formaDePagamento">Forma de pagamento</label>
-        <select class="form-control" required id="formaDePagamento" name="formaDePagamento" [(ngModel)]="pagamento.formaDePagamento">
+        <select class="form-control" required id="formaDePagamento" name="formaDePagamento" [(ngModel)]="pagamento.paymentMethod">
           <option *ngFor="let forma of formasDePagamento" [ngValue]="forma">{{ forma.nome }}</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="nome">Nome no cartão</label>
-        <input class="form-control" required id="nome" name="nome" [(ngModel)]="pagamento.nome" placeholder="nome como impresso no cartão">
+        <label for="name">Nome no cartão</label>
+        <input class="form-control" required id="name" name="name" [(ngModel)]="pagamento.name" placeholder="nome como impresso no cartão">
       </div>
       <div class="form-group">
-        <label for="numero">Número do cartão</label>
-        <input class="form-control" required id="numero" name="numero" [(ngModel)]="pagamento.numero"
+        <label for="number">Número do cartão</label>
+        <input class="form-control" required id="number" name="number" [(ngModel)]="pagamento.number"
           placeholder="0000 0000 0000 0000" [textMask]="{mask: numeroCartaoMask}">
       </div>
       <div class="form-group">
-        <label for="expiracao">Data de expiração</label>
-        <input class="form-control" type="month" required id="expiracao" name="expiracao" [(ngModel)]="pagamento.expiracao">
+        <label for="expiration">Data de expiração</label>
+        <input class="form-control" type="month" required id="expiration" name="expiration" [(ngModel)]="pagamento.expiration">
       </div>
       <div class="form-group">
-        <label for="codigo">Código de Segurança</label>
-        <input class="form-control" required id="codigo" name="codigo" [(ngModel)]="pagamento.codigo"
+        <label for="code">Código de Segurança</label>
+        <input class="form-control" required id="code" name="code" [(ngModel)]="pagamento.code"
           placeholder="000" [textMask]="{mask: codigoCartaoMask}">
       </div>
       <button *ngIf="!pagamento.status" class="btn btn-primary" type="submit" [disabled]="!pagamentoForm.form.valid">Criar pagamento</button>
     </form>
-    <div *ngIf="pagamento.status === 'CRIADO'">
+    <div *ngIf="pagamento.status === 'CREATED'">
       <dl>
         <dt>Cartão</dt>
-        <dd>{{ pagamento.numero.substring(0, 5) }} XXXX XXXX XXXX</dd>
+        <dd>{{ pagamento.number.substring(0, 5) }} XXXX XXXX XXXX</dd>
         <dt>Valor</dt>
         <dd>{{ pedido.total | currency:'BRL' }}</dd>
       </dl>

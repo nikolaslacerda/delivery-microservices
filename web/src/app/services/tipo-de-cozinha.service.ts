@@ -15,7 +15,7 @@ export class TipoDeCozinhaService {
   }
 
   todos(): Observable<any> {
-    return this.http.get(`${this.API}/tipos-de-cozinha`);
+    return this.http.get(`${this.API}/cuisine-types`);
   }
 
   salva(tipoDeCozinha: any): Observable<any> {

@@ -20,8 +20,8 @@
         <li *ngIf="user?.roles?.includes('PARCEIRO') && user?.restauranteId" class="nav-item dropdown" ngbDropdown>
           <a class="nav-link dropdown-toggle" ngbDropdownToggle>Meu Restaurante</a>
           <div class="dropdown-menu" ngbDropdownMenu>
-            <a class="dropdown-item" ngbDropdownItem [routerLink]="['/restaurantes', user.restauranteId]">Cadastro</a>
-            <a class="dropdown-item" ngbDropdownItem [routerLink]="['/restaurantes', user.restauranteId, 'pedidos', 'pendentes']">Pedidos pendentes</a>
+            <a class="dropdown-item" ngbDropdownItem [routerLink]="['/restaurants', user.restauranteId]">Cadastro</a>
+            <a class="dropdown-item" ngbDropdownItem [routerLink]="['/restaurants', user.restauranteId, 'orders', 'pending']">Pedidos pendentes</a>
           </div>
         </li>
         <li *ngIf="user" class="nav-item"><a class="nav-link" (click)="logout()">Logout</a></li>

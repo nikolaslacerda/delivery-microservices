@@ -1,8 +1,8 @@
 package com.server.deliverydistanceservice.controller;
 
-import com.server.deliverydistanceservice.repository.RestaurantRepository;
 import com.server.deliverydistanceservice.exception.ResourceNotFoundException;
 import com.server.deliverydistanceservice.model.Restaurant;
+import com.server.deliverydistanceservice.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -30,7 +30,7 @@ public class RestaurantController {
     }
 
     @PutMapping("/restaurants/{id}")
-    public Restaurant updateRestaurant(@PathVariable("id") Long id, @RequestBody Restaurant restaurant) {
+    public Restaurant updateRestaurant(@PathVariable("id") String id, @RequestBody Restaurant restaurant) {
         if (!restaurantRepository.existsById(id)) {
             throw new ResourceNotFoundException();
         }

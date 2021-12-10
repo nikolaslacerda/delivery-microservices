@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PagamentoService {
 
-  private API = environment.baseUrl + '/pagamentos';
+  private API = environment.baseUrl + '/payment';
 
   constructor(private http: HttpClient) {
   }
@@ -30,8 +30,8 @@ export class PagamentoService {
   }
 
   private ajustaIds(pagamento) {
-    pagamento.formaDePagamentoId = pagamento.formaDePagamentoId || pagamento.formaDePagamento.id;
-    pagamento.pedidoId = pagamento.pedidoId || pagamento.pedido.id;
+    pagamento.paymentMethodId = pagamento.paymentMethodId || pagamento.paymentMethod.id;
+    pagamento.orderId = pagamento.pedidoId || pagamento.pedido.id;
   }
 
 }

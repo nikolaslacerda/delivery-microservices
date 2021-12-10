@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Restaurant {
 
     @Id
-    private Long id;
+    private String id;
 
     private String cep;
 

@@ -9,9 +9,9 @@ import static com.server.apigateway.amqp.ApiGatewayConfig.UpdateOrderSink;
 
 @EnableBinding(UpdateOrderSink.class)
 @Configuration
-class ApiGatewayConfig {
+public class ApiGatewayConfig {
 
-    static interface UpdateOrderSink {
+    public static interface UpdateOrderSink {
 
         String ORDER_WITH_UPDATED_STATUS = "orderWithUpdatedStatus";
 

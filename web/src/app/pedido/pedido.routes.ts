@@ -12,23 +12,23 @@ const routes: Routes = [
     component: PedidoComponent
   },
   {
-    path: 'pedidos/:cep',
+    path: 'orders/:cep',
     component: ListaRestaurantesComponent
   },
   {
-    path: 'pedidos/:cep/tipos-de-cozinha/:tipoDeCozinhaId',
+    path: 'orders/:cep/tipos-de-cozinha/:tipoDeCozinhaId',
     component: ListaRestaurantesComponent
   },
   {
-    path: 'pedidos/:cep/restaurante/:restauranteId',
+    path: 'orders/:cep/restaurant/:restauranteId',
     component: RestauranteComponent
   },
   {
-    path: 'pedidos/:pedidoId/pagamento',
+    path: 'orders/:pedidoId/payment',
     component: PagamentoPedidoComponent
   },
   {
-    path: 'pedidos/:pedidoId/status',
+    path: 'orders/:pedidoId/status',
     component: StatusPedidoComponent
   }
 ];

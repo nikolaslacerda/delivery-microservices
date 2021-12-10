@@ -15,19 +15,19 @@ export class CardapioService {
   }
 
   porIdDoRestaurante(restauranteId: string): Observable<any> {
-    return this.http.get(`${this.API}/restaurantes/${restauranteId}/cardapio`);
+    return this.http.get(`${this.API}/restaurants/${restauranteId}/menu`);
   }
 
   porId(restauranteId, cardapioId): Observable<any> {
-    return this.http.get(`${this.API}/restaurantes/${restauranteId}/cardapio/${cardapioId}`);
+    return this.http.get(`${this.API}/restaurants/${restauranteId}/menu/${cardapioId}`);
   }
 
   doRestaurante(restaurante): Observable<any> {
-    return this.http.get(`${this.API}/restaurantes/${restaurante.id}/cardapio`);
+    return this.http.get(`${this.API}/restaurants/${restaurante.id}/menu`);
   }
 
   categoriaDoCardapioPorId(restauranteId, cardapioId, categoriaId): Observable<any> {
-    return this.http.get(`${this.API}/restaurantes/${restauranteId}/cardapio/${cardapioId}/categoria/${categoriaId}`);
+    return this.http.get(`${this.API}/restaurants/${restauranteId}/menu/${cardapioId}/category/${categoriaId}`);
   }
 
   adicionaCategoriaAoCardapio(categoria): Observable<any> {

@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class RestaurantWithDistanceDto {
 
-    private Long restaurantId;
+    private String restaurantId;
 
     private BigDecimal distance;
 

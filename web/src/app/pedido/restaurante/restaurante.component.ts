@@ -128,7 +128,7 @@ export class RestauranteComponent implements OnInit {
   registraEntrega() {
     this.pedidoService.adiciona(this.pedido)
     .subscribe(pedido => {
-      this.router.navigateByUrl(`pedidos/${pedido.id}/pagamento`);
+      this.router.navigateByUrl(`orders/${pedido.id}/payment`);
       this.formularioDeEntregaModalRef.close();
     });
 
