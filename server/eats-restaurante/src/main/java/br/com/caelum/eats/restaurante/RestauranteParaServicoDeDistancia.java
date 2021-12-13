@@ -14,7 +14,7 @@ class RestauranteParaServicoDeDistancia {
     private Long tipoDeCozinhaId;
 
     RestauranteParaServicoDeDistancia(Restaurante restaurante) {
-        this(restaurante.getId(), restaurante.getCep(), restaurante.getTipoDeCozinha().getId());
+        this(restaurante.getId(), restaurante.getCep(), restaurante.getTipoDeCozinhaId());
     }
 
 }

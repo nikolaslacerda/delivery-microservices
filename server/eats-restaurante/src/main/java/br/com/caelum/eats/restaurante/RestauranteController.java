@@ -1,6 +1,5 @@
 package br.com.caelum.eats.restaurante;
 
-import br.com.caelum.eats.administrativo.TipoDeCozinha;
 import lombok.AllArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -53,11 +52,11 @@ class RestauranteController {
     @PutMapping("/partners/restaurants/{id}")
     public RestauranteDto update(@RequestBody RestauranteDto restaurante) {
         Restaurante doBD = restaurantRepository.getOne(restaurante.getId());
-        TipoDeCozinha tipoDeCozinhaOriginal = doBD.getTipoDeCozinha();
+        Long tipoDeCozinhaOriginal = doBD.getTipoDeCozinhaId();
         String cepOriginal = doBD.getCep();
         restaurante.populaRestaurante(doBD);
         Restaurante salvo = restaurantRepository.save(doBD);
-        if (!tipoDeCozinhaOriginal.getId().equals(restaurante.getTipoDeCozinha().getId())
+        if (!tipoDeCozinhaOriginal.equals(restaurante.getTipoDeCozinhaId())
                 ||
                 !cepOriginal.equals(restaurante.getCep())) {
             distanciaRestClient.restauranteAtualizado(salvo);

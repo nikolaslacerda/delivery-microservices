@@ -1,18 +1,11 @@
 package br.com.caelum.eats.restaurante;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-
-import br.com.caelum.eats.administrativo.FormaDePagamento;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
@@ -20,28 +13,27 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 class RestauranteFormaDePagamento {
 
-	@EmbeddedId
-	private RestauranteFormaDePagamentoId id;
+    @EmbeddedId
+    private RestauranteFormaDePagamentoId id;
 
-	@ManyToOne
-	@MapsId("restauranteId")
-	private Restaurante restaurante;
+    @ManyToOne
+    @MapsId("restauranteId")
+    private Restaurante restaurante;
 
-	@ManyToOne
-	@MapsId("formaDePagamentoId")
-	private FormaDePagamento formaDePagamento;
+    @Column(name = "forma_de_pagamento_id", insertable = false, updatable = false)
+    private Long formaDePagamento;
 
-	@Embeddable
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	static class RestauranteFormaDePagamentoId implements Serializable {
-		private static final long serialVersionUID = 1L;
+    @Embeddable
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    static class RestauranteFormaDePagamentoId implements Serializable {
+        private static final long serialVersionUID = 1L;
 
-		@Column(name = "restaurante_id")
-		private Long restauranteId;
+        @Column(name = "restaurante_id")
+        private Long restauranteId;
 
-		@Column(name = "forma_de_pagamento_id")
-		private Long formaDePagamentoId;
-	}
+        @Column(name = "forma_de_pagamento_id")
+        private Long formaDePagamentoId;
+    }
 }

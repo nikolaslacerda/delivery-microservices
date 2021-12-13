@@ -23,11 +23,6 @@
 		</dependency>
 		<dependency>
 			<groupId>br.com.caelum</groupId>
-			<artifactId>eats-administrativo</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>br.com.caelum</groupId>
 			<artifactId>eats-seguranca</artifactId>
 			<version>${project.version}</version>
 		</dependency>

@@ -16,7 +16,7 @@ public class RestauranteAuthorizationService {
 	public boolean checaId(Authentication authentication, long id) {
 		User user = (User) authentication.getPrincipal();
 		if (user.isInRole(Role.ROLES.PARCEIRO)) {
-			Restaurante restaurante = restauranteRepo.findByUser(user);
+			Restaurante restaurante = restauranteRepo.findByUserId(user.getId());
 			if (restaurante != null) {
 				return id == restaurante.getId();
 			}
