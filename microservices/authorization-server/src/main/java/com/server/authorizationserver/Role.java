@@ -1,4 +1,4 @@
-package com.server.apigateway.security.model;
+package com.server.authorizationserver;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,5 @@
 package br.com.caelum.eats.restaurante;
 
-import br.com.caelum.eats.seguranca.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,9 +18,6 @@ interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
     Page<Restaurante> findAllByAprovado(boolean aprovado, Pageable limit);
 
     Restaurante findByUserId(Long userId);
-
-    @Query("select r from Restaurante r where r.user.name = :username")
-    Restaurante findByUsername(@Param("username") String username);
 
     @Modifying(clearAutomatically = true)
     @Query("update Restaurante r set r.aprovado = true where r.id = :id")

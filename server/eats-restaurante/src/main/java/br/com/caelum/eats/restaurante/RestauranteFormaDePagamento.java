@@ -21,7 +21,7 @@ class RestauranteFormaDePagamento {
     private Restaurante restaurante;
 
     @Column(name = "forma_de_pagamento_id", insertable = false, updatable = false)
-    private Long formaDePagamento;
+    private Long formaDePagamentoId;
 
     @Embeddable
     @Data

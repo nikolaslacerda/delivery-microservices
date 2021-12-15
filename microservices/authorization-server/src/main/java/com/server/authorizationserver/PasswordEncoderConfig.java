@@ -1,4 +1,4 @@
-package com.server.apigateway.security.config;
+package com.server.authorizationserver;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 class PasswordEncoderConfig {
 
     @Bean
-    public PasswordEncoder bCryptPasswordEncoder() {
+    PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 

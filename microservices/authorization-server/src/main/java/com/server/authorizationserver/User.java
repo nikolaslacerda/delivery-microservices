@@ -1,7 +1,6 @@
-package com.server.apigateway.security.model;
+package com.server.authorizationserver;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.server.apigateway.security.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

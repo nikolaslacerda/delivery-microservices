@@ -16,6 +16,7 @@ import java.net.URI;
 @Slf4j
 @RestController
 @AllArgsConstructor
+@RequestMapping("/distances")
 public class RestaurantController {
 
     private RestaurantRepository restaurantRepository;

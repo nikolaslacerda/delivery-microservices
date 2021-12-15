@@ -19,13 +19,13 @@ class HorarioDeFuncionamentoController {
 
 	private HorarioDeFuncionamentoRepository repo;
 	
-	@GetMapping("/restaurantes/{idRestaurante}/horarios-de-funcionamento/{id}")
+	@GetMapping("/restaurants/{idRestaurante}/business-hours/{id}")
 	public HorarioDeFuncionamentoDto detalha(@PathVariable("id") Long id) {
 		HorarioDeFuncionamento horario = repo.findById(id).orElseThrow(() -> new ResourceNotFoundException());
 		return new HorarioDeFuncionamentoDto(horario);
 	}
 
-	@GetMapping("/restaurantes/{idRestaurante}/horarios-de-funcionamento")
+	@GetMapping("/restaurants/{idRestaurante}/business-hours")
 	public List<HorarioDeFuncionamentoDto> lista(@PathVariable("idRestaurante") Long idRestaurante) {
 		Restaurante restaurante = new Restaurante();
 		restaurante.setId(idRestaurante);
@@ -33,17 +33,17 @@ class HorarioDeFuncionamentoController {
 		return horariosDoRestaurante.stream().map(h -> new HorarioDeFuncionamentoDto(h)).collect(Collectors.toList());
 	}
 
-	@PostMapping("/parceiros/restaurantes/{idRestaurante}/horarios-de-funcionamento")
+	@PostMapping("/partners/restaurants/{idRestaurante}/business-hours")
 	public HorarioDeFuncionamento adiciona(@RequestBody HorarioDeFuncionamento horarioDeFuncionamento) {
 		return repo.save(horarioDeFuncionamento);
 	}
 
-	@PutMapping("/parceiros/restaurantes/{idRestaurante}/horarios-de-funcionamento/{id}")
+	@PutMapping("/partners/restaurants/{idRestaurante}/business-hours/{id}")
 	public HorarioDeFuncionamento atualiza(@RequestBody HorarioDeFuncionamento horarioDeFuncionamento) {
 		return repo.save(horarioDeFuncionamento);
 	}
 
-	@DeleteMapping("/parceiros/restaurantes/{idRestaurante}/horarios-de-funcionamento/{id}")
+	@DeleteMapping("/partners/restaurants/{idRestaurante}/business-hours/{id}")
 	public void remove(@PathVariable("id") Long id) {
 		repo.deleteById(id);
 	}

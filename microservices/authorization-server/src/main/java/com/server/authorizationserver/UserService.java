@@ -1,7 +1,5 @@
-package com.server.apigateway.security.service;
+package com.server.authorizationserver;
 
-import com.server.apigateway.security.model.User;
-import com.server.apigateway.security.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

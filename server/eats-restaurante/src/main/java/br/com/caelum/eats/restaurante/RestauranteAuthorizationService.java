@@ -14,8 +14,8 @@ public class RestauranteAuthorizationService {
 	private RestauranteRepository restauranteRepo;
 
 	public boolean checaId(Authentication authentication, long id) {
-		User user = (User) authentication.getPrincipal();
-		if (user.isInRole(Role.ROLES.PARCEIRO)) {
+		User user = getUserFromAuthentication(authentication);
+		if (user != null && user.isInRole(Role.ROLES.PARCEIRO)) {
 			Restaurante restaurante = restauranteRepo.findByUserId(user.getId());
 			if (restaurante != null) {
 				return id == restaurante.getId();
@@ -24,9 +24,19 @@ public class RestauranteAuthorizationService {
 		return false;
 	}
 
-	public boolean checaUsername(Authentication authentication, String username) {
-		User user = (User) authentication.getPrincipal();
-		return user.isInRole(Role.ROLES.PARCEIRO) && user.getName().equals(username);
+	public boolean checaUserId(Authentication authentication, Long userId) {
+		User user = getUserFromAuthentication(authentication);
+		return user != null && user.isInRole(Role.ROLES.PARCEIRO) && user.getId().equals(userId);
 	}
+
+	private User getUserFromAuthentication(Authentication authentication) {
+		Object principal = authentication.getPrincipal();
+		if (principal instanceof User) {
+			User user = (User) principal;
+			return user;
+		}
+		return null;
+	}
+
 
 }

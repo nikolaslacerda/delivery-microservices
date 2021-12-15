@@ -7,6 +7,8 @@ import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import java.util.List;
 
 @Component
@@ -20,9 +22,9 @@ class JwtTokenManager {
 
     public boolean isValid(String jwt) {
         try {
-            Jwts.parser().setSigningKey(this.secret).parseClaimsJws(jwt);
+            Jwts.parser().setSigningKey(secret).parseClaimsJws(jwt);
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
+        } catch (JwtException | IllegalArgumentException ex) {
             return false;
         }
     }
