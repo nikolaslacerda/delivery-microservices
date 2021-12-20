@@ -25,11 +25,6 @@ public class BusinessHoursController {
 
 	private BusinessHoursRepository businessHoursRepository;
 
-	@PostMapping("/partners/restaurants/{idRestaurant}/business-hours")
-	public BusinessHours createRestaurantBusinessHours(@RequestBody BusinessHours businessHours) {
-		return businessHoursRepository.save(businessHours);
-	}
-
 	@GetMapping("/restaurants/{idRestaurant}/business-hours/{id}")
 	public BusinessHoursDto getRestaurantBusinessHoursByDay(@PathVariable("id") Long id) {
 		BusinessHours businessHours = businessHoursRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
@@ -44,6 +39,11 @@ public class BusinessHoursController {
 		return businessHours.stream()
 				.map(BusinessHourMapper::mapToDto)
 				.collect(Collectors.toList());
+	}
+
+	@PostMapping("/partners/restaurants/{idRestaurant}/business-hours")
+	public BusinessHours createRestaurantBusinessHours(@RequestBody BusinessHours businessHours) {
+		return businessHoursRepository.save(businessHours);
 	}
 
 	@PutMapping("/partners/restaurants/{idRestaurant}/business-hours/{id}")

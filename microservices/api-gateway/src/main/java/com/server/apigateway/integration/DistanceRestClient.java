@@ -23,7 +23,7 @@ public class DistanceRestClient {
     @SuppressWarnings("unchecked")
     @HystrixCommand(fallbackMethod = "restaurantWithoutDistanceAndDetails")
     public Map<String, Object> byCepAndId(String cep, Long restaurantId) {
-        String url = distanceServiceUrl + "/restaurants/" + cep + "/restaurant/" + restaurantId;
+        String url = distanceServiceUrl + "/distances/restaurants/" + cep + "/restaurant/" + restaurantId;
         return restTemplate.getForObject(url, Map.class);
     }
 
