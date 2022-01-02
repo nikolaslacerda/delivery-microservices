@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TipoDeCozinha {
+public class CuisineType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,6 @@ public class TipoDeCozinha {
 
     @NotBlank
     @Size(min = 3, max = 100)
-    private String nome;
+    private String name;
 
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
+import {Order} from '../models/order';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,12 @@ export class PedidosService {
   constructor(private http: HttpClient) {
   }
 
-  porId(pedidoId) {
-    return this.http.get(`${this.API}/orders/${pedidoId}`);
+  getOrderById(orderId: number): Observable<Order> {
+    return this.http.get<Order>(`${this.API}/orders/${orderId}`);
   }
 
-  adiciona(pedido): Observable<any> {
-    return this.http.post(`${this.API}/orders`, pedido);
+  createOrder(order): Observable<any> {
+    return this.http.post(`${this.API}/orders`, order);
   }
 
   atualizaStatus(pedido): Observable<any> {

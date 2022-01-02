@@ -28,7 +28,7 @@ export class ListaRestaurantesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tipoDeCozinhaService.todos().subscribe(tipos => {
+    this.tipoDeCozinhaService.getCuisineTypes().subscribe(tipos => {
       this.tiposDeCozinha = tipos;
     });
 
@@ -44,9 +44,9 @@ export class ListaRestaurantesComponent implements OnInit {
   obtemRestaurantesMaisProximos() {
     let observableMaisProximos: Observable<any>;
     if (this.tipoDeCozinhaId) {
-      observableMaisProximos = this.restaurantesService.maisProximosPorCepETipoDeCozinha(this.cep, this.tipoDeCozinhaId);
+      observableMaisProximos = this.restaurantesService.getNearestRestaurantsByCuisineType(this.cep, this.tipoDeCozinhaId);
     } else {
-      observableMaisProximos = this.restaurantesService.maisProximosPorCep(this.cep);
+      observableMaisProximos = this.restaurantesService.getNearestRestaurants(this.cep);
     }
 
     observableMaisProximos.subscribe(restaurantesMaisProximos => {
@@ -57,7 +57,7 @@ export class ListaRestaurantesComponent implements OnInit {
 
   obtemDetalhesDosRestaurantes() {
     const idsDosRestaurantes = this.restaurantesMaisProximos.map(maisProximo => maisProximo.restaurantId).join(',');
-    this.restaurantesService.porIds(idsDosRestaurantes)
+    this.restaurantesService.getByIds(idsDosRestaurantes)
       .subscribe(restaurantes => {
         this.restaurantesComDetalhes = restaurantes;
         this.agregaDistanciaAosDetalhesDosRestaurantes();
@@ -73,11 +73,11 @@ export class ListaRestaurantesComponent implements OnInit {
   }
 
   mediaDeAvaliacoesDosRestaurantes() {
-    this.avaliacoesService.mediaDasAvaliacoesDosRestaurantes(this.restaurantesComDetalhes)
+    this.avaliacoesService.getRestaurantAverage(this.restaurantesComDetalhes)
       .subscribe(infoMedias => {
         infoMedias.forEach(infoMedia => {
-          const restaurante = this.restaurantesComDetalhes.find(restaurante => restaurante.id === infoMedia.restauranteId);
-          restaurante.mediaAvaliacoes = infoMedia.media;
+          const restaurante = this.restaurantesComDetalhes.find(restaurante => restaurante.id === infoMedia.restaurantId);
+          restaurante.average = infoMedia.average;
         });
       });
   }

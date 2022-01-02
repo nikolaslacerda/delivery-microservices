@@ -40,7 +40,7 @@ public class PaymentController {
         links.add(self);
 
         if (Payment.Status.CREATED.equals(payment.getStatus())) {
-            Link confirm = linkTo(methodOn(PaymentController.class).confirm(id)).withRel("confirm");
+            Link confirm = linkTo(methodOn(PaymentController.class).confirmPayment(id)).withRel("confirm");
             links.add(confirm);
 
             Link cancel = linkTo(methodOn(PaymentController.class).cancel(id)).withRel("cancel");
@@ -56,6 +56,7 @@ public class PaymentController {
                                                        UriComponentsBuilder uriBuilder) {
         payment.setStatus(Payment.Status.CREATED);
         Payment salvo = paymentRepository.save(payment);
+
         URI path = uriBuilder.path("/payment/{id}").buildAndExpand(salvo.getId()).toUri();
         PaymentDto dto = new PaymentDto(salvo);
 
@@ -66,7 +67,7 @@ public class PaymentController {
         Link self = linkTo(methodOn(PaymentController.class).detail(id)).withSelfRel();
         links.add(self);
 
-        Link confirm = linkTo(methodOn(PaymentController.class).confirm(id)).withRel("confirm");
+        Link confirm = linkTo(methodOn(PaymentController.class).confirmPayment(id)).withRel("confirm");
         links.add(confirm);
 
         Link cancel = linkTo(methodOn(PaymentController.class).cancel(id)).withRel("cancel");
@@ -77,7 +78,7 @@ public class PaymentController {
     }
 
     @PutMapping("/{id}")
-    public Resource<PaymentDto> confirm(@PathVariable Long id) {
+    public Resource<PaymentDto> confirmPayment(@PathVariable Long id) {
         Payment payment = paymentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         payment.setStatus(Payment.Status.CONFIRM);
         paymentRepository.save(payment);

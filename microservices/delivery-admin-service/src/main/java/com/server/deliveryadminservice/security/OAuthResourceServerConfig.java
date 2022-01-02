@@ -10,7 +10,7 @@ class OAuthResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/tipos-de-cozinha/**", "/formas-de-pagamento/**").permitAll()
+                .antMatchers("/cuisine-types/**", "/payment-methods/**").permitAll()
                 .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()

@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
-import { environment } from 'src/environments/environment';
+import {environment} from 'src/environments/environment';
+import {Review} from '../models/review';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +15,18 @@ export class AvaliacoesService {
   constructor(private http: HttpClient) {
   }
 
-  porIdDoRestaurante(restauranteId: string): Observable<any> {
-    return this.http.get(`${this.API}/${restauranteId}/reviews`);
+  getByRestaurant(restaurantId: string): Observable<Review[]> {
+    return this.http.get<Review[]>(`${this.API}/${restaurantId}/reviews`);
   }
 
-  salva(avaliacao: any): Observable<any> {
-    const restauranteId = avaliacao.pedido.restaurante.id;
-    return this.http.post(`${this.API}/${restauranteId}/reviews`, avaliacao);
+  create(review: Review): Observable<any> {
+    const restaurantId = review.order.restaurantId;
+    return this.http.post(`${this.API}/${restaurantId}/reviews`, review);
   }
 
-  mediaDasAvaliacoesDosRestaurantes(restaurantes: any[]): Observable<any> {
-    const idsDosRestaurantes = restaurantes.map(restaurante => restaurante.id).join(',');
-    return this.http.get(`${this.API}/rating?restaurants=${idsDosRestaurantes}`);
+  getRestaurantAverage(restaurants: any[]): Observable<any> {
+    const restaurantIds = restaurants.map(restaurant => restaurant.id).join(',');
+    return this.http.get(`${this.API}/rating?restaurants=${restaurantIds}`);
   }
 
 }

@@ -13,10 +13,10 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FormaDePagamento {
+public class PaymentMethod {
 
-    public enum Tipo {
-        CARTAO_CREDITO, CARTAO_DEBITO, VALE_REFEICAO;
+    public enum Type {
+        CREDIT_CARD, DEBIT_CARD, MEAL_TICKET;
     }
 
     @Id
@@ -25,10 +25,10 @@ public class FormaDePagamento {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private Tipo tipo;
+    private Type type;
 
     @NotBlank
     @Size(max = 100)
-    private String nome;
+    private String name;
 
 }

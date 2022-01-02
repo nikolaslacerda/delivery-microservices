@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
-import { environment } from 'src/environments/environment';
+import {environment} from 'src/environments/environment';
+import {Payment} from '../models/payment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,24 +15,16 @@ export class PagamentoService {
   constructor(private http: HttpClient) {
   }
 
-  cria(pagamento): Observable<any> {
-    this.ajustaIds(pagamento);
-    return this.http.post(`${this.API}`, pagamento);
+  create(payment: Payment): Observable<any> {
+    return this.http.post(`${this.API}`, payment);
   }
 
-  confirma(pagamento): Observable<any> {
-    const url = pagamento._links.confirm.href;
-    return this.http.put(url, null);
+  confirm(payment: Payment): Observable<any> {
+    return this.http.put(`${this.API}/${payment.orderId}`, null);
   }
 
-  cancela(pagamento): Observable<any> {
-    const url = pagamento._links.cancel.href;
-    return this.http.delete(url, null);
-  }
-
-  private ajustaIds(pagamento) {
-    pagamento.paymentMethodId = pagamento.paymentMethodId || pagamento.paymentMethod.id;
-    pagamento.orderId = pagamento.pedidoId || pagamento.pedido.id;
+  cancel(payment): Observable<any> {
+    return this.http.delete(`${this.API}/${payment.orderId}`, null);
   }
 
 }

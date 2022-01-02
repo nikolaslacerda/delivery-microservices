@@ -20,6 +20,7 @@ public class DistanceController {
     public Map<String, Object> byCepAndIdWithDistance(@PathVariable("cep") String cep,
                                                       @PathVariable("restaurantId") Long restaurantId) {
         Map<String, Object> restaurantData = restaurantRestClient.byId(restaurantId);
+        restaurantData.forEach((x,y) -> System.out.println(x));
         Map<String, Object> distanceData = distanceRestClient.byCepAndId(cep, restaurantId);
         restaurantData.putAll(distanceData);
         return restaurantData;

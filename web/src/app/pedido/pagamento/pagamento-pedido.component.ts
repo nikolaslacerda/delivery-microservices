@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
-import { RestauranteService } from 'src/app/services/restaurante.service';
-import { PedidosService } from 'src/app/services/pedidos.service';
-import { PagamentoService } from 'src/app/services/pagamento.service';
+import {RestauranteService} from 'src/app/services/restaurante.service';
+import {PedidosService} from 'src/app/services/pedidos.service';
+import {PagamentoService} from 'src/app/services/pagamento.service';
+import {Order} from '../../models/order';
+import {Payment} from '../../models/payment';
 
 @Component({
   selector: 'app-pagamento-pedido',
@@ -11,12 +13,12 @@ import { PagamentoService } from 'src/app/services/pagamento.service';
 })
 export class PagamentoPedidoComponent implements OnInit {
 
-  pedido: any;
-  formasDePagamento: Array<any>;
-  pagamento: any = {};
+  order: Order;
+  paymentMethods: Array<any>;
+  payment = {} as Payment;
 
-  numeroCartaoMask = [/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/];
-  codigoCartaoMask= [/\d/, /\d/, /\d/];
+  cardNameMask = [/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/];
+  cardCodeMask = [/\d/, /\d/, /\d/];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -26,31 +28,38 @@ export class PagamentoPedidoComponent implements OnInit {
   }
 
   ngOnInit() {
-    const pedidoId = this.route.snapshot.params.pedidoId;
-    this.pedidoService.porId(pedidoId)
-      .subscribe((pedido: any) => {
-        this.pedido = pedido;
-        this.pagamento = { pedido, totalValue: pedido.total };
-        this.restaurantesService.formasDePagamento(pedido.restaurante)
-          .subscribe(formasDePagamento => this.formasDePagamento = formasDePagamento);
+    const orderId = this.route.snapshot.params.pedidoId;
+    console.log(orderId);
+    this.pedidoService.getOrderById(orderId)
+      .subscribe((order: Order) => {
+        this.order = order;
+        console.log("ORDER ENCONTRADA=>");
+        console.log(order);
+        this.payment.orderId = order.id;
+        this.payment.totalValue = order.total;
+        this.restaurantesService.getRestaurantPaymentMethods(order.restaurantId)
+          .subscribe(paymentMethods => {
+            console.log(paymentMethods);
+            this.paymentMethods = paymentMethods;
+          });
       });
   }
 
-  criaPagamento() {
-    this.pagamentoService.cria(this.pagamento)
-      .subscribe(pagamento => {
-        this.pagamento = pagamento;
+  createPayment() {
+    this.pagamentoService.create(this.payment)
+      .subscribe(payment => {
+        this.payment = payment;
       });
   }
 
-  confirmaPagamento() {
-    this.pagamentoService.confirma(this.pagamento)
-      .subscribe(pagamento => this.router.navigateByUrl(`orders/${pagamento.orderId}/status`));
+  confirmPayment() {
+    this.pagamentoService.confirm(this.payment)
+      .subscribe(payment => this.router.navigateByUrl(`orders/${payment.orderId}/status`));
   }
 
-  cancelaPagamento() {
-    this.pagamentoService.cancela(this.pagamento)
+  cancelPayment() {
+    this.pagamentoService.cancel(this.payment)
       .subscribe(() => this.router.navigateByUrl(``));
-}
+  }
 
 }

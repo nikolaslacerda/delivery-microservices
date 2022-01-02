@@ -28,7 +28,7 @@ export class CardapioListagemComponent implements OnInit {
     this.cardapio.restaurante = this.restaurante;
     this.categoria.cardapio = this.cardapio;
     this.cardapioService.adicionaCategoriaAoCardapio(this.categoria)
-      .subscribe(categoriaAdicionada => this.cardapio.categorias.push(categoriaAdicionada));
+      .subscribe(categoriaAdicionada => this.cardapio.categories.push(categoriaAdicionada));
   }
 
 }

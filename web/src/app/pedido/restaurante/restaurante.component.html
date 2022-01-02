@@ -1,36 +1,37 @@
 <div class="row">
-  <div class="col-sm-9" *ngIf="restaurante">
+  <div class="col-sm-9" *ngIf="restaurant">
     <section>
-      <h2>{{restaurante?.nome}}</h2>
-      <p *ngIf="restaurante.mediaAvaliacoes">★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</p>
+      <h2>{{restaurant?.name}}</h2>
+      <p *ngIf="restaurant.reviewAverage">★ {{ restaurant.reviewAverage | number:'1.1-1' }}</p>
       <p>
-        <span>{{restaurante?.tipoDeCozinha?.nome}}</span>
-        <span *ngIf="restaurante.tempoDeEntregaMinimoEmMinutos"> • {{restaurante.tempoDeEntregaMinimoEmMinutos}} min</span>
-        <span *ngIf="restaurante.tempoDeEntregaMaximoEmMinutos"> - {{restaurante.tempoDeEntregaMaximoEmMinutos}} min</span>
-        <span *ngIf="restaurante.distancia"> • {{ restaurante.distancia | number:'1.1-1' }} km</span>
+        <span>{{restaurant?.cuisineTypeId}}</span>
+        <span *ngIf="restaurant.minDeliveryTime"> • {{restaurant.minDeliveryTime}} min</span>
+        <span *ngIf="restaurant.maxDeliveryTime"> - {{restaurant.maxDeliveryTime}} min</span>
+        <span *ngIf="restaurant.distance"> • {{ restaurant.distance | number:'1.1-1' }} km</span>
       </p>
-      <p class="text-muted">{{ restaurante?.descricao }}</p>
+      <p class="text-muted">{{ restaurant?.description }}</p>
     </section>
     <ngb-tabset>
-      <ngb-tab title="Cardápio">
+      <ngb-tab title="Menu">
         <ng-template ngbTabContent>
-          <section class="mb-5" *ngIf="restaurante && cardapio">
-            <div class="my-5" *ngFor="let categoria of cardapio.categorias">
-              <h3>{{ categoria.nome | uppercase }}</h3>
+          <section class="mb-5" *ngIf="restaurant && menu">
+            <div class="my-5" *ngFor="let category of menu.categories">
+              <h3>{{ category.name | uppercase }}</h3>
               <div class="card-columns mt-3">
-                <div class="card bg-light shadow-sm" *ngFor="let itemCardapio of categoria.itens">
+                <div class="card bg-light shadow-sm" *ngFor="let menuItem of category.items">
                   <div class="card-body">
-                    <h4 class="card-title">{{ itemCardapio.nome }}</h4>
-                    <p class="card-text">{{ itemCardapio.descricao }}</p>
-                    <p *ngIf="!itemCardapio.precoPromocional; else promocional">
-                      {{ itemCardapio.preco | currency:'BRL' }}
+                    <h4 class="card-title">{{ menuItem.name }}</h4>
+                    <p class="card-text">{{ menuItem.description }}</p>
+                    <p *ngIf="!menuItem.promotionalPrice; else promocional">
+                      {{ menuItem.price | currency:'BRL' }}
                     </p>
                     <ng-template #promocional>
-                      <del>{{ itemCardapio.preco | currency:'BRL' }}</del>
-                      <p>{{ itemCardapio.precoPromocional | currency:'BRL' }}</p>
+                      <del>{{ menuItem.price | currency:'BRL' }}</del>
+                      <p>{{ menuItem.promotionalPrice | currency:'BRL' }}</p>
                     </ng-template>
-                    <button (click)="escolheItemDoCardapio(itemDoPedidoEscolhidoModal, itemCardapio)"
-                      class="btn btn-light btn-sm stretched-link">Escolhe</button>
+                    <button (click)="chooseMenuItem(menuItemModal, menuItem)"
+                            class="btn btn-light btn-sm stretched-link">Escolhe
+                    </button>
                   </div>
                 </div>
               </div>
@@ -39,13 +40,14 @@
         </ng-template>
 
       </ngb-tab>
-      <ngb-tab title="Avaliações">
+      <ngb-tab title="Review">
         <ng-template ngbTabContent>
-          <section class="mb-5" *ngIf="restaurante && avaliacoes.length">
-            <ngb-rating max="5" readonly="true" [(rate)]="restaurante.mediaAvaliacoes"></ngb-rating>
-            <p>{{restaurante.mediaAvaliacoes | number:'1.1-1' }} de {{avaliacoes.length}} {{avaliacoes.length > 1 ? 'avaliações' : 'avaliação'}}</p>
-            <div *ngFor="let avaliacao of avaliacoes">
-              <p>{{ avaliacao.nota }} • {{ avaliacao.comentario }}</p>
+          <section class="mb-5" *ngIf="restaurant && reviews.length">
+            <ngb-rating max="5" readonly="true" [(rate)]="restaurant.reviewAverage"></ngb-rating>
+            <p>{{restaurant.reviewAverage | number:'1.1-1' }}
+              of {{reviews.length}} {{reviews.length > 1 ? 'reviews' : 'reviews'}}</p>
+            <div *ngFor="let review of reviews">
+              <p>{{ review.score }} • {{ review.comment }}</p>
             </div>
           </section>
         </ng-template>
@@ -55,45 +57,48 @@
   </div>
 
   <div class="col-sm-3">
-    <section class="mb-5" *ngIf="restaurante && pedido.itens?.length">
-      <h3>Pedido</h3>
-      <div *ngFor="let itemPedido of pedido.itens">
+    <section class="mb-5" *ngIf="restaurant && order.items?.length">
+      <h3>Order</h3>
+      <div *ngFor="let orderItem of order.items">
         <hr>
-        <p>{{ itemPedido.quantidade }}x {{ itemPedido.itemDoCardapio.nome }}
-          {{ calculaSubTotal(itemPedido) | currency:'BRL' }}<br>
-          <span class="text-muted"><small>{{ itemPedido.observacao }}</small></span>
+        <p>{{ orderItem.quantity }}x {{ orderItem.name }}
+          {{ getSubtotal(orderItem) | currency:'BRL' }}<br>
+          <span class="text-muted"><small>{{ orderItem.observation }}</small></span>
         </p>
-        <p><button class="btn btn-secondary btn-sm mr-1"
-            (click)="editaItemDoPedido(itemDoPedidoEscolhidoModal, itemPedido)">Editar</button>
-          <button class="btn btn-light btn-sm mr-1" (click)="removeItemDoPedido(itemPedido)">Remover</button></p>
+        <p>
+          <button class="btn btn-secondary btn-sm mr-1"
+                  (click)="updateMenuItem(menuItemModal, orderItem)">Edit
+          </button>
+          <button class="btn btn-light btn-sm mr-1" (click)="deleteMenuItem(orderItem)">Delete</button>
+        </p>
       </div>
       <hr>
-      <p>Taxa de entrega:
-        {{ restaurante.taxaDeEntregaEmReais ? (restaurante.taxaDeEntregaEmReais | currency:'BRL') : 'Grátis' }}</p>
-      <p class="font-weight-bolder">Total: {{ totalDoPedido() | currency:'BRL' }}</p>
-      <button class="btn btn-primary mb-5" (click)="fazPedido(formularioDeEntregaModal)">Fazer Pedido</button>
+      <p>Delivery Price:
+        {{ restaurant.deliveryPrice ? (restaurant.deliveryPrice | currency:'BRL') : 'Free' }}</p>
+      <p class="font-weight-bolder">Total: {{ getOrderPrice() | currency:'BRL' }}</p>
+      <button class="btn btn-primary mb-5" (click)="finishOrder(formularioDeEntregaModal)">Finish Order</button>
     </section>
   </div>
 </div>
 
-<ng-template #itemDoPedidoEscolhidoModal let-modal>
+<ng-template #menuItemModal let-modal>
   <div class="modal-body">
-    <section *ngIf="itemDoPedidoEscolhido">
-      <p><strong>{{ itemDoPedidoEscolhido.itemDoCardapio?.nome }}</strong></p>
-      <form #itemDoPedidoEscolhidoForm="ngForm" (ngSubmit)="salvaItemNoPedido()">
+    <section *ngIf="itemChosen">
+      <p><strong>{{ itemChosen?.name }}</strong></p>
+      <form #itemDoPedidoEscolhidoForm="ngForm" (ngSubmit)="selectMenuItem()">
         <div class="form-group">
-          <label for="quantidade">Quantidade</label>
+          <label for="quantidade">Quantity</label>
           <input class="form-control" type="number" min="1" id="quantidade" name="quantidade"
-            [(ngModel)]="itemDoPedidoEscolhido.quantidade">
+                 [(ngModel)]="itemChosen.quantity">
         </div>
         <div class="form-group">
-          <label for="observacao">Observação</label>
+          <label for="observacao">Observation</label>
           <textarea class="form-control" id="observacao" name="observacao"
-            [(ngModel)]="itemDoPedidoEscolhido.observacao"></textarea>
+                    [(ngModel)]="itemChosen.observation"></textarea>
         </div>
         <button class="btn btn-primary" type="submit"
-          [disabled]="!itemDoPedidoEscolhidoForm.form.valid">{{ adicionandoItemAoPedido ? 'Adicionar':'Atualizar' }}</button>
-        <button type="button" class="btn btn-default" (click)="modal.dismiss()">Cancelar</button>
+                [disabled]="!itemDoPedidoEscolhidoForm.form.valid">{{ addOrderItem ? 'Add' : 'Update' }}</button>
+        <button type="button" class="btn btn-default" (click)="modal.dismiss()">Cancel</button>
       </form>
     </section>
   </div>
@@ -104,28 +109,29 @@
 
     <section>
       <h3>Informações de Entrega</h3>
-      <form #entregaForm="ngForm" (ngSubmit)="registraEntrega()">
+      <form #entregaForm="ngForm" (ngSubmit)="finishDelivery()">
         <fieldset>
           <legend>Dados pessoais</legend>
           <div class="form-group">
             <label for="nome">Nome:</label>
             <input class="form-control" required id="nome" name="nome" maxlength="100"
-              [(ngModel)]="pedido.entrega.cliente.nome" placeholder="digite seu nome">
+                   [(ngModel)]="order.delivery.client.name" placeholder="digite seu nome">
           </div>
           <div class="form-group">
             <label for="cpf">CPF:</label>
             <input class="form-control" required id="cpf" name="cpf" maxlength="15"
-              [(ngModel)]="pedido.entrega.cliente.cpf" placeholder="000.000.000-00" [textMask]="{mask: cpfMask}">
+                   [(ngModel)]="order.delivery.client.cpf" placeholder="000.000.000-00" [textMask]="{mask: cpfMask}">
           </div>
           <div class="form-group">
             <label for="email">Email:</label>
             <input class="form-control" required type="email" id="email" name="email" maxlength="100"
-              [(ngModel)]="pedido.entrega.cliente.email" placeholder="email@exemplo.com">
+                   [(ngModel)]="order.delivery.client.email" placeholder="email@exemplo.com">
           </div>
           <div class="form-group">
             <label for="telefone">Telefone:</label>
             <input class="form-control" required id="telefone" name="telefone" maxlength="16"
-              [(ngModel)]="pedido.entrega.cliente.telefone" [textMask]="{mask: telefoneMask}"  placeholder="(00) 0000-0000">
+                   [(ngModel)]="order.delivery.client.phone" [textMask]="{mask: phoneMask}"
+                   placeholder="(00) 0000-0000">
           </div>
         </fieldset>
         <fieldset>
@@ -133,17 +139,17 @@
           <div class="form-group">
             <label for="cep">CEP:</label>
             <input class="form-control" required id="cep" name="cep" maxlength="10"
-              [(ngModel)]="pedido.entrega.cep" [textMask]="{mask: cepMask}">
+                   [(ngModel)]="order.delivery.cep" [textMask]="{mask: cepMask}">
           </div>
           <div class="form-group">
             <label for="endereco">Endereço:</label>
             <textarea class="form-control" required id="endereco" name="endereco"
-              [(ngModel)]="pedido.entrega.endereco" placeholder="rua, número, bloco, bairro, ..."></textarea>
+                      [(ngModel)]="order.delivery.address" placeholder="rua, número, bloco, bairro, ..."></textarea>
           </div>
           <div class="form-group">
             <label for="complemento">Complemento:</label>
             <textarea class="form-control" id="complemento" name="complemento"
-              [(ngModel)]="pedido.entrega.complemento"></textarea>
+                      [(ngModel)]="order.delivery.complement"></textarea>
           </div>
         </fieldset>
         <button class="btn btn-primary" type="submit" [disabled]="!entregaForm.form.valid">Confirmar pedido</button>

@@ -11,7 +11,7 @@ public class MenuCategoryMapper {
     public static MenuCategoryDto mapToDto(MenuCategory category) {
         return MenuCategoryDto.builder()
                 .id(category.getId())
-                .nome(category.getName())
+                .name(category.getName())
                 .items(MenuItemMapper.mapListToDto(category.getItems()))
                 .build();
     }

@@ -15,7 +15,7 @@ import java.util.List;
 public class MenuCategoryDto {
 
     private Long id;
-    private String nome;
+    private String name;
     private List<MenuItemDto> items = new ArrayList<>();
 
 }

@@ -2,7 +2,7 @@
     <h3>Tipos de Cozinha</h3>
     <ul class="list-inline">
       <li class="list-inline-item border rounded p-2" *ngFor="let tipoDeCozinha of tiposDeCozinha"><a
-          [routerLink]="['/orders', cep, 'tipos-de-cozinha', tipoDeCozinha.id]">{{tipoDeCozinha.nome}}</a></li>
+          [routerLink]="['/orders', cep, 'tipos-de-cozinha', tipoDeCozinha.id]">{{tipoDeCozinha.name}}</a></li>
     </ul>
   </section>
 
@@ -11,15 +11,15 @@
   <div class="card-columns mt-4 mb-5">
     <div class="card bg-light shadow" *ngFor="let restaurante of restaurantesComDetalhes">
       <div class="card-body">
-        <h5 class="card-title">{{restaurante.nome}}</h5>
-        <h6 class="card-subtitle" *ngIf="restaurante.mediaAvaliacoes" class="card-subtitle mb-2">★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</h6>
+        <h5 class="card-title">{{restaurante.name}}</h5>
+        <h6 class="card-subtitle" *ngIf="restaurante.average" class="card-subtitle mb-2">★ {{ restaurante.average | number:'1.1-1' }}</h6>
         <p class="card-text">
-          <span>{{restaurante.tipoDeCozinha?.nome}}</span>
-          <span *ngIf="restaurante.tempoDeEntregaMinimoEmMinutos"> • {{restaurante.tempoDeEntregaMinimoEmMinutos}} min</span>
-          <span *ngIf="restaurante.tempoDeEntregaMaximoEmMinutos"> - {{restaurante.tempoDeEntregaMaximoEmMinutos}} min</span>
-          <span *ngIf="restaurante.distancia"> • {{ restaurante.distancia | number:'1.1-1' }} km</span>
+          <span>{{restaurante.tipoDeCozinha?.name}}</span>
+          <span *ngIf="restaurante.minDeliveryTime"> • {{restaurante.minDeliveryTime}} min</span>
+          <span *ngIf="restaurante.maxDeliveryTime"> - {{restaurante.maxDeliveryTime}} min</span>
+          <span *ngIf="restaurante.distance"> • {{ restaurante.distance | number:'1.1-1' }} km</span>
         </p>
-        <p class="card-text">{{ restaurante.taxaDeEntregaEmReais | currency:'BRL' }}</p>
+        <p class="card-text">{{ restaurante.deliveryPrice | currency:'BRL' }}</p>
         <a [routerLink]="['/orders', this.cep, 'restaurant', restaurante.id]"
           class="btn btn-primary stretched-link">Escolher</a>
       </div>

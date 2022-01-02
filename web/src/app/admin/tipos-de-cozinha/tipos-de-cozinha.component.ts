@@ -20,7 +20,7 @@ export class TiposDeCozinhaComponent implements OnInit {
               private tipoDeCozinhaService: TipoDeCozinhaService) { }
 
   ngOnInit() {
-    this.tipoDeCozinhaService.todos()
+    this.tipoDeCozinhaService.getCuisineTypes()
       .subscribe(tiposDeCozinha => {
         this.tiposDeCozinha = tiposDeCozinha;
       });
@@ -44,7 +44,7 @@ export class TiposDeCozinhaComponent implements OnInit {
   }
 
   salva() {
-    this.tipoDeCozinhaService.salva(this.tipoDeCozinha)
+    this.tipoDeCozinhaService.create(this.tipoDeCozinha)
       .subscribe(tipoDeCozinha => {
         if (this.tipoDeCozinha.id) {
           const indice = this.tiposDeCozinha.findIndex(t => t.id === tipoDeCozinha.id);
@@ -52,7 +52,7 @@ export class TiposDeCozinhaComponent implements OnInit {
         } else {
           this.tiposDeCozinha.push(tipoDeCozinha);
         }
-        this.tiposDeCozinha = this.tiposDeCozinha.sort((a, b) => a.nome.localeCompare(b.nome));
+        this.tiposDeCozinha = this.tiposDeCozinha.sort((a, b) => a.name.localeCompare(b.name));
         this.tipoDeCozinha = {};
         this.modalRef.close();
       });

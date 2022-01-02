@@ -27,6 +27,7 @@ public class OrderController {
 
     @PostMapping
     public OrderDto createOrder(@RequestBody Order order) {
+        //DTO COM MAPPER DEFAULT
         order.setDateTime(LocalDateTime.now());
         order.setStatus(Status.SUBMITTED);
         order.getItems().forEach(item -> item.setOrder(order));

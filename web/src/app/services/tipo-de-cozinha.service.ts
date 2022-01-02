@@ -14,15 +14,15 @@ export class TipoDeCozinhaService {
   constructor(private http: HttpClient) {
   }
 
-  todos(): Observable<any> {
+  getCuisineTypes(): Observable<any> {
     return this.http.get(`${this.API}/cuisine-types`);
   }
 
-  salva(tipoDeCozinha: any): Observable<any> {
-    if (tipoDeCozinha.id) {
-      return this.http.put(`${this.API}/admin/tipos-de-cozinha/${tipoDeCozinha.id}`, tipoDeCozinha);
+  create(cuisineType: any): Observable<any> {
+    if (cuisineType.id) {
+      return this.http.put(`${this.API}/admin/tipos-de-cozinha/${cuisineType.id}`, cuisineType);
     }
-    return this.http.post(`${this.API}/admin/tipos-de-cozinha`, tipoDeCozinha);
+    return this.http.post(`${this.API}/admin/tipos-de-cozinha`, cuisineType);
   }
 
   remove(tipoDeCozinha: any) {

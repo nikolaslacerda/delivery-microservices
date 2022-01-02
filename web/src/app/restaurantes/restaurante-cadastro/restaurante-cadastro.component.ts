@@ -36,7 +36,7 @@ export class RestauranteCadastroComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tipoDeCozinhaService.todos().subscribe(data => {
+    this.tipoDeCozinhaService.getCuisineTypes().subscribe(data => {
       this.tiposDeCozinha = data;
     });
 

@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { AvaliacoesService } from 'src/app/services/avaliacoes.service';
+import {Review} from '../../models/review';
+import {Order} from '../../models/order';
 
 @Component({
   selector: 'app-status-pedido',
@@ -10,8 +12,8 @@ import { AvaliacoesService } from 'src/app/services/avaliacoes.service';
 })
 export class StatusPedidoComponent implements OnInit {
 
-  pedido: any = {};
-  avaliacao: any = {};
+  order: Order = {} as Order;
+  review: Review = {} as Review;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -20,16 +22,16 @@ export class StatusPedidoComponent implements OnInit {
   }
 
   ngOnInit() {
-    const pedidoId = this.route.snapshot.params.pedidoId;
-    this.pedidoService.porId(pedidoId)
-      .subscribe(pedido => this.pedido = pedido);
+    const orderId = this.route.snapshot.params.pedidoId;
+    this.pedidoService.getOrderById(orderId)
+      .subscribe(order => this.order = order);
   }
 
-  salvaAvaliacao() {
-    this.avaliacao.pedido = this.pedido;
-    this.avaliacoesService.salva(this.avaliacao)
-      .subscribe(avaliacao => {
-        this.avaliacao = avaliacao;
+  createReview() {
+    this.review.order = this.order;
+    this.avaliacoesService.create(this.review)
+      .subscribe(review => {
+        this.review = review;
         setTimeout(() => this.router.navigate(['']), 1500);
       });
   }

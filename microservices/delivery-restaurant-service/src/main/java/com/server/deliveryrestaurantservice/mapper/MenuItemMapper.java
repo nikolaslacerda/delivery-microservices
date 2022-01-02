@@ -10,6 +10,7 @@ public class MenuItemMapper {
 
     public static MenuItemDto mapToDto(MenuItem item) {
         return MenuItemDto.builder()
+                .id(item.getId())
                 .name(item.getName())
                 .description(item.getDescription())
                 .price(item.getPrice())

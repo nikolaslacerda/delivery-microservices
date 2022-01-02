@@ -24,11 +24,11 @@ public class OrderDto {
     private LocalDateTime dateTime;
     private Status status;
     private Long restaurantId;
-    private DeliveryDto deliveryDto;
+    private DeliveryDto delivery;
     private List<OrderItemDto> items = new ArrayList<>();
 
     public BigDecimal getTotal() {
-        return BigDecimal.ZERO;
+        return BigDecimal.ONE;
 //		BigDecimal total = restaurante.getTaxaDeEntregaEmReais() != null ? restaurante.getTaxaDeEntregaEmReais() : BigDecimal.ZERO;
 //		for (OrderItemDto item : items) {
 //			BigDecimal price = item.getItemDoCardapio().getPrecoPromocional() != null ? item.getItemDoCardapio().getPrecoPromocional() : item.getItemDoCardapio().getPreco() ;

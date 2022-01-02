@@ -23,7 +23,7 @@ export class ItemDoCardapioCadastroComponent implements OnInit {
 
   ngOnInit() {
     const restauranteId = this.route.snapshot.params.restauranteId;
-    this.restauranteService.porId(restauranteId)
+    this.restauranteService.getById(restauranteId)
       .subscribe(restaurante => this.restaurante = restaurante);
 
     const cardapioId = this.route.snapshot.params.cardapioId;

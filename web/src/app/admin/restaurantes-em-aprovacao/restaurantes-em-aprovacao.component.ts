@@ -14,7 +14,7 @@ export class RestauranteEmAprovacaoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.restaurantesService.emAprovacao()
+    this.restaurantesService.getPendingRestaurants()
       .subscribe(restaurantes => this.restaurantesEmAprovacao = restaurantes);
   }
 
@@ -23,7 +23,7 @@ export class RestauranteEmAprovacaoComponent implements OnInit {
   }
 
   aprova(restaurante) {
-    this.restaurantesService.aprova(restaurante)
+    this.restaurantesService.approveRestaurant(restaurante)
       .subscribe(() => {
         restaurante.aprovado = true;
         this.restauranteEmDetalhe = null;

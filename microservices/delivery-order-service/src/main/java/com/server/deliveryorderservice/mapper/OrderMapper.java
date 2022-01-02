@@ -11,7 +11,7 @@ public class OrderMapper {
                 .dateTime(order.getDateTime())
                 .status(order.getStatus())
                 .restaurantId(order.getRestaurantId())
-                .deliveryDto(DeliveryMapper.mapToDto(order.getDelivery()))
+                .delivery(DeliveryMapper.mapToDto(order.getDelivery()))
                 .items(OrderItemMapper.mapItemsToDto(order.getItems()))
                 .build();
     }
