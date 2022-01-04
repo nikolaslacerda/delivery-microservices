@@ -7,6 +7,7 @@ import com.server.deliverypaymentservice.model.Payment;
 import com.server.deliverypaymentservice.model.PaymentDto;
 import com.server.deliverypaymentservice.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.ResponseEntity;
@@ -20,18 +21,19 @@ import java.util.List;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-
+@Slf4j
 @RestController
 @AllArgsConstructor
 @RequestMapping("/payment")
 public class PaymentController {
 
-    private PaymentRepository paymentRepository;
     private OrderRestClient orderRestClient;
+    private PaymentRepository paymentRepository;
     private NotifierConfirmedPayment paymentNotifier;
 
     @GetMapping("/{id}")
     public Resource<PaymentDto> detail(@PathVariable("id") Long id) {
+        log.info("Find payment with id {}", id);
         Payment payment = paymentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 
         List<Link> links = new ArrayList<>();
@@ -54,6 +56,7 @@ public class PaymentController {
     @PostMapping
     public ResponseEntity<Resource<PaymentDto>> create(@RequestBody Payment payment,
                                                        UriComponentsBuilder uriBuilder) {
+        log.info("Create payment {}", payment);
         payment.setStatus(Payment.Status.CREATED);
         Payment salvo = paymentRepository.save(payment);
 
@@ -79,6 +82,8 @@ public class PaymentController {
 
     @PutMapping("/{id}")
     public Resource<PaymentDto> confirmPayment(@PathVariable Long id) {
+        log.info("Confirm payment with id {}", id);
+
         Payment payment = paymentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         payment.setStatus(Payment.Status.CONFIRM);
         paymentRepository.save(payment);
@@ -99,6 +104,8 @@ public class PaymentController {
 
     @DeleteMapping("/{id}")
     public Resource<PaymentDto> cancel(@PathVariable Long id) {
+        log.info("Delete payment with id {}", id);
+
         Payment payment = paymentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         payment.setStatus(Payment.Status.CANCELED);
         paymentRepository.save(payment);

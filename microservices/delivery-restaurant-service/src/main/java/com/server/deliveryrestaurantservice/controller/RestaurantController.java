@@ -29,9 +29,15 @@ class RestaurantController {
         return RestaurantMapper.mapToDto(restaurant);
     }
 
-    @GetMapping("/partners/restaurants/user/{userId}")
-    public RestaurantDto getRestaurantByUser(@PathVariable("userId") Long userId) {
-        Restaurant restaurant = restaurantRepository.findByUserId(userId);
+//    @GetMapping("/partners/restaurants/user/{userId}")
+//    public RestaurantDto getRestaurantByUser(@PathVariable("userId") Long userId) {
+//        Restaurant restaurant = restaurantRepository.findByUserId(userId);
+//        return RestaurantMapper.mapToDto(restaurant);
+//    }
+
+    @GetMapping("/partners/restaurants/user/{username}")
+    public RestaurantDto getRestaurantByUsername(@PathVariable("username") String username) {
+        Restaurant restaurant = restaurantRepository.findByUsername(username);
         return RestaurantMapper.mapToDto(restaurant);
     }
 

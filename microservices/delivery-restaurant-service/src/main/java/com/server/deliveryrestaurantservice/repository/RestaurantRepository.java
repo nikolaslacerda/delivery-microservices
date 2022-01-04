@@ -20,6 +20,10 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
     Restaurant findByUserId(Long userId);
 
+    @Query(value = "SELECT * FROM restaurant\n" +
+            "INNER JOIN user on restaurant.user_id = user.id\n", nativeQuery = true)
+    Restaurant findByUsername(String userId);
+
     @Modifying(clearAutomatically = true)
     @Query("update Restaurant r set r.approved = true where r.id = :id")
     void approveById(@Param("id") Long id);
