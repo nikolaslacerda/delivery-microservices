@@ -27,8 +27,8 @@ export class PedidosService {
     return this.http.put(`${this.API}/orders/${pedido.id}/status`, pedido);
   }
 
-  pendentes(restauranteId): Observable<any> {
-    return this.http.get(`${this.API}/partners/restaurants/${restauranteId}/orders/pending`);
+  getPendingOrders(restaurantId: number): Observable<Array<Order>> {
+    return this.http.get<Array<Order>>(`${this.API}/orders/pending/restaurant/${restaurantId}`);
   }
 
 }

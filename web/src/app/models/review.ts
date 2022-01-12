@@ -2,7 +2,9 @@ import {Order} from './order';
 
 export class Review {
   id: number;
-  score: number;
-  comment: string;
+  userRating: number;
+  name: string;
+  date: string;
+  comments: string;
   order: Order;
 }

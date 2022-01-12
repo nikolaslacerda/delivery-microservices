@@ -18,15 +18,16 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
     return next.handle(req)
       .pipe(
         catchError(err => {
-          let mensagemDeErro = '';
+          let errorMessage = '';
           if (err.error instanceof ErrorEvent) {
-            mensagemDeErro = err.error.message;
+            errorMessage = err.error.message;
           } else {
             if (err.status && err.message) {
-              mensagemDeErro = `[${err.status}] ${err.message}`;
+              errorMessage = `[${err.status}] ${err.message}`;
             }
           }
-          this.toaster.error(mensagemDeErro, 'Erro no servidor');
+          console.error(errorMessage);
+          this.toaster.error(errorMessage, 'Erro no servidor');
           this.router.navigate(['']);
           return throwError(err);
         })

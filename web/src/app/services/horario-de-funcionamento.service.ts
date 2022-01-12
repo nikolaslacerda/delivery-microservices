@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
-import { environment } from 'src/environments/environment';
+import {environment} from 'src/environments/environment';
 
-import { DiaDaSemanaService } from './dia-da-semana.service';
+import {DiaDaSemanaService} from './dia-da-semana.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,31 +20,31 @@ export class HorarioDeFuncionamentoService {
   }
 
   todosDoRestaurante(restaurante): Observable<any> {
-    return this.http.get(`${this.API}/restaurantes/${restaurante.id}/horarios-de-funcionamento`)
+    return this.http.get(`${this.API}/restaurants/${restaurante.id}/business-hours`)
       .pipe(
-        map(horarios => this.ordena(horarios))
+        map(horarios => this.sortHours(horarios))
       );
   }
 
   porId(restauranteId, horarioId) {
-    return this.http.get(`${this.API}/restaurantes/${restauranteId}/horarios-de-funcionamento/${horarioId}`);
+    return this.http.get(`${this.API}/restaurants/${restauranteId}/business-hours/${horarioId}`);
   }
 
   salva(horario): Observable<any> {
     if (horario.id) {
-      return this.http.put(`${this.API}/parceiros/restaurantes/${horario.restaurante.id}/horarios-de-funcionamento/${horario.id}`, horario);
+      return this.http.put(`${this.API}/partners/restaurants/${horario.restaurante.id}/business-hours/${horario.id}`, horario);
     } else {
-      return this.http.post(`${this.API}/parceiros/restaurantes/${horario.restaurante.id}/horarios-de-funcionamento`, horario);
+      return this.http.post(`${this.API}/partners/restaurants/${horario.restaurante.id}/business-hours`, horario);
     }
   }
 
   remove(horario) {
-    return this.http.delete(`${this.API}/parceiros/restaurantes/${horario.restaurante.id}/horarios-de-funcionamento/${horario.id}`);
+    return this.http.delete(`${this.API}/partners/restaurants/${horario.restaurante.id}/business-hours/${horario.id}`);
   }
 
-  ordena(horarios) {
-    return horarios.sort(
-      (a,b) => this.diaDaSemanaService.compara(a.diaDaSemana, b.diaDaSemana)
+  sortHours(hours) {
+    return hours.sort(
+      (a, b) => this.diaDaSemanaService.compara(a.dayOfWeek, b.dayOfWeek)
     );
   }
 

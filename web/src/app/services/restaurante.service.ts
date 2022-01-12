@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 
 import {environment} from 'src/environments/environment';
 import {Restaurant} from '../models/restaurant';
-import {RestaurantWithDistance} from '../models/restaurant-with-distance';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,8 @@ import {RestaurantWithDistance} from '../models/restaurant-with-distance';
 export class RestauranteService {
 
   private API = environment.baseUrl;
-  private DISTANCE_API = environment.baseUrl + '/distances';
+
+  // private DISTANCE_API = environment.baseUrl + '/distances';
 
   constructor(private http: HttpClient) {
   }
@@ -25,19 +25,19 @@ export class RestauranteService {
     return this.http.get<Restaurant[]>(`${this.API}/restaurants?ids=${ids}`);
   }
 
-  getNearestRestaurants(cep: string): Observable<Restaurant> {
-    return this.http.get<Restaurant>(`${this.DISTANCE_API}/restaurants/nearest/${cep}`);
+  getNearestRestaurants(cep: string): Observable<Restaurant[]> {
+    return this.http.get<Restaurant[]>(`${this.API}/restaurants`);
   }
 
-  getNearestRestaurantsByCuisineType(cep: string, cuisineTypeId: string): Observable<Restaurant> {
-    return this.http.get<Restaurant>(`${this.DISTANCE_API}/restaurants/nearest/${cep}/cuisine-type/${cuisineTypeId}`);
+  getNearestRestaurantsByCategory(cep: string, mainCategory: string): Observable<Restaurant[]> {
+    return this.http.get<Restaurant[]>(`${this.API}/restaurants?mainCategory=${mainCategory}`);
   }
 
   getRestaurantPaymentMethods(restaurantId: number): Observable<any> {
     return this.http.get(`${this.API}/restaurants/${restaurantId}/payment-methods`);
   }
 
-  doUsuario(user: any): Observable<any> {
+  getUserRestaurants(user: any): Observable<any> {
     return this.http.get(`${this.API}/partners/restaurants/user/${user.username}`);
   }
 
@@ -60,8 +60,9 @@ export class RestauranteService {
     return this.http.patch(`${this.API}/admin/restaurants/${restaurant.id}`, restaurant);
   }
 
-  getRestaurantWithDistance(cep: string, restaurantId: string): Observable<RestaurantWithDistance> {
-    return this.http.get<RestaurantWithDistance>(`${this.API}/restaurants-with-distance/${cep}/restaurant/${restaurantId}`);
+  getRestaurantWithDistance(cep: string, restaurantId: string): Observable<Restaurant> {
+    // return this.http.get<RestaurantWithDistance>(`${this.API}/restaurants-with-distance/${cep}/restaurant/${restaurantId}`);
+    return this.http.get<Restaurant>(`${this.API}/restaurants/${restaurantId}`);
   }
 
 }

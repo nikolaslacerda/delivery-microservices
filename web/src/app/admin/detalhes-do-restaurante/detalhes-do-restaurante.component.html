@@ -1,25 +1,25 @@
 <h3>Detalhes do restaurante</h3>
 <dl>
   <dt>Nome</dt>
-  <dd>{{ restaurante.nome }}</dd>
+  <dd>{{ restaurante.name }}</dd>
 
   <dt>Tipo de cozinha</dt>
-  <dd>{{ restaurante.tipoDeCozinha.nome }}</dd>
+  <dd>{{ restaurante.cuisineType }}</dd>
 
   <dt>CNPJ</dt>
   <dd>{{ restaurante.cnpj }}</dd>
 
   <dt>Descrição</dt>
-  <dd>{{ restaurante.descricao }}</dd>
+  <dd>{{ restaurante.description }}</dd>
 
   <dt>Taxa de entrega</dt>
-  <dd>{{ restaurante.taxaDeEntregaEmReais | currency:'BRL' }}</dd>
+  <dd>{{ restaurante.deliveryPrice | currency:'BRL' }}</dd>
 
   <dt>Tempo de entrega mínimo (em minutos)</dt>
-  <dd>{{ restaurante.tempoDeEntregaMinimoEmMinutos}}</dd>
+  <dd>{{ restaurante.minDeliveryTime}}</dd>
 
   <dt>Tempo de entrega máximo (em minutos)</dt>
-  <dd>{{ restaurante.tempoDeEntregaMaximoEmMinutos }}</dd>
+  <dd>{{ restaurante.maxDeliveryTime }}</dd>
 </dl>
 <div *ngIf="formasDePagamento?.length">
   <h4>Formas de pagamento</h4>

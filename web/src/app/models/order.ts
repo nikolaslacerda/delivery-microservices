@@ -8,4 +8,5 @@ export class Order {
   items: OrderItem[];
   total: number;
   deliveryPrice: number;
+  status: string;
 }

@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/pt';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -18,12 +18,13 @@ import { HeaderComponent } from './header/header.component';
 
 import { AdminModule } from './admin/admin.module';
 import { PedidoModule } from './pedido/pedido.module';
-import { RestaurantesModule } from './restaurantes/restaurantes.module';
+import { RestaurantesModule } from './restaurants/restaurantes.module';
 
 import { ErrorHandlingInterceptor } from './interceptors/error-handling-interceptor';
 import { JwtInterceptor } from './interceptors/jwt-interceptor';
 
 import { appRoutes } from './app.routes';
+import { HomeComponent } from './home/home.component';
 
 registerLocaleData(localeFr, 'pt');
 
@@ -31,7 +32,8 @@ registerLocaleData(localeFr, 'pt');
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ registerLocaleData(localeFr, 'pt');
     FormsModule,
     BrowserAnimationsModule,
     appRoutes,
-    NgbModule,
+    // NgbModule,
     ToastrModule.forRoot(),
     AdminModule,
     PedidoModule,

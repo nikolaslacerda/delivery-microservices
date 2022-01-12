@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
+import {Restaurant} from '../models/restaurant';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,12 @@ export class FormaDePagamentoService {
   constructor(private http: HttpClient) {
   }
 
-  todas(): Observable<any> {
+  getAllPaymentMethods(): Observable<any> {
     return this.http.get(`${this.API}/payment-methods`);
+  }
+
+  getRestaurantPaymentMethods(restaurant: Restaurant): Observable<any> {
+    return this.http.get(`${this.API}/restaurants/${restaurant.id}/payment-methods`);
   }
 
   salva(formaDePagamento: any): Observable<any> {
@@ -31,10 +36,6 @@ export class FormaDePagamentoService {
 
   tipos(): Observable<any> {
     return this.http.get(`${this.API}/admin/payment-methods/tipos`);
-  }
-
-  doRestaurante(restaurante): Observable<any> {
-    return this.http.get(`${this.API}/restaurants/${restaurante.id}/payment-methods`);
   }
 
   adicionaAoRestaurante(formaDePagamento): Observable<any> {

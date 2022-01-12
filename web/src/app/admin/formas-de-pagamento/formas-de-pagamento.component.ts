@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+// import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 import { FormaDePagamentoService } from 'src/app/services/forma-de-pagamento.service';
 
@@ -14,9 +14,9 @@ export class FormasDePagamentoComponent implements OnInit {
   formasDePagamento: Array<any> = [];
   formaDePagamento: any = {};
 
-  modalRef: NgbModalRef;
+  // modalRef: NgbModalRef;
 
-  constructor(private modal: NgbModal,
+  constructor(// private modal: NgbModal,
               private formaDePagamentoService: FormaDePagamentoService) { }
 
   ngOnInit() {
@@ -24,7 +24,7 @@ export class FormasDePagamentoComponent implements OnInit {
       this.tiposDeFormaDePagamento = data;
     });
 
-    this.formaDePagamentoService.todas()
+    this.formaDePagamentoService.getAllPaymentMethods()
       .subscribe(data => {
         this.formasDePagamento = data;
       });
@@ -32,12 +32,12 @@ export class FormasDePagamentoComponent implements OnInit {
 
   adiciona(formaDePagamentoModal) {
     this.formaDePagamento = {};
-    this.modalRef = this.modal.open(formaDePagamentoModal);
+    // this.modalRef = this.modal.open(formaDePagamentoModal);
   }
 
   edita(formaDePagamentoModal, formaDePagamento) {
     this.formaDePagamento = Object.assign({}, formaDePagamento);
-    this.modalRef = this.modal.open(formaDePagamentoModal);
+    // this.modalRef = this.modal.open(formaDePagamentoModal);
   }
 
   remove(formaDePagamento) {
@@ -57,7 +57,7 @@ export class FormasDePagamentoComponent implements OnInit {
         }
         this.formasDePagamento = this.formasDePagamento.sort((a, b) => a.nome.localeCompare(b.nome));
         this.formaDePagamento = {};
-        this.modalRef.close();
+        // this.modalRef.close();
       });
   }
 

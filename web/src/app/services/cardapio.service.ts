@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import {Menu} from '../models/menu';
+import {MenuItem} from '../models/menu-item';
+import {MenuCategory} from '../models/menu-category';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +17,16 @@ export class CardapioService {
   constructor(private http: HttpClient) {
   }
 
-  getByRestaurant(restaurantId: string): Observable<Menu> {
-    return this.http.get<Menu>(`${this.API}/restaurants/${restaurantId}/menu`);
+  getByRestaurant(restaurantId: string): Observable<Menu[]> {
+    return this.http.get<Menu[]>(`${this.API}/menu?restaurantId=${restaurantId}`);
+  }
+
+    getMenuCategories(menuId: number): Observable<MenuCategory[]> {
+    return this.http.get<MenuCategory[]>(`${this.API}/menu-category?menuId=${menuId}`);
+  }
+
+  getCategoryItems(categoryId: number): Observable<MenuItem[]> {
+    return this.http.get<MenuItem[]>(`${this.API}/menu-item?menuCategoryId=${categoryId}`);
   }
 
   porId(restauranteId, cardapioId): Observable<any> {

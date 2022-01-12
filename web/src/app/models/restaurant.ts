@@ -1,14 +1,17 @@
-export class Restaurant {
+export interface Restaurant {
   id: number;
-  cnpj: number;
   name: string;
-  description: string;
-  cep: number;
-  address: string;
-  deliveryPrice: number;
+  cnpj?: number;
+  mainCategory: string;
   minDeliveryTime: number;
   maxDeliveryTime: number;
-  approved: boolean;
-  cuisineTypeId: number;
+  cep?: number;
+  description?: string;
+  address?: string;
+  deliveryFee?: number;
+  approved?: boolean;
   distance: number;
+  userId?: number;
+  imageUrl: string;
+  userRating: number;
 }

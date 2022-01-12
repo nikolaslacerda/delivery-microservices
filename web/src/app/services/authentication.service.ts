@@ -1,16 +1,15 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-
-import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {map, switchMap} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  private API = environment.baseUrl + '/auth';
+  private API = environment.baseUrl + '/oauth';
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
@@ -24,21 +23,60 @@ export class AuthenticationService {
   }
 
   hasRole(role: string): boolean {
-    if (this.currentUserValue && this.currentUserValue.roles) {
-      return this.currentUserValue.roles.includes(role);
+    if (this.currentUserValue && this.currentUserValue.role) {
+      return this.currentUserValue.role === role;
     }
     return false;
   }
 
   login(loginInfo): Observable<any> {
-    return this.http.post(`${this.API}`, loginInfo)
-      .pipe(map((authData: any) => {
-        if (authData && authData.token) {
-          localStorage.setItem('currentUser', JSON.stringify(authData));
-          this.currentUserSubject.next(authData);
-        }
-        return authData;
-      }));
+
+    const headers = {
+      Authorization: 'Basic ' + btoa('root:root'),
+      'Content-type': 'application/x-www-form-urlencoded'
+    };
+
+    const body = new HttpParams()
+      .set('username', loginInfo.username)
+      .set('password', loginInfo.password)
+      .set('scope', 'any')
+      .set('grant_type', 'password');
+
+
+    return this.http.post(`${this.API}/token`, body, {headers})
+      .pipe(switchMap((tokenData: any) => {
+          if (tokenData && tokenData.access_token) {
+            localStorage.setItem('currentUser', JSON.stringify(tokenData));
+            this.currentUserSubject.next(tokenData);
+            return this.http.get(`${this.API}/me`)
+              .pipe(
+                map((userData: any) => {
+                  tokenData.username = userData.username;
+                  tokenData.role = userData.role.replace('ROLE_', '');
+                  userData.role = userData.role.replace('ROLE_', '');
+                  localStorage.setItem('currentUser', JSON.stringify(tokenData));
+                  this.currentUserSubject.next(userData);
+                  return userData;
+                })
+              );
+          }
+        })
+      );
+  }
+
+  getUserInfo() {
+    return this.http.get(`${this.API}/me`)
+      .pipe(
+        map((authData1: any) => {
+          if (authData1) {
+            console.log(authData1);
+            this.currentUserSubject.next(authData1);
+          } else {
+            console.log('?');
+          }
+          return authData1;
+        })
+      );
   }
 
   logout() {

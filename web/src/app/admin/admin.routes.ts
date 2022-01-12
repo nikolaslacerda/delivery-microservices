@@ -20,7 +20,7 @@ const routes: Routes = [
     data: { role: 'ADMIN'}
   },
   {
-    path: 'admin/restaurantes-em-aprovacao',
+    path: 'admin/restaurants-em-aprovacao',
     component: RestauranteEmAprovacaoComponent,
     canActivate: [AuthorizationGuard],
     data: { role: 'ADMIN'}

@@ -6,7 +6,7 @@ import { CardapioService } from 'src/app/services/cardapio.service';
 import { DiaDaSemanaService } from 'src/app/services/dia-da-semana.service';
 
 @Component({
-  selector: 'app-detalhes-do-restaurante',
+  selector: 'app-detalhes-do-restaurant',
   templateUrl: './detalhes-do-restaurante.component.html'
 })
 export class DetalhesDoRestauranteComponent implements OnChanges {
@@ -23,7 +23,7 @@ export class DetalhesDoRestauranteComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    this.formaDePagamentoService.doRestaurante(this.restaurante)
+    this.formaDePagamentoService.getRestaurantPaymentMethods(this.restaurante)
       .subscribe(formas => this.formasDePagamento = formas);
 
     this.horarioDeFuncionamentoService.todosDoRestaurante(this.restaurante)

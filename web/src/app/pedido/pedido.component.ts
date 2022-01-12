@@ -10,6 +10,6 @@ export class PedidoComponent {
   constructor(private router: Router) { }
 
   buscar() {
-    this.router.navigate(['/orders/', this.cep]);
+    this.router.navigate(['/restaurants/', this.cep]);
   }
 }

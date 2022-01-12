@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestauranteService } from 'src/app/services/restaurante.service';
 
 @Component({
-  selector: 'app-restaurantes-em-aprovacao',
+  selector: 'app-restaurants-em-aprovacao',
   templateUrl: './restaurantes-em-aprovacao.component.html'
 })
 export class RestauranteEmAprovacaoComponent implements OnInit {

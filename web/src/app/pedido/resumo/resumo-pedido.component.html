@@ -3,10 +3,10 @@
   <div *ngFor="let item of order.items">
     <hr>
     <p>{{ item.quantity }}x {{ item.name }}
-      <span>{{ item.quantity * item.price | currency:'BRL' }}</span><br>
+      <span>{{ item.quantity * item.price | currency:'USD' }}</span><br>
       <span class="text-muted"><small>{{ item.observation }}</small></span></p>
   </div>
   <hr>
-  <p>Delivery Price: {{ order.deliveryPrice ? (order.deliveryPrice | currency:'BRL') : 'Free' }}</p>
-  <p class="font-weight-bold">Total: {{ order.total | currency:'BRL' }}</p>
+  <p>Delivery Price: {{ order.deliveryPrice ? (order.deliveryPrice | currency:'USD') : 'Free' }}</p>
+  <p class="font-weight-bold">Total: {{ order.total | currency:'USD' }}</p>
 </section>

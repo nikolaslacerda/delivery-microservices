@@ -2,6 +2,7 @@ export class MenuItem {
   id: number;
   name: string;
   description: string;
-  price: number;
-  promotionalPrice: number;
+  unitOriginalPrice: number;
+  unitPrice: number;
+  imageUrl: string;
 }

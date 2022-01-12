@@ -1,27 +1,49 @@
-import { RouterModule, Routes } from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
-import { PedidoComponent } from './pedido.component';
-import { ListaRestaurantesComponent } from './lista-restaurantes/lista-restaurantes.component';
-import { RestauranteComponent } from './restaurante/restaurante.component';
-import { PagamentoPedidoComponent } from './pagamento/pagamento-pedido.component';
-import { StatusPedidoComponent } from './status/status-pedido.component';
+import {PedidoComponent} from './pedido.component';
+import {RestaurantListComponent} from '../restaurants/restaurant-list/restaurant-list.component';
+import {RestaurantComponent} from '../restaurants/restaurant/restaurant.component';
+import {PagamentoPedidoComponent} from './pagamento/pagamento-pedido.component';
+import {StatusPedidoComponent} from './status/status-pedido.component';
+import {HomeComponent} from '../home/home.component';
+import {MenuComponent} from '../restaurants/restaurant/menu/menu.component';
+import {ReviewsComponent} from '../restaurants/restaurant/reviews/reviews.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'restaurants',
     component: PedidoComponent
   },
   {
-    path: 'orders/:cep',
-    component: ListaRestaurantesComponent
+    path: 'restaurants/:cep',
+    component: RestaurantListComponent
   },
   {
-    path: 'orders/:cep/tipos-de-cozinha/:tipoDeCozinhaId',
-    component: ListaRestaurantesComponent
+    path: 'restaurants/:cep/tipos-de-cozinha/:tipoDeCozinhaId',
+    component: RestaurantListComponent
   },
   {
-    path: 'orders/:cep/restaurant/:restauranteId',
-    component: RestauranteComponent
+    path: 'restaurant/:restaurantId',
+    component: RestaurantComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'menu',
+        pathMatch: 'full'
+      },
+      {
+        path: 'menu',
+        component: MenuComponent
+      },
+      {
+        path: 'reviews',
+        component: ReviewsComponent
+      }
+    ]
   },
   {
     path: 'orders/:pedidoId/payment',

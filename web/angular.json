@@ -23,9 +23,17 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/font-awesome/css/font-awesome.css",
+              "./node_modules/admin-lte/node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/admin-lte/dist/css/adminlte.min.css",
+              "./node_modules/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.css",
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/admin-lte/node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "./node_modules/admin-lte/dist/js/adminlte.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

@@ -16,7 +16,7 @@ export class DiaDaSemanaService {
   ];
 
   aPartirDoValor(valor) {
-    return this.diasDaSemana.find( d => d.valor == valor);
+    return this.diasDaSemana.find( d => d.valor === valor);
   }
 
   compara(a, b) {
