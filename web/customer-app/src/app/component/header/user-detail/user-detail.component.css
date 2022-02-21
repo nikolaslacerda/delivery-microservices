@@ -1,0 +1,13 @@
+.dropdown-item:hover {
+  background-color: #f2f2f2;
+}
+
+.dropdown-item:active {
+  background-color: #f2f2f2;
+  color: #555555;
+}
+
+div.dropdown:last-child .dropdown-menu {
+  right: 0;
+  left: auto;
+}

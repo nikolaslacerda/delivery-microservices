@@ -1,0 +1,103 @@
+<div class="container-fluid p-0">
+  <div class="d-flex">
+    <div class="col-6 aaa d-flex min-vh-100">
+      <img src="assets/img/background.jpg" class="background" alt="logo">
+    </div>
+    <div class="col-6 d-flex align-items-center justify-content-center ">
+      <div class="d-flex w-50">
+        <div class="card-body">
+          <div href="/" class="logoc d-flex align-items-center justify-content-center mt-4">
+            <img src="assets/img/ifood.logo.svg" class="logo" alt="logo">
+          </div>
+          <div *ngIf="partner">
+            <h5 class="card-title mt-4"><strong>Portal do Parceiro</strong></h5>
+            <h6 class="card-subtitle mb-4 text-muted">Faça o seu cadastro</h6>
+            <form class="mb-5" [formGroup]="partnerForm" (ngSubmit)="createPartner()">
+              <div class="row">
+                <div class="form-group mb-2 col-md-6">
+                  <label for="firstName">First Name</label>
+                  <input type="text" class="form-control" formControlName="firstName" id="firstName">
+                </div>
+                <div class="form-group mb-2 col-md-6">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" class="form-control" formControlName="lastName" id="lastName">
+                </div>
+              </div>
+              <div class="form-group mb-2">
+                <label for="email">Email</label>
+                <input class="form-control" formControlName="email" type="text" id="email">
+              </div>
+              <div class="form-group mb-2">
+                <label for="phone">Phone</label>
+                <input class="form-control" formControlName="phone" type="text" id="phone">
+              </div>
+              <div class="form-group mb-4">
+                <label for="cpf">CPF</label>
+                <input class="form-control" formControlName="cpf" type="text" id="cpf">
+              </div>
+              <button class="btn btn-primary w-100 mb-3" type="submit"
+                      [disabled]="!partnerForm.valid">Next
+              </button>
+            </form>
+            <div class="mt-4">
+              <span>Já tem cadastro? <a [routerLink]="['/login']" class="text-primary"><strong>Entre</strong></a></span>
+            </div>
+          </div>
+          <div *ngIf="!partner">
+            <h5 class="card-title mt-4"><strong>Portal do Parceiro</strong></h5>
+            <h6 class="card-subtitle mb-3 text-muted">Cadastre seu restaurante</h6>
+            <form [formGroup]="restaurantForm" (ngSubmit)="createRestaurant()">
+              <div class="form-group mb-2">
+                <label for="nome">Name</label>
+                <input class="form-control" formControlName="name" type="text" id="nome">
+              </div>
+              <div class="form-group mb-2">
+                <label for="nome">CNPJ</label>
+                <input class="form-control" placeholder="00.000.000/0000-00" id="cnpj" formControlName="cnpj">
+              </div>
+              <div class="form-group mb-2">
+<!--                <label for="cuisineType">Cuisine Type</label>-->
+<!--                <select class="form-control" id="cuisineType" formControlName="mainCategory">-->
+<!--                  <option *ngFor="let category of cuisineTypes" [value]="category.id">{{category.name}}</option>-->
+<!--                </select>-->
+              </div>
+              <div class="form-group mb-2">
+                <label for="description">Description:</label>
+                <textarea class="form-control" formControlName="description" id="description"></textarea>
+              </div>
+              <div class="form-group mb-2">
+                <label for="cep">CEP:</label>
+                <input class="form-control" formControlName="cep" id="cep">
+              </div>
+              <div class="form-group mb-2">
+                <label for="address">Address:</label>
+                <input required class="form-control" formControlName="address" id="address">
+              </div>
+              <div class="form-group mb-2">
+                <label for="deliveryPrice">Delivery Price (in $)</label>
+                <input class="form-control" type="text" id="deliveryPrice" formControlName="deliveryFee">
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6 mb-4">
+                  <label for="minDeliveryTime">Min Delivery Time:</label>
+                  <input class="form-control" type="number" min="10" max="180" id="minDeliveryTime"
+                         formControlName="minDeliveryTime"
+                         placeholder="Minutes">
+                </div>
+                <div class="form-group col-md-6 mb-4">
+                  <label for="maxDeliveryTime">Max Delivery Time:</label>
+                  <input class="form-control" type="number" min="10" max="180" id="maxDeliveryTime"
+                         formControlName="maxDeliveryTime"
+                         placeholder="Minutes">
+                </div>
+              </div>
+              <button class="btn btn-primary w-100" type="submit"
+                      [disabled]="!restaurantForm.valid">Register
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

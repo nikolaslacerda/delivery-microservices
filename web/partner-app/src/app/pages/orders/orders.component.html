@@ -1,0 +1,97 @@
+<div class="row" style="height: 100vh">
+  <div class="col-4 p-0">
+    <div class="d-flex flex-column border" style="height: 100vh">
+      <div class="d-flex justify-content-center mt-3 border-bottom">
+        <div class="row mb-4">
+          <select class="form-select" (change)="onChange($event)" aria-label="Default select example">
+            <option value="ALL" selected>All</option>
+            <option value="RECEIVED">Received</option>
+            <option value="IN_THE_KITCHEN">In the kitchen</option>
+            <option value="ON_THE_WAY">On the way</option>
+            <option value="DELIVERED">Delivered</option>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex flex-column overflow-auto" style="height: 100vh">
+        <div *ngIf="isLoading" class="mt-3">
+          <app-loading></app-loading>
+        </div>
+        <div *ngIf="!isLoading">
+          <div class="border-0" *ngIf="filter === 'RECEIVED' || filter === 'ALL'">
+            <div class="card-header">
+              Received
+            </div>
+            <div (click)="orderIsClicked(order)" [ngClass]="{'border-item-left': isOrderClicked(order)}"
+                 class="d-flex w-100 shadow-none p-0 mt-0 cursor-pointer tyty border-bottom"
+                 *ngFor="let order of getReceiveOrders()">
+              <div class="card-body">
+                <span class="card-text ms-1">#{{order.id}}</span>
+                <p class="card-text">Confirme o pedido</p>
+              </div>
+              <div *ngIf="!orders.length">
+                <p>There are no pending orders!</p>
+              </div>
+            </div>
+          </div>
+          <div class="border-0" *ngIf="filter === 'IN_THE_KITCHEN' || filter === 'ALL'">
+            <div class="card-header">
+              In the kitchen
+            </div>
+            <div (click)="orderIsClicked(order)" [ngClass]="{'border-item-left': isOrderClicked(order)}"
+                 class="d-flex w-100 shadow-none p-0 mt-0 cursor-pointer tyty border-bottom"
+                 *ngFor="let order of getInTheKitchenOrders()">
+              <div class="card-body">
+                <strong>{{order.customer.firstName}}</strong>
+                <span class="card-text ms-1">#{{order.id}}</span>
+                <p class="card-text">17:44 - Previsto 18:44</p>
+              </div>
+              <div *ngIf="!orders.length">
+                <p>There are no pending orders!</p>
+              </div>
+            </div>
+          </div>
+          <div class="border-0" *ngIf="filter === 'ON_THE_WAY' || filter === 'ALL'">
+            <div class="card-header">
+              On the way
+            </div>
+            <div (click)="orderIsClicked(order)" [ngClass]="{'border-item-left': isOrderClicked(order)}"
+                 class="d-flex w-100 shadow-none p-0 mt-0 cursor-pointer tyty border-bottom"
+                 *ngFor="let order of getOnTheWayOrders()">
+              <div class="card-body">
+                <strong>{{order.customer.firstName}}</strong>
+                <span class="card-text ms-1">#{{order.id}}</span>
+                <p class="card-text">17:44 - Previsto 18:44</p>
+              </div>
+              <div *ngIf="!orders.length">
+                <p>There are no pending orders!</p>
+              </div>
+            </div>
+          </div>
+          <div class=" border-0" *ngIf="filter === 'DELIVERED' || filter === 'ALL'">
+            <div class="card-header">
+              Delivered
+            </div>
+            <div (click)="orderIsClicked(order)" [ngClass]="{'border-item-left': isOrderClicked(order)}"
+                 class="d-flex w-100 shadow-none p-0 mt-0 cursor-pointer tyty border-bottom"
+                 *ngFor="let order of getDeliveredOrders()">
+              <div class="card-body">
+                <strong>{{order.customer.firstName}}</strong>
+                <span class="card-text ms-1">#{{order.id}}</span>
+                <p class="card-text">17:44 - Previsto 18:44</p>
+              </div>
+              <div *ngIf="!orders.length">
+                <p>There are no pending orders!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer d-flex align-items-center" style="height: 63px">
+        Orders ({{orders?.length}})
+      </div>
+    </div>
+  </div>
+  <div class="col-8 p-0" *ngIf="orderClicked">
+    <app-order-detail [order]="orderClicked"></app-order-detail>
+  </div>
+</div>

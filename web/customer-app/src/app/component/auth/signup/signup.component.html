@@ -1,0 +1,61 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title mb-3"><strong>Sign Up</strong></h5>
+    <form #loginForm="ngForm" (ngSubmit)="signUp()">
+      <div class="form-group">
+        <app-input errorMessage="required" label="Name">
+          <input type="text"
+                 class="form-control"
+                 id="name"
+                 formControlName="name"
+                 placeholder="Name"
+                 autocomplete="on">
+        </app-input>
+      </div>
+      <div class="form-group">
+        <app-input errorMessage="required" label="Phone">
+          <input type="phone"
+                 class="form-control"
+                 id="phone"
+                 formControlName="phone"
+                 placeholder="Phone"
+                 autocomplete="on">
+        </app-input>
+      </div>
+      <div class="form-group">
+        <app-input errorMessage="required" label="Email">
+          <input type="email"
+                 class="form-control"
+                 id="email"
+                 formControlName="email"
+                 placeholder="Email"
+                 autocomplete="on">
+        </app-input>
+      </div>
+      <div class="form-group">
+        <app-input errorMessage="required" label="Password">
+          <input type="password"
+                 class="form-control"
+                 id="password"
+                 formControlName="password"
+                 placeholder="Password"
+                 autocomplete="off">
+        </app-input>
+      </div>
+      <div class="form-group">
+        <app-input errorMessage="required" label="Password">
+          <input type="password"
+                 class="form-control"
+                 id="passwordConfirmation"
+                 formControlName="passwordConfirmation"
+                 placeholder="Confirm Password"
+                 autocomplete="off">
+        </app-input>
+      </div>
+<!--      <p class="text-danger mt-2" *ngIf="passwordConfirmation.dirty && !validaSenhas()">A senha e a confirmação não-->
+<!--        conferem.</p>-->
+      <button type="submit" class="btn btn-danger w-100" [disabled]="!loginForm.form.valid"><strong>Register</strong>
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel"><strong>Adicione um item</strong></h5>
+    <button type="button" class="btn-close btn-close-red" (click)="hide()" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex justify-content-center align-items-center mb-2">
+      <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width:150px">
+    </div>
+    <form [formGroup]="addMenuItemForm" (ngSubmit)="addItem()">
+      <div class="form-group mb-3" formGroupName="image">
+        <label for="file" class="form-label">Image</label>
+        <input
+          formControlName="file"
+          id="file"
+          type="file"
+          class="form-control form-control-file"
+          (change)="onFileChange($event)">
+      </div>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" formControlName="description" class="form-control" id="description"
+               aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <input type="text" class="form-control" id="category" [value]="this.list[0].category.name"
+               aria-describedby="emailHelp" disabled>
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="text" formControlName="unitOriginalPrice" class="form-control" id="price"
+               aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="pprice" class="form-label">Promotional Price</label>
+        <input type="text" formControlName="unitPrice" class="form-control" id="pprice"
+               aria-describedby="emailHelp">
+      </div>
+      <div class="modal-footer mt-4">
+        <button type="button" (click)="hide()" class="btn btn-lg btn-primary-outline">Close</button>
+        <button type="submit" class="btn btn-lg btn-primary" [disabled]="!addMenuItemForm.valid">Add</button>
+      </div>
+    </form>
+  </div>
+</div>

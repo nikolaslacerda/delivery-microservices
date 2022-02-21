@@ -1,0 +1,7 @@
+<div *ngFor="let category of menu.categories">
+  <h2>{{category.name}}</h2>
+  <div class="d-flex justify-content-between" style="flex-flow: row wrap">
+    <app-menu-item *ngFor="let item of category.items" [menuItem]="item" (add)="addItem($event)"></app-menu-item>
+  </div>
+</div>
+

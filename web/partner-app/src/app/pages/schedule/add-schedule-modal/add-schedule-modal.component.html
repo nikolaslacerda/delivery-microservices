@@ -1,0 +1,34 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel"><strong>Edite o horário</strong></h5>
+    <button type="button" class="btn-close btn-close-red" (click)="hide()" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="scheduleForm" (ngSubmit)="addSchedule()">
+      <div class="mb-3">
+        <label for="day">Selecione o dia</label>
+        <select id="day" class="form-select ml-2 mr-2" formControlName="dayOfWeek" aria-label="Default select example">
+          <option value="MONDAY" selected>Monday</option>
+          <option value="TUESDAY">Tuesday</option>
+          <option value="WEDNESDAY">Wednesday</option>
+          <option value="THURSDAY">Thursday</option>
+          <option value="FRIDAY">Friday</option>
+          <option value="SATURDAY">Saturday</option>
+          <option value="SUNDAY">Sunday</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Horario de abertura</label>
+        <timepicker [formControlName]="'openingTime'" [showMeridian]="false"></timepicker>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Horario de fechamento</label>
+        <timepicker [formControlName]="'closingTime'" [showMeridian]="false"></timepicker>
+      </div>
+      <div class="modal-footer mt-4">
+        <button type="button" (click)="hide()" class="btn btn-lg btn-primary-outline">Close</button>
+        <button type="submit" class="btn btn-lg btn-primary" [disabled]="!scheduleForm.valid">Update</button>
+      </div>
+    </form>
+  </div>
+</div>

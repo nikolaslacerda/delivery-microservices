@@ -1,0 +1,7 @@
+.card:hover {
+  border-color: rgba(219, 218, 217, 0.97);
+}
+
+.card {
+  border: 1px solid #f2f2f2;
+}

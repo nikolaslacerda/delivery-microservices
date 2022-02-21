@@ -1,0 +1,17 @@
+.logo {
+  position: relative;
+  height: 55px;
+  width: 100px
+}
+
+.background {
+  max-height: 100vh;
+  min-width: 100%;
+}
+
+.invalid-feedbackk {
+  width: 100%;
+  margin-top: .25rem;
+  font-size: .875em;
+  color: #dc3545
+}

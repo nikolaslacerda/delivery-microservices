@@ -1,0 +1,13 @@
+.progress-bar.indeterminate {
+  position: relative;
+  animation: progress-indeterminate 3s linear infinite;
+}
+
+.progress-complete {
+  width: 100%;
+}
+
+@keyframes progress-indeterminate {
+  from { left: -50%; width: 50%; }
+  to { left: 100%; width: 50%;}
+}

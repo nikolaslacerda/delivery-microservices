@@ -1,0 +1,12 @@
+<section class="content" *ngIf="customerOrders?.length">
+  <h4><strong>My Orders</strong></h4>
+  <div class="row mt-3 justify-content-between">
+    <div *ngFor="let order of customerOrders" style="width: 49%">
+      <app-user-order-card [order]="order"></app-user-order-card>
+    </div>
+  </div>
+</section>
+<section class="content" *ngIf="!customerOrders?.length">
+  <p>Sorry! No orders.</p>
+</section>
+

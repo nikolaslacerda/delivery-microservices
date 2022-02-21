@@ -1,0 +1,44 @@
+<div class="container" style="height: 95%;display:flex;flex-direction:column;">
+    <h3 class="mt-4 mb-4"><strong>Restaurant Reviews</strong></h3>
+    <p>What customers say about you.</p>
+    <div class="card overflow-auto border-0"
+         infiniteScroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="50"
+         [scrollWindow]="false"
+         (scrolled)="onScroll()">
+      <div *ngIf="isLoading">
+        <app-loading></app-loading>
+      </div>
+      <div *ngIf="!isLoading">
+        <div class="col mb-2 me-2" *ngFor="let review of reviews">
+          <div class="card card-rating">
+            <div class="card-body">
+              <div class="row mb-1">
+                <h5 class="card-title text-bold">{{review.name}}</h5>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <!--            <span class="review-score text-lg">{{review.userRating}} <i class="fa fa-star rating-yellow"></i></span>-->
+                  <rating class="color-rating" [(ngModel)]="review.userRating" [max]="max"
+                          [readonly]="isReadonly"></rating>
+                </div>
+                <div class="col">
+                  <span class="description text-lg text-muted float-end">{{review.createdAt | date:'dd/MM/yyyy'}}</span>
+                </div>
+              </div>
+              <p>{{review.comments}}</p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isListLoading">
+          <app-loading></app-loading>
+        </div>
+        <div *ngIf="!hasMoreReviews">
+          <div class="col-md-12 d-flex justify-content-center">
+            <div class="text-muted h6 p-2">No more reviews to show</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

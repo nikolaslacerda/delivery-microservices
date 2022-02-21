@@ -1,0 +1,66 @@
+<div class="container mt-4">
+  <div class="row mb-3">
+    <h3><strong>Profile</strong></h3>
+  </div>
+  <div *ngIf="isLoading">
+    <app-loading></app-loading>
+  </div>
+  <div *ngIf="!isLoading">
+    <form class="mb-5" [formGroup]="restaurantForm" (ngSubmit)="updateRestaurant()">
+      <div class="form-group mt-3" formGroupName="image">
+        <div class="place-info-box-icon" style="position: relative;">
+          <div class="place-info-box-icon2">
+            <img src="{{restaurant.imageUrl}}" alt="">
+            <div class="edit"><i class="bi-pen-fill"></i></div>
+          </div>
+          <input
+            formControlName="profileImage"
+            id="profileImage"
+            type="file"
+            class="form-control"
+            style="background-color: #1DD104; cursor:pointer; opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%;"
+            (change)="onImageChange($event)">
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <label for="name">Restaurant Name</label>
+        <input type="text" class="form-control" formControlName="name" id="name" maxlength="60"
+               [ngClass]="{ 'is-invalid': restaurantForm.controls.name.invalid && (restaurantForm.controls.name.dirty || restaurantForm.controls.name.touched) }">
+        <small id="passwordHelpBlock" class="form-text text-muted" style="right: 0">
+          <p class="float-end">{{restaurantForm.value.name.length}}/60 characters</p>
+          <!--    <div *ngIf="!restaurantForm.controls.name.valid" class="invalid-feedback">-->
+          <!--      <p *ngIf="restaurantForm.controls.name.errors.required">Fullname is required</p>-->
+          <!--    </div>-->
+        </small>
+      </div>
+      <div class="form-group mt-3">
+        <label for="mainCategory">Cuisine Type</label>
+        <select class="form-select" formControlName="mainCategory" id="mainCategory" name="mainCategory"
+                aria-label="select example"
+                [ngClass]="{ 'is-invalid': restaurantForm.controls.mainCategory.invalid && (restaurantForm.controls.mainCategory.touched) }">
+          <option *ngFor="let cuisine of cuisineTypes" value="{{cuisine.name}}">{{cuisine.name}}</option>
+          <option value="Stackhouse">Stackhouse</option>
+          <!--      <option value="2">Two</option>-->
+          <!--      <option value="3">Three</option>-->
+        </select>
+      </div>
+      <div class="form-group mt-3">
+        <label for="description">Description</label>
+        <textarea style="resize: none;" class="form-control" formControlName="description" type="text" id="description"
+                  maxlength="150"
+                  [ngClass]="{ 'is-invalid': restaurantForm.controls.description.invalid && (restaurantForm.controls.description.dirty || restaurantForm.controls.description.touched) }"></textarea>
+        <small id="none" class="form-text text-muted" style="right: 0">
+          <p class="float-end">{{restaurantForm.value.description.length}}/150 characters</p>
+        </small>
+      </div>
+      <div class="row justify-content-center mt-3">
+        <button class="btn btn-primary w-50 btn-lg mb-3" type="submit"
+                [disabled]="!restaurantForm.valid || buttonLoading">
+          <span *ngIf="buttonLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Update
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

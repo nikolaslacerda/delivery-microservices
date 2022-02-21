@@ -1,0 +1,23 @@
+.badge-in-the-kitchen {
+  background-color: #FF8400;
+  color: white;
+}
+
+.badge-received{
+  background-color: #FFCB00;
+  color: white;
+}
+
+.badge-delivered{
+  background-color: #1DD104;
+  color: white;
+}
+
+.badge-on-the-way{
+  background-color: #814500;
+  color: white;
+}
+
+.border-item-left {
+  border-left: solid 4px #EF5753;
+}

@@ -1,0 +1,12 @@
+.aaa:focus {
+  box-shadow: none;
+}
+
+.btn:focus {
+  box-shadow: none;
+  opacity: 1;
+}
+
+a {
+  text-decoration: none;
+}

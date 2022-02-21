@@ -1,0 +1,18 @@
+<div class="table-responsive">
+  <table class="table-borderless w-100" aria-describedby="values">
+    <tbody>
+    <tr>
+      <th id="subtotal" class="text-muted">Subtotal</th>
+      <td class="text-right text-muted">{{subtotal | currency: 'USD': "symbol"}}</td>
+    </tr>
+    <tr>
+      <th id="deliveryFee" class="text-muted">Delivery Fee</th>
+      <td class="text-right text-muted">{{deliveryFee | currency: 'USD': "symbol"}}</td>
+    </tr>
+    <tr>
+      <th id="total">Total</th>
+      <td class="text-right"><strong>{{total | currency: 'USD': "symbol"}}</strong></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

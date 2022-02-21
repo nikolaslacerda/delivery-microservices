@@ -1,0 +1,56 @@
+$primary: #EF5753;
+$text-primary: #EF5753;
+
+@import '~bootstrap/scss/bootstrap.scss';
+
+.btn.btn-primary,
+.btn.btn-primary:hover,
+.btn.btn-primary:focus,
+.btn.btn-primary:active,
+.btn.btn-primary.disable {
+  color: #fff;
+}
+
+.btn.btn-primary:focus {
+  background-color: #EF5753;
+}
+
+.btn.btn-outline-primary:hover {
+  background-color: #EF5753;
+  color: #FFF;
+}
+
+
+body {
+  background-color: #fff;
+  font-family: 'Roboto', sans-serif;
+}
+
+;
+.bg-light-grey {
+  background-color: #F2F2F2;
+}
+
+.color-primary {
+  color: #EF5753;
+}
+
+.color-rating {
+  color: #e7a74e;
+}
+
+.btn-not-selected {
+  background-color: #ECECEC;
+  border: 1px solid #c2bfbf;
+  font-weight: bold;
+  color: #c2bfbf;
+}
+
+.btn-not-selected:hover {
+  filter: brightness(105%);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+

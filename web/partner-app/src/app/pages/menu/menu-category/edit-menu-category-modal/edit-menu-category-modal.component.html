@@ -1,0 +1,18 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel"><strong>Edite um item</strong></h5>
+    <button type="button" class="btn-close btn-close-red" (click)="hide()" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="categoryForm" (ngSubmit)="updateMenuCategory()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
+      </div>
+      <div class="modal-footer mt-4">
+        <button type="button" (click)="hide()" class="btn btn-lg btn-primary-outline">Close</button>
+        <button type="submit" class="btn btn-lg btn-primary" [disabled]="!categoryForm.valid">Update</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="container mt-4">
+  <h3 class="mb-4"><strong>Restaurant Menu</strong></h3>
+  <p>The menu is your product showcase on iFood. Here you can create categories, insert items, set availability and change prices.</p>
+  <div *ngIf="isLoading">
+    <app-loading></app-loading>
+  </div>
+  <div *ngIf="!isLoading">
+    <app-menu-category [menu]="menu" *ngIf="!isLoading"></app-menu-category>
+  </div>
+</div>

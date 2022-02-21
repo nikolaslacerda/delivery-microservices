@@ -1,0 +1,21 @@
+<div *ngIf="items.length === 0">
+  <p>No Items</p>
+</div>
+<div class="col-xs-12 table-responsive" *ngIf="items.length > 0">
+  <table class="table" aria-label="items">
+    <tbody>
+    <tr *ngFor="let item of items">
+      <td class="text-center">
+        <a (click)="emitDecreaseQty(item)" class="btn btn-sm"><em class="fa fa-minus"></em></a>
+        {{item.quantity}}
+        <a (click)="emitIncreaseQty(item)" class="btn btn-sm"><em class="fa fa-plus"></em></a>
+      </td>
+      <td>{{item.menuItem.name}}</td>
+      <td class="text-right"><strong>{{item.value() | currency: 'USD': 'symbol'}}</strong></td>
+      <td class="text-right">
+        <a (click)="emitRemove(item)" class="btn btn-sm danger"><em class="fa fa-remove"></em></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

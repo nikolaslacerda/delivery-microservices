@@ -1,0 +1,12 @@
+div.dropdown:last-child .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.nav-link {
+  color: #dd4b39;
+}

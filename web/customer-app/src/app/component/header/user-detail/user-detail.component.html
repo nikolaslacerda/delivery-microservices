@@ -1,0 +1,27 @@
+<div class="dropdown" *ngIf="isLoggedIn(); else notLoggedIn">
+  <div class="mr-4" type="button" data-bs-toggle="dropdown" aria-haspopup="true"
+       aria-expanded="false">
+    <em style="font-size: 24px; color: #EA1D2C" data-feather="user"></em>
+  </div>
+  <div class="dropdown-menu mt-1" aria-labelledby="dropdownMenuButton">
+    <button style="font-size: 18px" class="dropdown-item" (click)="navigateToEdit()"><em
+      class="fa fa-store text-muted"></em> Profile
+    </button>
+    <button style="font-size: 18px" class="dropdown-item" (click)="navigateToOrders()"><em
+      class="far fa-sticky-note text-muted"></em>
+      Orders
+    </button>
+    <button style="font-size: 18px" class="dropdown-item" (click)="logout()"><em
+      class="fa fa-sign-out-alt text-muted"></em> Logout
+    </button>
+  </div>
+</div>
+<ng-template #notLoggedIn>
+  <a (click)="login()">
+    <div class="mr-4" type="button" data-bs-toggle="dropdown" aria-haspopup="true"
+         aria-expanded="false">
+      <em style="font-size: 24px; color: #EA1D2C" class="fas fa-sign-in-alt"></em>
+    </div>
+  </a>
+</ng-template>
+

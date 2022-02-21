@@ -1,0 +1,48 @@
+<table *ngIf="items.length !== 0 " class="table mb-5">
+  <thead>
+  <tr>
+    <th scope="col">Image</th>
+    <th scope="col">Item</th>
+    <th scope="col">Price</th>
+    <th scope="col">Promotional Price</th>
+    <th scope="col">Status</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of items">
+    <td class="align-middle">
+      <img [src]="item.imageUrl" style="width: 100px">
+    </td>
+    <td class="align-middle">
+      {{item.name}}
+    </td>
+    <td class="align-middle">{{item.unitOriginalPrice | currency: 'USD': 'symbol'}}
+    </td>
+    <td class="align-middle">{{item.unitPrice | currency: 'USD': 'symbol'}}
+    </td>
+    <td class="align-middle">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button (click)="updateItemStatus(item)" type="button" class="btn btn-sm"
+                [ngClass]="{'btn-primary': !item.active, 'btn-not-selected': item.active}">Disabled
+        </button>
+        <button (click)="updateItemStatus(item)" type="button" class="btn btn-sm"
+                [ngClass]="{'btn-primary': item.active, 'btn-not-selected': !item.active}">Active
+        </button>
+      </div>
+    </td>
+    <td class="align-middle">
+      <button class="btn btn-sm mr-1 mb-1 mb-lg-0" (click)="openEditModal(item)">
+        <em class="bi-pen" style="color: #666666"></em>
+      </button>
+      <button class="btn btn-sm" (click)="deleteMenuItem(item)">
+        <em class="bi-trash" style="color: #ec1c2d"></em>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div class="d-flex gap-2 justify-content-between">
+  <button (click)="openAddModal(category)" class="btn btn-outline-primary"><em class="bi-plus-lg"></em><strong> Add
+    Item</strong></button>
+</div>

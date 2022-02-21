@@ -1,0 +1,15 @@
+<body class="d-flex flex-column min-vh-100">
+<app-header-partner *ngIf="user && user.role === 'PARTNER'"></app-header-partner>
+<app-header *ngIf="!user || user.role === 'CLIENT'"></app-header>
+<main class="my-5">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+<footer id="sticky-footer" class="mt-auto py-3 border-top">
+  <div class="container text-center">
+    <span>Copyright &copy; Delivery App • About Us • <a routerLink="/restaurants/register">Register your restaurant</a> • <a
+      routerLink="/partner/login">Já sou parceiro</a></span>
+  </div>
+</footer>
+</body>

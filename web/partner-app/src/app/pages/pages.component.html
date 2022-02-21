@@ -1,0 +1,65 @@
+<div class="main">
+  <div class="d-flex flex-column flex-shrink-0 text-black bg-light-grey sidebar">
+    <div href="/" class="logoc d-flex align-items-center justify-content-center mt-4">
+      <img src="assets/img/ifood.logo.svg" class="logo" alt="logo">
+    </div>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a routerLink="/home" class="nav-link" routerLinkActive="sidebar-active" aria-current="page">
+          <em class="bi-house"></em>
+          <span class="nav-text"> Home</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/orders" class="nav-link" routerLinkActive="sidebar-active">
+          <em class="bi-card-text"></em>
+          <span class="nav-text"> Orders</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/menu" class="nav-link" routerLinkActive="sidebar-active">
+          <em class="bi-journals"></em>
+          <span class="nav-text"> Menu</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/schedule" class="nav-link" routerLinkActive="sidebar-active">
+          <em class="bi-clock"></em>
+          <span class="nav-text"> Schedule</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/payment-methods" class="nav-link" routerLinkActive="sidebar-active">
+          <em class="bi-credit-card"></em>
+          <span class="nav-text"> Payment Forms</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/reviews" class="nav-link" routerLinkActive="sidebar-active">
+          <em class="bi-star"></em>
+          <span class="nav-text"> Reviews</span>
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <div class="d-flex mb-4 align-items-center justify-content-center">
+    <div class="dropdown">
+      <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1"
+         data-bs-toggle="dropdown" aria-expanded="false">
+        <img [src]="restaurant.imageUrl" alt="" width="50" height="50" class="rounded-circle me-2">
+        <strong>{{restaurant.name}}</strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-center text-small shadow" aria-labelledby="dropdownUser1">
+        <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" (click)="onSignOut()">Sign out</a></li>
+      </ul>
+    </div>
+    </div>
+  </div>
+  <div class="container-fluid align-items-center justify-content-center">
+    <router-outlet></router-outlet>
+  </div>
+</div>
