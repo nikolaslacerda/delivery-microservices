@@ -1,0 +1,47 @@
+<div *ngIf="isLoading(order)">
+  <app-loading-bar></app-loading-bar>
+</div>
+<div *ngIf="!isLoading(order)">
+  <h2 class="text-center mb-5">Acompanhe o Pedido</h2>
+  <div class="container">
+    <app-order-timeline [order]="order"></app-order-timeline>
+
+    <div class="d-flex justify-content-center">
+      <div class="card w-50">
+        <div class="card-body">
+          <div class="d-flex flex-column">
+            <h5 class="card-title"><strong>Entregar em</strong></h5>
+            <span
+              class="card-text text-muted mt-2">{{order.address.streetAddress | titlecase}} {{order.address.complement}}</span>
+            <span class="card-text text-muted">{{order.address?.neighborhood | titlecase}}
+              - {{order.address?.city | titlecase}}/{{order.address?.country}}</span>
+          </div>
+        </div>
+        <div class="card-footer text-muted">
+          <em class="fa fa-paper-plane"></em> Entrega Rastreável
+        </div>
+      </div>
+    </div>
+    <app-order-summary [order]="order"></app-order-summary>
+  </div>
+  <div class="row mt-3 justify-content-center" *ngIf="order.status >= 4">
+    <div class="card w-50">
+      <div class="card-body">
+        <h5 class="card-title"><strong>Review your order</strong></h5>
+        <form class="mb-3" [formGroup]="ratingForm" (ngSubmit)="createReview()">
+          <div class="form-group ddd">
+            <ngb-rating required max="5" formControlName="rating"></ngb-rating>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control w-100" id="comment" formControlName="comment"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit" [disabled]="!ratingForm.valid">Review</button>
+        </form>
+        <p class="card-text text-muted">Escolha entre 1 ou 5 estrelas para classificar</p>
+      </div>
+      <div class="my-5" *ngIf="order.status == 'ENTREGUE' && review.date">
+        <p class="lead text-info">Avaliação devidamente registrada. Muito obrigado!</p>
+      </div>
+    </div>
+  </div>
+</div>

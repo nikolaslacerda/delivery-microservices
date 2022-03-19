@@ -14,7 +14,7 @@ export class ReviewService {
   constructor(private http: HttpClient) {
   }
 
-  getReviewsByRestaurant(restaurantId: string, page: number): Observable<ReviewResponse[]> {
+  getReviewsByRestaurant(restaurantId: number, page: number): Observable<ReviewResponse[]> {
     return this.http.get<ReviewResponse[]>(`${this.API}/${restaurantId}/reviews?_page=${page}`);
   }
 

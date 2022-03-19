@@ -14,20 +14,16 @@ export class OrderService {
   constructor(private http: HttpClient) {
   }
 
-  createOrder(order: any): Observable<any> {
-    return this.http.post(`${this.API}/orders`, order);
-  }
-
-  getRestaurantOrders(restaurantId: number): Observable<Array<OrderResponse>> {
+  getRestaurantOrders(restaurantId: number): Observable<OrderResponse[]> {
     const params = new HttpParams()
       .append('restaurantId', String(restaurantId))
       .append('_expand', 'customer')
       .append('_expand', 'address')
       .append('_expand', 'payment');
-    return this.http.get<Array<OrderResponse>>(`${this.API}/orders/`, {params});
+    return this.http.get<OrderResponse[]>(`${this.API}/orders/`, {params});
   }
 
-  updateStatus(orderId: number, orderStatus: string): Observable<any> {
-    return this.http.patch(`${this.API}/orders/${orderId}`, {status: orderStatus});
+  updateStatus(orderId: number, orderStatus: string): Observable<OrderResponse> {
+    return this.http.patch<OrderResponse>(`${this.API}/orders/${orderId}`, {status: orderStatus});
   }
 }

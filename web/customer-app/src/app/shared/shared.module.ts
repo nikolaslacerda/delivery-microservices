@@ -5,16 +5,26 @@ import {InputRadioComponent} from './components/input-radio/input-radio.componen
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { LoadingBarComponent } from './components/loading-bar/loading-bar.component';
+import {LoadingBarComponent} from './components/loading-bar/loading-bar.component';
+import {ShoppingCartComponent} from './components/shopping-cart/shopping-cart.component';
+import { ChangeRestaurantModalComponent } from './components/shopping-cart/change-restaurant-modal/change-restaurant-modal.component';
 
 @NgModule({
-  declarations: [InputComponent, InputRadioComponent, NotFoundComponent, LoadingBarComponent],
-    exports: [
-        InputComponent,
-        InputRadioComponent,
-        NotFoundComponent,
-        LoadingBarComponent
-    ],
+  declarations: [
+    InputComponent,
+    InputRadioComponent,
+    NotFoundComponent,
+    LoadingBarComponent,
+    ShoppingCartComponent,
+    ChangeRestaurantModalComponent
+  ],
+  exports: [
+    InputComponent,
+    InputRadioComponent,
+    NotFoundComponent,
+    LoadingBarComponent,
+    ShoppingCartComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,

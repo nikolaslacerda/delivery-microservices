@@ -272,18 +272,9 @@ body {
   /*border-right: 1px solid rgba(0, 0, 0, 0.1);*/
 }
 
-.menu-item-info-box-price {
-  margin-right: 20px;
-  font-size: 18px;
-  color: #50a773;
-}
 
-.menu-item-info-box-original-price {
-  margin-right: 20px;
-  font-size: 14px;
-  color: #a1a1a1;
-  text-decoration: line-through;
-}
+
+
 
 .menu-item-info-box-content {
   padding: 5px 10px;
@@ -301,19 +292,7 @@ body {
   width: 100%;
 }
 
-.menu-item-info-box-text {
-  display: block;
-  font-size: 18px;
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-bottom: 10px;
-  width: 80%;
-}
 
-.menu-item-info-box-text {
-}
 
 .menu-item-info-box-more {
   display: block;
@@ -468,7 +447,7 @@ table th, table td {
   margin: 1rem
 }
 
-@media (min-width:768px) {
+@media (min-width: 768px) {
   .timeline-steps .timeline-step:not(:last-child):after {
     content: "";
     display: block;
@@ -478,6 +457,7 @@ table th, table td {
     left: 7.5rem;
     top: .3125rem
   }
+
   .timeline-steps .timeline-step:not(:first-child):before {
     content: "";
     display: block;
@@ -542,7 +522,7 @@ ngb-rating {
 }
 
 
-.sdsd{
+.sdsd {
   font-size: 24px;
   color: #ffffff;
   background: none;
@@ -595,6 +575,10 @@ ngb-rating {
   left: auto;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .clickable:hover {
   font-weight: bold;
 }
@@ -605,12 +589,12 @@ ngb-rating {
   font-weight: bold;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
   background-color: #EC1C2D;
   filter: brightness(120%);
 }
 
-.btn-primary:disabled{
+.btn-primary:disabled {
   background-color: #EC1C2D;
 }
 
@@ -620,12 +604,12 @@ ngb-rating {
 
 .btn-primary-outline {
   background-color: transparent;
-  border: 1px solid #EC1C2D ;
+  border: 1px solid #EC1C2D;
   color: #EC1C2D;
   font-weight: bold;
 }
 
-.btn-primary-outline:hover{
+.btn-primary-outline:hover {
   filter: brightness(120%);
   color: #EC1C2D;
 }
@@ -642,7 +626,7 @@ ngb-rating {
   color: #c2bfbf;
 }
 
-.btn-not-selected:hover{
+.btn-not-selected:hover {
   filter: brightness(105%);
 }
 

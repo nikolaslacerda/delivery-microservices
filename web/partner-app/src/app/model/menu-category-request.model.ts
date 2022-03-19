@@ -7,6 +7,6 @@ export class MenuCategoryRequest {
   constructor(model: any = {}) {
     this.menuId = model.menuId;
     this.name = model.name;
-    this.active = true;
+    this.active = false;
   }
 }

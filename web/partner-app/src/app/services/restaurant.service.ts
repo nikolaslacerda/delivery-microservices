@@ -13,15 +13,15 @@ export class RestaurantService {
   constructor(private http: HttpClient) {
   }
 
-  updateRestaurant(restaurantId: any, restaurantData: any): any {
-    return this.http.patch(`${this.API}/restaurants/${restaurantId}`, restaurantData);
-  }
-
   createRestaurant(restaurant: any): Observable<any> {
     return this.http.post(`${this.API}/restaurants`, restaurant);
   }
 
-  updateRestaurantProfileImage(restaurantId: any, file: File): Observable<any> {
+  updateRestaurant(restaurantId: number, restaurantData: any): Observable<any> {
+    return this.http.patch(`${this.API}/restaurants/${restaurantId}`, restaurantData);
+  }
+
+  updateRestaurantProfileImage(restaurantId: number, file: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', file);
     return this.http.post(`${this.API}/restaurants/${restaurantId}/update-image`, formData);

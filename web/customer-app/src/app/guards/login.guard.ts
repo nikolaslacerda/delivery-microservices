@@ -9,22 +9,20 @@ import {AuthenticationService} from 'src/app/services/authentication.service';
 export class LoginGuard implements CanLoad, CanActivate {
 
   constructor(private router: Router,
-              private authenticationService: AuthenticationService) {
+              private authService: AuthenticationService) {
   }
 
   canLoad(route: Route): boolean {
-    const loggedIn = this.authenticationService.isLoggedIn();
-    if (!loggedIn) {
-      this.authenticationService.navigateToLogin(`/${route.path}`);
+    if (!this.authService.isLoggedIn()) {
+      this.authService.navigateToLogin(`/${route.path}`);
     }
-    return loggedIn;
+    return false;
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const loggedIn = this.authenticationService.isLoggedIn();
-    if (!loggedIn) {
-      this.authenticationService.navigateToLogin(`/${route.routeConfig.path}`);
+    if (!this.authService.isLoggedIn()) {
+      this.authService.navigateToLogin(`/${route.routeConfig.path}`);
     }
-    return loggedIn;
+    return false;
   }
 }

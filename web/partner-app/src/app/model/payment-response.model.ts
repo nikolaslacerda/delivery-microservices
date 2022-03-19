@@ -7,12 +7,12 @@ export class PaymentResponse {
   deliveryFee: number;
   total: number;
 
-  constructor(id: number, paymentMethodId: number, cardNumber: string, subtotal: number, deliveryFee: number, total: number) {
-    this.id = id;
-    this.paymentMethodId = paymentMethodId;
-    this.cardNumber = cardNumber;
-    this.subtotal = subtotal;
-    this.deliveryFee = deliveryFee;
-    this.total = total;
+  constructor(model: any = {}) {
+    this.id = model.id;
+    this.paymentMethodId = model.paymentMethodId;
+    this.cardNumber = model.cardNumber;
+    this.subtotal = model.subtotal;
+    this.deliveryFee = model.deliveryFee;
+    this.total = model.total;
   }
 }

@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {CartItem} from '../models/order/cart-item';
+import {CartItem} from '../models/cart-item';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {ChangeRestaurantModalComponent} from '../shared/components/shopping-cart/change-restaurant-modal/change-restaurant-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,9 @@ export class ShoppingCartService {
   restaurantO: Observable<number>;
   items: BehaviorSubject<CartItem[]>;
   itemsO: Observable<CartItem[]>;
+  bsModalRef: BsModalRef | undefined;
 
-  constructor(private http: HttpClient) {
+  constructor(private modalService: BsModalService) {
     this.items = new BehaviorSubject<CartItem[]>([]);
     this.itemsO = this.items.asObservable();
     this.restaurant = new BehaviorSubject<any>(undefined);
@@ -38,17 +40,28 @@ export class ShoppingCartService {
   }
 
   addItem(item: any) {
-    if (item.restaurantId !== this.getRestaurant) {
-      console.log('Change restaurant');
-      this.clear();
-    }
-    const foundItem = this.getCartItems.find((menuItem) => menuItem.menuItem.id === item.id);
-    if (foundItem) {
-      this.increaseQty(foundItem);
+    if (this.getRestaurant !== undefined && item.restaurantId !== this.getRestaurant) {
+      this.bsModalRef = this.modalService.show(ChangeRestaurantModalComponent);
+      this.bsModalRef.content.event.subscribe(() => {
+        this.clear();
+        const foundItem = this.getCartItems.find((menuItem) => menuItem.menuItem.id === item.id);
+        if (foundItem) {
+          this.increaseQty(foundItem);
+        } else {
+          const push = [...this.getCartItems, new CartItem(item)];
+          this.restaurant.next(item.restaurantId);
+          this.items.next(push);
+        }
+      });
     } else {
-      const push = [...this.getCartItems, new CartItem(item)];
-      this.restaurant.next(item.restaurantId);
-      this.items.next(push);
+      const foundItem = this.getCartItems.find((menuItem) => menuItem.menuItem.id === item.id);
+      if (foundItem) {
+        this.increaseQty(foundItem);
+      } else {
+        const push = [...this.getCartItems, new CartItem(item)];
+        this.restaurant.next(item.restaurantId);
+        this.items.next(push);
+      }
     }
   }
 

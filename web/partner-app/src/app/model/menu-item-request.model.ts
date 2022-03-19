@@ -15,6 +15,6 @@ export class MenuItemRequest {
     this.unitPrice = model.unitPrice;
     this.unitOriginalPrice = model.unitOriginalPrice;
     this.active = model.active || false;
-    this.imageUrl = model.imageUrl || 'default';
+    this.imageUrl = model.imageUrl || 'default.png';
   }
 }

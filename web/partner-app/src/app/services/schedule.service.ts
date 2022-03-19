@@ -4,6 +4,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {DayOfWeekUtils} from '../shared/utils/dayOfWeek.utils';
 import {map} from 'rxjs/operators';
+import {ScheduleResponse} from '../model/schedule-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,9 @@ export class ScheduleService {
     }
   }
 
-  getRestaurantSchedule(restaurantId: any): Observable<any> {
+  getRestaurantSchedule(restaurantId: any): Observable<ScheduleResponse[]> {
     const params = new HttpParams().set('restaurantId', restaurantId);
-    return this.http.get(`${this.API}/schedules`, {params})
+    return this.http.get<ScheduleResponse[]>(`${this.API}/schedules`, {params})
       .pipe(
         map((days: any) => this.sortDays(days))
       );

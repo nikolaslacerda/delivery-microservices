@@ -92,6 +92,6 @@
     </div>
   </div>
   <div class="col-8 p-0" *ngIf="orderClicked">
-    <app-order-detail [order]="orderClicked"></app-order-detail>
+    <app-order-detail [order]="orderClicked" *ngIf="orderClicked"></app-order-detail>
   </div>
 </div>

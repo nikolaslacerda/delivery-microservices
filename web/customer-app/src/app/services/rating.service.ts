@@ -3,7 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {environment} from 'src/environments/environment';
-import {Review} from '../models/order/review';
+import {ReviewRequest} from '../models/request/review.request.model';
+import {ReviewResponse} from '../models/response/review.response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +16,17 @@ export class RatingService {
   constructor(private http: HttpClient) {
   }
 
-  createReview(review: Review): Observable<any> {
+  createReview(review: ReviewRequest): Observable<any> {
     const restaurantId = review.order.restaurantId;
     return this.http.post(`${this.API}/${restaurantId}/reviews`, review);
   }
 
-  getReviewsByRestaurant(restaurantId: string): Observable<Review[]> {
-    return this.http.get<Review[]>(`${this.API}/${restaurantId}/reviews`);
+  getReviewsByRestaurant(restaurantId: string): Observable<ReviewResponse[]> {
+    return this.http.get<ReviewResponse[]>(`${this.API}/${restaurantId}/reviews`);
   }
 
-  getRestaurantRatingAverage(restaurantId: string): Observable<any> {
-    return this.http.get<Review[]>(`${this.API}/${restaurantId}/reviews`);
+  getRestaurantRatingAverage(restaurantId: string): Observable<ReviewResponse[]> {
+    return this.http.get<ReviewResponse[]>(`${this.API}/${restaurantId}/reviews`);
   }
 
 }

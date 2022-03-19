@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
 import {MenuService} from '../../../services/menu.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {AddMenuCategoryModalComponent} from './add-menu-category-modal/add-menu-category-modal.component';
 import {EditMenuCategoryModalComponent} from './edit-menu-category-modal/edit-menu-category-modal.component';
 import {ToastrService} from 'ngx-toastr';
+import {MenuCategoryResponse} from '../../../model/menu-category-response.model';
+import {MenuResponse} from '../../../model/menu-response.model';
 
 @Component({
   selector: 'app-menu-category',
@@ -14,19 +15,17 @@ import {ToastrService} from 'ngx-toastr';
 export class MenuCategoryComponent implements OnInit {
 
   bsModalRef: BsModalRef | undefined;
-  @Input() menu: any = {};
-  categories: any;
+  @Input() menu = {} as MenuResponse;
+  categories: MenuCategoryResponse[] = [];
 
-  constructor(private route: ActivatedRoute,
-              private modalService: BsModalService,
+  constructor(private modalService: BsModalService,
               private menuService: MenuService,
               public toastr: ToastrService) {
   }
 
   ngOnInit(): void {
     this.menuService.getCategoriesByMenu(this.menu.id)
-      .subscribe(categories => {
-        console.log(categories);
+      .subscribe((categories: MenuCategoryResponse[]) => {
         this.categories = categories;
       });
   }

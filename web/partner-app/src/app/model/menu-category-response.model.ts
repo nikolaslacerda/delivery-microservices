@@ -5,10 +5,10 @@ export class MenuCategoryResponse {
   name: string;
   active: boolean;
 
-  constructor(id: number, menuId: number, name: string, active: boolean) {
-    this.id = id;
-    this.menuId = menuId;
-    this.name = name;
-    this.active = active;
+  constructor(model: any = {}) {
+    this.id = model.id;
+    this.menuId = model.menuId;
+    this.name = model.name;
+    this.active = model.active;
   }
 }

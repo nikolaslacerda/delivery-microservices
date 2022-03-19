@@ -4,71 +4,49 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {filter, map, switchMap, tap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {NavigationEnd, Router} from '@angular/router';
+import {CustomerResponse} from '../models/response/customer.response.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  private API = environment.baseUrl; // + '/oauth';
-  currentUser: Observable<any>;
+  private API = environment.baseUrl;
+
+  currentUser: BehaviorSubject<any>;
+  currentUserObservable: Observable<any>;
   lastUrl: string;
 
-  user: BehaviorSubject<any>;
-  restaurantData: any;
-
-  constructor(private http: HttpClient, private router: Router) {
-    this.user = new BehaviorSubject<any>(undefined);
-    this.currentUser = this.user.asObservable();
-
+  constructor(private router: Router,
+              private http: HttpClient) {
+    this.currentUser = new BehaviorSubject<any>(undefined);
+    this.currentUserObservable = this.currentUser.asObservable();
     if (localStorage.getItem('session')) {
-      this.user.next(JSON.parse(localStorage.getItem('session'))) ;
+      this.currentUser.next(JSON.parse(localStorage.getItem('session')));
     }
     this.router.events.pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: NavigationEnd) => this.lastUrl = e.url);
   }
 
   public get getCurrentUser() {
-    return this.user.value;
-  }
-
-  loginPartner(partnerInfo) {
-    return this.http.post(`${this.API}/partner/login`, partnerInfo)
-      .pipe(switchMap((tokenData: any) => {
-        this.user.next(tokenData);
-        return this.http.get(`${this.API}/restaurants?partnerId=${this.getCurrentUser.id}`);
-      }))
-      .pipe(tap((restaurantDetails: any) => {
-        this.getCurrentUser.restaurantId = restaurantDetails[0].id;
-        localStorage.setItem('session', JSON.stringify(this.getCurrentUser));
-        this.user.next( this.getCurrentUser);
-      }));
+    return this.currentUser.value;
   }
 
   login(loginInfo): Observable<any> {
     return this.http.post(`${this.API}/login`, loginInfo)
       .pipe(switchMap((tokenData: any) => {
-        this.user.next(tokenData);
+        this.currentUser.next(tokenData);
         return this.http.get(`${this.API}/customers/${this.getCurrentUser.id}`);
       }))
-      .pipe(tap((userDetails: any) => {
-        this.getCurrentUser.role = userDetails.role;
+      .pipe(tap((customerDetails: CustomerResponse) => {
+        this.getCurrentUser.role = customerDetails.role;
         localStorage.setItem('session', JSON.stringify(this.getCurrentUser));
-        this.user.next(this.getCurrentUser);
+        this.currentUser.next(this.getCurrentUser);
       }));
   }
 
-  getUserInfo() {
-    return this.http.get(`${this.API}/customers/${this.getCurrentUser.id}`)
-      .pipe(
-        map((authData1: any) => {
-          return authData1;
-        })
-      );
-  }
-
-  getRestaurantInfo() {
-    return this.http.get(`${this.API}/restaurants/${this.getCurrentUser.restaurantId}`)
+  getUserInfo(): Observable<CustomerResponse> {
+    return this.http.get<CustomerResponse>(`${this.API}/customers/${this.getCurrentUser.id}`)
       .pipe(
         map((authData1: any) => {
           return authData1;
@@ -77,7 +55,7 @@ export class AuthenticationService {
   }
 
   hasRole(role: string): boolean {
-    if (this.user && this.getCurrentUser.role) {
+    if (this.currentUser && this.getCurrentUser.role) {
       return this.getCurrentUser.role === role;
     }
     return false;
@@ -85,7 +63,8 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem('session');
-    this.user.next(undefined);
+    this.currentUser.next(undefined);
+    this.currentUserObservable = this.currentUser.asObservable();
     this.router.navigate(['/']);
   }
 

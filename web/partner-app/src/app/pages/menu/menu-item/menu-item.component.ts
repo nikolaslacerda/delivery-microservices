@@ -6,6 +6,7 @@ import {AddMenuItemModalComponent} from './add-menu-item-modal/add-menu-item-mod
 import {EditMenuItemModalComponent} from './edit-menu-item-modal/edit-menu-item-modal.component';
 import {MenuItemResponse} from '../../../model/menu-item-response.model';
 import {ToastrService} from 'ngx-toastr';
+import {MenuCategoryResponse} from '../../../model/menu-category-response.model';
 
 @Component({
   selector: 'app-menu-item',
@@ -14,7 +15,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class MenuItemComponent implements OnInit {
 
-  @Input() category: any;
+  @Input() category = {} as MenuCategoryResponse;
   items: MenuItemResponse[] = [];
   bsModalRef: BsModalRef | undefined;
 
@@ -27,7 +28,7 @@ export class MenuItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuService.getItemsByCategory(this.category.id)
-      .subscribe(items => this.items = items);
+      .subscribe((items: MenuItemResponse[]) => this.items = items);
   }
 
   updateItemStatus(item: MenuItemResponse): void {
@@ -43,12 +44,8 @@ export class MenuItemComponent implements OnInit {
       });
   }
 
-  openAddModal(category: any): void {
-    const initialState = {
-      list: [
-        {category}
-      ]
-    };
+  openAddModal(category: MenuCategoryResponse): void {
+    const initialState = {category};
     this.bsModalRef = this.modalService.show(AddMenuItemModalComponent, {initialState});
     this.bsModalRef.content.event.subscribe((item: any) => {
       this.items.push(item);
@@ -56,12 +53,8 @@ export class MenuItemComponent implements OnInit {
     });
   }
 
-  openEditModal(item: any): void {
-    const initialState = {
-      list: [
-        {item}
-      ]
-    };
+  openEditModal(item: MenuItemResponse): void {
+    const initialState = {item};
     this.bsModalRef = this.modalService.show(EditMenuItemModalComponent, {initialState});
     this.bsModalRef.content.event.subscribe((editedItem: MenuItemResponse) => {
       item.name = editedItem.name;

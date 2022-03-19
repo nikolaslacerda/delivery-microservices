@@ -1,0 +1,41 @@
+/*card:hover {*/
+/*  border-color: rgba(219, 218, 217, 0.97);*/
+/*}*/
+
+/*.card {*/
+/*  border: 1px solid #f2f2f2;*/
+/*}.*/
+
+/*@media (max-width: 1199px) {*/
+/*  .card {*/
+/*    width: 60rem;*/
+/*  }*/
+/*}*/
+
+.menu-item-image {
+  max-width:200px;
+  max-height:150px;
+  width: auto;
+  height: auto;
+}
+
+.menu-item-info-box-text {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  overflow: hidden;
+  display: block;
+}
+
+.menu-item-info-box-price {
+  margin-right: 20px;
+  font-size: 18px;
+  color: #50a773;
+}
+
+.menu-item-info-box-original-price {
+  margin-right: 20px;
+  font-size: 14px;
+  color: #a1a1a1;
+  text-decoration: line-through;
+}

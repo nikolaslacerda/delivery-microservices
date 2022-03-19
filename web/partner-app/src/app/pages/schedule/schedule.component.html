@@ -21,22 +21,22 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let horarioDeFuncionamento of schedule">
+      <tr *ngFor="let schedule of schedule">
         <td>
           <div class="form-check justify-content-center align-items-center d-flex aaa">
-            <input type="checkbox" (change)="updateScheduleStatus($event, horarioDeFuncionamento)"
+            <input type="checkbox" (change)="updateScheduleStatus($event, schedule)"
                    class="form-check-input custom-checkbox" id="exampleCheck1"
-                   [checked]="horarioDeFuncionamento.active">
+                   [checked]="schedule.active">
           </div>
         </td>
-        <td>{{horarioDeFuncionamento.dayOfWeek}}</td>
-        <td>{{horarioDeFuncionamento.openingTime}}</td>
-        <td>{{horarioDeFuncionamento.closingTime}}</td>
+        <td>{{schedule.dayOfWeek}}</td>
+        <td>{{schedule.openingTime}}</td>
+        <td>{{schedule.closingTime}}</td>
         <td>
-          <button class="btn btn-sm mr-1 mb-1 mb-lg-0" (click)="openEditModal(horarioDeFuncionamento)">
+          <button class="btn btn-sm mr-1 mb-1 mb-lg-0" (click)="openEditModal(schedule)">
             <em class="bi-pen" style="color: #666666"></em>
           </button>
-          <button class="btn  btn-sm" (click)="deleteSchedule(horarioDeFuncionamento)">
+          <button class="btn  btn-sm" (click)="deleteSchedule(schedule)">
             <em class="bi-trash" style="color: #ec1c2d"></em>
           </button>
         </td>

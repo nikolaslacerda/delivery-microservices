@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {MenuService} from '../../../../services/menu.service';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {MenuItemUpdateRequest} from '../../../../model/menu-item-update-request.model';
+import {MenuItemResponse} from '../../../../model/menu-item-response.model';
 
 @Component({
   selector: 'app-edit-menu-item-modal',
@@ -13,6 +14,7 @@ export class EditMenuItemModalComponent implements OnInit {
 
   @Output() event = new EventEmitter<any>();
 
+  item = {} as MenuItemResponse;
   editMenuItemForm = this.fb.group({
     name: ['', Validators.required],
     description: ['', Validators.required],
@@ -24,7 +26,6 @@ export class EditMenuItemModalComponent implements OnInit {
       fileSource: ['']
     })
   });
-  list: any[] = [];
   imageSrc: any;
   image!: File;
   buttonLoading = false;
@@ -37,9 +38,9 @@ export class EditMenuItemModalComponent implements OnInit {
 
   ngOnInit(): void {
     this._populateForm();
-    this.imageSrc = this.list[0].item.imageUrl;
+    this.imageSrc = 'https://localhost:3001/partner/item/image/' + this.item.imageUrl;
 
-    this.menuService.getCategory(this.list[0].item.menuCategoryId)
+    this.menuService.getCategory(this.item.menuCategoryId)
       .subscribe(res => {
         this.menuService.getCategoriesByMenu(res.menuId)
           .subscribe(allMenuCategories => this.allCategories = allMenuCategories);
@@ -48,11 +49,11 @@ export class EditMenuItemModalComponent implements OnInit {
 
   private _populateForm(): void {
     this.editMenuItemForm.patchValue({
-      name: this.list[0].item.name,
-      description: this.list[0].item.description,
-      menuCategoryId: this.list[0].item.menuCategoryId,
-      unitPrice: this.list[0].item.unitPrice,
-      unitOriginalPrice: this.list[0].item.unitOriginalPrice
+      name: this.item.name,
+      description: this.item.description,
+      menuCategoryId: this.item.menuCategoryId,
+      unitPrice: this.item.unitPrice,
+      unitOriginalPrice: this.item.unitOriginalPrice
     });
   }
 
@@ -68,21 +69,18 @@ export class EditMenuItemModalComponent implements OnInit {
     if (this.editMenuItemForm.valid) {
       this.buttonLoading = true;
       if (!this.editMenuItemForm.value.image.fileSource.length) {
-        console.log('Não tem imagem');
-        this.menuService.updateMenuItem(this.list[0].item.id, new MenuItemUpdateRequest(this.editMenuItemForm.value))
-          .subscribe(menuItem => {
-            console.log(menuItem);
+        this.menuService.updateMenuItem(this.item.id, new MenuItemUpdateRequest(this.editMenuItemForm.value))
+          .subscribe((menuItem: MenuItemResponse) => {
             this.buttonLoading = false;
             this.emitAdd(menuItem);
             this.hide();
           });
       } else {
-        console.log('Tem imagem');
-        this.menuService.updateMenuItem(this.list[0].item.id, new MenuItemUpdateRequest(this.editMenuItemForm.value))
-          .subscribe(menuItem => {
+        this.menuService.updateMenuItem(this.item.id, new MenuItemUpdateRequest(this.editMenuItemForm.value))
+          .subscribe((menuItem: MenuItemResponse) => {
             this.menuService.addMenuItemImage(menuItem.id, this.image)
               .subscribe(res => {
-                menuItem.imageUrl = 'assets/img/foods/' + res.uploadedFile.filename;
+                menuItem.imageUrl = 'https://localhost:3001/partner/item/image/' + res.uploadedFile.filename;
                 this.menuService.updateMenuItem(menuItem.id, menuItem)
                   .subscribe(menuItem2 => {
                     this.buttonLoading = false;

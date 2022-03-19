@@ -1,8 +1,12 @@
+FROM node:10-alpine as angular
+WORKDIR /app
+COPY package.json /app
+RUN npm install --silent
+COPY . .
+RUN npm run build
+
 FROM nginx:alpine
-
-COPY nginx.conf /etc/nginx/nginx.conf
-
-WORKDIR /usr/share/nginx/html
-
-COPY dist/eats-ui/ .
+VOLUME /var/cache/nginx
+COPY --from=angular app/dist/customer-app /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 

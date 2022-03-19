@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {MenuService} from '../../../../services/menu.service';
 import {MenuCategoryRequest} from '../../../../model/menu-category-request.model';
+import {MenuCategoryResponse} from '../../../../model/menu-category-response.model';
 
 @Component({
   selector: 'app-add-menu-category-modal',
@@ -13,7 +14,7 @@ export class AddMenuCategoryModalComponent implements OnInit {
 
   @Output() event = new EventEmitter<any>();
 
-  category: any = {};
+  category = {} as MenuCategoryResponse;
   categoryForm = this.fb.group({
     name: ['', Validators.required],
     menuId: ['']

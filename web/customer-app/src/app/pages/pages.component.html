@@ -1,0 +1,14 @@
+<body class="d-flex flex-column min-vh-100">
+<app-header class="fixed fixed-top"></app-header>
+<main class="my-5">
+  <div class="container mt-5">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+<footer id="sticky-footer" class="mt-auto py-3 border-top">
+  <div class="container text-center">
+      <span>Copyright &copy; Delivery App • <a class="cursor" (click)="goToPartnerApp()">Register your restaurant</a> • <a class="cursor"
+        (click)="goToPartnerApp()">I'm already a partner</a></span>
+  </div>
+</footer>
+</body>

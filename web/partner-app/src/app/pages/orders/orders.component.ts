@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {OrderService} from '../../services/order.service';
-import {MenuService} from '../../services/menu.service';
+import {OrderResponse} from '../../model/order-response.model';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-orders',
@@ -10,25 +11,22 @@ import {MenuService} from '../../services/menu.service';
 })
 export class OrdersComponent implements OnInit {
 
-  orders: Array<any> = [];
+  orders: OrderResponse[] = [];
   orderClicked: any;
   isLoading = true;
   filter = 'ALL';
 
   constructor(private route: ActivatedRoute,
               private orderService: OrderService,
-              private menuService: MenuService) {
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    const restaurantId = 1;
-    this.orderService.getRestaurantOrders(1)
-      .subscribe(orders => {
-        this.delay(1000).then(() => {
-          this.orders = orders;
-          console.log(this.orders);
-          this.isLoading = false;
-        });
+    const restaurantId = this.authService.getRestaurantId();
+    this.orderService.getRestaurantOrders(restaurantId)
+      .subscribe((orders: OrderResponse[]) => {
+        this.orders = orders;
+        this.isLoading = false;
       });
   }
 
@@ -48,15 +46,11 @@ export class OrdersComponent implements OnInit {
     return this.orders.filter(x => x.status === 'DELIVERED');
   }
 
-  async delay(ms: number) {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log('fired'));
-  }
-
-  orderIsClicked(order: any): any {
+  orderIsClicked(order: OrderResponse): void {
     this.orderClicked = order;
   }
 
-  isOrderClicked(order: any): any {
+  isOrderClicked(order: OrderResponse): boolean {
     if (this.orderClicked) {
       return this.orderClicked.id === order.id;
     }

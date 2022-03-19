@@ -32,7 +32,7 @@ export class PaymentMethodService {
 
   getRestaurantPaymentMethods(restaurantId): Observable<any> {
     return this.http.get(`${this.API}/restaurants_paymentMethods?restaurantId=${restaurantId}&_expand=paymentMethod`)
-      .pipe(map((res: any) => res.map(name => ({idd: name.id, ...name.paymentMethod}))));
+      .pipe(map((res: any) => res.map(name => ({id: name.paymentMethod.id, name: name.paymentMethod.name}))));
   }
 
   deletePaymentMethod(paymentMethod: any) {

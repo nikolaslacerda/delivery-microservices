@@ -4,9 +4,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RestaurantService} from '../../services/restaurant.service';
 import {CategoryService} from '../../services/category.service';
 import {AuthService} from '../../services/auth.service';
-import {getImagePath} from '../../shared/utils/image.utils';
 import {RestaurantImageUpdateRequest} from '../../model/restaurant-image-update-request.model';
 import {RestaurantUpdateRequest} from '../../model/restaurant-update-request.model';
+import {RestaurantResponse} from '../../model/restaurant-response.model';
+import {CuisineTypeResponse} from '../../model/cuisine-type-response.model';
 
 @Component({
   selector: 'app-profile',
@@ -19,9 +20,10 @@ export class ProfileComponent implements OnInit {
   isLoading = true;
   buttonLoading = false;
   image!: File;
+  imageSrc: any;
 
-  restaurant: any;
-  cuisineTypes: any;
+  restaurant = {} as RestaurantResponse;
+  cuisineTypes: CuisineTypeResponse[] = [];
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -40,15 +42,14 @@ export class ProfileComponent implements OnInit {
       })
     });
     this.authService.getRestaurantInfo()
-      .subscribe(restaurant => {
+      .subscribe((restaurant: RestaurantResponse) => {
         this.restaurant = restaurant;
+        this.imageSrc = 'https://localhost:3001/partner/profile/image/' + this.restaurant.imageUrl;
         this.categoryService.getCuisineTypes()
-          .subscribe(cuisineTypes => {
-            this.delay(1000).then(() => {
-              this.cuisineTypes = cuisineTypes;
-              this.populateForm();
-              this.isLoading = false;
-            });
+          .subscribe((cuisineTypes: CuisineTypeResponse[]) => {
+            this.cuisineTypes = cuisineTypes;
+            this.populateForm();
+            this.isLoading = false;
           });
       });
   }
@@ -62,9 +63,16 @@ export class ProfileComponent implements OnInit {
   }
 
   onImageChange(event: any): void {
-    if (event.target.files.length > 0) {
-      const file: File = event.target.files[0];
-      this.image = file;
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const file2: File = event.target.files[0];
+      this.image = file2;
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+        this.image = file;
+      };
     }
   }
 
@@ -78,11 +86,11 @@ export class ProfileComponent implements OnInit {
             this.router.navigate(['/']);
           });
       } else {
-        const filename = getImagePath(this.restaurant.id, this.image);
         this.restaurantService.updateRestaurantProfileImage(this.restaurant.id, this.image)
           .subscribe(res => {
             const restaurantImageUpdateRequest = new RestaurantImageUpdateRequest(this.restaurantForm.value);
-            restaurantImageUpdateRequest.imageUrl = 'assets/img/restaurants/' + res.uploadedFile.filename;
+            restaurantImageUpdateRequest.imageUrl = res.uploadedFile.filename;
+            this.imageSrc = 'https://localhost:3001/partner/profile/image/' + this.restaurant.imageUrl;
             this.restaurantService.updateRestaurant(this.restaurant.id, restaurantImageUpdateRequest)
               .subscribe(() => {
                 this.buttonLoading = false;
@@ -94,6 +102,6 @@ export class ProfileComponent implements OnInit {
   }
 
   async delay(ms: number) {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log('fired'));
+    await new Promise(resolve => setTimeout(() => resolve(), ms)).then();
   }
 }

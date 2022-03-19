@@ -6,12 +6,11 @@ export class CustomerResponse {
   email: string;
   phone: string;
 
-
-  constructor(id: number, firstName: string, lastName: string, email: string, phone: string) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.phone = phone;
+  constructor(model: any = {}) {
+    this.id = model.id;
+    this.firstName = model.firstName;
+    this.lastName = model.lastName;
+    this.email = model.email;
+    this.phone = model.phone;
   }
 }

@@ -3,6 +3,8 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {MenuService} from '../../../../services/menu.service';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {MenuItemRequest} from '../../../../model/menu-item-request.model';
+import {MenuCategoryResponse} from '../../../../model/menu-category-response.model';
+import {MenuItemResponse} from '../../../../model/menu-item-response.model';
 
 @Component({
   selector: 'app-add-menu-item-modal',
@@ -17,6 +19,7 @@ export class AddMenuItemModalComponent implements OnInit {
   imageSrc = '';
   image!: File;
 
+  category = {} as MenuCategoryResponse;
   addMenuItemForm = this.fb.group({
     name: ['', Validators.required],
     description: ['', Validators.required],
@@ -28,7 +31,6 @@ export class AddMenuItemModalComponent implements OnInit {
       fileSource: ['', Validators.required]
     })
   });
-  list: any[] = [];
 
   constructor(private fb: FormBuilder,
               public bsModalRef: BsModalRef,
@@ -36,13 +38,12 @@ export class AddMenuItemModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.list[0]);
     this._populateForm();
   }
 
   private _populateForm(): void {
     this.addMenuItemForm.patchValue({
-      menuCategoryId: this.list[0].category.id
+      menuCategoryId: this.category.id
     });
   }
 
@@ -76,19 +77,17 @@ export class AddMenuItemModalComponent implements OnInit {
       this.buttonLoading = true;
       if (!this.addMenuItemForm.value.image.fileSource.length) {
         this.menuService.addMenuItem(new MenuItemRequest(this.addMenuItemForm.value))
-          .subscribe(menuItem => {
+          .subscribe((menuItem: MenuItemResponse) => {
             this.buttonLoading = false;
             this.emitAdd(menuItem);
             this.hide();
           });
       } else {
-        console.log('tem imagem');
         this.menuService.addMenuItem(new MenuItemRequest(this.addMenuItemForm.value))
-          .subscribe(menuItem => {
+          .subscribe((menuItem: MenuItemResponse) => {
             this.menuService.addMenuItemImage(menuItem.id, this.image)
               .subscribe(res => {
-                console.log(res.uploadedFile);
-                menuItem.imageUrl = 'assets/img/foods/' + res.uploadedFile.filename;
+                menuItem.imageUrl = 'https://localhost:3001/partner/item/image/' + res.uploadedFile.filename;
                 this.menuService.updateMenuItem(menuItem.id, menuItem).subscribe(() => {
                   this.buttonLoading = false;
                   this.emitAdd(menuItem);

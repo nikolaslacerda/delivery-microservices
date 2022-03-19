@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 
-import { ToastrService } from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import {AuthenticationService} from 'src/app/services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +11,16 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class AuthorizationGuard implements CanActivate {
 
   constructor(private router: Router,
-              private authenticationService: AuthenticationService,
-              private toaster: ToastrService) { }
+              private toaster: ToastrService,
+              private authService: AuthenticationService) {
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const role = route.data.role;
-    if (role && this.authenticationService.hasRole(role)) {
+    if (role && this.authService.hasRole(role)) {
       return true;
     }
-    this.toaster.error('Efetue o login para ter acesso.', 'Acesso negado');
+    this.toaster.error('Please login to access', 'Access Denied');
     this.router.navigate(['/login']);
     return false;
   }

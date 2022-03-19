@@ -3,8 +3,8 @@ export class MenuResponse {
   id: number;
   restaurantId: number;
 
-  constructor(id: number, restaurantId: number) {
-    this.id = id;
-    this.restaurantId = restaurantId;
+  constructor(model: any = {}) {
+    this.id = model.id;
+    this.restaurantId = model.restaurantId;
   }
 }

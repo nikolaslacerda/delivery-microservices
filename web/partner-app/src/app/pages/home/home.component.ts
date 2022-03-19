@@ -9,6 +9,7 @@ import {ReviewService} from '../../services/review.service';
 })
 export class HomeComponent implements OnInit {
 
+  isLoading = true;
   orders: any;
   reviews: any;
 
@@ -18,10 +19,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderService.getRestaurantOrders(1)
-      .subscribe(orders => this.orders = orders);
-
-    this.reviewService.getReviewsByRestaurant2(1)
-      .subscribe(reviews => this.reviews = reviews);
+      .subscribe(orders => {
+        this.orders = orders;
+        this.reviewService.getReviewsByRestaurant2(1)
+          .subscribe(reviews => {
+            this.reviews = reviews;
+            this.isLoading = false;
+          });
+      });
   }
 
   getMonthyOrders(): any {
@@ -29,7 +34,7 @@ export class HomeComponent implements OnInit {
   }
 
   getTodayOrders(): any {
-    return this.orders.filter((order: any) => new Date(order.createdAt).getDay() === new Date().getDay());
+    return this.orders.filter((order: any) => new Date(order.createdAt).getDate() === new Date().getDate());
   }
 
   getWeekReviews(): any {

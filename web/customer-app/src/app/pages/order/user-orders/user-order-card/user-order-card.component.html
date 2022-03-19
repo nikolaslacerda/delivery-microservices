@@ -1,0 +1,64 @@
+<div (click)="navigateToStatus()" class="card w-100 shadow-none border cursor">
+  <div class="card-body">
+    <div class="d-flex align-items-center">
+      <div class="restaurant-order-icon">
+        <img src="{{'https://localhost:3001/partner/profile/image/' + order.restaurant.imageUrl}}"
+             alt="restaurant logo"/>
+      </div>
+      <div class="d-flex flex-column" style="height: 50px">
+        <div class="d-flex p-0">
+          <span class="card-title ml-2">  {{order.restaurant.name}}</span>
+        </div>
+        <div class="d-flex p-0">
+          <span class="card-title ml-2 text-muted" style="font-size: 14px">
+              <div *ngIf="order.status !== 'COMPLETED'" class="spinner-grow spinner-grow-sm bg-success mr-2"
+                   role="status" aria-hidden="true"></div>
+            {{order.status | OrderStatus}}
+            • Nº  {{order.id}}
+          </span>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div *ngIf="order.items.length > 2">
+      <div class="row align-items-center" style="min-height: 50px;">
+        <div>
+          <p class="card-text">
+            <span class="badge badge-light">{{order.items[0].quantity}}</span>
+            <span class="ml-2 text-muted">{{order.items[0].name}}</span>
+          </p>
+          <p class="card-text" style="cursor: pointer; margin-top: -15px; font-size: 14px">
+            <span (click)="expandItems()" class="text-muted"><strong>more {{order.items.length - 1}}
+              items</strong></span>
+          </p>
+          <div *ngIf="showAllItems">
+            <div *ngFor="let item of order.items">
+              <p class="card-text">
+                <span class="badge badge-light">{{item.quantity}}</span>
+                <span class="ml-2 text-muted">{{item.name}}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="order.items.length <= 2">
+      <div class="d-flex align-items-center " style="min-height: 50px; max-height: 50px">
+
+        <div>
+          <div class="p-0" *ngFor="let item of order.items">
+            <span class="badge badge-light">{{item.quantity}}</span>
+            <span class="ml-2 text-muted">{{item.name}}</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <hr>
+    <div class="row justify-content-center">
+      <div class="col text-center"><a class="card-link" style="color: red"><strong>Help</strong></a></div>
+      <div class="col text-center"><a class="card-link" style="color: red"><strong>Rating</strong></a></div>
+    </div>
+  </div>
+</div>
+

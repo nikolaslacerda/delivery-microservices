@@ -6,6 +6,7 @@ import {EditScheduleModalComponent} from './edit-schedule-modal/edit-schedule-mo
 import {AddScheduleModalComponent} from './add-schedule-modal/add-schedule-modal.component';
 import {AuthService} from '../../services/auth.service';
 import {ToastrService} from 'ngx-toastr';
+import {ScheduleResponse} from '../../model/schedule-response.model';
 
 @Component({
   selector: 'app-schedule',
@@ -15,8 +16,7 @@ import {ToastrService} from 'ngx-toastr';
 export class ScheduleComponent implements OnInit {
 
   isLoading = true;
-  restaurant: any;
-  schedule: Array<any> = [];
+  schedule: ScheduleResponse[] = [];
   daysOfWeek: Array<any> = [];
   bsModalRef: BsModalRef | undefined;
 
@@ -28,21 +28,13 @@ export class ScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.restaurant = this.authService.tokenData.id;
-
+    const restaurantId = this.authService.getRestaurantId();
     this.daysOfWeek = this.dayOfWeekUtils.dayOfWeek;
-
-    this.scheduleService.getRestaurantSchedule(this.restaurant)
-      .subscribe(hours => {
-        this.delay(1000).then(() => {
-          this.schedule = hours;
-          this.isLoading = false;
-        });
+    this.scheduleService.getRestaurantSchedule(restaurantId)
+      .subscribe((schedule: ScheduleResponse[]) => {
+        this.schedule = schedule;
+        this.isLoading = false;
       });
-  }
-
-  async delay(ms: number) {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log('fired'));
   }
 
   deleteSchedule(schedule: any): void {
@@ -67,12 +59,8 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
-  openEditModal(schedule: any): void {
-    const initialState = {
-      list: [
-        {schedule}
-      ]
-    };
+  openEditModal(schedule: ScheduleResponse): void {
+    const initialState = {schedule};
     this.bsModalRef = this.modalService.show(EditScheduleModalComponent, {initialState});
     this.bsModalRef.content.event
       .subscribe(() => this.showSuccessUpdate());

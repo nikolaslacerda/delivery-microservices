@@ -5,9 +5,8 @@
   <div class="accordion-item" *ngFor="let category of categories; let i = index">
     <h2 class="accordion-header" id="flush-heading-1">
       <div class="d-flex justify-content-end align-items-center">
-        <a type="button" class="accordion-button aaa collapsed text-start" data-bs-toggle="collapse" href="#List-{{ i }}"
-           aria-expanded="true">
-          <!--            aria-controls="List-{{ i }}">-->
+        <a type="button" class="accordion-button aaa collapsed text-start" data-bs-toggle="collapse"
+           href="#List-{{ i }}" aria-expanded="true">
           <h5 class="content_title fw-bold w-100 text-left">{{category.name}}</h5>
         </a>
         <div class="d-flex align-items-end justify-content-end position-absolute"

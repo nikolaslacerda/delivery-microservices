@@ -9,12 +9,16 @@ import {AuthService} from '../services/auth.service';
 export class PagesComponent implements OnInit {
 
   restaurant: any;
+  loading = true;
 
   constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.authService.getRestaurantInfo().subscribe(restaurant => this.restaurant = restaurant);
+    this.authService.getRestaurantInfo().subscribe(restaurant => {
+      this.restaurant = restaurant;
+      this.loading = false;
+    });
   }
 
   onSignOut(): void {

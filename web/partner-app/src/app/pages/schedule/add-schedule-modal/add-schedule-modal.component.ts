@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, LOCALE_ID, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {ScheduleService} from '../../../services/schedule.service';
@@ -21,7 +21,6 @@ export class AddScheduleModalComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder,
-              @Inject(LOCALE_ID) private locale: string,
               public bsModalRef: BsModalRef,
               private scheduleService: ScheduleService) {
   }
@@ -39,8 +38,8 @@ export class AddScheduleModalComponent implements OnInit {
 
   addSchedule(): void {
     this.schedule.dayOfWeek = this.scheduleForm.value.dayOfWeek;
-    this.schedule.openingTime = formatDate(this.scheduleForm.value.openingTime, 'HH:mm', this.locale);
-    this.schedule.closingTime = formatDate(this.scheduleForm.value.closingTime, 'HH:mm', this.locale);
+    this.schedule.openingTime = formatDate(this.scheduleForm.value.openingTime, 'HH:mm', 'en');
+    this.schedule.closingTime = formatDate(this.scheduleForm.value.closingTime, 'HH:mm', 'en');
     this.schedule.active = true;
     this.schedule.restaurantId = 1;
     this.scheduleService.saveRestaurantSchedule(this.schedule).subscribe(schedule => {

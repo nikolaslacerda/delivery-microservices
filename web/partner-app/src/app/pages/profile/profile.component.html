@@ -10,8 +10,8 @@
       <div class="form-group mt-3" formGroupName="image">
         <div class="place-info-box-icon" style="position: relative;">
           <div class="place-info-box-icon2">
-            <img src="{{restaurant.imageUrl}}" alt="">
-            <div class="edit"><i class="bi-pen-fill"></i></div>
+            <img src="{{imageSrc}}" alt="">
+            <div class="edit"><em class="bi-pen-fill"></em></div>
           </div>
           <input
             formControlName="profileImage"
@@ -41,8 +41,6 @@
                 [ngClass]="{ 'is-invalid': restaurantForm.controls.mainCategory.invalid && (restaurantForm.controls.mainCategory.touched) }">
           <option *ngFor="let cuisine of cuisineTypes" value="{{cuisine.name}}">{{cuisine.name}}</option>
           <option value="Stackhouse">Stackhouse</option>
-          <!--      <option value="2">Two</option>-->
-          <!--      <option value="3">Three</option>-->
         </select>
       </div>
       <div class="form-group mt-3">

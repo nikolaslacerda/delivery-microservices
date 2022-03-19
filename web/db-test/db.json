@@ -1,0 +1,1551 @@
+{
+  "customers": [
+    {
+      "id": 1,
+      "firstName": "Nikolas",
+      "lastName": "Santos",
+      "email": "nikolas@email.com",
+      "phone": "9999999999",
+      "password": "1234",
+      "role": "CLIENT",
+      "cpf": "12312321"
+    },
+    {
+      "id": 2,
+      "name": "John",
+      "role": "CLIENT",
+      "password": "1234"
+    }
+  ],
+  "partners": [
+    {
+      "id": 1,
+      "firstName": "Nikolass",
+      "lastName": "Santos",
+      "email": "nikolas@email.com",
+      "phone": "9999999999",
+      "role": "PARTNER",
+      "password": "1234"
+    },
+    {
+      "firstName": "João",
+      "lastName": "Das Neves",
+      "email": "joao@email.com",
+      "phone": "51992046779",
+      "cpf": "111.111.111-11",
+      "role": "PARTNER",
+      "id": 2,
+      "password": "1234"
+    }
+  ],
+  "restaurants": [
+    {
+      "id": 1,
+      "name": "Outback",
+      "mainCategory": "Stackhouse",
+      "minDeliveryTime": 55,
+      "maxDeliveryTime": 75,
+      "deliveryFee": 7.8,
+      "description": "TESTE",
+      "userRating": 4.9,
+      "distance": 1.27,
+      "imageUrl": "1_image_48353175.png",
+      "menuId": 1,
+      "addressId": 1,
+      "partnerId": 1,
+      "cuisineType": "Stackhouse",
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "Mcdonald's",
+      "mainCategory": "Hamburgers",
+      "minDeliveryTime": 25,
+      "maxDeliveryTime": 35,
+      "deliveryFee": 4.81,
+      "description": "",
+      "userRating": 4.2222,
+      "distance": 1.27,
+      "imageUrl": "mcdonalds_32aslAnfgI228Sh.png",
+      "menuId": 2,
+      "addressId": 2,
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "Starbucks",
+      "mainCategory": "Coffee",
+      "minDeliveryTime": 25,
+      "maxDeliveryTime": 25,
+      "deliveryFee": 7.82,
+      "description": "tst",
+      "userRating": 4.8,
+      "distance": 1.27,
+      "imageUrl": "starbucks_AKjm3ds213d.png",
+      "menuId": 3,
+      "addressId": 3,
+      "active": true
+    },
+    {
+      "id": 4,
+      "name": "KFC",
+      "mainCategory": "Fast Food",
+      "minDeliveryTime": 35,
+      "maxDeliveryTime": 45,
+      "deliveryFee": 4.99,
+      "description": "tst",
+      "userRating": 4.075,
+      "distance": 1.27,
+      "imageUrl": "kfc_Ahd6320ADSAd364.png",
+      "menuId": 4,
+      "addressId": 4,
+      "active": true
+    },
+    {
+      "id": 5,
+      "name": "Ben & Jerry's",
+      "mainCategory": "Ice Creams",
+      "minDeliveryTime": 25,
+      "maxDeliveryTime": 35,
+      "deliveryFee": 7.84,
+      "description": "",
+      "userRating": 4.5,
+      "distance": 1.27,
+      "imageUrl": "benandjerrys_ASHSd312asa74ah.png",
+      "menuId": 5,
+      "addressId": 5,
+      "active": true
+    },
+    {
+      "id": 6,
+      "name": "Domino's Pizza",
+      "mainCategory": "Pizza",
+      "minDeliveryTime": 25,
+      "maxDeliveryTime": 25,
+      "deliveryFee": 7.85,
+      "description": "tst",
+      "userRating": 4.4,
+      "distance": 1.27,
+      "imageUrl": "dominos_Sb34AalD832.png",
+      "menuId": 6,
+      "addressId": 6,
+      "active": true
+    },
+    {
+      "name": "Nikolas Lacerda Santos",
+      "cnpj": "12.312.312/3123-13",
+      "mainCategory": "2",
+      "description": "adsasdasdasd",
+      "cep": "92440-328",
+      "address": "Quadra L Setor Quatro B Bloco 2",
+      "deliveryFee": "2",
+      "minDeliveryTime": 180,
+      "maxDeliveryTime": 122,
+      "partnerId": 1,
+      "id": 7,
+      "active": false
+    },
+    {
+      "name": "João das Neves",
+      "cnpj": "12.312.312/3123-13",
+      "mainCategory": "2",
+      "description": "asdasdasdasd",
+      "cep": "92440-328",
+      "address": "Quadra L Setor Quatro B Bloco 2",
+      "deliveryFee": "2",
+      "minDeliveryTime": 11,
+      "maxDeliveryTime": 11,
+      "partnerId": 2,
+      "id": 8,
+      "active": false
+    }
+  ],
+  "menus": [
+    {
+      "id": 1,
+      "restaurantId": 1
+    },
+    {
+      "id": 2,
+      "restaurantId": 2
+    },
+    {
+      "id": 3,
+      "restaurantId": 3
+    },
+    {
+      "id": 4,
+      "restaurantId": 4
+    },
+    {
+      "id": 5,
+      "restaurantId": 5
+    },
+    {
+      "id": 6,
+      "restaurantId": 6
+    }
+  ],
+  "menuCategories": [
+    {
+      "id": 1,
+      "menuId": 1,
+      "name": "Favorites",
+      "active": true
+    },
+    {
+      "id": 2,
+      "menuId": 2,
+      "name": "Hamburgers",
+      "active": true
+    },
+    {
+      "id": 22,
+      "menuId": 2,
+      "name": "Combos",
+      "active": true
+    },
+    {
+      "id": 222,
+      "menuId": 2,
+      "name": "Drinks",
+      "active": true
+    },
+    {
+      "id": 3,
+      "menuId": 3,
+      "name": "Coffee",
+      "active": true
+    },
+    {
+      "id": 322,
+      "menuId": 3,
+      "name": "Frapuccinos",
+      "active": true
+    },
+    {
+      "id": 4,
+      "menuId": 4,
+      "name": "Promotion",
+      "active": true
+    },
+    {
+      "id": 5,
+      "menuId": 4,
+      "name": "Chicken",
+      "active": true
+    },
+    {
+      "id": 6,
+      "menuId": 4,
+      "name": "Fries",
+      "active": true
+    },
+    {
+      "id": 7,
+      "menuId": 4,
+      "name": "Drinks",
+      "active": true
+    },
+    {
+      "id": 8,
+      "menuId": 5,
+      "name": "Classic",
+      "active": true
+    },
+    {
+      "id": 9,
+      "menuId": 5,
+      "name": "Core",
+      "active": true
+    },
+    {
+      "id": 10,
+      "menuId": 6,
+      "name": "Pizza",
+      "active": true
+    },
+    {
+      "menuId": 1,
+      "name": "TESTEE",
+      "id": 323,
+      "active": false
+    },
+    {
+      "menuId": 1,
+      "name": "Nikolas",
+      "id": 324,
+      "active": false
+    },
+    {
+      "active": true,
+      "id": 325
+    },
+    {
+      "active": true,
+      "id": 326
+    },
+    {
+      "active": true,
+      "id": 327
+    },
+    {
+      "active": true,
+      "id": 328
+    },
+    {
+      "active": true,
+      "id": 329
+    }
+  ],
+  "menuItems": [
+    {
+      "id": 1,
+      "imageUrl": "201911051405_RSTQ_j.png",
+      "name": "JUNIOR RIBS FOR TWO",
+      "description": "Duas junior ribs, nossa meia costela suína, servidas com dois acompanhamentos.",
+      "unitPrice": 2.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 1,
+      "active": false
+    },
+    {
+      "id": 2,
+      "imageUrl": "201911051405_RSTQ_j.png",
+      "name": "JUNIOR RIBS FOR TWO",
+      "description": "Duas junior ribs, nossa meia costela suína, servidas com dois acompanhamentos.",
+      "unitPrice": 2.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 1,
+      "active": false
+    },
+    {
+      "id": 3,
+      "imageUrl": "201911191742_qCKt_r.jpg",
+      "name": "RIBS ON THE BARBIE",
+      "description": "Nossa costela suína preparada em chama aberta como manda a tradição australiana, vem com as saborosas cinnamon apples.",
+      "unitPrice": 15.9,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 1,
+      "active": true
+    },
+    {
+      "id": 33,
+      "imageUrl": "202006261543_0PWa_a.jpg",
+      "name": "ALICE SPRINGS CHICKEN",
+      "description": "Um suculento peito de frango grelhado, temperado com o molho honey mustard e coberto de bacon, champignons e queijos gratinados.\npara deixar seu #momentooutbackemcasa ainda mais gostoso, sugerimos que leve ao forno pré aquecido a 180 e deixe entre 3 a 5 minutos até o queijo estar totalmente derretido e quente.",
+      "unitPrice": 15.9,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 1,
+      "active": true
+    },
+    {
+      "id": 4,
+      "imageUrl": "big_mac.png",
+      "name": "BIG MAC",
+      "description": "Dois hambúrgueres, alface, queijo e molho especial, cebola e picles num pão com gergelim. Consulte informações nutricionais em: mcdonalds.com.br/cardapio. Não utilize o campo de observações, as alterações devem ser realizadas no pedido.",
+      "unitPrice": 18.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 2,
+      "active": true
+    },
+    {
+      "id": 5,
+      "imageUrl": "big_tasty.png",
+      "name": "BIG TASTY",
+      "description": "O maior hambúrguer de carne 100% bovina do mcdonald’s",
+      "unitPrice": 5.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 2,
+      "active": true
+    },
+    {
+      "id": 6,
+      "imageUrl": "Cheddar MecMelt.png",
+      "name": "CHEDDAR MCMELT",
+      "description": "Delicioso hambúrguer de carne bovina, queijo tipo cheddar derretido, cebola ao molho shoyu no pão escuro com gergelim. Consulte informações nutricionais em: mcdonalds.com.br/cardapio. Não utilize o campo de observações, as alterações devem ser realizadas no pedido.",
+      "unitPrice": 4.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 2,
+      "active": true
+    },
+    {
+      "id": 4,
+      "imageUrl": "burger.png",
+      "name": "MCOFERTA MCCHICKEN BACON",
+      "description": "Frango empanado e dourado com molho suave e cremoso, acompanhado de alface fresquinha, fatias de bacon crocante num pão com gergelim, acompanhamento e bebida. Consulte informações nutricionais em: mcdonalds.com.br/cardapio/bebidas. Não utilize o campo de observações, as alterações devem ser realizadas no pedido.",
+      "unitPrice": 18.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 22,
+      "active": true
+    },
+    {
+      "id": 5,
+      "imageUrl": "cake.png",
+      "name": "MCOFERTA MCCHICKEN BARBECUE",
+      "description": "Frango empanado e dourado com delicioso molho barbecue, cebola fresca, bacon crocante, fatia de queijo cheddar num pão com gergelim, acompanhamento e bebida. Consulte informações nutricionais em: mcdonalds.com.br/cardapio/bebidas. Não utilize o campo de observações, as alterações devem ser realizadas no pedido.",
+      "unitPrice": 5.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 22,
+      "active": true
+    },
+    {
+      "id": 6,
+      "imageUrl": "straw.png",
+      "name": "COCA-COLA 500ML",
+      "description": "",
+      "unitPrice": 4.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 222,
+      "active": true
+    },
+    {
+      "id": 7,
+      "imageUrl": "201911271549_5nzt_3.jpg",
+      "name": "Café Americano",
+      "description": "",
+      "unitPrice": 9.9,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 3,
+      "active": true
+    },
+    {
+      "id": 8,
+      "imageUrl": "201911271550_PQdf_3.jpg",
+      "name": "Café com leite",
+      "description": "",
+      "unitPrice": 12.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 3,
+      "active": true
+    },
+    {
+      "id": 9,
+      "imageUrl": "201911271559_FsJr_4.jpg",
+      "name": "Flat Whit",
+      "description": "Espresso ristretto com leite vaporizado.",
+      "unitPrice": 15.6,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 3,
+      "active": true
+    },
+    {
+      "id": 7,
+      "imageUrl": "201911271610_KuRO_5.jpg",
+      "name": "FRAPPUCCINO CHOCOLATE",
+      "description": "Bebida com calda de chocolate, choco chip batido com gelo e leite (café opcional). Finalizada com chantilly e cobertura de chocolate.",
+      "unitPrice": 9.9,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 322,
+      "active": true
+    },
+    {
+      "id": 8,
+      "imageUrl": "201911271611_zjFE_5.jpg",
+      "name": "FRAPPUCCINO CARAMELO",
+      "description": "Bebida base café com essência de caramelo batida com gelo e leite. Finalizada com chantilly e cobertura de caramelo.",
+      "unitPrice": 12.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 322,
+      "active": true
+    },
+    {
+      "id": 9,
+      "imageUrl": "201911271609_3BkE_5.jpg",
+      "name": "FRAPPUCCINO BAUNILHA",
+      "description": "Bebida base creme (sem café) batida com gelo e leite. Finalizada com chantilly.",
+      "unitPrice": 15.6,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 322,
+      "active": true
+    },
+    {
+      "id": 9,
+      "imageUrl": "201911271607_YxhH_5.jpg",
+      "name": "FRAPPUCCINO CHÁ VERDE",
+      "description": "Bebida base creme (sem café) com chá verde matchá batida com gelo e leite. Finalizada com chantilly.",
+      "unitPrice": 15.6,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 322,
+      "active": true
+    },
+    {
+      "id": 9,
+      "imageUrl": "201911271613_gHfm_6.jpg",
+      "name": "FRAPUCCINO MORANGO",
+      "description": "Ainda mais morango, bebida base creme (sem café), batida com gelo e leite. Com calda de morango e finalizada com chantilly.",
+      "unitPrice": 15.6,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 322,
+      "active": true
+    },
+    {
+      "id": 13,
+      "imageUrl": "sunday.png",
+      "name": "BEN & JERRY'S NEW YORK SUPER FUDGE CHUNK 458ML",
+      "description": "Sorvete sabor chocolate com nozes, amêndoas com cobertura sabor chocolate e flocos sabor chocolate ao leite e chocolate branco.",
+      "unitPrice": 21.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 8,
+      "active": true
+    },
+    {
+      "id": 14,
+      "imageUrl": "chocpop.png",
+      "name": "DOCE DELEITE 458ML",
+      "description": "Sorvete sabor doce de leite e sorvete sabor chocolate com pedaços sabor chocolate recheio cremoso de doce de leite 458ml/414g.",
+      "unitPrice": 8.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 9,
+      "active": true
+    },
+    {
+      "id": 15,
+      "imageUrl": "icestd.png",
+      "name": "TRIPLE CARAMEL CHUNK 458ML",
+      "description": "Sorvete de caramelo com calda de caramelo e flocos sabor chocolate recheados com caramelo 458ml/414g.",
+      "unitPrice": 1.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 8,
+      "active": true
+    },
+    {
+      "id": 16,
+      "imageUrl": "cup.png",
+      "name": "CRUSH GÂTEAU 458ML",
+      "description": "Sorvete sabor baunilha e sorvete sabor chocolate com pedaços de bolo sabor chocolate e recheio cremoso sabor chocolate 458ml/415g.",
+      "unitPrice": 5.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 9,
+      "active": true
+    },
+    {
+      "id": 19,
+      "imageUrl": "202112271016_75IT_i.jpg",
+      "name": "35% 0FF - 2 PIZZAS MÉDIAS ESPECIALIDADES",
+      "description": "",
+      "unitPrice": 40.5,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 10,
+      "active": true
+    },
+    {
+      "id": 21,
+      "imageUrl": "202108101528_36MN_.jpeg",
+      "name": "Balde + Refri",
+      "description": "O famoso balde de frango do Kfc com 8 Pedaços.\nAcompanha 2 molhos e 1 refrigerante de 1,5l.",
+      "unitPrice": 5.9,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 4,
+      "active": true
+    },
+    {
+      "id": 22,
+      "imageUrl": "202102181148_IyaM_.jpeg",
+      "name": "BALDE 8 PEDAÇOS - RECEITA CROCANTE",
+      "description": "8 Pedaços de Frango Com Osso Empanados com a Receita Crocante",
+      "unitPrice": 5.9,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 5,
+      "active": true
+    },
+    {
+      "id": 23,
+      "imageUrl": "202102181153_Bavr_.jpeg",
+      "name": "MEGABALDE - 16 TIRINHAS - SERVE 4 PESSOAS - RECEITA CROCANTE",
+      "description": "16 Tirinhas de Frango Sem Osso Empanadas com a Receita Crocante",
+      "unitPrice": 5.9,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 5,
+      "active": true
+    },
+    {
+      "id": 24,
+      "imageUrl": "202106251450_1FQ7_.jpeg",
+      "name": "WOW BOX 3 TIRINHAS",
+      "description": "3 Tirinhas de Frango Sem Osso Empanadas com a Receita Crocante ou Secreta. Acompanha Batata Frita Grande.",
+      "unitPrice": 5.9,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 6,
+      "active": true
+    },
+    {
+      "id": 24,
+      "imageUrl": "202107261751_2LNC_.jpeg",
+      "name": "WOW BOX 2 PEDAÇOS",
+      "description": "2 Pedaços de Frango com a Receita Crocante ou Secreta. Acompanha batata frita grande",
+      "unitPrice": 5.9,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 6,
+      "active": true
+    },
+    {
+      "id": 24,
+      "imageUrl": "202102140813_644Q_.jpeg",
+      "name": "COCA COLA SEM AÇÚCAR 1,5L",
+      "description": "",
+      "unitPrice": 5.9,
+      "unitOriginalPrice": 8.7,
+      "menuCategoryId": 7,
+      "active": true
+    },
+    {
+      "menuCategoryId": "324",
+      "name": "asdasd",
+      "description": "adasdasd",
+      "unitPrice": "12",
+      "unitOriginalPrice": "12",
+      "active": false,
+      "imageUrl": "46_image_21652495.jpg",
+      "id": 46
+    }
+  ],
+  "addresses": [
+    {
+      "id": 1,
+      "streetAddress": "RUA VEREADOR ANTONIO FERREIRA ALVES",
+      "streetNumber": 417,
+      "neighborhood": "MATHIAS VELHO",
+      "city": "CANOAS",
+      "state": "RS",
+      "country": "BR",
+      "complement": "",
+      "reference": "",
+      "postCode": "111111"
+    },
+    {
+      "id": 2,
+      "streetAddress": "RUA VEREADOR ANTONIO FERREIRA ALVES",
+      "streetNumber": 417,
+      "neighborhood": "MATHIAS VELHO",
+      "city": "CANOAS",
+      "state": "RS",
+      "country": "BR",
+      "complement": "",
+      "reference": "",
+      "postCode": "111111"
+    },
+    {
+      "id": 3,
+      "streetAddress": "RUA VEREADOR ANTONIO FERREIRA ALVES",
+      "streetNumber": 417,
+      "neighborhood": "MATHIAS VELHO",
+      "city": "CANOAS",
+      "state": "RS",
+      "country": "BR",
+      "complement": "",
+      "reference": "",
+      "postCode": "111111"
+    },
+    {
+      "id": 4,
+      "streetAddress": "RUA VEREADOR ANTONIO FERREIRA ALVES",
+      "streetNumber": 417,
+      "neighborhood": "MATHIAS VELHO",
+      "city": "CANOAS",
+      "state": "RS",
+      "country": "BR",
+      "complement": "",
+      "reference": "",
+      "postCode": "111111"
+    },
+    {
+      "id": 5,
+      "streetAddress": "RUA VEREADOR ANTONIO FERREIRA ALVES",
+      "streetNumber": 417,
+      "neighborhood": "MATHIAS VELHO",
+      "city": "CANOAS",
+      "state": "RS",
+      "country": "BR",
+      "complement": "",
+      "reference": "",
+      "postCode": "111111"
+    },
+    {
+      "id": 6,
+      "streetAddress": "RUA VEREADOR ANTONIO FERREIRA ALVES",
+      "streetNumber": 417,
+      "neighborhood": "MATHIAS VELHO",
+      "city": "CANOAS",
+      "state": "RS",
+      "country": "BR",
+      "complement": "",
+      "reference": "",
+      "postCode": "111111"
+    }
+  ],
+  "reviews": [
+    {
+      "name": "Julia",
+      "createdAt": "2022-01-20 22:11:47",
+      "userRating": 4.5,
+      "comments": "Tudo muito bom, entrega no tempo certo",
+      "restaurantId": 1
+    },
+    {
+      "name": "Aline",
+      "createdAt": "2022-01-19 22:11:47",
+      "userRating": 3,
+      "comments": "NÃO recomendo. O recheio é só um creme, não tem camarão e nem carne",
+      "restaurantId": 1
+    },
+    {
+      "name": "Renata",
+      "createdAt": "2022-01-18 22:11:47",
+      "userRating": 2,
+      "comments": "Não foi muito agradável ao nosso paladar, e eu e meu esposo no outro dia passamos super mal. Pode até ter sido outra coisa, mas...",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-17 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-16 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-15 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-14 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-13 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-12 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-11 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-10 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-09 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-08 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-07 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-07 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-06 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-05 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-04 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-03 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-02 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Client Name",
+      "createdAt": "2022-01-01 22:11:47",
+      "userRating": 5,
+      "comments": "Comment Example.",
+      "restaurantId": 1
+    },
+    {
+      "name": "Daniela",
+      "createdAt": "2017-01-23T18:25:43",
+      "userRating": 4,
+      "comments": "Sanduíche muito bom! Já pedi diversas vezes sempre bom!",
+      "restaurantId": 2
+    },
+    {
+      "name": "Laila",
+      "createdAt": "2017-02-02T18:25:43",
+      "userRating": 5,
+      "comments": "Melhor hambúrguer que já provei. Vai ser difícil voltar para mc e bk",
+      "restaurantId": 2
+    },
+    {
+      "name": "Suzana",
+      "createdAt": "2016-12-12T18:25:43",
+      "userRating": 3.5,
+      "comments": "Meu sanduíche chegou frio e todo desmontado =\\",
+      "restaurantId": 2
+    },
+    {
+      "name": "Eric",
+      "createdAt": "2017-01-23T18:25:43",
+      "userRating": 4.5,
+      "comments": "Excelente opção! Recomendo!",
+      "restaurantId": 3
+    },
+    {
+      "name": "Amanda",
+      "createdAt": "2017-02-02T18:25:43",
+      "userRating": 2.5,
+      "comments": "Demorou muito e o café veio gelado",
+      "restaurantId": 3
+    },
+    {
+      "name": "Carla",
+      "createdAt": "2016-12-12T18:25:43",
+      "userRating": 4.8,
+      "comments": "Tudo perfeito. Entrega, embalagem, comida. Resultado? Melhor custo beneficio",
+      "restaurantId": 3
+    },
+    {
+      "name": "Rodrigo",
+      "createdAt": "2016-12-12T18:25:43",
+      "userRating": 4,
+      "comments": "Muito rápida a entrega, mas é caro.",
+      "restaurantId": 3
+    },
+    {
+      "name": "André",
+      "createdAt": "2016-12-12T18:25:43",
+      "userRating": 4.5,
+      "comments": "Excelente como sempre!",
+      "restaurantId": 3
+    },
+    {
+      "name": "João",
+      "createdAt": "2017-01-23T18:25:43",
+      "userRating": 5,
+      "comments": "Excelente. Fiz o pedido com outro endereço e quando vi o erro liguei avisando. O motoqueiro cortou a cidade todinha e a comida ainda chegou quentinha (e deliciosa). Estou sempre pedindo e recomendando",
+      "restaurantId": 4
+    },
+    {
+      "name": "Marcelo",
+      "createdAt": "2017-02-02T18:25:43",
+      "userRating": 4.5,
+      "comments": "Chegou muito rápido, antes mesmo da previsão",
+      "restaurantId": 4
+    },
+    {
+      "name": "Fatinha",
+      "createdAt": "2017-01-23T18:25:43",
+      "userRating": 2,
+      "comments": "Ñ gostei dos sabores q pedi e achei o preço muito elevado",
+      "restaurantId": 5
+    },
+    {
+      "name": "Lucas",
+      "createdAt": "2017-02-02T18:25:43",
+      "userRating": 2.5,
+      "comments": "Esperar 1:45hr pra receber o pedido é INACEITÁVEL",
+      "restaurantId": 5
+    },
+    {
+      "name": "Jacira",
+      "createdAt": "2017-02-01T18:25:43",
+      "userRating": 4.5,
+      "comments": "Veio OK!",
+      "restaurantId": 5
+    },
+    {
+      "name": "Ana",
+      "createdAt": "2017-01-23T18:25:43",
+      "userRating": 5,
+      "comments": "Rápido e sempre uma delicia!! Ja pedi 3x e sempre veio rapido e tudo certinho.",
+      "restaurantId": 6
+    },
+    {
+      "name": "Larissa",
+      "createdAt": "2017-02-02T18:25:43",
+      "userRating": 2.5,
+      "comments": "A taxa de entrega poderia ser mais barata.",
+      "restaurantId": 6
+    },
+    {
+      "name": "Jarbas",
+      "createdAt": "2016-12-15T18:25:43",
+      "userRating": 4.7,
+      "comments": "Excelente e chegou muito rápido!",
+      "restaurantId": 6
+    },
+    {
+      "name": "Rafaela",
+      "createdAt": "2017-01-12T18:25:43",
+      "userRating": 5,
+      "comments": "Chegou rápido e perfeito!",
+      "restaurantId": 6
+    },
+    {
+      "name": "Julia",
+      "createdAt": "2016-12-12T18:25:43",
+      "userRating": 1.5,
+      "comments": "Sempre gostei muito dos pedidos que eu fiz, mas dessa vez foi péssimo e decepcionou muito. Demorou 30min a mais pra chegar do que o tempo máximo esperado.",
+      "restaurantId": 6
+    },
+    {
+      "name": "Marília",
+      "createdAt": "2016-12-20T18:25:43",
+      "userRating": 4.5,
+      "comments": "Taxa de entrega bastante elevada e precisa colocar no app se a pessoa quer porção adicional de algo (calda, crocante etc)",
+      "restaurantId": 6
+    }
+  ],
+  "payments": [
+    {
+      "id": 1,
+      "orderId": 1,
+      "paymentMethodId": 1,
+      "cardNumber": 123123122122222,
+      "total": 589
+    },
+    {
+      "id": 2,
+      "paymentMethodId": 2,
+      "cardNumber": 9123891283912,
+      "total": 589
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "createdAt": "2022-02-20 22:11:47",
+      "customerId": 1,
+      "restaurantId": 1,
+      "paymentId": 1,
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": 417,
+        "neighborhood": "MATHIAS VELHO",
+        "city": "CANOAS",
+        "state": "RS",
+        "country": "BR",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "status": "IN_THE_KITCHEN",
+      "deliveryFee": 10.0,
+      "subtotal": 10.0,
+      "total": 20.0,
+      "items": [
+        {
+          "menuItemId": 4,
+          "quantity": 1,
+          "name": "Qualquer 4",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        },
+        {
+          "menuItemId": 3,
+          "quantity": 2,
+          "name": "Qualquer 3",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "createdAt": "2022-02-20 22:11:47",
+      "customerId": 1,
+      "restaurantId": 1,
+      "paymentId": 2,
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": 417,
+        "neighborhood": "MATHIAS VELHO",
+        "city": "CANOAS",
+        "state": "RS",
+        "country": "BR",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "status": "ON_THE_WAY",
+      "deliveryFee": 10.0,
+      "subtotal": 10.0,
+      "total": 20.0,
+      "items": [
+        {
+          "menuItemId": 1,
+          "quantity": 2,
+          "name": "Qualquer 1",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "createdAt": "2022-02-20 22:11:47",
+      "customerId": 1,
+      "restaurantId": 1,
+      "paymentId": 2,
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": 417,
+        "neighborhood": "MATHIAS VELHO",
+        "city": "CANOAS",
+        "state": "RS",
+        "country": "BR",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "status": "DELIVERED",
+      "deliveryFee": 10.0,
+      "subtotal": 10.0,
+      "total": 20.0,
+      "items": [
+        {
+          "menuItemId": 1,
+          "quantity": 2,
+          "name": "Qualquer 1",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "createdAt": "2022-02-19 22:11:47",
+      "customerId": 1,
+      "restaurantId": 1,
+      "paymentId": 2,
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": 417,
+        "neighborhood": "MATHIAS VELHO",
+        "city": "CANOAS",
+        "state": "RS",
+        "country": "BR",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "status": "ON_THE_WAY",
+      "deliveryFee": 10.0,
+      "subtotal": 10.0,
+      "total": 20.0,
+      "items": [
+        {
+          "menuItemId": 1,
+          "quantity": 1,
+          "name": "Qualquer 1",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        },
+        {
+          "menuItemId": 2,
+          "quantity": 1,
+          "name": "Qualquer 2",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        },
+        {
+          "quantity": 1,
+          "menuItemId": 6,
+          "name": "Qualquer 6",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        },
+        {
+          "quantity": 1,
+          "menuItemId": 7,
+          "name": "Qualquer 7",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "customerId": 1,
+      "restaurantId": 2,
+      "paymentId": 2,
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": 417,
+        "neighborhood": "MATHIAS VELHO",
+        "city": "CANOAS",
+        "state": "RS",
+        "country": "BR",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "status": "IN_THE_KITCHEN",
+      "deliveryFee": 10.0,
+      "subtotal": 10.0,
+      "total": 20.0,
+      "items": [
+        {
+          "quantity": 1,
+          "menuItemId": 1,
+          "name": "Qualquer 1",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "customerId": 1,
+      "restaurantId": 1,
+      "paymentId": 2,
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": 417,
+        "neighborhood": "MATHIAS VELHO",
+        "city": "CANOAS",
+        "state": "RS",
+        "country": "BR",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "status": "RECEIVED",
+      "deliveryFee": 10.0,
+      "subtotal": 10.0,
+      "total": 20.0,
+      "items": [
+        {
+          "quantity": 1,
+          "menuItemId": 1,
+          "name": "Qualquer 1",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "customerId": 1,
+      "restaurantId": 1,
+      "createdAt": "2022-02-19 22:11:47",
+      "paymentId": 2,
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": 417,
+        "neighborhood": "MATHIAS VELHO",
+        "city": "CANOAS",
+        "state": "RS",
+        "country": "BR",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "status": "RECEIVED",
+      "deliveryFee": 10.0,
+      "subtotal": 10.0,
+      "total": 20.0,
+      "items": [
+        {
+          "quantity": 1,
+          "menuItemId": 1,
+          "name": "Qualquer 1",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "customerId": 1,
+      "restaurantId": 1,
+      "createdAt": "2022-01-20 22:11:47",
+      "paymentId": 2,
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": 417,
+        "neighborhood": "MATHIAS VELHO",
+        "city": "CANOAS",
+        "state": "RS",
+        "country": "BR",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "status": "RECEIVED",
+      "deliveryFee": 10.0,
+      "subtotal": 10.0,
+      "total": 20.0,
+      "items": [
+        {
+          "quantity": 1,
+          "menuItemId": 1,
+          "name": "Qualquer 1",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "customerId": 1,
+      "createdAt": "2022-01-20 22:11:47",
+      "restaurantId": 1,
+      "paymentId": 2,
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": 417,
+        "neighborhood": "MATHIAS VELHO",
+        "city": "CANOAS",
+        "state": "RS",
+        "country": "BR",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "status": "RECEIVED",
+      "deliveryFee": 10.0,
+      "subtotal": 10.0,
+      "total": 20.0,
+      "items": [
+        {
+          "quantity": 1,
+          "menuItemId": 1,
+          "name": "Qualquer 1",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "createdAt": "2022-01-20 22:11:47",
+      "customerId": 1,
+      "restaurantId": 1,
+      "paymentId": 2,
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": 417,
+        "neighborhood": "MATHIAS VELHO",
+        "city": "CANOAS",
+        "state": "RS",
+        "country": "BR",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "status": "IN_THE_KITCHEN",
+      "deliveryFee": 10.0,
+      "subtotal": 10.0,
+      "total": 20.0,
+      "items": [
+        {
+          "quantity": 1,
+          "menuItemId": 1,
+          "name": "Qualquer 1",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "createdAt": "2022-01-20 22:11:47",
+      "customerId": 1,
+      "restaurantId": 1,
+      "paymentId": 2,
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": 417,
+        "neighborhood": "MATHIAS VELHO",
+        "city": "CANOAS",
+        "state": "RS",
+        "country": "BR",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "status": "IN_THE_KITCHEN",
+      "deliveryFee": 10.0,
+      "subtotal": 10.0,
+      "total": 20.0,
+      "items": [
+        {
+          "quantity": 1,
+          "menuItemId": 1,
+          "name": "Qualquer 1",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        }
+      ]
+    },
+    {
+      "customerId": 1,
+      "restaurantId": "1",
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": 417,
+        "neighborhood": "MATHIAS VELHO",
+        "city": "CANOAS",
+        "state": "RS",
+        "country": "BR",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "payment": {
+        "paymentId": "5"
+      },
+      "items": [
+        {
+          "quantity": 3,
+          "menuItemId": 1,
+          "name": "Qualquer 1",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        }
+      ],
+      "status": "RECEIVED",
+      "deliveryFee": 10.0,
+      "subtotal": 10.0,
+      "total": 20.0,
+      "id": 12
+    },
+    {
+      "customerId": 1,
+      "restaurantId": "1",
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": 417,
+        "neighborhood": "MATHIAS VELHO",
+        "city": "CANOAS",
+        "state": "RS",
+        "country": "BR",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "payment": {
+        "paymentId": "5"
+      },
+      "items": [
+        {
+          "quantity": 1,
+          "menuItemId": 1,
+          "name": "Qualquer 1",
+          "price": 8.7,
+          "promotionalPrice": 8.7
+        }
+      ],
+      "status": "RECEIVED",
+      "deliveryFee": 10.0,
+      "subtotal": 10.0,
+      "total": 20.0,
+      "id": 13
+    }
+  ],
+  "deliveries": [
+    {
+      "id": 1,
+      "addressId": 1
+    },
+    {
+      "id": 2,
+      "addressId": 2
+    }
+  ],
+  "cuisine-types": [
+    {
+      "id": 1,
+      "name": "Hamburgers",
+      "imageUrl": ":resolution/discoveries/Cafeteria-out_20_HZH8.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Japanese",
+      "imageUrl": ":resolution/discoveries/Cafeteria-out_20_HZH8.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Desserts",
+      "imageUrl": ":resolution/discoveries/Cafeteria-out_20_HZH8.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Coffee",
+      "imageUrl": ":resolution/discoveries/Cafeteria-out_20_HZH8.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Healthy Food",
+      "imageUrl": ":resolution/discoveries/Cafeteria-out_20_HZH8.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Brazilian",
+      "imageUrl": ":resolution/discoveries/Cafeteria-out_20_HZH8.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Ice Creams",
+      "imageUrl": ":resolution/discoveries/Cafeteria-out_20_HZH8.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Bakery",
+      "imageUrl": ":resolution/discoveries/Cafeteria-out_20_HZH8.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Pizza",
+      "imageUrl": ":resolution/discoveries/Cafeteria-out_20_HZH8.jpg"
+    }
+  ],
+  "paymentMethods": [
+    {
+      "id": 1,
+      "name": "CREDIT_CARD"
+    },
+    {
+      "id": 2,
+      "name": "MEAL_TICKET"
+    },
+    {
+      "id": 3,
+      "name": "DEBIT_CARD"
+    },
+    {
+      "id": 4,
+      "name": "MOBILE_WALLET"
+    },
+    {
+      "id": 5,
+      "name": "CASH"
+    }
+  ],
+  "restaurants_paymentMethods": [
+    {
+      "restaurantId": 1,
+      "paymentMethodId": 5,
+      "id": 2
+    }
+  ],
+  "schedules": [
+    {
+      "id": 1,
+      "restaurantId": 1,
+      "dayOfWeek": "MONDAY",
+      "closingTime": "07:00",
+      "active": true,
+      "openingTime": "00:00"
+    },
+    {
+      "id": 2,
+      "restaurantId": 1,
+      "dayOfWeek": "TUESDAY",
+      "closingTime": "21:00",
+      "active": true,
+      "openingTime": "23:00"
+    },
+    {
+      "id": 3,
+      "restaurantId": 1,
+      "dayOfWeek": "WEDNESDAY",
+      "openingTime": "23:00",
+      "closingTime": "22:00",
+      "active": true
+    },
+    {
+      "id": 4,
+      "restaurantId": 1,
+      "dayOfWeek": "THURSDAY",
+      "openingTime": "00:00",
+      "closingTime": "23:00",
+      "active": true
+    },
+    {
+      "id": 5,
+      "restaurantId": 1,
+      "dayOfWeek": "FRIDAY",
+      "openingTime": "00:00",
+      "closingTime": "23:00",
+      "active": true
+    },
+    {
+      "id": 6,
+      "restaurantId": 1,
+      "dayOfWeek": "SATURDAY",
+      "openingTime": "00:00",
+      "closingTime": "23:00",
+      "active": true
+    },
+    {
+      "id": 7,
+      "restaurantId": 1,
+      "dayOfWeek": "SUNDAY",
+      "openingTime": "00:00",
+      "closingTime": "23:00",
+      "active": false
+    }
+  ]
+}

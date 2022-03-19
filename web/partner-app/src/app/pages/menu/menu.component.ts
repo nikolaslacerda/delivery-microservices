@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
 import {MenuService} from '../../services/menu.service';
-import {ToastrService} from 'ngx-toastr';
+import {MenuResponse} from '../../model/menu-response.model';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,26 +11,18 @@ import {ToastrService} from 'ngx-toastr';
 export class MenuComponent implements OnInit {
 
   isLoading = true;
-  menu: any;
+  menu = {} as MenuResponse;
 
   constructor(private menuService: MenuService,
-              private route: ActivatedRoute,
-              public toastr: ToastrService) {
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    const restaurantId = 1;
-
+    const restaurantId = this.authService.getRestaurantId();
     this.menuService.getMenuByRestaurant(restaurantId)
-      .subscribe(menu => {
-        this.delay(1000).then(() => {
-          this.isLoading = false;
-          this.menu = menu[0];
-        });
+      .subscribe((menu: MenuResponse[]) => {
+        this.isLoading = false;
+        this.menu = menu[0];
       });
-  }
-
-  async delay(ms: number) {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log('fired'));
   }
 }

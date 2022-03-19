@@ -14,19 +14,60 @@ import {SignupComponent} from './pages/signup/signup.component';
 
 const routes: Routes = [
   {
-    path: '', component: PagesComponent, children: [
-      {path: '', pathMatch: 'full', redirectTo: 'home', canActivate: [AuthGuard]},
-      {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-      {path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
-      {path: 'menu', component: MenuComponent, canActivate: [AuthGuard]},
-      {path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard]},
-      {path: 'payment-methods', component: PaymentMethodsComponent, canActivate: [AuthGuard]},
-      {path: 'reviews', component: ReviewsComponent, canActivate: [AuthGuard]},
-      {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}
+    path: '',
+    component: PagesComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'home',
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'orders',
+        component: OrdersComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'menu',
+        component: MenuComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'schedule',
+        component: ScheduleComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'payment-methods',
+        component: PaymentMethodsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'reviews',
+        component: ReviewsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [AuthGuard]
+      }
     ]
   },
-  {path: 'login', component: LoginComponent},
-  {path: 'sign-up', component: SignupComponent}
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'sign-up',
+    component: SignupComponent
+  }
 ];
 
 @NgModule({

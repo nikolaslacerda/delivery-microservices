@@ -7,27 +7,29 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/pt';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule} from 'ngx-toastr';
 
 import {AppComponent} from './app.component';
 
-import {LoginComponent} from './component/auth/login/login.component';
-import {HeaderComponent} from './component/header/header.component';
+import {LoginComponent} from './pages/login/login.component';
+import {HeaderComponent} from './shared/components/header/header.component';
 
-import {AdminModule} from './component/restaurants/admin/admin.module';
-import {OrderModule} from './component/order/order.module';
-import {RestaurantModule} from './component/restaurants/restaurant.module';
+import {AdminModule} from './pages/restaurants/admin/admin.module';
+import {OrderModule} from './pages/order/order.module';
 
 import {ErrorHandlingInterceptor} from './interceptors/error-handling-interceptor';
 import {JwtInterceptor} from './interceptors/jwt-interceptor';
 
-import {appRoutes} from './app.routes';
-import {HomeComponent} from './home/home.component';
+import {HomeComponent} from './pages/home/home.component';
 import {SharedModule} from './shared/shared.module';
-import { SignupComponent } from './component/auth/signup/signup.component';
-import { UserDetailComponent } from './component/header/user-detail/user-detail.component';
-import { EditProfileComponent } from './component/edit-profile/edit-profile.component';
+import {SignupComponent} from './pages/signup/signup.component';
+import {UserDetailComponent} from './shared/components/header/user-detail/user-detail.component';
+import {EditProfileComponent} from './pages/user/edit-profile/edit-profile.component';
+import {PagesComponent} from './pages/pages.component';
+import {RouterModule} from '@angular/router';
+import {AppRoutingModule} from './app-routing.module';
+import {ModalModule} from 'ngx-bootstrap/modal';
+import {RatingModule} from 'ngx-bootstrap/rating';
 
 registerLocaleData(localeFr, 'pt');
 
@@ -39,21 +41,26 @@ registerLocaleData(localeFr, 'pt');
     HomeComponent,
     SignupComponent,
     UserDetailComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    appRoutes,
-    NgbModule,
-    ToastrModule.forRoot(),
+    RatingModule.forRoot(),
+    ModalModule.forRoot(),
+    ToastrModule.forRoot({
+      maxOpened: 1,
+      autoDismiss: true
+    }),
     AdminModule,
-    RestaurantModule,
     OrderModule,
     SharedModule,
+    RouterModule,
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-br'},

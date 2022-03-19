@@ -1,0 +1,18 @@
+<div class="row mt-3 justify-content-center">
+  <div class="card w-50">
+    <div class="card-body">
+      <h5 class="card-title"><strong>Order Summary</strong></h5>
+      <div class="mt-5" *ngIf="order">
+        <div class="d-flex align-items-start justify-content-between" *ngFor="let item of order.items">
+          <hr>
+          <p >{{ item.quantity }}x </p>
+          <span>{{ item.name }}</span>
+          <span>{{ item.quantity * item.price | currency:'USD': 'symbol' }}</span><br>
+        </div>
+        <hr>
+        <app-order-delivery-costs [deliveryFee]="order.deliveryFee" [subtotal]="order.subtotal"
+                                  [total]="order.total"></app-order-delivery-costs>
+      </div>
+    </div>
+  </div>
+</div>
