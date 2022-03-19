@@ -4,6 +4,8 @@ import {RatingService} from 'src/app/services/rating.service';
 import {OrderRequest} from '../../../models/request/order.request.model';
 import {OrderService} from '../../../services/order.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {OrderResponse} from '../../../models/response/order.response.model';
+import {ReviewResponse} from '../../../models/response/review.response.model';
 import {ReviewRequest} from '../../../models/request/review.request.model';
 
 @Component({
@@ -14,8 +16,8 @@ import {ReviewRequest} from '../../../models/request/review.request.model';
 export class OrderStatusComponent implements OnInit {
 
   ratingForm: FormGroup;
-  order: OrderRequest = {} as OrderRequest;
-  review: ReviewRequest = {} as ReviewRequest;
+  order: OrderResponse = {} as OrderResponse;
+  review: ReviewResponse = {} as ReviewResponse;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -31,21 +33,28 @@ export class OrderStatusComponent implements OnInit {
     });
     const orderId = this.route.snapshot.params.orderId;
     this.orderService.getOrderById(orderId)
-      .subscribe(order => {
+      .subscribe((order: OrderResponse) => {
         this.order = order;
+        this.ratingService.getOrderReview(orderId).subscribe((review: ReviewResponse) => {
+          this.review = review[0];
+          console.log(this.review)
+        });
       });
   }
 
   createReview() {
-    this.review.order = this.order;
-    this.ratingService.createReview(this.review)
+    this.review.orderId = this.order.id;
+    this.review.restaurantId = this.order.restaurant.id;
+    this.review.createdAt = Date.now().toString();
+    this.review.name = '';
+    this.ratingService.createReview(new ReviewRequest(this.ratingForm))
       .subscribe(review => {
         this.review = review;
         setTimeout(() => this.router.navigate(['']), 1500);
       });
   }
 
-  isLoading(order: OrderRequest) {
-    return Object.keys(order).length === 0;
+  isLoading() {
+    return Object.keys(this.order).length === 0 && Object.keys(this.review).length === 0;
   }
 }

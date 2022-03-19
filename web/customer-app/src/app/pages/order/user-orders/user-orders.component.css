@@ -1,0 +1,16 @@
+.ddd {
+  width: 49%;
+}
+
+@media (max-width: 768px) {
+  .ccc {
+    background-color: #dd4b39;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .ddd {
+    width: 100%;
+  }
+}

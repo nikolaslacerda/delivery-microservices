@@ -13,16 +13,18 @@ export class LoginGuard implements CanLoad, CanActivate {
   }
 
   canLoad(route: Route): boolean {
-    if (!this.authService.isLoggedIn()) {
+    const isLoggedIn = this.authService.isLoggedIn()
+    if (!isLoggedIn) {
       this.authService.navigateToLogin(`/${route.path}`);
     }
-    return false;
+    return isLoggedIn;
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (!this.authService.isLoggedIn()) {
+    const isLoggedIn = this.authService.isLoggedIn()
+    if (!isLoggedIn) {
       this.authService.navigateToLogin(`/${route.routeConfig.path}`);
     }
-    return false;
+    return isLoggedIn;
   }
 }

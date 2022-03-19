@@ -20,12 +20,12 @@ export class OrderService {
     return this.http.post(`${this.API}/orders`, order);
   }
 
-  getOrderById(orderId: number): Observable<OrderRequest> {
+  getOrderById(orderId: number): Observable<OrderResponse> {
     const params = new HttpParams()
       .append('_expand', 'restaurant')
       // .append('_expand', 'address')
       // .append('_expand', 'payment');
-    return this.http.get<OrderRequest>(`${this.API}/orders/${orderId}`, {params});
+    return this.http.get<OrderResponse>(`${this.API}/orders/${orderId}`, {params});
   }
 
   getCustomerOrders(customerId: string): Observable<Array<OrderResponse>> {

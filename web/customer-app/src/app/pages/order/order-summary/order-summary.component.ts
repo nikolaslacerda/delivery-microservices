@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {OrderRequest} from '../../../models/request/order.request.model';
 import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
+import {OrderResponse} from '../../../models/response/order.response.model';
 
 @Component({
   selector: 'app-order-summary',
@@ -8,7 +9,7 @@ import {connectableObservableDescriptor} from 'rxjs/internal/observable/Connecta
 })
 export class OrderSummaryComponent implements OnInit {
 
-  @Input() order: OrderRequest;
+  @Input() order: OrderResponse;
 
   ngOnInit() {
   }

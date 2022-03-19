@@ -3,18 +3,18 @@ import {OrderRequest} from './order.request.model';
 export class ReviewRequest {
 
   name: string;
-  date: string;
+  createdAt: string;
   comments: string;
   userRating: number;
   restaurantId: number;
-  order: OrderRequest;
+  orderId: number;
 
   constructor(model: any = {}) {
     this.name = model.name;
-    this.date = model.date;
+    this.createdAt = model.createdAt;
     this.comments = model.comments;
     this.userRating = model.userRating;
     this.restaurantId = model.restaurantId;
-    this.order = model.order;
+    this.orderId = model.orderId;
   }
 }

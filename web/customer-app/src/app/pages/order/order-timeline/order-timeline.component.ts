@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {OrderRequest} from '../../../models/request/order.request.model';
+import {OrderResponse} from '../../../models/response/order.response.model';
 
 @Component({
   selector: 'app-order-timeline',
@@ -8,7 +9,7 @@ import {OrderRequest} from '../../../models/request/order.request.model';
 })
 export class OrderTimelineComponent implements OnInit {
 
-  @Input() order: OrderRequest;
+  @Input() order: OrderResponse;
 
   constructor() {
   }

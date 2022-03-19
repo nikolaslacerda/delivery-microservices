@@ -12,8 +12,8 @@ const routes: Routes = [
   {
     path: 'edit',
     component: EditProfileComponent,
-    // canLoad: [LoginGuard],
-    // canActivate: [LoginGuard]
+    canLoad: [LoginGuard],
+    canActivate: [LoginGuard]
   }
 ];
 

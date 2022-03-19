@@ -1,5 +1,5 @@
 <div *ngIf="(order.status | OrderStatusIndex) == 4">
-  <div class="card ssss justify-content-center">
+  <div class="card ssss justify-content-center mb-4">
     <em class="text-center fa fa-check-circle mt-3 cic"></em>
     <div class="card-body">
       <p class="text-center cic"><strong>Pedido entregue</strong></p>
@@ -29,19 +29,19 @@
     <strong class="text-lg">21:30 - 21:22</strong>
   </div>
   <div class="d-flex mb-4">
-    <div class="flex-fill mr-2">
+    <div class="flex-fill me-2">
       <div class="progress" style="position: relative; width: 100%; height: 5px">
         <div class="progress-bar bg-success"
              [ngClass]="{ 'indeterminate': order.status === 'RECEIVED', 'progress-complete': (order.status | OrderStatusIndex ) > 1}"></div>
       </div>
     </div>
-    <div class="flex-fill mr-2">
+    <div class="flex-fill me-2">
       <div class="progress" style="position: relative; width: 100%; height: 5px">
         <div class="progress-bar bg-success"
              [ngClass]="{ indeterminate: order.status === 'IN_THE_KITCHEN', 'progress-complete': (order.status | OrderStatusIndex ) > 2}"></div>
       </div>
     </div>
-    <div class="flex-fill mr-2">
+    <div class="flex-fill me-2">
       <div class="progress" style="position: relative; width: 100%; height: 5px">
         <div class="progress-bar bg-success"
              [ngClass]="{ indeterminate: order.status === 'ON_THE_WAY', 'progress-complete': (order.status | OrderStatusIndex ) > 3}"></div>
@@ -49,15 +49,15 @@
     </div>
   </div>
   <div class="mb-4" *ngIf="order.status === 'RECEIVED'">
-    <div class="spinner-grow spinner-grow-sm bg-success mr-2" role="status" aria-hidden="true"></div>
+    <div class="spinner-grow spinner-grow-sm bg-success me-2" role="status" aria-hidden="true"></div>
     <span>Aguardando a confirmação do restaurante</span>
   </div>
   <div class="mb-4" *ngIf="order.status === 'ON_THE_WAY'">
-    <div class="spinner-grow spinner-grow-sm bg-success mr-2" role="status" aria-hidden="true"></div>
+    <div class="spinner-grow spinner-grow-sm bg-success me-2" role="status" aria-hidden="true"></div>
     <span>Seu pedido está indo até você</span>
   </div>
   <div class="mb-4" *ngIf="order.status === 'IN_THE_KITCHEN'">
-    <div class="spinner-grow spinner-grow-sm bg-success mr-2" role="status" aria-hidden="true"></div>
+    <div class="spinner-grow spinner-grow-sm bg-success me-2" role="status" aria-hidden="true"></div>
     <span>O restaurante está preparando o seu pedido</span>
   </div>
 </div>

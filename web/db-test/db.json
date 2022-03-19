@@ -680,84 +680,96 @@
       "createdAt": "2022-01-20 22:11:47",
       "userRating": 4.5,
       "comments": "Tudo muito bom, entrega no tempo certo",
-      "restaurantId": 1
+      "restaurantId": 1,
+      "orderId": 1
     },
     {
       "name": "Aline",
       "createdAt": "2022-01-19 22:11:47",
       "userRating": 3,
       "comments": "NÃO recomendo. O recheio é só um creme, não tem camarão e nem carne",
-      "restaurantId": 1
+      "restaurantId": 1,
+      "orderId": 2
     },
     {
       "name": "Renata",
       "createdAt": "2022-01-18 22:11:47",
       "userRating": 2,
       "comments": "Não foi muito agradável ao nosso paladar, e eu e meu esposo no outro dia passamos super mal. Pode até ter sido outra coisa, mas...",
-      "restaurantId": 1
+      "restaurantId": 1,
+      "orderId": 3
     },
     {
       "name": "Client Name",
       "createdAt": "2022-01-17 22:11:47",
       "userRating": 5,
       "comments": "Comment Example.",
-      "restaurantId": 1
+      "restaurantId": 1,
+      "orderId": 4
     },
     {
       "name": "Client Name",
       "createdAt": "2022-01-16 22:11:47",
       "userRating": 5,
       "comments": "Comment Example.",
-      "restaurantId": 1
+      "restaurantId": 1,
+      "orderId": 5
     },
     {
       "name": "Client Name",
       "createdAt": "2022-01-15 22:11:47",
       "userRating": 5,
       "comments": "Comment Example.",
-      "restaurantId": 1
+      "restaurantId": 1,
+      "orderId": 6
     },
     {
       "name": "Client Name",
       "createdAt": "2022-01-14 22:11:47",
       "userRating": 5,
       "comments": "Comment Example.",
-      "restaurantId": 1
+      "restaurantId": 1,
+      "orderId": 7
     },
     {
       "name": "Client Name",
       "createdAt": "2022-01-13 22:11:47",
       "userRating": 5,
       "comments": "Comment Example.",
-      "restaurantId": 1
+      "restaurantId": 1,
+      "orderId": 8
     },
     {
       "name": "Client Name",
       "createdAt": "2022-01-12 22:11:47",
       "userRating": 5,
       "comments": "Comment Example.",
-      "restaurantId": 1
+      "restaurantId": 1,
+      "orderId": 9
     },
     {
       "name": "Client Name",
       "createdAt": "2022-01-11 22:11:47",
       "userRating": 5,
       "comments": "Comment Example.",
-      "restaurantId": 1
+      "restaurantId": 1,
+      "orderId": 10
     },
     {
       "name": "Client Name",
       "createdAt": "2022-01-10 22:11:47",
       "userRating": 5,
       "comments": "Comment Example.",
-      "restaurantId": 1
+      "restaurantId": 1,
+      "orderId": 11
     },
     {
       "name": "Client Name",
       "createdAt": "2022-01-09 22:11:47",
       "userRating": 5,
       "comments": "Comment Example.",
-      "restaurantId": 1
+      "restaurantId": 1,
+      "orderId": 12
     },
     {
       "name": "Client Name",
@@ -1365,7 +1377,7 @@
           "promotionalPrice": 8.7
         }
       ],
-      "status": "RECEIVED",
+      "status": "DELIVERED",
       "deliveryFee": 10.0,
       "subtotal": 10.0,
       "total": 20.0,
@@ -1397,7 +1409,7 @@
           "promotionalPrice": 8.7
         }
       ],
-      "status": "RECEIVED",
+      "status": "DELIVERED",
       "deliveryFee": 10.0,
       "subtotal": 10.0,
       "total": 20.0,

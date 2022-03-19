@@ -18,6 +18,7 @@ import {UserOrdersComponent} from './user-orders/user-orders.component';
 import {UserOrderCardComponent} from './user-orders/user-order-card/user-order-card.component';
 import {OrderComponent as Orr} from './order.component';
 import {OrderComponent} from './order/order.component';
+import {RatingModule} from 'ngx-bootstrap/rating';
 
 @NgModule({
   declarations: [
@@ -31,15 +32,17 @@ import {OrderComponent} from './order/order.component';
     UserOrdersComponent,
     UserOrderCardComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    TextMaskModule,
-    OrderRoutingModule,
-    PipesModule,
-    RestaurantModule,
-    SharedModule,
-    ReactiveFormsModule]
+    imports: [
+        CommonModule,
+        FormsModule,
+        TextMaskModule,
+        OrderRoutingModule,
+        PipesModule,
+        RestaurantModule,
+        SharedModule,
+        ReactiveFormsModule,
+        RatingModule
+    ]
 })
 export class OrderModule {
 }

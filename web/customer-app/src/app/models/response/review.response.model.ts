@@ -1,5 +1,3 @@
-import {OrderRequest} from '../request/order.request.model';
-
 export class ReviewResponse {
 
   id: number;
@@ -8,7 +6,7 @@ export class ReviewResponse {
   comments: string;
   userRating: number;
   restaurantId: number;
-  order: OrderRequest;
+  orderId: number;
 
   constructor(model: any = {}) {
     this.id = model.id;
@@ -17,6 +15,6 @@ export class ReviewResponse {
     this.comments = model.comments;
     this.userRating = model.userRating;
     this.restaurantId = model.restaurantId;
-    this.order = model.order;
+    this.orderId = model.orderId;
   }
 }
