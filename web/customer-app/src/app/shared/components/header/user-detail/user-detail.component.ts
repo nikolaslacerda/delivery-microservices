@@ -33,13 +33,10 @@ export class UserDetailComponent implements OnInit {
   }
 
   navigateToOrders() {
-    console.log("clicado orders")
-    // @ts-ignore
-    this.route.navigate(['/orders'],  { relativeTo: this.route });
+    this.route.navigate(['/orders']);
   }
 
   navigateToEdit() {
-    console.log("clicado edit")
     this.route.navigate(['/user/edit']);
   }
 

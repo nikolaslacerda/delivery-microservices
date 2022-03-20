@@ -21,13 +21,21 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authenticationService.isLoggedIn()) {
-      this.router.navigate(['/restaurants'])
+      this.router.navigate(['/restaurants']);
     }
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
+      email: this.fb.control('', [Validators.required, Validators.email]),
+      password: this.fb.control('', [Validators.required])
     });
     this.navigateTo = this.activatedRoute.snapshot.params.to || '/';
+  }
+
+  get email(): any {
+    return this.loginForm.get('email');
+  }
+
+  get password(): any {
+    return this.loginForm.get('password');
   }
 
   login() {

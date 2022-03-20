@@ -1002,9 +1002,9 @@
         "postalCode": "92440328"
       },
       "status": "IN_THE_KITCHEN",
-      "deliveryFee": 10.0,
-      "subtotal": 10.0,
-      "total": 20.0,
+      "deliveryFee": 10,
+      "subtotal": 10,
+      "total": 20,
       "items": [
         {
           "menuItemId": 4,
@@ -1040,9 +1040,9 @@
         "postalCode": "92440328"
       },
       "status": "ON_THE_WAY",
-      "deliveryFee": 10.0,
-      "subtotal": 10.0,
-      "total": 20.0,
+      "deliveryFee": 10,
+      "subtotal": 10,
+      "total": 20,
       "items": [
         {
           "menuItemId": 1,
@@ -1071,9 +1071,9 @@
         "postalCode": "92440328"
       },
       "status": "DELIVERED",
-      "deliveryFee": 10.0,
-      "subtotal": 10.0,
-      "total": 20.0,
+      "deliveryFee": 10,
+      "subtotal": 10,
+      "total": 20,
       "items": [
         {
           "menuItemId": 1,
@@ -1102,9 +1102,9 @@
         "postalCode": "92440328"
       },
       "status": "ON_THE_WAY",
-      "deliveryFee": 10.0,
-      "subtotal": 10.0,
-      "total": 20.0,
+      "deliveryFee": 10,
+      "subtotal": 10,
+      "total": 20,
       "items": [
         {
           "menuItemId": 1,
@@ -1153,9 +1153,9 @@
         "postalCode": "92440328"
       },
       "status": "IN_THE_KITCHEN",
-      "deliveryFee": 10.0,
-      "subtotal": 10.0,
-      "total": 20.0,
+      "deliveryFee": 10,
+      "subtotal": 10,
+      "total": 20,
       "items": [
         {
           "quantity": 1,
@@ -1183,9 +1183,9 @@
         "postalCode": "92440328"
       },
       "status": "RECEIVED",
-      "deliveryFee": 10.0,
-      "subtotal": 10.0,
-      "total": 20.0,
+      "deliveryFee": 10,
+      "subtotal": 10,
+      "total": 20,
       "items": [
         {
           "quantity": 1,
@@ -1214,9 +1214,9 @@
         "postalCode": "92440328"
       },
       "status": "RECEIVED",
-      "deliveryFee": 10.0,
-      "subtotal": 10.0,
-      "total": 20.0,
+      "deliveryFee": 10,
+      "subtotal": 10,
+      "total": 20,
       "items": [
         {
           "quantity": 1,
@@ -1245,9 +1245,9 @@
         "postalCode": "92440328"
       },
       "status": "RECEIVED",
-      "deliveryFee": 10.0,
-      "subtotal": 10.0,
-      "total": 20.0,
+      "deliveryFee": 10,
+      "subtotal": 10,
+      "total": 20,
       "items": [
         {
           "quantity": 1,
@@ -1276,9 +1276,9 @@
         "postalCode": "92440328"
       },
       "status": "RECEIVED",
-      "deliveryFee": 10.0,
-      "subtotal": 10.0,
-      "total": 20.0,
+      "deliveryFee": 10,
+      "subtotal": 10,
+      "total": 20,
       "items": [
         {
           "quantity": 1,
@@ -1307,9 +1307,9 @@
         "postalCode": "92440328"
       },
       "status": "IN_THE_KITCHEN",
-      "deliveryFee": 10.0,
-      "subtotal": 10.0,
-      "total": 20.0,
+      "deliveryFee": 10,
+      "subtotal": 10,
+      "total": 20,
       "items": [
         {
           "quantity": 1,
@@ -1338,9 +1338,9 @@
         "postalCode": "92440328"
       },
       "status": "IN_THE_KITCHEN",
-      "deliveryFee": 10.0,
-      "subtotal": 10.0,
-      "total": 20.0,
+      "deliveryFee": 10,
+      "subtotal": 10,
+      "total": 20,
       "items": [
         {
           "quantity": 1,
@@ -1378,9 +1378,9 @@
         }
       ],
       "status": "DELIVERED",
-      "deliveryFee": 10.0,
-      "subtotal": 10.0,
-      "total": 20.0,
+      "deliveryFee": 10,
+      "subtotal": 10,
+      "total": 20,
       "id": 12
     },
     {
@@ -1410,10 +1410,117 @@
         }
       ],
       "status": "DELIVERED",
-      "deliveryFee": 10.0,
-      "subtotal": 10.0,
-      "total": 20.0,
+      "deliveryFee": 10,
+      "subtotal": 10,
+      "total": 20,
       "id": 13
+    },
+    {
+      "customerId": 1,
+      "restaurantId": "1",
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": "87",
+        "neighborhood": "uhhuu",
+        "city": "Canoas",
+        "country": "US",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "payment": {},
+      "items": [
+        {
+          "menuItemId": 3,
+          "name": "RIBS ON THE BARBIE",
+          "quantity": 1
+        }
+      ],
+      "status": "RECEIVED",
+      "id": 14
+    },
+    {
+      "customerId": 1,
+      "restaurantId": "1",
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": "aasdasd",
+        "neighborhood": "aasdasd",
+        "city": "Canoas",
+        "country": "US",
+        "complement": "asdasd",
+        "reference": "asdasd",
+        "postalCode": "92440328"
+      },
+      "payment": {},
+      "items": [
+        {
+          "menuItemId": 3,
+          "name": "RIBS ON THE BARBIE",
+          "quantity": 1
+        }
+      ],
+      "status": "RECEIVED",
+      "subtotal": 15.9,
+      "deliveryFee": 7.8,
+      "total": 23.7,
+      "id": 15
+    },
+    {
+      "customerId": 1,
+      "restaurantId": "1",
+      "address": {
+        "streetAddress": "Quadra L Quatro B",
+        "streetNumber": "asdasd",
+        "neighborhood": "asdas",
+        "city": "Canoas",
+        "country": "US",
+        "complement": "",
+        "reference": "",
+        "postalCode": "92440328"
+      },
+      "payment": {},
+      "items": [
+        {
+          "menuItemId": 3,
+          "name": "RIBS ON THE BARBIE",
+          "quantity": 2
+        }
+      ],
+      "status": "RECEIVED",
+      "subtotal": 31.8,
+      "deliveryFee": 7.8,
+      "total": 39.6,
+      "id": 16
+    },
+    {
+      "customerId": 1,
+      "restaurantId": "1",
+      "address": {
+        "streetAddress": "Quadra L Setor Quatro B Bloco 2",
+        "streetNumber": "104",
+        "neighborhood": "Guaju",
+        "city": "Canoas",
+        "country": "US",
+        "complement": "Bloco 2 ",
+        "reference": "104",
+        "postalCode": "92440328"
+      },
+      "payment": {},
+      "items": [
+        {
+          "menuItemId": 33,
+          "name": "ALICE SPRINGS CHICKEN",
+          "price": 8.7,
+          "promotionalPrice": 15.9,
+          "quantity": 2
+        }
+      ],
+      "status": "RECEIVED",
+      "subtotal": 31.8,
+      "deliveryFee": 7.8,
+      "total": 39.6,
+      "id": 17
     }
   ],
   "deliveries": [

@@ -69,7 +69,7 @@ export class AuthenticationService {
   }
 
   registerUser(userInfo: any): Observable<any> {
-    return this.http.post(`${this.API}/auth/signup`, userInfo);
+    return this.http.post(`${this.API}/customers`, userInfo);
   }
 
   isLoggedIn(): boolean {

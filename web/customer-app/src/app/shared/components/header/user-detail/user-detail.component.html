@@ -3,16 +3,19 @@
        aria-expanded="false">
     <em style="font-size: 24px; color: #EA1D2C" data-feather="user"></em>
   </div>
-  <div class="dropdown-menu mt-1" aria-labelledby="dropdownMenuButton">
-    <button style="font-size: 18px" class="dropdown-item" (click)="navigateToEdit()"><em
-      class="fa fa-store text-muted"></em> Profile
+  <div class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton" style="width: 280px; margin-right: -3px">
+    <button class="dropdown-item" style="height: 50px;font-size: 18px; font-weight: bold"
+            (click)="navigateToEdit()">
+      <em class="fa fa-store"></em> Profile
     </button>
-    <button style="font-size: 18px" class="dropdown-item" (click)="navigateToOrders()"><em
-      class="far fa-sticky-note text-muted"></em>
+    <button class="dropdown-item" style="height: 50px; font-size: 18px; font-weight: bold"
+            (click)="navigateToOrders()">
+      <em class="far fa-sticky-note"></em>
       Orders
     </button>
-    <button style="font-size: 18px" class="dropdown-item" (click)="logout()"><em
-      class="fa fa-sign-out-alt text-muted"></em> Logout
+    <button class="dropdown-item" style="height: 50px; font-size: 18px; font-weight: bold"
+            (click)="logout()">
+      <em class="fa fa-sign-out-alt"></em> Logout
     </button>
   </div>
 </div>

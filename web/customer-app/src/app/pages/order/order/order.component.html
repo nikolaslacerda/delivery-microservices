@@ -7,13 +7,13 @@
             <strong>Checkout</strong>
           </h3>
         </div>
-        <section class="mt-4">
+        <section class="mt-4 mb-4">
           <form [formGroup]="orderForm" novalidate>
             <h4 class="page-header">
               Delivery Details
             </h4>
             <div formGroupName="addressGroup">
-              <div class="form-group">
+              <div class="input-group mb-3">
                 <input type="text"
                        class="form-control"
                        formControlName="streetAddress"
@@ -21,32 +21,73 @@
                        placeholder="Street Address"
                        maxlength="150"
                        autocomplete="off"
-                       [ngClass]="{ 'is-invalid': orderForm.controls.addressGroup.controls.streetAddress.invalid && ( orderForm.controls.addressGroup.controls.streetAddress.dirty ||  orderForm.controls.addressGroup.controls.streetAddress.touched) }">
+                       [ngClass]="{ 'is-invalid': streetAddress.invalid && ( streetAddress.dirty ||  streetAddress.touched) }">
               </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-
+              <div class="row">
+                <div class="col mb-3">
+                  <input type="text"
+                         class="form-control"
+                         id="streetNumber"
+                         formControlName="streetNumber"
+                         placeholder="Street Number"
+                         autocomplete="off"
+                         [ngClass]="{ 'is-invalid': streetNumber.invalid && ( streetNumber.dirty ||  streetNumber.touched) }">
+                </div>
+                <div class="col mb-3">
+                  <input type="text"
+                         class="form-control"
+                         id="neighborhood"
+                         formControlName="neighborhood"
+                         placeholder="Neighborhood"
+                         autocomplete="off"
+                         [ngClass]="{ 'is-invalid': neighborhood.invalid && ( neighborhood.dirty ||  neighborhood.touched) }"
+                  >
+                </div>
+              </div>
+              <div class="row">
+                <div class="col mb-3">
+                  <input type="text"
+                         class="form-control"
+                         id="city"
+                         formControlName="city"
+                         placeholder="City"
+                         autocomplete="off"
+                         [ngClass]="{ 'is-invalid': city.invalid && ( city.dirty ||  city.touched) }">
+                </div>
+                <div class="col mb-3">
+                  <input type="text"
+                         class="form-control"
+                         id="postalCode"
+                         formControlName="postalCode"
+                         placeholder="Postal Code"
+                         autocomplete="off"
+                         [ngClass]="{ 'is-invalid': postalCode.invalid && ( postalCode.dirty ||  postalCode.touched) }"
+                  >
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
                   <input type="text"
                          class="form-control"
                          id="complement"
                          formControlName="complement"
                          placeholder="Apartment, suite, floor, etc."
                          autocomplete="off"
-                         [ngClass]="{ 'is-invalid': orderForm.controls.addressGroup.controls.complement.invalid && ( orderForm.controls.addressGroup.controls.complement.dirty ||  orderForm.controls.addressGroup.controls.complement.touched) }">
+                         [ngClass]="{ 'is-invalid': complement.invalid && ( complement.dirty ||  complement.touched) }">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="col-6 mb-3">
                   <input type="text"
                          class="form-control"
-                         id="postalCode"
-                         formControlName="postalCode"
-                         placeholder="Zip/Postal Code"
+                         id="reference"
+                         formControlName="reference"
+                         placeholder="Reference"
                          autocomplete="off"
-                         [ngClass]="{ 'is-invalid': orderForm.controls.addressGroup.controls.postalCode.invalid && ( orderForm.controls.addressGroup.controls.postalCode.dirty ||  orderForm.controls.addressGroup.controls.postalCode.touched) }"
+                         [ngClass]="{ 'is-invalid': reference.invalid && ( reference.dirty ||  reference.touched) }"
                   >
                 </div>
               </div>
             </div>
-            <div formGroupName="paymentGroup">
+            <div class="mt-4" formGroupName="paymentGroup">
               <div class="row">
                 <div class="col-sm-6 col-xs-12">
                   <h4 class="page-header">
@@ -65,7 +106,7 @@
               </div>
             </div>
           </form>
-          <div class="row">
+          <div class="row mt-3">
             <div class="col-xs-12">
               <button (click)="checkOrder()" class="btn btn-success pull-right"
                       [disabled]="!orderForm.valid || cartItems().length === 0"><em class="fa fa-credit-card"></em>

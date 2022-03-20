@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {RatingService} from 'src/app/services/rating.service';
-import {OrderRequest} from '../../../models/request/order.request.model';
 import {OrderService} from '../../../services/order.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OrderResponse} from '../../../models/response/order.response.model';
@@ -37,9 +36,12 @@ export class OrderStatusComponent implements OnInit {
         this.order = order;
         this.ratingService.getOrderReview(orderId).subscribe((review: ReviewResponse) => {
           this.review = review[0];
-          console.log(this.review)
         });
       });
+  }
+
+  get comment(): any {
+    return this.ratingForm.get('comment');
   }
 
   createReview() {

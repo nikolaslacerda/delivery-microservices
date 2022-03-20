@@ -11,6 +11,7 @@ import {PaymentMethodService} from '../../../services/payment-method.service';
 import {ShoppingCartService} from '../../../services/shopping-cart.service';
 import {AddressRequest} from '../../../models/request/address.request.model';
 import {PaymentRequest} from '../../../models/request/payment.request.model';
+import {RestaurantResponse} from '../../../models/response/restaurant.response.model';
 
 @Component({
   selector: 'app-order-order',
@@ -23,7 +24,7 @@ export class OrderComponent implements OnInit {
   orderForm: FormGroup;
   paymentMethods: Array<any>;
   payment = {} as PaymentRequest;
-  restaurant: any = {};
+  restaurant = {} as RestaurantResponse;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -39,15 +40,19 @@ export class OrderComponent implements OnInit {
     this.orderForm = this.formBuilder.group({
       addressGroup: this.formBuilder.group({
         streetAddress: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+        streetNumber: this.formBuilder.control('', [Validators.required]),
+        neighborhood: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+        city: this.formBuilder.control('', [Validators.required, Validators.minLength(2)]),
+        country: this.formBuilder.control('US', [Validators.required]),
         postalCode: this.formBuilder.control('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
-        complement: this.formBuilder.control('')
+        complement: this.formBuilder.control(''),
+        reference: this.formBuilder.control('')
       }),
       paymentGroup: this.formBuilder.group({
         paymentId: this.formBuilder.control('', [Validators.required])
       })
     });
     if (this.shoppingCard.getCartItems.length === 0) {
-      console.log('SEM ITENS NO CARRINHO')
       this.router.navigateByUrl('/');
     } else {
       if (this.shoppingCard.getRestaurant) {
@@ -55,12 +60,39 @@ export class OrderComponent implements OnInit {
           this.restaurant = restaurant;
           this.paymentMethodService.getRestaurantPaymentMethods(restaurant.id).subscribe(paymentMethods => {
             this.paymentMethods = paymentMethods;
-            console.log(paymentMethods);
             this.isLoading = false;
           });
         });
       }
     }
+  }
+
+  get streetAddress(): any {
+    return this.orderForm.get('addressGroup').get('streetAddress');
+  }
+
+  get streetNumber(): any {
+    return this.orderForm.get('addressGroup').get('streetNumber');
+  }
+
+  get neighborhood(): any {
+    return this.orderForm.get('addressGroup').get('neighborhood');
+  }
+
+  get city(): any {
+    return this.orderForm.get('addressGroup').get('city');
+  }
+
+  get postalCode(): any {
+    return this.orderForm.get('addressGroup').get('postalCode');
+  }
+
+  get complement(): any {
+    return this.orderForm.get('addressGroup').get('complement');
+  }
+
+  get reference(): any {
+    return this.orderForm.get('addressGroup').get('reference');
   }
 
   cartItems() {
@@ -93,13 +125,12 @@ export class OrderComponent implements OnInit {
     this.order.payment = new PaymentRequest(this.orderForm.controls.paymentGroup.value);
     this.order.items = this.cartItems().map((item: CartItem) => new OrderItemRequest(item));
     this.order.status = 'RECEIVED';
+    this.order.subtotal = this.shoppingCard.total();
+    this.order.deliveryFee = this.restaurant.deliveryFee;
+    this.order.total = this.shoppingCard.total() + this.restaurant.deliveryFee;
     this.orderService.createOrder(this.order).subscribe(createdOrder => {
       this.shoppingCard.clear();
       this.router.navigateByUrl(`orders/${createdOrder.id}/status`);
     });
-  }
-
-  hasError(ngModel): boolean {
-    return ngModel.invalid && (ngModel.dirty || ngModel.touched);
   }
 }

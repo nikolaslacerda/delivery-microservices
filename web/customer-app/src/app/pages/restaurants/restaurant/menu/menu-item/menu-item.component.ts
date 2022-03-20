@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {MenuItemResponse} from '../../../../../models/response/menu-item.response';
 
 @Component({
   selector: 'app-menu-item',
@@ -8,7 +9,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class MenuItemComponent implements OnInit {
 
-  @Input() menuItem: any;
+  @Input() menuItem: MenuItemResponse;
   @Output() add = new EventEmitter();
 
   constructor(private route: ActivatedRoute) {
@@ -18,7 +19,7 @@ export class MenuItemComponent implements OnInit {
   }
 
   emitAddEvent() {
-    this.menuItem.restaurantId = this.route.parent.snapshot.params.restaurantId;
+    this.menuItem.restaurantId = this.route.parent.snapshot.params.restaurantId; //
     this.add.emit(this.menuItem);
   }
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../../services/authentication.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 @Component({
@@ -11,7 +11,6 @@ import {Router} from '@angular/router';
 export class EditProfileComponent implements OnInit {
 
   userForm: FormGroup;
-
   user: any;
 
   constructor(private authService: AuthenticationService,
@@ -29,13 +28,33 @@ export class EditProfileComponent implements OnInit {
 
   }
 
+  get email(): any {
+    return this.userForm.get('email');
+  }
+
+  get phone(): any {
+    return this.userForm.get('phone');
+  }
+
+  get firstName(): any {
+    return this.userForm.get('firstName');
+  }
+
+  get lastName(): any {
+    return this.userForm.get('lastName');
+  }
+
+  get cpf(): any {
+    return this.userForm.get('cpf');
+  }
+
   _initForm() {
     return this.userForm = this.fb.group({
-      email: this.fb.control(''),
-      phone: this.fb.control(''),
-      firstName: this.fb.control(''),
-      lastName: this.fb.control(''),
-      cpf: this.fb.control(''),
+      email: this.fb.control('', [Validators.required, Validators.email]),
+      phone: this.fb.control('', [Validators.required, , Validators.minLength(11)]),
+      firstName: this.fb.control('', [Validators.required, Validators.minLength(2)]),
+      lastName: this.fb.control('', [Validators.required, Validators.minLength(2)]),
+      cpf: this.fb.control('', [Validators.required, Validators.minLength(11)]),
     });
   }
 

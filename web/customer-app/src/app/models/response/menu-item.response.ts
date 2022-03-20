@@ -5,4 +5,5 @@ export class MenuItemResponse {
   unitOriginalPrice: number;
   unitPrice: number;
   imageUrl: string;
+  restaurantId?: number;
 }

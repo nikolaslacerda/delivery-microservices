@@ -14,35 +14,33 @@ import {SharedModule} from '../../shared/shared.module';
 import {OrderItemsComponent} from './order-items/order-items.component';
 import {OrderDeliveryCostsComponent} from './order-delivery-costs/order-delivery-costs.component';
 import {OrderTimelineComponent} from './order-timeline/order-timeline.component';
-import {UserOrdersComponent} from './user-orders/user-orders.component';
-import {UserOrderCardComponent} from './user-orders/user-order-card/user-order-card.component';
-import {OrderComponent as Orr} from './order.component';
+import {OrderListComponent} from './order-list/order-list.component';
+import {OrderCardComponent} from './order-list/order-card/order-card.component';
 import {OrderComponent} from './order/order.component';
 import {RatingModule} from 'ngx-bootstrap/rating';
 
 @NgModule({
   declarations: [
-    Orr,
     OrderComponent,
     OrderItemsComponent,
     OrderDeliveryCostsComponent,
     OrderSummaryComponent,
     OrderStatusComponent,
     OrderTimelineComponent,
-    UserOrdersComponent,
-    UserOrderCardComponent
+    OrderListComponent,
+    OrderCardComponent
   ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        TextMaskModule,
-        OrderRoutingModule,
-        PipesModule,
-        RestaurantModule,
-        SharedModule,
-        ReactiveFormsModule,
-        RatingModule
-    ]
+  imports: [
+    CommonModule,
+    FormsModule,
+    TextMaskModule,
+    OrderRoutingModule,
+    PipesModule,
+    RestaurantModule,
+    SharedModule,
+    ReactiveFormsModule,
+    RatingModule
+  ]
 })
 export class OrderModule {
 }

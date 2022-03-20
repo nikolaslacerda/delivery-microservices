@@ -10,20 +10,16 @@
         <div class="d-flex flex-column">
           <h5 class="card-title"><strong>Entregar em</strong></h5>
           <span
-            class="card-text text-muted mt-2">{{order.address.streetAddress | titlecase}} {{order.address.complement}}</span>
+            class="card-text text-muted mt-2">{{order.address.streetAddress | titlecase}} {{order.address.streetNumber}}</span>
           <span class="card-text text-muted">{{order.address?.neighborhood | titlecase}}
-            - {{order.address?.city | titlecase}}/{{order.address?.country}}</span>
+            - {{order.address?.city | titlecase}}</span>
         </div>
       </div>
       <div class="card-footer text-muted">
         <em class="fa fa-paper-plane"></em> Entrega Rastreável
       </div>
     </div>
-
-
     <app-order-summary class="ccc w-50 mb-3" [order]="order"></app-order-summary>
-
-
     <div class="card ccc w-50 mb-3" *ngIf="(order.status | OrderStatusIndex) == 4">
       <div class="card-body" *ngIf="!review">
         <h5 class="card-title"><strong>Review your order</strong></h5>
@@ -32,7 +28,11 @@
             <rating required max="5" formControlName="rating" style="font-size: 24px; color: #e7a74e"></rating>
           </div>
           <div class="form-group">
-            <textarea class="form-control w-100" id="comment" formControlName="comment"></textarea>
+            <textarea
+              class="form-control w-100"
+              id="comment"
+              formControlName="comment"
+              [ngClass]="{ 'is-invalid': comment.invalid && ( comment.dirty ||  comment.touched) }">></textarea>
           </div>
           <button class="btn btn-primary mt-2" type="submit" [disabled]="!ratingForm.valid">Review</button>
         </form>

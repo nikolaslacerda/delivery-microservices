@@ -2,7 +2,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {OrderComponent} from './order/order.component';
 import {OrderStatusComponent} from './order-status/order-status.component';
 import {LoginGuard} from '../../guards/login.guard';
-import {UserOrdersComponent} from './user-orders/user-orders.component';
+import {OrderListComponent} from './order-list/order-list.component';
 import {NgModule} from '@angular/core';
 
 const routes: Routes = [
@@ -21,7 +21,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: UserOrdersComponent,
+    component: OrderListComponent,
     canLoad: [LoginGuard],
     canActivate: [LoginGuard]
   }

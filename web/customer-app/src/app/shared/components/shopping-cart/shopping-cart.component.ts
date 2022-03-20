@@ -50,9 +50,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   finishOrder() {
-    // this.orderService.createOrder(this.order)
-    // .subscribe(order => {
     this.router.navigateByUrl(`orders/finish`);
-    // });
   }
 }

@@ -12,7 +12,7 @@ export class OrderStatusIndexPipe implements PipeTransform {
     DELIVERED: 4
   };
 
-  transform(value: any): string {
+  transform(value: any): number {
     return this.orderStatusDescription[value] || value;
   }
 

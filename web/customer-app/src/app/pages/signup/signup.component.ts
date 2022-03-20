@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CustomerRequest} from '../../models/request/customer.request.model';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +12,11 @@ import {Router} from '@angular/router';
 })
 export class SignupComponent implements OnInit {
 
+  signUpForm: FormGroup;
+
   constructor(private router: Router,
+              private fb: FormBuilder,
+              private toastr: ToastrService,
               private authenticationService: AuthenticationService) {
     if (this.authenticationService.isLoggedIn()) {
       this.router.navigate(['/restaurants']);
@@ -17,9 +24,50 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.signUpForm = this.fb.group({
+      firstName: this.fb.control('', [Validators.required, Validators.minLength(2)]),
+      lastName: this.fb.control('', [Validators.required, Validators.minLength(2)]),
+      phone: this.fb.control('', [Validators.required, Validators.minLength(11)]),
+      email: this.fb.control('', [Validators.required, Validators.email]),
+      password: this.fb.control('', [Validators.required]),
+      passwordConfirmation: this.fb.control('', [Validators.required]),
+    });
+  }
+
+  get firstName(): any {
+    return this.signUpForm.get('firstName');
+  }
+
+  get lastName(): any {
+    return this.signUpForm.get('lastName');
+  }
+
+  get phone(): any {
+    return this.signUpForm.get('phone');
+  }
+
+  get email(): any {
+    return this.signUpForm.get('email');
+  }
+
+  get password(): any {
+    return this.signUpForm.get('password');
+  }
+
+  get passwordConfirmation(): any {
+    return this.signUpForm.get('passwordConfirmation');
   }
 
   signUp() {
+    this.authenticationService.registerUser(new CustomerRequest(this.signUpForm.value))
+      .subscribe(() => this.toastr.success('Confirm to activate your account', 'Account Created! An email has been sent'),
+        error => console.log(error),
+        () => {
+          this.router.navigate(['/login']);
+        });
+  }
 
+  validatePassword() {
+    return this.password.value === this.passwordConfirmation.value;
   }
 }

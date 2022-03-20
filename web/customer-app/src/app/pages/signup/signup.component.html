@@ -1,61 +1,92 @@
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title mb-3"><strong>Sign Up</strong></h5>
-    <form #loginForm="ngForm" (ngSubmit)="signUp()">
-      <div class="form-group">
-        <app-input errorMessage="required" label="Name">
-          <input type="text"
-                 class="form-control"
-                 id="name"
-                 formControlName="name"
-                 placeholder="Name"
-                 autocomplete="on">
-        </app-input>
+<div class="container-fluid vh-100" style="height: 100%">
+  <img class="brand-image mt-2" src="../../../../assets/img/ifood.logo.svg" alt="" height="50px"
+       style="position: absolute">
+  <div class="row">
+    <div class="col-8 justify-content-center align-items-center d-flex"
+         style="background-color: #FDEDEE; border-radius: 0 100% 100% 0">
+      <img src="assets/img/people-buying.svg"/>
+    </div>
+    <div class="col-4 vh-100 align-items-center justify-content-center d-flex">
+      <div class="card w-100 border-0 shadow-sm" style="margin-left: -350px">
+        <div class="card-body">
+          <h5 class="card-title mb-3"><strong>Sign Up</strong></h5>
+          <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+            <div class="row mb-3">
+              <div class="col">
+                <app-input errorMessage="First name is required" label="Name">
+                  <input type="text"
+                         class="form-control"
+                         id="firstName"
+                         formControlName="firstName"
+                         placeholder="First Name"
+                         autocomplete="on"
+                         [ngClass]="{ 'is-invalid': firstName.invalid && ( firstName.dirty ||  firstName.touched) }">
+                </app-input>
+              </div>
+              <div class="col">
+                <app-input errorMessage="Last Name is required" label="Name">
+                  <input type="text"
+                         class="form-control"
+                         id="lastName"
+                         formControlName="lastName"
+                         placeholder="Last Name"
+                         autocomplete="on"
+                         [ngClass]="{ 'is-invalid': lastName.invalid && ( lastName.dirty ||  lastName.touched) }">
+                </app-input>
+              </div>
+            </div>
+            <div class="mb-3">
+              <app-input errorMessage="Phone is required" label="Phone">
+                <input type="phone"
+                       class="form-control"
+                       id="phone"
+                       formControlName="phone"
+                       placeholder="Phone"
+                       autocomplete="on"
+                       [ngClass]="{ 'is-invalid': phone.invalid && ( phone.dirty ||  phone.touched) }">
+              </app-input>
+            </div>
+            <div class="mb-3">
+              <app-input errorMessage="Email is required" label="Email">
+                <input type="email"
+                       class="form-control"
+                       id="email"
+                       formControlName="email"
+                       placeholder="Email"
+                       autocomplete="on"
+                       [ngClass]="{ 'is-invalid': email.invalid && ( email.dirty ||  email.touched) }">
+              </app-input>
+            </div>
+            <div class="mb-3">
+              <app-input errorMessage="Password is required" label="Password">
+                <input type="password"
+                       class="form-control"
+                       id="password"
+                       formControlName="password"
+                       placeholder="Password"
+                       autocomplete="off"
+                       [ngClass]="{ 'is-invalid': password.invalid && ( password.dirty ||  password.touched) }">
+              </app-input>
+            </div>
+            <div class="mb-3">
+              <app-input errorMessage="Password Confirmation is required" label="Password">
+                <input type="password"
+                       class="form-control"
+                       id="passwordConfirmation"
+                       formControlName="passwordConfirmation"
+                       placeholder="Confirm Password"
+                       autocomplete="off"
+                       [ngClass]="{ 'is-invalid': passwordConfirmation.invalid && ( passwordConfirmation.dirty ||  passwordConfirmation.touched) }">
+              </app-input>
+            </div>
+            <p class="text-danger small mt-2" *ngIf="passwordConfirmation.dirty && !validatePassword()">Passwords don't
+              match</p>
+            <button type="submit" class="btn btn-danger w-100" [disabled]="!signUpForm.valid || !validatePassword()">
+              <strong>Register</strong>
+            </button>
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <app-input errorMessage="required" label="Phone">
-          <input type="phone"
-                 class="form-control"
-                 id="phone"
-                 formControlName="phone"
-                 placeholder="Phone"
-                 autocomplete="on">
-        </app-input>
-      </div>
-      <div class="form-group">
-        <app-input errorMessage="required" label="Email">
-          <input type="email"
-                 class="form-control"
-                 id="email"
-                 formControlName="email"
-                 placeholder="Email"
-                 autocomplete="on">
-        </app-input>
-      </div>
-      <div class="form-group">
-        <app-input errorMessage="required" label="Password">
-          <input type="password"
-                 class="form-control"
-                 id="password"
-                 formControlName="password"
-                 placeholder="Password"
-                 autocomplete="off">
-        </app-input>
-      </div>
-      <div class="form-group">
-        <app-input errorMessage="required" label="Password">
-          <input type="password"
-                 class="form-control"
-                 id="passwordConfirmation"
-                 formControlName="passwordConfirmation"
-                 placeholder="Confirm Password"
-                 autocomplete="off">
-        </app-input>
-      </div>
-<!--      <p class="text-danger mt-2" *ngIf="passwordConfirmation.dirty && !validaSenhas()">A senha e a confirmação não-->
-<!--        conferem.</p>-->
-      <button type="submit" class="btn btn-danger w-100" [disabled]="!loginForm.form.valid"><strong>Register</strong>
-      </button>
-    </form>
+    </div>
   </div>
 </div>
