@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {RestaurantService} from 'src/app/services/restaurant.service';
 import {RatingService} from 'src/app/services/rating.service';
-// import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {OrderItemRequest} from '../../../models/request/order-item.request';
 import {RestaurantResponse} from '../../../models/response/restaurant.response.model';
 
@@ -16,7 +15,7 @@ export class RestaurantComponent implements OnInit {
   order: any = {};
   reviews: string;
   restaurant: RestaurantResponse;
-
+  isLoading = true;
   itemChosen: OrderItemRequest = {} as OrderItemRequest;
   addOrderItem = false;
 
@@ -29,14 +28,11 @@ export class RestaurantComponent implements OnInit {
 
   ngOnInit() {
     const restaurantId = this.route.snapshot.params.restaurantId;
-
-    console.log(restaurantId);
-
     this.restaurantService.getRestaurantById(restaurantId)
       .subscribe(restaurant => {
         this.restaurant = restaurant;
+        this.isLoading = false;
         this.order.restaurantId = restaurant.id;
-
         this.reviewService.getRestaurantRatingAverage(restaurantId)
           .subscribe(reviews => {
             this.reviews = (reviews.map(item => item.userRating)

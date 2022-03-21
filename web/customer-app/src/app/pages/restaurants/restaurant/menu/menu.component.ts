@@ -12,14 +12,14 @@ import {ShoppingCartService} from '../../../../services/shopping-cart.service';
 export class MenuComponent implements OnInit {
 
   menu: MenuResponse = {} as MenuResponse;
+  isLoading = true;
 
   constructor(private menuService: MenuService, private route: ActivatedRoute, private shoppingCartService: ShoppingCartService) {
   }
 
   ngOnInit() {
     const restaurantId = this.route.parent.snapshot.params.restaurantId;
-    this.menuService
-      .getByRestaurant(restaurantId)
+    this.menuService.getByRestaurant(restaurantId)
       .subscribe(menu => {
         this.menu = menu[0];
         this.menuService.getCategories(this.menu.id).subscribe(categories => {
@@ -29,6 +29,7 @@ export class MenuComponent implements OnInit {
             });
           }
           this.menu.categories = categories;
+          this.isLoading = false;
         });
       });
   }

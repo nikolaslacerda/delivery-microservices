@@ -15,8 +15,7 @@ export class RestaurantListComponent implements OnInit {
   searchForm = this.fb.group({
     restaurantName: ['', Validators.required]
   });
-
-  cep: string;
+  isLoading = true;
   cuisineTypes: Array<any>;
   mainCategory: string;
   q: string;
@@ -30,17 +29,13 @@ export class RestaurantListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cep = this.route.snapshot.params.cep;
-
     this.cuisineTypeService.getCuisineTypes().subscribe(cuisineTypes => {
       this.cuisineTypes = cuisineTypes;
     });
-
     this.route.queryParams.subscribe(queryParams => {
       this.mainCategory = queryParams.mainCategory;
       this.getFeedRestaurants();
     });
-
     this.route.queryParams.subscribe(queryParams => {
       this.q = queryParams.q;
       this.getFeedRestaurants();
@@ -51,14 +46,17 @@ export class RestaurantListComponent implements OnInit {
     if (this.q) {
       this.restaurantService.getRestaurants(this.q).subscribe(restaurants => {
         this.allRestaurants = restaurants;
+        this.isLoading = false;
       });
     } else if (this.mainCategory) {
       this.restaurantService.getRestaurantsByCategory(this.mainCategory).subscribe(restaurants => {
         this.allRestaurants = restaurants;
+        this.isLoading = false;
       });
     } else {
       this.restaurantService.getRestaurants().subscribe(restaurants => {
         this.allRestaurants = restaurants;
+        this.isLoading = false;
       });
     }
   }

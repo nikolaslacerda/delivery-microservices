@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {PagesComponent} from './pages.component';
+import {NotFoundComponent} from '../shared/components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
           .then(m => m.UserModule)
       }
     ],
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 

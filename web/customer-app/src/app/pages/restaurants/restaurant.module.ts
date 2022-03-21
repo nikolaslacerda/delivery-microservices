@@ -15,7 +15,6 @@ import {ReviewsComponent} from './restaurant/reviews/reviews.component';
 import {RestaurantComponent} from './restaurant/restaurant.component';
 import {MenuItemComponent} from './restaurant/menu/menu-item/menu-item.component';
 import {SharedModule} from '../../shared/shared.module';
-import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -34,8 +33,7 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
     TextMaskModule,
     RestaurantRoutingModule,
     PipesModule,
-    SharedModule,
-    NgMultiSelectDropDownModule,
+    SharedModule
   ]
 })
 export class RestaurantModule {
