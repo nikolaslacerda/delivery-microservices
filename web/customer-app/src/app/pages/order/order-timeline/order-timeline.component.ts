@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {OrderRequest} from '../../../models/request/order.request.model';
-import {OrderResponse} from '../../../models/response/order.response.model';
+import {OrderRequest} from '../../../shared/models/request/order.request.model';
+import {OrderResponse} from '../../../shared/models/response/order.response.model';
 
 @Component({
   selector: 'app-order-timeline',

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
-import {RestaurantService} from 'src/app/services/restaurant.service';
-import {RatingService} from 'src/app/services/rating.service';
-import {OrderItemRequest} from '../../../models/request/order-item.request';
-import {RestaurantResponse} from '../../../models/response/restaurant.response.model';
+import {RestaurantService} from 'src/app/core/services/restaurant.service';
+import {RatingService} from 'src/app/core/services/rating.service';
+import {OrderItemRequest} from '../../../shared/models/request/order-item.request';
+import {RestaurantResponse} from '../../../shared/models/response/restaurant.response.model';
 
 @Component({
   selector: 'app-restaurant',

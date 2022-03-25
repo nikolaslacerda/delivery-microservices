@@ -3,8 +3,8 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {environment} from 'src/environments/environment';
-import {ReviewRequest} from '../models/request/review.request.model';
-import {ReviewResponse} from '../models/response/review.response.model';
+import {ReviewRequest} from '../../shared/models/request/review.request.model';
+import {ReviewResponse} from '../../shared/models/response/review.response.model';
 
 @Injectable({
   providedIn: 'root'

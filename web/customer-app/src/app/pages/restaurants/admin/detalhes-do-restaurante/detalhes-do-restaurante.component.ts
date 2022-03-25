@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
-import { PaymentMethodService } from 'src/app/services/payment-method.service';
-import { ScheduleService } from 'src/app/services/schedule.service';
-import { MenuService } from 'src/app/services/menu.service';
-import { DayOfWeekService } from 'src/app/services/day-of-week.service';
+import { PaymentMethodService } from 'src/app/core/services/payment-method.service';
+import { ScheduleService } from 'src/app/core/services/schedule.service';
+import { MenuService } from 'src/app/core/services/menu.service';
+import { DayOfWeekService } from 'src/app/core/services/day-of-week.service';
 
 @Component({
   selector: 'app-detalhes-do-restaurant',

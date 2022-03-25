@@ -17,8 +17,8 @@ import {HeaderComponent} from './shared/components/header/header.component';
 import {AdminModule} from './pages/restaurants/admin/admin.module';
 import {OrderModule} from './pages/order/order.module';
 
-import {ErrorHandlingInterceptor} from './interceptors/error-handling-interceptor';
-import {JwtInterceptor} from './interceptors/jwt-interceptor';
+import {ErrorHandlingInterceptor} from './core/interceptors/error-handling-interceptor';
+import {JwtInterceptor} from './core/interceptors/jwt-interceptor';
 
 import {HomeComponent} from './pages/home/home.component';
 import {SharedModule} from './shared/shared.module';

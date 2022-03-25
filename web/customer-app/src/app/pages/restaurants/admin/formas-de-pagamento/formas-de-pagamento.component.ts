@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 // import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
-import { PaymentMethodService } from 'src/app/services/payment-method.service';
+import { PaymentMethodService } from 'src/app/core/services/payment-method.service';
 
 @Component({
   selector: 'app-formas-de-order',

@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {filter, map, switchMap, tap} from 'rxjs/operators';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {NavigationEnd, Router} from '@angular/router';
-import {CustomerResponse} from '../models/response/customer.response.model';
+import {CustomerResponse} from '../../shared/models/response/customer.response.model';
 
 @Injectable({
   providedIn: 'root'

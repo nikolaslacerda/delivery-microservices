@@ -1,7 +1,7 @@
 import {RouterModule, Routes} from '@angular/router';
 import {OrderComponent} from './order/order.component';
 import {OrderStatusComponent} from './order-status/order-status.component';
-import {LoginGuard} from '../../guards/login.guard';
+import {LoginGuard} from '../../core/guards/login.guard';
 import {OrderListComponent} from './order-list/order-list.component';
 import {NgModule} from '@angular/core';
 

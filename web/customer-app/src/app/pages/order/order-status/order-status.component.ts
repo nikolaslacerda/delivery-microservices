@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {RatingService} from 'src/app/services/rating.service';
-import {OrderService} from '../../../services/order.service';
+import {RatingService} from 'src/app/core/services/rating.service';
+import {OrderService} from '../../../core/services/order.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {OrderResponse} from '../../../models/response/order.response.model';
-import {ReviewResponse} from '../../../models/response/review.response.model';
-import {ReviewRequest} from '../../../models/request/review.request.model';
+import {OrderResponse} from '../../../shared/models/response/order.response.model';
+import {ReviewResponse} from '../../../shared/models/response/review.response.model';
+import {ReviewRequest} from '../../../shared/models/request/review.request.model';
 
 @Component({
   selector: 'app-order-status-order',

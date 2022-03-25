@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 
 import {ToastrService} from 'ngx-toastr';
 
-import {AuthenticationService} from 'src/app/services/authentication.service';
+import {AuthenticationService} from 'src/app/core/services/authentication.service';
 
 @Injectable({
   providedIn: 'root'

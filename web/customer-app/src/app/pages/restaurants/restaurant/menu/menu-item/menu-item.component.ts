@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {MenuItemResponse} from '../../../../../models/response/menu-item.response';
+import {MenuItemResponse} from '../../../../../shared/models/response/menu-item.response';
 
 @Component({
   selector: 'app-menu-item',

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DayOfWeekService } from '../../services/day-of-week.service';
+import { DayOfWeekService } from '../../core/services/day-of-week.service';
 
 @Pipe({
   name: 'dayOfWeek'

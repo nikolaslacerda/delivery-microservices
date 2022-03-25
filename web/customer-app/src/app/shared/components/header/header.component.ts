@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthenticationService} from '../../../services/authentication.service';
-import {RestaurantService} from '../../../services/restaurant.service';
+import {AuthenticationService} from '../../../core/services/authentication.service';
+import {RestaurantService} from '../../../core/services/restaurant.service';
 import {FormBuilder, Validators} from '@angular/forms';
-import {ShoppingCartService} from '../../../services/shopping-cart.service';
+import {ShoppingCartService} from '../../../core/services/shopping-cart.service';
 import * as Feather from 'feather-icons';
 
 

@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {OrderService} from 'src/app/services/order.service';
-import {OrderRequest} from '../../../models/request/order.request.model';
-import {CartItem} from '../../../models/cart-item';
-import {OrderItemRequest} from '../../../models/request/order-item.request';
+import {OrderService} from 'src/app/core/services/order.service';
+import {OrderRequest} from '../../../shared/models/request/order.request.model';
+import {CartItem} from '../../../shared/models/cart-item';
+import {OrderItemRequest} from '../../../shared/models/request/order-item.request';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {RestaurantService} from '../../../services/restaurant.service';
-import {AuthenticationService} from '../../../services/authentication.service';
-import {PaymentMethodService} from '../../../services/payment-method.service';
-import {ShoppingCartService} from '../../../services/shopping-cart.service';
-import {AddressRequest} from '../../../models/request/address.request.model';
-import {PaymentRequest} from '../../../models/request/payment.request.model';
-import {RestaurantResponse} from '../../../models/response/restaurant.response.model';
+import {RestaurantService} from '../../../core/services/restaurant.service';
+import {AuthenticationService} from '../../../core/services/authentication.service';
+import {PaymentMethodService} from '../../../core/services/payment-method.service';
+import {ShoppingCartService} from '../../../core/services/shopping-cart.service';
+import {AddressRequest} from '../../../shared/models/request/address.request.model';
+import {PaymentRequest} from '../../../shared/models/request/payment.request.model';
+import {RestaurantResponse} from '../../../shared/models/response/restaurant.response.model';
 
 @Component({
   selector: 'app-order-order',

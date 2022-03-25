@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthorizationGuard } from '../../../guards/authorization.guard';
+import { AuthorizationGuard } from '../../../core/guards/authorization.guard';
 
 import { TiposDeCozinhaComponent } from './tipos-de-cozinha/tipos-de-cozinha.component';
 import { FormasDePagamentoComponent } from './formas-de-pagamento/formas-de-pagamento.component';

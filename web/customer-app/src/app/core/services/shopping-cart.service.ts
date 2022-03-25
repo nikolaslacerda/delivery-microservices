@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {CartItem} from '../models/cart-item';
+import {CartItem} from '../../shared/models/cart-item';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
-import {ChangeRestaurantModalComponent} from '../shared/components/shopping-cart/change-restaurant-modal/change-restaurant-modal.component';
+import {ChangeRestaurantModalComponent} from '../../shared/components/shopping-cart/change-restaurant-modal/change-restaurant-modal.component';
 
 @Injectable({
   providedIn: 'root'

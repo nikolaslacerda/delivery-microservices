@@ -3,10 +3,10 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {environment} from 'src/environments/environment';
-import {MenuResponse} from '../models/response/menu.response.model';
-import {MenuItemResponse} from '../models/response/menu-item.response';
-import {MenuCategoryResponse} from '../models/response/menu-category.response';
-import {RestaurantResponse} from '../models/response/restaurant.response.model';
+import {MenuResponse} from '../../shared/models/response/menu.response.model';
+import {MenuItemResponse} from '../../shared/models/response/menu-item.response';
+import {MenuCategoryResponse} from '../../shared/models/response/menu-category.response';
+import {RestaurantResponse} from '../../shared/models/response/restaurant.response.model';
 
 @Injectable({
   providedIn: 'root'
