@@ -13,7 +13,8 @@ export class ReviewsComponent implements OnInit {
 
   reviews: Observable<ReviewResponse[]>;
 
-  constructor(private reviewService: RatingService, private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,
+              private reviewService: RatingService) {
   }
 
   ngOnInit() {

@@ -15,7 +15,7 @@ export class DayOfWeekUtils {
   }
 
   public static compare(name1: string, name2: string) {
-    return  this.findValue(name1).id - this.findValue(name2).id;
+    return this.findValue(name1).id - this.findValue(name2).id;
   }
 
 }

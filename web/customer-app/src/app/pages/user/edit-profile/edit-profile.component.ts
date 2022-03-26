@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../../core/services/authentication.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {CustomerRequest} from '../../../shared/models/request/customer.request.model';
+import {CustomerResponse} from '../../../shared/models/response/customer.response.model';
 
 @Component({
   selector: 'app-edit-profile',
@@ -11,11 +13,11 @@ import {Router} from '@angular/router';
 export class EditProfileComponent implements OnInit {
 
   userForm: FormGroup;
-  user: any;
+  user: CustomerResponse;
 
-  constructor(private authService: AuthenticationService,
-              private router: Router,
-              private fb: FormBuilder) {
+  constructor(private router: Router,
+              private fb: FormBuilder,
+              private authService: AuthenticationService,) {
   }
 
   ngOnInit() {
@@ -28,23 +30,23 @@ export class EditProfileComponent implements OnInit {
 
   }
 
-  get email(): any {
+  get email(): AbstractControl {
     return this.userForm.get('email');
   }
 
-  get phone(): any {
+  get phone(): AbstractControl {
     return this.userForm.get('phone');
   }
 
-  get firstName(): any {
+  get firstName(): AbstractControl {
     return this.userForm.get('firstName');
   }
 
-  get lastName(): any {
+  get lastName(): AbstractControl {
     return this.userForm.get('lastName');
   }
 
-  get cpf(): any {
+  get cpf(): AbstractControl {
     return this.userForm.get('cpf');
   }
 
@@ -68,8 +70,8 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  updateUser() {
-    this.authService.updateCustomer(this.user.id, this.userForm.value)
+  updateUser(): void {
+    this.authService.updateCustomer(this.user.id, new CustomerRequest(this.userForm.value))
       .subscribe(() => this.router.navigate(['/']));
   }
 }

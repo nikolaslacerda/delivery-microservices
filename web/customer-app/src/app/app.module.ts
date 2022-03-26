@@ -14,13 +14,11 @@ import {AppComponent} from './app.component';
 import {LoginComponent} from './pages/login/login.component';
 import {HeaderComponent} from './shared/components/header/header.component';
 
-import {AdminModule} from './pages/restaurants/admin/admin.module';
 import {OrderModule} from './pages/order/order.module';
 
 import {ErrorHandlingInterceptor} from './core/interceptors/error-handling-interceptor';
 import {JwtInterceptor} from './core/interceptors/jwt-interceptor';
 
-import {HomeComponent} from './pages/home/home.component';
 import {SharedModule} from './shared/shared.module';
 import {SignupComponent} from './pages/signup/signup.component';
 import {UserDetailComponent} from './shared/components/header/user-detail/user-detail.component';
@@ -38,7 +36,6 @@ registerLocaleData(localeFr, 'pt');
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    HomeComponent,
     SignupComponent,
     UserDetailComponent,
     EditProfileComponent,
@@ -57,7 +54,6 @@ registerLocaleData(localeFr, 'pt');
       maxOpened: 1,
       autoDismiss: true
     }),
-    AdminModule,
     OrderModule,
     SharedModule,
     RouterModule,

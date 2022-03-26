@@ -32,13 +32,4 @@ export class RestaurantService {
     const params = new HttpParams().set('mainCategory', category);
     return this.http.get<RestaurantResponse[]>(`${this.API}/restaurants`, {params});
   }
-
-  getPendingRestaurants(): Observable<any> {
-    return this.http.get(`${this.API}/admin/restaurants/pending`);
-  }
-
-  approveRestaurant(restaurant): Observable<any> {
-    return this.http.patch(`${this.API}/admin/restaurants/${restaurant.id}`, restaurant);
-  }
-
 }

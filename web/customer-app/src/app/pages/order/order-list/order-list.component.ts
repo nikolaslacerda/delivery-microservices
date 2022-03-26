@@ -11,7 +11,7 @@ import {OrderStatusIndexPipe} from '../../../shared/pipes/order-status-index.pip
 })
 export class OrderListComponent implements OnInit {
 
-  customerOrders: Array<OrderResponse> = [];
+  customerOrders: OrderResponse[] = [];
 
   constructor(private orderService: OrderService,
               private authService: AuthenticationService) {
@@ -20,17 +20,15 @@ export class OrderListComponent implements OnInit {
   ngOnInit() {
     this.orderService.getCustomerOrders(this.authService.getCurrentUser.id)
       .subscribe((orders: OrderResponse[]) => {
-        console.log(orders);
         this.customerOrders = orders;
-      })
-    ;
+      });
   }
 
-  getProcessOrders() {
+  getProcessOrders(): OrderResponse[] {
     return this.customerOrders.filter((order: OrderResponse) => (new OrderStatusIndexPipe().transform(order.status)) !== 4);
   }
 
-  getHistoric() {
+  getHistoric(): OrderResponse[] {
     return this.customerOrders.filter((order: OrderResponse) => (new OrderStatusIndexPipe().transform(order.status)) === 4);
   }
 

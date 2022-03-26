@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {environment} from 'src/environments/environment';
+import {CuisineTypeResponse} from '../../shared/models/response/cuisine-type.response';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +15,7 @@ export class CuisineTypeService {
   constructor(private http: HttpClient) {
   }
 
-  createCuisineType(cuisineType: any): Observable<any> {
-    if (cuisineType.id) {
-      return this.http.put(`${this.API}/admin/cuisine-type/${cuisineType.id}`, cuisineType);
-    }
-    return this.http.post(`${this.API}/admin/cuisine-type`, cuisineType);
+  getCuisineTypes(): Observable<CuisineTypeResponse[]> {
+    return this.http.get<CuisineTypeResponse[]>(`${this.API}/cuisine-types`);
   }
-
-  getCuisineTypes(): Observable<any> {
-    return this.http.get(`${this.API}/cuisine-types`);
-  }
-
-  removeCuisineType(cuisineType: any) {
-    return this.http.delete(`${this.API}/admin/cuisine-type/${cuisineType.id}`);
-  }
-
 }

@@ -32,10 +32,6 @@ export class MenuService {
     return this.http.get<MenuItemResponse[]>(`${this.API}/menuItems?menuCategoryId=${categoryId}`, {params});
   }
 
-  doRestaurante(restaurante): Observable<any> {
-    return this.http.get(`${this.API}/restaurants/${restaurante.id}/menu`); // DIFERENÇA DE RESTAURANT E POR ID?
-  }
-
   getItemById(menuId: number): Observable<MenuItemResponse> {
     return this.http.get<MenuItemResponse>(`${this.API}/menuItems/${menuId}`);
   }

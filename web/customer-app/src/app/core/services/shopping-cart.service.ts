@@ -3,6 +3,7 @@ import {CartItem} from '../../shared/models/cart-item';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {ChangeRestaurantModalComponent} from '../../shared/components/shopping-cart/change-restaurant-modal/change-restaurant-modal.component';
+import {MenuItemResponse} from '../../shared/models/response/menu-item.response';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,7 @@ export class ShoppingCartService {
     return this.getCartItems.map(item => item.value()).reduce((prev, actual) => prev + actual, 0);
   }
 
-  handleAddItem(item: any) {
+  handleAddItem(item: MenuItemResponse) {
     if (this.getRestaurant !== undefined && item.restaurantId !== this.getRestaurant) {
       this.bsModalRef = this.modalService.show(ChangeRestaurantModalComponent);
       this.bsModalRef.content.event.subscribe(() => {
@@ -51,7 +52,7 @@ export class ShoppingCartService {
     }
   }
 
-  private addItem(item: any) {
+  private addItem(item: MenuItemResponse) {
     console.log('adicionando item');
     console.log(item)
     const foundItem = this.getCartItems.find((menuItem) => menuItem.menuItem.id === item.id);

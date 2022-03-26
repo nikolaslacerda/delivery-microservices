@@ -3,7 +3,7 @@
        aria-expanded="false">
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
                       style="background-color: #EA1D2C">
-                  {{this.cartCount}}</span>
+                  {{this.itemsCount}}</span>
     <em style="font-size: 24px; color: #EA1D2C" data-feather="shopping-bag"></em>
   </div>
   <div class="dropdown-menu mt-3 align-items-center justify-content-center" aria-labelledby="dropdownMenuButton"
@@ -55,7 +55,7 @@
     </div>
     <div *ngIf="items().length">
       <div class="d-flex align-items-center justify-content-center">
-        <a (click)="finishOrder()" class="btn btn-success mt-2 me-1"><i class="fa fa-credit-card"></i> Finish Order</a>
+        <a (click)="checkoutOrder()" class="btn btn-success mt-2 me-1"><i class="fa fa-credit-card"></i> Finish Order</a>
         <button (click)="clear()" type="button" class="btn btn-danger mt-2"><i class="fa fa-trash"></i> Clear</button>
       </div>
     </div>

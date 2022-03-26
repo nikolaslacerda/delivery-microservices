@@ -1,5 +1,4 @@
 export class ReviewResponse {
-
   id: number;
   name: string;
   createdAt: string;

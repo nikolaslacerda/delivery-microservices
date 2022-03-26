@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {RestaurantService} from 'src/app/core/services/restaurant.service';
 import {RatingService} from 'src/app/core/services/rating.service';
-import {OrderItemRequest} from '../../../shared/models/request/order-item.request';
 import {RestaurantResponse} from '../../../shared/models/response/restaurant.response.model';
 
 @Component({
@@ -13,15 +12,12 @@ import {RestaurantResponse} from '../../../shared/models/response/restaurant.res
 })
 export class RestaurantComponent implements OnInit {
 
-  order: any = {};
   reviews: string;
-  restaurant: RestaurantResponse;
   isLoading = true;
-  itemChosen: OrderItemRequest = {} as OrderItemRequest;
-  addOrderItem = false;
+  restaurant: RestaurantResponse;
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
+  constructor(private router: Router,
+              private route: ActivatedRoute,
               private reviewService: RatingService,
               private restaurantService: RestaurantService) {
   }
@@ -32,7 +28,6 @@ export class RestaurantComponent implements OnInit {
       .subscribe(restaurant => {
         this.restaurant = restaurant;
         this.isLoading = false;
-        this.order.restaurantId = restaurant.id;
         this.reviewService.getRestaurantRatingAverage(restaurantId)
           .subscribe(reviews => {
             this.reviews = (reviews.map(item => item.userRating)

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../core/services/authentication.service';
 import {Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CustomerRequest} from '../../shared/models/request/customer.request.model';
 import {ToastrService} from 'ngx-toastr';
 
@@ -34,27 +34,27 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  get firstName(): any {
+  get firstName(): AbstractControl {
     return this.signUpForm.get('firstName');
   }
 
-  get lastName(): any {
+  get lastName(): AbstractControl {
     return this.signUpForm.get('lastName');
   }
 
-  get phone(): any {
+  get phone(): AbstractControl {
     return this.signUpForm.get('phone');
   }
 
-  get email(): any {
+  get email(): AbstractControl {
     return this.signUpForm.get('email');
   }
 
-  get password(): any {
+  get password(): AbstractControl {
     return this.signUpForm.get('password');
   }
 
-  get passwordConfirmation(): any {
+  get passwordConfirmation(): AbstractControl {
     return this.signUpForm.get('passwordConfirmation');
   }
 

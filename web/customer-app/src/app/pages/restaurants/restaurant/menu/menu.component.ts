@@ -3,6 +3,7 @@ import {MenuService} from '../../../../core/services/menu.service';
 import {ActivatedRoute} from '@angular/router';
 import {MenuResponse} from '../../../../shared/models/response/menu.response.model';
 import {ShoppingCartService} from '../../../../core/services/shopping-cart.service';
+import {MenuItemResponse} from '../../../../shared/models/response/menu-item.response';
 
 @Component({
   selector: 'app-menu',
@@ -11,10 +12,12 @@ import {ShoppingCartService} from '../../../../core/services/shopping-cart.servi
 })
 export class MenuComponent implements OnInit {
 
-  menu: MenuResponse = {} as MenuResponse;
   isLoading = true;
+  menu: MenuResponse = {} as MenuResponse;
 
-  constructor(private menuService: MenuService, private route: ActivatedRoute, private shoppingCartService: ShoppingCartService) {
+  constructor(private route: ActivatedRoute,
+              private menuService: MenuService,
+              private shoppingCartService: ShoppingCartService) {
   }
 
   ngOnInit() {
@@ -34,7 +37,7 @@ export class MenuComponent implements OnInit {
       });
   }
 
-  addItem(item: any) {
+  addItem(item: MenuItemResponse): void {
     this.shoppingCartService.handleAddItem(item);
   }
 }

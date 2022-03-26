@@ -19,7 +19,7 @@ export class OrderCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  expandItems() {
+  expandItems(): void {
     this.showAllItems = !this.showAllItems;
   }
 

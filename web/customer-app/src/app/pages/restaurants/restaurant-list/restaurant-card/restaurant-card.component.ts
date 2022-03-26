@@ -15,15 +15,4 @@ export class RestaurantCardComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  // mediaDeAvaliacoesDosRestaurantes() {
-  //   this.avaliacoesService.getRestaurantAverage(this.restaurantesComDetalhes)
-  //     .subscribe(infoMedias => {
-  //       infoMedias.forEach(infoMedia => {
-  //         const restaurante = this.restaurantesComDetalhes.find(restaurante => restaurante.id === infoMedia.restaurantId);
-  //         restaurante.average = infoMedia.average;
-  //       });
-  //     });
-  // }
-
 }

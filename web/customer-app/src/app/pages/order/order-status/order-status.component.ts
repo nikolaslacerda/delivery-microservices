@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {RatingService} from 'src/app/core/services/rating.service';
 import {OrderService} from '../../../core/services/order.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OrderResponse} from '../../../shared/models/response/order.response.model';
 import {ReviewResponse} from '../../../shared/models/response/review.response.model';
 import {ReviewRequest} from '../../../shared/models/request/review.request.model';
@@ -18,9 +18,9 @@ export class OrderStatusComponent implements OnInit {
   order: OrderResponse = {} as OrderResponse;
   review: ReviewResponse = {} as ReviewResponse;
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
+  constructor(private router: Router,
               private fb: FormBuilder,
+              private route: ActivatedRoute,
               private orderService: OrderService,
               private ratingService: RatingService) {
   }
@@ -40,11 +40,11 @@ export class OrderStatusComponent implements OnInit {
       });
   }
 
-  get comment(): any {
+  get comment(): AbstractControl {
     return this.ratingForm.get('comment');
   }
 
-  createReview() {
+  createReview(): void {
     this.review.orderId = this.order.id;
     this.review.restaurantId = this.order.restaurant.id;
     this.review.createdAt = Date.now().toString();

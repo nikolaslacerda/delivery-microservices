@@ -4,7 +4,7 @@ import {OrderService} from 'src/app/core/services/order.service';
 import {OrderRequest} from '../../../shared/models/request/order.request.model';
 import {CartItem} from '../../../shared/models/cart-item';
 import {OrderItemRequest} from '../../../shared/models/request/order-item.request';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RestaurantService} from '../../../core/services/restaurant.service';
 import {AuthenticationService} from '../../../core/services/authentication.service';
 import {PaymentMethodService} from '../../../core/services/payment-method.service';
@@ -12,6 +12,7 @@ import {ShoppingCartService} from '../../../core/services/shopping-cart.service'
 import {AddressRequest} from '../../../shared/models/request/address.request.model';
 import {PaymentRequest} from '../../../shared/models/request/payment.request.model';
 import {RestaurantResponse} from '../../../shared/models/response/restaurant.response.model';
+import {PaymentMethodResponse} from '../../../shared/models/response/payment-method.response';
 
 @Component({
   selector: 'app-order-order',
@@ -21,20 +22,20 @@ import {RestaurantResponse} from '../../../shared/models/response/restaurant.res
 export class OrderComponent implements OnInit {
 
   isLoading = true;
-  order = {} as OrderRequest;
   orderForm: FormGroup;
-  paymentMethods: Array<any>;
+  order = {} as OrderRequest;
   payment = {} as PaymentRequest;
   restaurant = {} as RestaurantResponse;
+  paymentMethods: PaymentMethodResponse[];
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private orderService: OrderService,
-              private paymentMethodService: PaymentMethodService,
-              private restaurantService: RestaurantService,
-              private shoppingCard: ShoppingCartService,
+  constructor(private router: Router,
+              private route: ActivatedRoute,
               private formBuilder: FormBuilder,
-              private authService: AuthenticationService) {
+              private orderService: OrderService,
+              private shoppingCard: ShoppingCartService,
+              private authService: AuthenticationService,
+              private restaurantService: RestaurantService,
+              private paymentMethodService: PaymentMethodService,) {
   }
 
   ngOnInit() {
@@ -68,58 +69,59 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  get streetAddress(): any {
+  get streetAddress(): AbstractControl {
     return this.orderForm.get('addressGroup').get('streetAddress');
   }
 
-  get streetNumber(): any {
+  get streetNumber(): AbstractControl {
     return this.orderForm.get('addressGroup').get('streetNumber');
   }
 
-  get neighborhood(): any {
+  get neighborhood(): AbstractControl {
     return this.orderForm.get('addressGroup').get('neighborhood');
   }
 
-  get city(): any {
+  get city(): AbstractControl {
     return this.orderForm.get('addressGroup').get('city');
   }
 
-  get postalCode(): any {
+  get postalCode(): AbstractControl {
     return this.orderForm.get('addressGroup').get('postalCode');
   }
 
-  get complement(): any {
+  get complement(): AbstractControl {
     return this.orderForm.get('addressGroup').get('complement');
   }
 
-  get reference(): any {
+  get reference(): AbstractControl {
     return this.orderForm.get('addressGroup').get('reference');
   }
 
-  cartItems() {
+  cartItems(): CartItem[] {
     return this.shoppingCard.getCartItems;
   }
 
-  increaseQty(item: CartItem) {
+  increaseQty(item: CartItem): void {
     this.shoppingCard.increaseQty(item);
   }
 
-  decreaseQty(item: CartItem) {
+  decreaseQty(item: CartItem): void {
     this.shoppingCard.decreaseQty(item);
   }
 
-  remove(item: CartItem) {
+  remove(item: CartItem): void {
     this.shoppingCard.removeItem(item);
     if (this.shoppingCard.getCartItems.length === 0) {
+      console.log('zerou, ué apareceu')
       this.router.navigateByUrl('/');
     }
   }
 
-  itemsValue() {
+  getOrderTotalValue(): number {
     return this.shoppingCard.total();
   }
 
-  checkOrder() {
+  submitOrder(): void {
     this.order.customerId = this.authService.getCurrentUser.id;
     this.order.restaurantId = this.shoppingCard.getRestaurant;
     this.order.address = new AddressRequest(this.orderForm.controls.addressGroup.value);

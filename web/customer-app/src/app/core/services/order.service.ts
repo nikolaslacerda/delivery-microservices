@@ -16,22 +16,20 @@ export class OrderService {
   constructor(private http: HttpClient) {
   }
 
-  createOrder(order: OrderRequest): Observable<any> {
-    return this.http.post(`${this.API}/orders`, order);
+  createOrder(order: OrderRequest): Observable<OrderResponse> {
+    return this.http.post<OrderResponse>(`${this.API}/orders`, order);
   }
 
   getOrderById(orderId: number): Observable<OrderResponse> {
     const params = new HttpParams()
-      .append('_expand', 'restaurant')
-      // .append('_expand', 'address')
-      // .append('_expand', 'payment');
+      .append('_expand', 'restaurant');
     return this.http.get<OrderResponse>(`${this.API}/orders/${orderId}`, {params});
   }
 
-  getCustomerOrders(customerId: string): Observable<Array<OrderResponse>> {
+  getCustomerOrders(customerId: string): Observable<OrderResponse[]> {
     const params = new HttpParams()
       .set('customerId', customerId)
       .set('_expand', 'restaurant');
-    return this.http.get<Array<OrderResponse>>(`${this.API}/orders/`, {params});
+    return this.http.get<OrderResponse[]>(`${this.API}/orders/`, {params});
   }
 }

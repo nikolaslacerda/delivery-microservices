@@ -16,9 +16,9 @@ export class RatingService {
   constructor(private http: HttpClient) {
   }
 
-  createReview(review: ReviewRequest): Observable<any> {
+  createReview(review: ReviewRequest): Observable<ReviewResponse> {
     const restaurantId = review.restaurantId;
-    return this.http.post(`${this.API}/restaurants/${restaurantId}/reviews`, review);
+    return this.http.post<ReviewResponse>(`${this.API}/restaurants/${restaurantId}/reviews`, review);
   }
 
   getOrderReview(orderId: number): Observable<ReviewResponse> {

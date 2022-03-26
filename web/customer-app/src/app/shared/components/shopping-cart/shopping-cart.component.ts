@@ -13,14 +13,14 @@ import {RestaurantResponse} from '../../models/response/restaurant.response.mode
 export class ShoppingCartComponent implements OnInit {
 
   restaurant = {} as RestaurantResponse;
-  cartCount: any;
+  itemsCount: number;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private restaurantService: RestaurantService,
               private shoppingCartService: ShoppingCartService) {
     this.shoppingCartService.itemsObservable.subscribe(items => {
-      this.cartCount = items.map(item => item.quantity).reduce((x, y) => x + y, 0);
+      this.itemsCount = items.map(item => item.quantity).reduce((x, y) => x + y, 0);
     });
   }
 
@@ -42,7 +42,7 @@ export class ShoppingCartComponent implements OnInit {
     return this.shoppingCartService.getRestaurant;
   }
 
-  clear() {
+  clear(): void {
     this.shoppingCartService.clear();
   }
 
@@ -50,11 +50,11 @@ export class ShoppingCartComponent implements OnInit {
     return this.shoppingCartService.total();
   }
 
-  removeItem(item: any) {
+  removeItem(item: CartItem): void {
     this.shoppingCartService.removeItem(item);
   }
 
-  finishOrder() {
+  checkoutOrder(): void {
     this.router.navigateByUrl(`orders/finish`);
   }
 }
