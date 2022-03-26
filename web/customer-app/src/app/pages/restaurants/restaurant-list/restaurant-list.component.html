@@ -3,11 +3,10 @@
 </div>
 <div *ngIf="!isLoading">
   <section class="mb-2" *ngIf="!q && cuisineTypes?.length">
-    <div class="row align-items-center justify-content-center">
-      <div class="col-10">
-        <ul class="list-inline">
+      <div class="d-flex align-items-center justify-content-center">
+        <ul class="list-inline align-items-center justify-content-center">
           <li class="list-inline-item p-2 cursor" *ngFor="let cuisineType of cuisineTypes">
-            <div class="item-i" [routerLink]="['/restaurants']" [queryParams]="{'mainCategory': cuisineType.name}">
+            <div class="scale-effect" [routerLink]="['/restaurants']" [queryParams]="{'mainCategory': cuisineType.name}">
               <div class="row">
                 <div class="col text-center">
                   <img class="aafa" src="assets/img/food_category/{{cuisineType.name}}.jpg"/>
@@ -22,13 +21,12 @@
           </li>
         </ul>
       </div>
-    </div>
   </section>
 
   <section class="content" *ngIf="allRestaurants?.length">
     <h4><b>Restaurants</b></h4>
-    <div class="row">
-      <div *ngFor="let restaurant of allRestaurants" class="col-sm-4 col-xs-12">
+    <div class="d-flex flex-wrap justify-content-around eee align-items-center">
+      <div *ngFor="let restaurant of allRestaurants" class="ddd mt-4">
         <app-restaurant-card [restaurant]="restaurant"></app-restaurant-card>
       </div>
     </div>

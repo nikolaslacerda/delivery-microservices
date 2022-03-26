@@ -7,6 +7,10 @@
   width: 100%;
 }
 
+.green-text {
+  color: #50a773;
+}
+
 @keyframes progress-indeterminate {
   from { left: -50%; width: 50%; }
   to { left: 100%; width: 50%;}

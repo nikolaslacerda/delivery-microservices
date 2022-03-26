@@ -6,10 +6,6 @@ import {NgModule} from '@angular/core';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
-  },
-  {
     path: 'login',
     component: LoginComponent
   },
@@ -20,6 +16,10 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent
+  },
+  {
+    path: '',
+    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
   },
   {
     path: '**',

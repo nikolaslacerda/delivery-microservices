@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from '../../services/authentication.service';
+import {AuthenticationService} from '../../core/services/authentication.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CustomerRequest} from '../../models/request/customer.request.model';
+import {CustomerRequest} from '../../shared/models/request/customer.request.model';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -59,7 +59,7 @@ export class SignupComponent implements OnInit {
   }
 
   signUp() {
-    this.authenticationService.registerUser(new CustomerRequest(this.signUpForm.value))
+    this.authenticationService.createCustomer(new CustomerRequest(this.signUpForm.value))
       .subscribe(() => this.toastr.success('Confirm to activate your account', 'Account Created! An email has been sent'),
         error => console.log(error),
         () => {

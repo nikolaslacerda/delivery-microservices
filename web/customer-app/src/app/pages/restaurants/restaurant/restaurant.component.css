@@ -1,0 +1,45 @@
+.active {
+  font-weight: bold;
+  border-bottom: 2px solid #dd4b39;
+}
+
+.rating-yellow-title {
+  color: #e7a74e;
+  font-size: 24px;
+}
+
+
+.cursor:hover {
+  font-weight: bold;
+}
+
+.menu-logo {
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  float: left;
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  align-content: center;
+  justify-content: center;
+  margin-left: 10px;
+  margin-right: 20px;
+  overflow: hidden;
+  border: 1px solid #f2f2f2;
+}
+
+.box-img-detail {
+  position: relative;
+  align-content: center;
+}
+
+.ddd {
+  flex-direction: row;
+}
+
+@media (max-width: 500px) {
+  .ddd {
+    flex-direction: column;
+  }
+}

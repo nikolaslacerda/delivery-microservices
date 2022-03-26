@@ -1,18 +1,15 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { DayOfWeekService } from '../../services/day-of-week.service';
+import {Pipe, PipeTransform} from '@angular/core';
+import {DayOfWeekUtils} from '../utils/day-of-week.utils';
 
 @Pipe({
   name: 'dayOfWeek'
 })
 export class DayOfWeekPipe implements PipeTransform {
 
-  constructor(private diaDaSemanaService: DayOfWeekService) {
-  }
-
-  transform(value: any): string {
-    const dayOfWeek = this.diaDaSemanaService.findValue(value);
+  transform(value: string): string {
+    const dayOfWeek = DayOfWeekUtils.findValue(value);
     if (dayOfWeek) {
-      return dayOfWeek.nome;
+      return dayOfWeek.name;
     }
     return value;
   }

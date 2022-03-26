@@ -1,0 +1,34 @@
+.eee {
+  flex-direction: row;
+}
+
+.ddd {
+  width: 33%;
+}
+
+.aafa {
+  height: 62px;
+  width: 76px;
+}
+
+.scale-effect:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 992px) {
+  .ddd {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .eee {
+    flex-direction: column;
+  }
+
+  .ddd {
+    width: 100%;
+  }
+}
+
+

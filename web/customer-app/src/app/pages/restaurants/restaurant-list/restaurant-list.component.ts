@@ -1,34 +1,37 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
-import {CuisineTypeService} from 'src/app/services/cuisine-type.service';
-import {RestaurantService} from 'src/app/services/restaurant.service';
-import {FormBuilder, Validators} from '@angular/forms';
-import {RestaurantResponse} from '../../../models/response/restaurant.response.model';
+import {CuisineTypeService} from 'src/app/core/services/cuisine-type.service';
+import {RestaurantService} from 'src/app/core/services/restaurant.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {RestaurantResponse} from '../../../shared/models/response/restaurant.response.model';
+import {CuisineTypeResponse} from '../../../shared/models/response/cuisine-type.response';
 
 @Component({
   selector: 'app-restaurant-list',
-  templateUrl: './restaurant-list.component.html'
+  templateUrl: './restaurant-list.component.html',
+  styleUrls: ['./restaurant-list.component.css']
 })
 export class RestaurantListComponent implements OnInit {
 
-  searchForm = this.fb.group({
-    restaurantName: ['', Validators.required]
-  });
-  isLoading = true;
-  cuisineTypes: Array<any>;
-  mainCategory: string;
   q: string;
+  isLoading = true;
+  mainCategory: string;
+  searchForm: FormGroup;
+  cuisineTypes: CuisineTypeResponse[] = [];
   allRestaurants: RestaurantResponse[] = [];
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private cuisineTypeService: CuisineTypeService,
+  constructor(private router: Router,
+              private fb: FormBuilder,
+              private route: ActivatedRoute,
               private restaurantService: RestaurantService,
-              private fb: FormBuilder) {
+              private cuisineTypeService: CuisineTypeService) {
   }
 
   ngOnInit() {
+    this.searchForm = this.fb.group({
+      restaurantName: ['', Validators.required]
+    });
     this.cuisineTypeService.getCuisineTypes().subscribe(cuisineTypes => {
       this.cuisineTypes = cuisineTypes;
     });
@@ -57,18 +60,6 @@ export class RestaurantListComponent implements OnInit {
       this.restaurantService.getRestaurants().subscribe(restaurants => {
         this.allRestaurants = restaurants;
         this.isLoading = false;
-      });
-    }
-  }
-
-  onSubmit() {
-    if (this.searchForm.valid) {
-      this.restaurantService.getRestaurants(this.searchForm.value.restaurantName).subscribe(restaurants => {
-        this.allRestaurants = restaurants;
-      });
-    } else {
-      this.restaurantService.getRestaurants().subscribe(restaurants => {
-        this.allRestaurants = restaurants;
       });
     }
   }

@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {MenuService} from '../../../../services/menu.service';
+import {MenuService} from '../../../../core/services/menu.service';
 import {ActivatedRoute} from '@angular/router';
-import {MenuResponse} from '../../../../models/response/menu.response.model';
-import {ShoppingCartService} from '../../../../services/shopping-cart.service';
+import {MenuResponse} from '../../../../shared/models/response/menu.response.model';
+import {ShoppingCartService} from '../../../../core/services/shopping-cart.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: []
+  styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
 
@@ -35,6 +35,6 @@ export class MenuComponent implements OnInit {
   }
 
   addItem(item: any) {
-    this.shoppingCartService.addItem(item);
+    this.shoppingCartService.handleAddItem(item);
   }
 }

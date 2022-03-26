@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from '../../../services/authentication.service';
-import {OrderService} from '../../../services/order.service';
-import {OrderResponse} from '../../../models/response/order.response.model';
+import {AuthenticationService} from '../../../core/services/authentication.service';
+import {OrderService} from '../../../core/services/order.service';
+import {OrderResponse} from '../../../shared/models/response/order.response.model';
 import {OrderStatusIndexPipe} from '../../../shared/pipes/order-status-index.pipe';
 
 @Component({

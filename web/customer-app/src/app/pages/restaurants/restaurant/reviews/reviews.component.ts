@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {RatingService} from '../../../../services/rating.service';
+import {RatingService} from '../../../../core/services/rating.service';
 import {ActivatedRoute} from '@angular/router';
-import {ReviewResponse} from '../../../../models/response/review.response.model';
+import {ReviewResponse} from '../../../../shared/models/response/review.response.model';
 
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
-  styleUrls: []
+  styleUrls: ['./reviews.components.css']
 })
 export class ReviewsComponent implements OnInit {
 

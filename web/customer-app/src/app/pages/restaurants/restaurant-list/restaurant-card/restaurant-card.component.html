@@ -1,16 +1,22 @@
 <div style="cursor: pointer" [routerLink]="['/restaurants',restaurant.id]">
-  <div class="place-info-box">
-    <span class="place-info-box-icon"><img
-      src="{{'https://localhost:3001/partner/profile/image/' + restaurant.imageUrl}}" alt=""/></span>
-    <div class="place-info-box-content">
-      <span class="place-info-box-text">{{restaurant.name}}</span>
-      <span class="place-info-box-detail">
-        <span class="rating-yellow">
-          <em class="fa fa-star"></em> {{restaurant.userRating | number : '1.1-1'}}
+  <div class="card border-0 me-3" style="min-width: 300px; height: 100px">
+    <div class="d-flex flex-row h-100 w-100">
+      <div class="d-flex align-items-center justify-content-center">
+         <span class="place-info-box-icon">
+           <img src="{{'https://localhost:3001/partner/profile/image/' + restaurant.imageUrl}}" alt=""/>
+         </span>
+      </div>
+      <div class="d-flex">
+        <div class="card-body">
+          <h5 class="card-title"><strong>{{restaurant.name}}</strong></h5>
+          <span class="rating-yellow small">
+            <strong><em class="fa fa-star"></em> {{restaurant.userRating | number : '1.1-1'}}</strong>
           </span>
-        • {{restaurant.mainCategory}} • {{restaurant.distance}} km</span>
-      <span class="place-info-box-detail">{{restaurant.minDeliveryTime}}-{{restaurant.maxDeliveryTime}}
-        min • $ {{restaurant.deliveryFee}}</span>
+          <span class="text-muted"> • {{restaurant.mainCategory}} • {{restaurant.distance}} km</span>
+          <p class="card-text"><small class="text-muted">{{restaurant.minDeliveryTime}}-{{restaurant.maxDeliveryTime}}
+            min • $ {{restaurant.deliveryFee}}</small></p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

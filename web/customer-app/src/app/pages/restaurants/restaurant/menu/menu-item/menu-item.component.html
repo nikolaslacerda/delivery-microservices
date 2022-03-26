@@ -1,14 +1,19 @@
-<div (click)="emitAddEvent()" class="card flex-row shadow-sm cursor" style="height: 15rem">
-  <div class="d-flex align-items-center justify-content-center" style="max-width: 15rem;min-width: 15rem; width: 15rem">
-    <img class="menu-item-image" src="{{'https://localhost:3001/partner/item/image/' + menuItem.imageUrl}}" alt="...">
-  </div>
-  <div class="card-body d-flex flex-column">
-    <span class="menu-item-info-box-text">{{menuItem.name}}</span>
-    <p *ngIf="menuItem.description.length<100">{{menuItem.description}}</p>
-    <p *ngIf="menuItem.description.length>100">{{menuItem.description.substring(0, 100) + '...'}}</p>
-    <div class="" style="position: absolute;bottom: 0; right: 0;margin-bottom: 2px">
-      <span class="menu-item-info-box-price">{{menuItem.unitPrice | currency: 'USD': "symbol"}}</span>
-      <span class="menu-item-info-box-original-price">{{menuItem.unitOriginalPrice | currency: 'USD': "symbol"}}</span>
+<div (click)="emitAddEvent()" class="card shadow-sm cursor mb-3" style="height: 15rem; min-width: 250px">
+  <div class="d-flex flex-row w-100 h-100">
+    <div class="d-flex align-items-center justify-content-center" style="min-width: 30%;width: 30%">
+      <span class="place-info-box-icon">
+           <img class="menu-item-image" src="{{'https://localhost:3001/partner/item/image/' + menuItem.imageUrl}}" alt="...">
+         </span>
+    </div>
+    <div class="card-body d-flex flex-column">
+      <span class="menu-item-info-box-text">{{menuItem.name}}</span>
+      <p *ngIf="menuItem.description.length<100">{{menuItem.description}}</p>
+      <p *ngIf="menuItem.description.length>100">{{menuItem.description.substring(0, 100) + '...'}}</p>
+      <div class="" style="position: absolute;bottom: 0; right: 0;margin-bottom: 2px">
+        <span class="menu-item-info-box-price">{{menuItem.unitPrice | currency: 'USD': "symbol"}}</span>
+        <span
+          class="menu-item-info-box-original-price">{{menuItem.unitOriginalPrice | currency: 'USD': "symbol"}}</span>
+      </div>
     </div>
   </div>
 </div>

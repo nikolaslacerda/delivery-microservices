@@ -1,0 +1,19 @@
+.ddd {
+  flex-flow: row wrap;
+  flex: 50%
+}
+
+.it {
+  width: 49%;
+}
+
+@media (max-width: 1200px) {
+  .ddd {
+    flex-direction: row;
+  }
+  .it {
+    width: 100%;
+  }
+}
+
+

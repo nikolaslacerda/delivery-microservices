@@ -1,29 +1,34 @@
 import {Component, OnInit} from '@angular/core';
-import {ShoppingCartService} from '../../../services/shopping-cart.service';
-import {CartItem} from '../../../models/cart-item';
+import {ShoppingCartService} from '../../../core/services/shopping-cart.service';
+import {CartItem} from '../../models/cart-item';
 import {ActivatedRoute, Router} from '@angular/router';
-import {RestaurantService} from '../../../services/restaurant.service';
+import {RestaurantService} from '../../../core/services/restaurant.service';
+import {RestaurantResponse} from '../../models/response/restaurant.response.model';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: []
+  styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
 
-  restaurant: any = {};
+  restaurant = {} as RestaurantResponse;
+  cartCount: any;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private restaurantService: RestaurantService,
               private shoppingCartService: ShoppingCartService) {
+    this.shoppingCartService.itemsObservable.subscribe(items => {
+      this.cartCount = items.map(item => item.quantity).reduce((x, y) => x + y, 0);
+    });
   }
 
   ngOnInit() {
-    this.shoppingCartService.restaurantO.subscribe(x => {
-      if (x) {
-        this.restaurantService.getRestaurantById(x).subscribe(rest => {
-          this.restaurant = rest;
+    this.shoppingCartService.restaurantObservable.subscribe(idNewRestaurant => {
+      if (idNewRestaurant) {
+        this.restaurantService.getRestaurantById(idNewRestaurant).subscribe(restaurant => {
+          this.restaurant = restaurant;
         });
       }
     });

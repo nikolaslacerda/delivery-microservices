@@ -1,17 +1,3 @@
-/*card:hover {*/
-/*  border-color: rgba(219, 218, 217, 0.97);*/
-/*}*/
-
-/*.card {*/
-/*  border: 1px solid #f2f2f2;*/
-/*}.*/
-
-/*@media (max-width: 1199px) {*/
-/*  .card {*/
-/*    width: 60rem;*/
-/*  }*/
-/*}*/
-
 .menu-item-image {
   max-width:200px;
   max-height:150px;
@@ -39,3 +25,22 @@
   color: #a1a1a1;
   text-decoration: line-through;
 }
+
+.place-info-box-icon {
+  position: relative;
+  display: flex;
+  float: left;
+  margin-left: 5px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.place-info-box-icon > img {
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
+}
+

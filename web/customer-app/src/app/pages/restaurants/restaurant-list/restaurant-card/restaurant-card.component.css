@@ -1,0 +1,25 @@
+.place-info-box-icon {
+  position: relative;
+  border-radius: 50%;
+  display: block;
+  float: left;
+  width: 85px;
+  height: 85px;
+  overflow: hidden;
+  border: 2px solid #f2f2f2;
+}
+
+.place-info-box-icon > img {
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
+}
+
+.rating-yellow {
+  color: #e7a74e;
+}
+
+.rating-yellow-title {
+  color: #e7a74e;
+  font-size: 24px;
+}

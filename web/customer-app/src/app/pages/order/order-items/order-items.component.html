@@ -6,14 +6,18 @@
     <tbody>
     <tr *ngFor="let item of items">
       <td class="text-center">
+        <div style="min-width: 100px">
         <a (click)="emitDecreaseQty(item)" class="btn btn-sm"><em class="fa fa-minus"></em></a>
         {{item.quantity}}
         <a (click)="emitIncreaseQty(item)" class="btn btn-sm"><em class="fa fa-plus"></em></a>
+        </div>
       </td>
-      <td>{{item.menuItem.name}}</td>
+      <td>
+        <span class="fd">{{item.menuItem.name}}</span>
+      </td>
       <td class="text-right"><strong>{{item.value() | currency: 'USD': 'symbol'}}</strong></td>
       <td class="text-right">
-        <a (click)="emitRemove(item)" class="btn btn-sm danger"><em class="fa fa-remove"></em></a>
+        <a (click)="emitRemove(item)" class="btn btn-sm"><em class="fa fa-trash"></em></a>
       </td>
     </tr>
     </tbody>

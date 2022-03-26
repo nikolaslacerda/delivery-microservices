@@ -1,46 +1,63 @@
-<div class="box-cart shadow-none border-0" style="min-width: 300px">
-  <div class="empty-message" *ngIf="!items().length">
-    <p>Add items from a restaurant to start a new cart</p>
+<div class="dropdown">
+  <div class="mr-4" type="button" data-bs-toggle="dropdown" aria-haspopup="true"
+       aria-expanded="false">
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                      style="background-color: #EA1D2C">
+                  {{this.cartCount}}</span>
+    <em style="font-size: 24px; color: #EA1D2C" data-feather="shopping-bag"></em>
   </div>
-  <div *ngIf="items().length" class="table-responsive">
-    <div class="mt-2">
-    <span >Your order in</span><br>
-    <span class="cart-restaurant-name"><strong>{{restaurant.name}}</strong></span>
+  <div class="dropdown-menu mt-3 align-items-center justify-content-center" aria-labelledby="dropdownMenuButton"
+       style="width: 380px; margin-right: -3px">
+    <div class="flex-row align-items-center justify-content-center p-2">
+      <div class="w-100">
+        <div class="d-flex justify-content-center align-items-center">
+          <p *ngIf="!items().length">Add items from a restaurant to start a new cart</p>
+        </div>
+        <div *ngIf="items().length" class="table-responsive justify-content-center align-items-center">
+          <div class="mt-2">
+            <span>Your order in</span><br>
+            <span class="fs-6"><strong>{{restaurant.name}}</strong></span>
+          </div>
+          <div class="overflow-auto w-100" style="max-height: 240px">
+          <table class="table mt-2">
+            <tbody>
+            <tr *ngFor="let item of items()">
+              <th class="fw-normal">{{item.quantity}}x {{item.menuItem.name}}</th>
+              <td class="text-center"><b>{{item.value() | currency: 'USD': 'symbol'}}</b></td>
+              <td class="text-center">
+                <a (click)="removeItem(item)" class="btn btn-sm">
+                  <em class="fa fa-trash" style="color: #333333"></em>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          </div>
+          <div><strong>Delivery</strong></div>
+          <table class="table">
+            <tbody>
+            <tr>
+              <th class="fw-normal">Subtotal</th>
+              <td class="text-end">{{total() | currency: 'USD': 'symbol'}}</td>
+            </tr>
+            <tr>
+              <th class="fw-normal">Delivery Fee</th>
+              <td class="text-end">{{restaurant.deliveryFee | currency: 'USD': 'symbol'}}</td>
+            </tr>
+            <tr>
+              <th>Total</th>
+              <td class="text-end"><b>{{total() + restaurant.deliveryFee | currency: 'USD': 'symbol'}}</b></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-    <table class="table mt-2">
-      <tbody>
-      <tr *ngFor="let item of items()">
-        <th class="ttt">{{item.quantity}}x {{item.menuItem.name}}</th>
-        <td class="text-right"><b>{{item.value() | currency: 'USD': 'symbol'}}</b></td>
-        <td class="text-right">
-          <a (click)="removeItem(item)" class="btn btn-sm danger"><i class="fa fa-remove"></i></a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <div><strong>Delivery</strong></div>
-    <table class="table">
-      <tbody>
-      <tr>
-        <th class="ttt">Subtotal</th>
-        <td class=" ttt">{{total() | currency: 'USD': 'symbol'}}</td>
-      </tr>
-      <tr>
-        <th class="ttt">Delivery Fee</th>
-        <td class="ttt">{{restaurant.deliveryFee | currency: 'USD': 'symbol'}}</td>
-      </tr>
-      <tr>
-        <th>Total</th>
-        <td><b>{{total() + restaurant.deliveryFee | currency: 'USD': 'symbol'}}</b></td>
-      </tr>
-      </tbody>
-    </table>
+    <div *ngIf="items().length">
+      <div class="d-flex align-items-center justify-content-center">
+        <a (click)="finishOrder()" class="btn btn-success mt-2 me-1"><i class="fa fa-credit-card"></i> Finish Order</a>
+        <button (click)="clear()" type="button" class="btn btn-danger mt-2"><i class="fa fa-trash"></i> Clear</button>
+      </div>
+    </div>
   </div>
 </div>
-<div *ngIf="items().length" class="box-footer">
-  <div class="d-flex align-items-center justify-content-center">
-    <a (click)="finishOrder()" class="btn btn-success mt-2 me-1"><i class="fa fa-credit-card"></i> Finish Order</a>
-    <button (click)="clear()" type="button" class="btn btn-danger mt-2"><i class="fa fa-trash"></i> Clear</button>
-  </div>
-</div>
-

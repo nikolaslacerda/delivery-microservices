@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MenuService} from '../../../../services/menu.service';
+import {MenuService} from '../../../../core/services/menu.service';
 import {Router} from '@angular/router';
-import {OrderResponse} from '../../../../models/response/order.response.model';
+import {OrderResponse} from '../../../../shared/models/response/order.response.model';
 
 @Component({
   selector: 'app-order-card',

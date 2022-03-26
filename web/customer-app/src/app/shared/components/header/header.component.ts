@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthenticationService} from '../../../services/authentication.service';
-import {RestaurantService} from '../../../services/restaurant.service';
+import {AuthenticationService} from '../../../core/services/authentication.service';
+import {RestaurantService} from '../../../core/services/restaurant.service';
 import {FormBuilder, Validators} from '@angular/forms';
-import {ShoppingCartService} from '../../../services/shopping-cart.service';
+import {ShoppingCartService} from '../../../core/services/shopping-cart.service';
 import * as Feather from 'feather-icons';
 
 
@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     restaurantName: ['', Validators.required]
   });
 
-  cartCount: any;
   constructor(private router: Router,
               private tst: AuthenticationService,
               private authenticationService: AuthenticationService,
@@ -30,9 +29,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
               private shoppingCartService: ShoppingCartService,
               private fb: FormBuilder
   ) {
-    this.shoppingCartService.itemsO.subscribe(items => {
-      this.cartCount = items.map(item => item.quantity).reduce((x, y) => x + y, 0);
-    });
   }
 
   ngAfterViewInit() {
@@ -48,11 +44,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     //       .subscribe(restaurant => user.restaurantId = restaurant.id);
     //   }
     // });
-  }
-
-  logout() {
-    // this.authenticationService.logout();
-    // this.router.navigate(['']);
   }
 
   onSubmit() {

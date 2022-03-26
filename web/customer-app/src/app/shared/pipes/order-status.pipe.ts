@@ -9,7 +9,8 @@ export class OrderStatusPipe implements PipeTransform {
     RECEIVED: 'Received',
     IN_THE_KITCHEN : 'In the kitchen', // confirmed
     ON_THE_WAY: 'On the way',
-    DELIVERED: 'Delivered'
+    DELIVERED: 'Delivered',
+    CANCELED: 'Canceled'
   };
 
   transform(value: any): string {

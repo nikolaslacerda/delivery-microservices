@@ -2,7 +2,7 @@
   <h4><strong>My Orders</strong></h4>
   <div *ngIf="getProcessOrders().length">
     <div class="d-flex flex-row flex-wrap justify-content-between align-items-start mb-5">
-      <div *ngFor="let order of getProcessOrders()" class="ddd">
+      <div *ngFor="let order of getProcessOrders()" class="ddd mt-4">
         <app-order-card [order]="order"></app-order-card>
       </div>
     </div>
@@ -10,7 +10,7 @@
   <div *ngIf="getHistoric().length">
     <h3><strong>Historic</strong></h3>
     <div class="d-flex flex-row flex-wrap justify-content-between">
-      <div *ngFor="let order of getHistoric()" class="ddd">
+      <div *ngFor="let order of getHistoric()" class="ddd mt-4">
         <app-order-card [order]="order"></app-order-card>
       </div>
     </div>
