@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {RatingService} from 'src/app/core/services/rating.service';
 import {OrderService} from '../../../core/services/order.service';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {OrderResponse} from '../../../shared/models/response/order.response.model';
 import {ReviewResponse} from '../../../shared/models/response/review.response.model';
 import {ReviewRequest} from '../../../shared/models/request/review.request.model';
@@ -14,9 +14,13 @@ import {ReviewRequest} from '../../../shared/models/request/review.request.model
 })
 export class OrderStatusComponent implements OnInit {
 
-  ratingForm: FormGroup;
   order: OrderResponse = {} as OrderResponse;
   review: ReviewResponse = {} as ReviewResponse;
+
+  ratingForm = this.fb.group({
+    rating: ['', Validators.required],
+    comment: ['', Validators.required],
+  });
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -26,10 +30,6 @@ export class OrderStatusComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ratingForm = this.fb.group({
-      rating: ['', Validators.required],
-      comment: ['', Validators.required],
-    });
     const orderId = this.route.snapshot.params.orderId;
     this.orderService.getOrderById(orderId)
       .subscribe((order: OrderResponse) => {

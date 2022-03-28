@@ -25,7 +25,7 @@
 
   <section class="content" *ngIf="allRestaurants?.length">
     <h4><b>Restaurants</b></h4>
-    <div class="d-flex flex-wrap justify-content-around eee align-items-center">
+    <div class="d-flex flex-wrap justify-content-start eee align-items-center">
       <div *ngFor="let restaurant of allRestaurants" class="ddd mt-4">
         <app-restaurant-card [restaurant]="restaurant"></app-restaurant-card>
       </div>

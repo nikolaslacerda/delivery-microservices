@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../core/services/authentication.service';
 import {Router} from '@angular/router';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {CustomerRequest} from '../../shared/models/request/customer.request.model';
 import {ToastrService} from 'ngx-toastr';
 
@@ -12,7 +12,14 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class SignupComponent implements OnInit {
 
-  signUpForm: FormGroup;
+  signUpForm = this.fb.group({
+    firstName: this.fb.control('', [Validators.required, Validators.minLength(2)]),
+    lastName: this.fb.control('', [Validators.required, Validators.minLength(2)]),
+    phone: this.fb.control('', [Validators.required, Validators.minLength(11)]),
+    email: this.fb.control('', [Validators.required, Validators.email]),
+    password: this.fb.control('', [Validators.required]),
+    passwordConfirmation: this.fb.control('', [Validators.required]),
+  });
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -24,14 +31,6 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.signUpForm = this.fb.group({
-      firstName: this.fb.control('', [Validators.required, Validators.minLength(2)]),
-      lastName: this.fb.control('', [Validators.required, Validators.minLength(2)]),
-      phone: this.fb.control('', [Validators.required, Validators.minLength(11)]),
-      email: this.fb.control('', [Validators.required, Validators.email]),
-      password: this.fb.control('', [Validators.required]),
-      passwordConfirmation: this.fb.control('', [Validators.required]),
-    });
   }
 
   get firstName(): AbstractControl {

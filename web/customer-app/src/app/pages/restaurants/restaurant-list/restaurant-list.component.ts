@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {CuisineTypeService} from 'src/app/core/services/cuisine-type.service';
 import {RestaurantService} from 'src/app/core/services/restaurant.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {RestaurantResponse} from '../../../shared/models/response/restaurant.response.model';
 import {CuisineTypeResponse} from '../../../shared/models/response/cuisine-type.response';
 
@@ -17,9 +17,12 @@ export class RestaurantListComponent implements OnInit {
   q: string;
   isLoading = true;
   mainCategory: string;
-  searchForm: FormGroup;
   cuisineTypes: CuisineTypeResponse[] = [];
   allRestaurants: RestaurantResponse[] = [];
+
+  searchForm = this.fb.group({
+    restaurantName: ['', Validators.required]
+  });
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -29,9 +32,6 @@ export class RestaurantListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchForm = this.fb.group({
-      restaurantName: ['', Validators.required]
-    });
     this.cuisineTypeService.getCuisineTypes().subscribe(cuisineTypes => {
       this.cuisineTypes = cuisineTypes;
     });

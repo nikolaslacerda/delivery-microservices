@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {AuthenticationService} from 'src/app/core/services/authentication.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +10,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
   navigateTo: string;
+
+  loginForm = this.fb.group({
+    email: this.fb.control('', [Validators.required, Validators.email]),
+    password: this.fb.control('', [Validators.required])
+  });
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -23,10 +27,6 @@ export class LoginComponent implements OnInit {
     if (this.authenticationService.isLoggedIn()) {
       this.router.navigate(['/restaurants']);
     }
-    this.loginForm = this.fb.group({
-      email: this.fb.control('', [Validators.required, Validators.email]),
-      password: this.fb.control('', [Validators.required])
-    });
     this.navigateTo = this.activatedRoute.snapshot.params.to || '/';
   }
 

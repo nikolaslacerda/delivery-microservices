@@ -4,7 +4,7 @@ import {OrderService} from 'src/app/core/services/order.service';
 import {OrderRequest} from '../../../shared/models/request/order.request.model';
 import {CartItem} from '../../../shared/models/cart-item';
 import {OrderItemRequest} from '../../../shared/models/request/order-item.request';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {RestaurantService} from '../../../core/services/restaurant.service';
 import {AuthenticationService} from '../../../core/services/authentication.service';
 import {PaymentMethodService} from '../../../core/services/payment-method.service';
@@ -22,11 +22,26 @@ import {PaymentMethodResponse} from '../../../shared/models/response/payment-met
 export class OrderComponent implements OnInit {
 
   isLoading = true;
-  orderForm: FormGroup;
   order = {} as OrderRequest;
   payment = {} as PaymentRequest;
   restaurant = {} as RestaurantResponse;
   paymentMethods: PaymentMethodResponse[];
+
+  orderForm = this.formBuilder.group({
+    addressGroup: this.formBuilder.group({
+      streetAddress: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      streetNumber: this.formBuilder.control('', [Validators.required]),
+      neighborhood: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      city: this.formBuilder.control('', [Validators.required, Validators.minLength(2)]),
+      country: this.formBuilder.control('US', [Validators.required]),
+      postalCode: this.formBuilder.control('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
+      complement: this.formBuilder.control(''),
+      reference: this.formBuilder.control('')
+    }),
+    paymentGroup: this.formBuilder.group({
+      paymentId: this.formBuilder.control('', [Validators.required])
+    })
+  });
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -39,21 +54,6 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.orderForm = this.formBuilder.group({
-      addressGroup: this.formBuilder.group({
-        streetAddress: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-        streetNumber: this.formBuilder.control('', [Validators.required]),
-        neighborhood: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-        city: this.formBuilder.control('', [Validators.required, Validators.minLength(2)]),
-        country: this.formBuilder.control('US', [Validators.required]),
-        postalCode: this.formBuilder.control('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
-        complement: this.formBuilder.control(''),
-        reference: this.formBuilder.control('')
-      }),
-      paymentGroup: this.formBuilder.group({
-        paymentId: this.formBuilder.control('', [Validators.required])
-      })
-    });
     if (this.shoppingCard.getCartItems.length === 0) {
       this.router.navigateByUrl('/');
     } else {
@@ -107,12 +107,14 @@ export class OrderComponent implements OnInit {
 
   decreaseQty(item: CartItem): void {
     this.shoppingCard.decreaseQty(item);
+    if (this.shoppingCard.getCartItems.length === 0) {
+      this.router.navigateByUrl('/');
+    }
   }
 
   remove(item: CartItem): void {
     this.shoppingCard.removeItem(item);
     if (this.shoppingCard.getCartItems.length === 0) {
-      console.log('zerou, ué apareceu')
       this.router.navigateByUrl('/');
     }
   }

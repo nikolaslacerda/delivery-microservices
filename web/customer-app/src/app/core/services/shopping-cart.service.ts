@@ -2,7 +2,9 @@ import {Injectable} from '@angular/core';
 import {CartItem} from '../../shared/models/cart-item';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
-import {ChangeRestaurantModalComponent} from '../../shared/components/shopping-cart/change-restaurant-modal/change-restaurant-modal.component';
+import {
+  ChangeRestaurantModalComponent
+} from '../../shared/components/shopping-cart/change-restaurant-modal/change-restaurant-modal.component';
 import {MenuItemResponse} from '../../shared/models/response/menu-item.response';
 
 @Injectable({
@@ -53,8 +55,6 @@ export class ShoppingCartService {
   }
 
   private addItem(item: MenuItemResponse) {
-    console.log('adicionando item');
-    console.log(item)
     const foundItem = this.getCartItems.find((menuItem) => menuItem.menuItem.id === item.id);
     if (foundItem) {
       this.increaseQty(foundItem);
@@ -80,5 +80,8 @@ export class ShoppingCartService {
   removeItem(item: CartItem) {
     this.getCartItems.splice(this.getCartItems.indexOf(item), 1);
     this.items.next(this.getCartItems);
+    if (this.getCartItems.length === 0) {
+      this.restaurant.next(undefined);
+    }
   }
 }
