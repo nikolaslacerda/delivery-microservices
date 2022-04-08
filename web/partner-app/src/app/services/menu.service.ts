@@ -19,23 +19,33 @@ export class MenuService {
   constructor(private http: HttpClient) {
   }
 
-  getMenuByRestaurant(restaurantId: number): Observable<MenuResponse[]> {
-    return this.http.get<MenuResponse[]>(`${this.API}/menus?restaurantId=${restaurantId}`);
+  // Menu
+
+  getMenuByRestaurant(restaurantId: number): Observable<MenuResponse> {
+    return this.http.get<MenuResponse>(`${this.API}/restaurants/${restaurantId}/menu`);
   }
 
-  getCategoriesByMenu(menuId: number): Observable<MenuCategoryResponse[]> {
-    return this.http.get<MenuCategoryResponse[]>(`${this.API}/menuCategories?menuId=${menuId}`);
+  // Categories
+
+  createCategory(restaurantId: number = 1, menuId: number, category: MenuCategoryRequest): Observable<MenuCategoryResponse> {
+    return this.http.post<MenuCategoryResponse>(`${this.API}/partners/restaurants/${restaurantId}/menu/${menuId}/categories`, category);
   }
 
-  getItemsByCategory(categoryId: number): Observable<MenuItemResponse[]> {
-    return this.http.get<MenuItemResponse[]>(`${this.API}/menuItems?menuCategoryId=${categoryId}`);
+  getCategories(restaurantId: number, menuId: number): Observable<MenuCategoryResponse> {
+    return this.http.get<MenuCategoryResponse>(`${this.API}/partners/restaurants/${restaurantId}/menu/${menuId}/categories`);
   }
 
-  addMenuCategory(category: MenuCategoryRequest): Observable<MenuCategoryResponse> {
-    return this.http.post<MenuCategoryResponse>(`${this.API}/menuCategories`, category);
+  editCategory(restaurantId: number, menuId: number, categoryId: number, category: MenuCategoryRequest): Observable<MenuCategoryResponse> {
+    return this.http.patch<MenuCategoryResponse>(`${this.API}/partners/restaurants/${restaurantId}/menu/${menuId}/categories/${categoryId}`, category);
   }
 
-  addMenuItem(menuItem: MenuItemRequest): Observable<MenuItemResponse> {
+  deleteCategory(restaurantId: number, menuId: number, categoryId: number): Observable<void> {
+    return this.http.delete<void>(`${this.API}/partners/restaurants/${restaurantId}/menu/${menuId}/categories/${categoryId}`);
+  }
+
+  // Items
+
+  createItem(menuItem: MenuItemRequest): Observable<MenuItemResponse> {
     return this.http.post<MenuItemResponse>(`${this.API}/menuItems`, menuItem);
   }
 
@@ -45,35 +55,11 @@ export class MenuService {
     return this.http.post(`${this.API}/menuItems/${menuItemId}/update-image`, formData);
   }
 
-  updateMenuItem(menuItemId: number, menuItem: MenuItemRequest): Observable<MenuItemResponse> {
+  editItem(menuItemId: number, menuItem: MenuItemRequest): Observable<MenuItemResponse> {
     return this.http.patch<MenuItemResponse>(`${this.API}/menuItems/${menuItemId}`, menuItem);
   }
 
-  updateMenuCategory(menuCategoryId: number, menuCategory: MenuCategoryRequest): Observable<MenuCategoryResponse> {
-    return this.http.put<MenuCategoryResponse>(`${this.API}/menuCategories/${menuCategoryId}`, menuCategory);
-  }
-
-  deleteMenuItem(menuItem: MenuItemResponse): Observable<void> {
+  deleteItem(menuItem: MenuItemResponse): Observable<void> {
     return this.http.delete<void>(`${this.API}/menuItems/${menuItem.id}`);
-  }
-
-  getMenuItemById(menuId: number): Observable<MenuItemResponse> {
-    return this.http.get<MenuItemResponse>(`${this.API}/menuItems/${menuId}`);
-  }
-
-  updateItemStatus(item: MenuItemResponse): Observable<void> {
-    return this.http.put<void>(`${this.API}/menuItems/${item.id}`, item);
-  }
-
-  getCategory(categoryId: number): Observable<any> {
-    return this.http.get(`${this.API}/menuCategories/${categoryId}`);
-  }
-
-  updateCategoryStatus(category: MenuCategoryResponse): Observable<void> {
-    return this.http.put<void>(`${this.API}/menuCategories/${category.id}`, category);
-  }
-
-  deleteMenuCategory(category: MenuCategoryResponse): Observable<void> {
-    return this.http.delete<void>(`${this.API}/menuCategories/${category.id}`);
   }
 }

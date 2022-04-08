@@ -39,21 +39,15 @@ export class EditMenuItemModalComponent implements OnInit {
   ngOnInit(): void {
     this._populateForm();
     this.imageSrc = 'https://localhost:3001/partner/item/image/' + this.item.imageUrl;
-
-    this.menuService.getCategory(this.item.menuCategoryId)
-      .subscribe(res => {
-        this.menuService.getCategoriesByMenu(res.menuId)
-          .subscribe(allMenuCategories => this.allCategories = allMenuCategories);
-      });
+    this.menuService.getCategories(1, 1).subscribe(allMenuCategories => this.allCategories = allMenuCategories);
   }
 
   private _populateForm(): void {
     this.editMenuItemForm.patchValue({
       name: this.item.name,
       description: this.item.description,
-      menuCategoryId: this.item.menuCategoryId,
-      unitPrice: this.item.unitPrice,
-      unitOriginalPrice: this.item.unitOriginalPrice
+      unitPrice: this.item.promotionalPrice,
+      unitOriginalPrice: this.item.price
     });
   }
 
@@ -69,24 +63,24 @@ export class EditMenuItemModalComponent implements OnInit {
     if (this.editMenuItemForm.valid) {
       this.buttonLoading = true;
       if (!this.editMenuItemForm.value.image.fileSource.length) {
-        this.menuService.updateMenuItem(this.item.id, new MenuItemUpdateRequest(this.editMenuItemForm.value))
+        this.menuService.editItem(this.item.id, new MenuItemUpdateRequest(this.editMenuItemForm.value))
           .subscribe((menuItem: MenuItemResponse) => {
             this.buttonLoading = false;
             this.emitAdd(menuItem);
             this.hide();
           });
       } else {
-        this.menuService.updateMenuItem(this.item.id, new MenuItemUpdateRequest(this.editMenuItemForm.value))
+        this.menuService.editItem(this.item.id, new MenuItemUpdateRequest(this.editMenuItemForm.value))
           .subscribe((menuItem: MenuItemResponse) => {
             this.menuService.addMenuItemImage(menuItem.id, this.image)
               .subscribe(res => {
                 menuItem.imageUrl = 'https://localhost:3001/partner/item/image/' + res.uploadedFile.filename;
-                this.menuService.updateMenuItem(menuItem.id, menuItem)
-                  .subscribe(menuItem2 => {
-                    this.buttonLoading = false;
-                    this.emitAdd(menuItem2);
-                    this.hide();
-                  });
+                // this.menuService.editItem(menuItem.id, menuItem)
+                //   .subscribe(menuItem2 => {
+                //     this.buttonLoading = false;
+                //     this.emitAdd(menuItem2);
+                //     this.hide();
+                //   });
               });
           });
       }

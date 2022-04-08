@@ -21,12 +21,12 @@ export class OrderDetailComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.isLoading = true;
     this.order.items.forEach(item => {
-      this.menuService.getMenuItemById(item.menuItemId)
-        .subscribe((menuItem: MenuItemResponse) => {
-          item.name = menuItem.name;
-          item.price = menuItem.unitPrice;
-          this.isLoading = false;
-        });
+      // this.menuService.getMenuItemById(item.menuItemId)
+      //   .subscribe((menuItem: MenuItemResponse) => {
+      //     item.name = menuItem.name;
+      //     item.price = menuItem.promotionalPrice;
+      //     this.isLoading = false;
+      //   });
     });
   }
 

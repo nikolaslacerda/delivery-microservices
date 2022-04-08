@@ -12,14 +12,14 @@
   <tbody>
   <tr *ngFor="let item of items">
     <td class="align-middle">
-      <img src="{{'https://localhost:3001/partner/item/image/' + item.imageUrl}}" style="width: 100px">
+      <img src="{{'http://localhost:8083/restaurants/image/menu-item/' + item.imageUrl}}" style="width: 100px">
     </td>
     <td class="align-middle">
       {{item.name}}
     </td>
-    <td class="align-middle">{{item.unitOriginalPrice | currency: 'USD': 'symbol'}}
+    <td class="align-middle">{{item.price | currency: 'USD': 'symbol'}}
     </td>
-    <td class="align-middle">{{item.unitPrice | currency: 'USD': 'symbol'}}
+    <td class="align-middle">{{item.promotionalPrice | currency: 'USD': 'symbol'}}
     </td>
     <td class="align-middle">
       <div class="btn-group" role="group" aria-label="Basic example">

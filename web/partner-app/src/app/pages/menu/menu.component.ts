@@ -20,9 +20,9 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     const restaurantId = this.authService.getRestaurantId();
     this.menuService.getMenuByRestaurant(restaurantId)
-      .subscribe((menu: MenuResponse[]) => {
+      .subscribe((menu: MenuResponse) => {
         this.isLoading = false;
-        this.menu = menu[0];
+        this.menu = menu;
       });
   }
 }

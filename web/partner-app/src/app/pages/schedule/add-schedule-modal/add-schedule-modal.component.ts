@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {ScheduleService} from '../../../services/schedule.service';
 import {formatDate} from '@angular/common';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-add-schedule-modal',
@@ -22,6 +23,7 @@ export class AddScheduleModalComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               public bsModalRef: BsModalRef,
+              private authService: AuthService,
               private scheduleService: ScheduleService) {
   }
 
@@ -42,7 +44,7 @@ export class AddScheduleModalComponent implements OnInit {
     this.schedule.closingTime = formatDate(this.scheduleForm.value.closingTime, 'HH:mm', 'en');
     this.schedule.active = true;
     this.schedule.restaurantId = 1;
-    this.scheduleService.saveRestaurantSchedule(this.schedule).subscribe(schedule => {
+    this.scheduleService.saveRestaurantSchedule(this.authService.getRestaurantId(), this.schedule).subscribe(schedule => {
       this.emitAdd(schedule);
       this.hide();
     });

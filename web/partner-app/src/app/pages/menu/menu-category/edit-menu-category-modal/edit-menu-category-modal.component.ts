@@ -42,7 +42,7 @@ export class EditMenuCategoryModalComponent implements OnInit {
 
   updateMenuCategory(): void {
     this.list[0].category.name = this.categoryForm.value.name;
-    this.menuService.updateMenuCategory(this.list[0].category.id, this.list[0].category).subscribe(() => {
+    this.menuService.editCategory(1, 1, this.list[0].category.id, this.list[0].category).subscribe(() => {
       this.emitAdd();
       this.hide();
     });

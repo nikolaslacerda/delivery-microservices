@@ -16,14 +16,14 @@ export class MenuService {
   constructor(private http: HttpClient) {
   }
 
-  getByRestaurant(restaurantId: string): Observable<MenuResponse[]> {
-    return this.http.get<MenuResponse[]>(`${this.API}/menus?restaurantId=${restaurantId}`);
+  getByRestaurant(restaurantId: string): Observable<MenuResponse> {
+    return this.http.get<MenuResponse>(`${this.API}/restaurants/${restaurantId}/menu`);
   }
 
-  getCategories(menuId: number): Observable<MenuCategoryResponse[]> {
+  getCategories(menuId: number): Observable<MenuResponse[]> {
     let params: HttpParams;
     params = new HttpParams().set('active', 'true');
-    return this.http.get<MenuCategoryResponse[]>(`${this.API}/menuCategories?menuId=${menuId}`, {params});
+    return this.http.get<MenuResponse[]>(`${this.API}/menu/${menuId}/category`, {params});
   }
 
   getItems(categoryId: number): Observable<MenuItemResponse[]> {

@@ -1,17 +1,20 @@
 package com.server.deliveryrestaurantservice.model.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class MenuCategory {
@@ -23,6 +26,9 @@ public class MenuCategory {
     @NotBlank
     @Size(max = 100)
     private String name;
+
+    @NotNull
+    private Boolean active;
 
     @ManyToOne(optional = false)
     private Menu menu;

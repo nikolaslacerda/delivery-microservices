@@ -76,24 +76,24 @@ export class AddMenuItemModalComponent implements OnInit {
     if (this.addMenuItemForm.valid) {
       this.buttonLoading = true;
       if (!this.addMenuItemForm.value.image.fileSource.length) {
-        this.menuService.addMenuItem(new MenuItemRequest(this.addMenuItemForm.value))
+        this.menuService.createItem(new MenuItemRequest(this.addMenuItemForm.value))
           .subscribe((menuItem: MenuItemResponse) => {
             this.buttonLoading = false;
             this.emitAdd(menuItem);
             this.hide();
           });
       } else {
-        this.menuService.addMenuItem(new MenuItemRequest(this.addMenuItemForm.value))
+        this.menuService.createItem(new MenuItemRequest(this.addMenuItemForm.value))
           .subscribe((menuItem: MenuItemResponse) => {
-            this.menuService.addMenuItemImage(menuItem.id, this.image)
-              .subscribe(res => {
-                menuItem.imageUrl = 'https://localhost:3001/partner/item/image/' + res.uploadedFile.filename;
-                this.menuService.updateMenuItem(menuItem.id, menuItem).subscribe(() => {
-                  this.buttonLoading = false;
-                  this.emitAdd(menuItem);
-                  this.hide();
-                });
-              });
+            // this.menuService.addMenuItemImage(menuItem.id, this.image)
+            //   .subscribe(res => {
+            //     menuItem.imageUrl = 'https://localhost:3001/partner/item/image/' + res.uploadedFile.filename;
+            //     this.menuService.editItem(menuItem.id, menuItem).subscribe(() => {
+            //       this.buttonLoading = false;
+            //       this.emitAdd(menuItem);
+            //       this.hide();
+            //     });
+            //   });
           });
       }
     }

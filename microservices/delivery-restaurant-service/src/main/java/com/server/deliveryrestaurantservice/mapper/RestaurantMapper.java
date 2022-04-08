@@ -1,46 +1,53 @@
 package com.server.deliveryrestaurantservice.mapper;
 
-import com.server.deliveryrestaurantservice.model.dto.RestaurantDistanceDto;
-import com.server.deliveryrestaurantservice.model.dto.RestaurantDto;
+import com.server.deliveryrestaurantservice.model.dto.response.RestaurantResponse;
 import com.server.deliveryrestaurantservice.model.entity.Restaurant;
+import com.server.deliveryrestaurantservice.model.dto.request.RestaurantRequest;
+import com.server.deliveryrestaurantservice.model.entity.Review;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.util.List;
+
+@NoArgsConstructor(access= AccessLevel.PRIVATE)
 public class RestaurantMapper {
 
-    public static RestaurantDto mapToDto(Restaurant restaurant) {
-        return RestaurantDto.builder()
+    public static RestaurantResponse mapToDto(Restaurant restaurant) {
+        return RestaurantResponse.builder()
                 .id(restaurant.getId())
                 .cnpj(restaurant.getCnpj())
                 .name(restaurant.getName())
+                .address(AddressMapper.mapToDto(restaurant.getAddress()))
+                .imageUrl(restaurant.getImageUrl())
                 .description(restaurant.getDescription())
-                .cep(restaurant.getCep())
-                .address(restaurant.getAddress())
-                .deliveryPrice(restaurant.getDeliveryPrice())
-                .cuisineTypeId(restaurant.getCuisineTypeId())
+                .deliveryFee(restaurant.getDeliveryPrice())
+                .cuisineType(restaurant.getCuisineType().getName())
                 .minDeliveryTime(restaurant.getMinDeliveryTime())
                 .maxDeliveryTime(restaurant.getMaxDeliveryTime())
-                .approved(restaurant.getApproved())
+                .active(restaurant.getActive())
+                .userRating(getReviewAverage(restaurant.getReviews()))
                 .build();
     }
 
-    public static RestaurantDistanceDto mapToDistanceDto(Restaurant restaurant) {
-        return RestaurantDistanceDto.builder()
-                .id(restaurant.getId())
-                .cep(restaurant.getCep())
-                .cuisineTypeId(restaurant.getCuisineTypeId())
-                .build();
+    private static Double getReviewAverage(List<Review> reviews) {
+        return reviews.stream()
+                .mapToDouble(Review::getUserRating)
+                .average()
+                .orElse(Double.NaN);
     }
 
-    public static Restaurant mapToModel(RestaurantDto restaurantDto) {
+    public static Restaurant mapToModel(RestaurantRequest restaurantDto) {
         return Restaurant.builder()
                 .cnpj(restaurantDto.getCnpj())
                 .name(restaurantDto.getName())
                 .description(restaurantDto.getDescription())
-                .cep(restaurantDto.getCep())
-                .address(restaurantDto.getAddress())
+                .active(false)
+                .createdAt(LocalDate.now())
                 .deliveryPrice(restaurantDto.getDeliveryPrice())
                 .maxDeliveryTime(restaurantDto.getMaxDeliveryTime())
                 .minDeliveryTime(restaurantDto.getMinDeliveryTime())
-                .cuisineTypeId(restaurantDto.getCuisineTypeId())
+                .partnerId(restaurantDto.getPartnerId())
                 .build();
     }
 }

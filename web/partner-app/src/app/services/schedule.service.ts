@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {DayOfWeekUtils} from '../shared/utils/dayOfWeek.utils';
 import {map} from 'rxjs/operators';
@@ -17,24 +17,23 @@ export class ScheduleService {
               private dayOfWeekUtils: DayOfWeekUtils) {
   }
 
-  saveRestaurantSchedule(schedule: any): Observable<any> {
-    if (schedule.id) {
-      return this.http.put(`${this.API}/schedules/${schedule.id}`, schedule);
-    } else {
-      return this.http.post(`${this.API}/schedules`, schedule);
-    }
+  saveRestaurantSchedule(restaurantId: number, schedule: any): Observable<any> {
+    return this.http.post(`${this.API}/partners/restaurants/${restaurantId}/business-hours`, schedule);
+  }
+
+  editSchedule(restaurantId: number, schedule: any): Observable<any> {
+    return this.http.put(`${this.API}/partners/restaurants/${restaurantId}/business-hours/${schedule.id}`, schedule);
   }
 
   getRestaurantSchedule(restaurantId: any): Observable<ScheduleResponse[]> {
-    const params = new HttpParams().set('restaurantId', restaurantId);
-    return this.http.get<ScheduleResponse[]>(`${this.API}/schedules`, {params})
+    return this.http.get<ScheduleResponse[]>(`${this.API}/partners/restaurants/${restaurantId}/business-hours`)
       .pipe(
         map((days: any) => this.sortDays(days))
       );
   }
 
-  deleteRestaurantSchedule(schedule: any): Observable<void> {
-    return this.http.delete<void>(`${this.API}/schedules/${schedule.id}`);
+  deleteRestaurantSchedule(restaurantId: number, schedule: any): Observable<void> {
+    return this.http.delete<void>(`${this.API}/partners/restaurants/${restaurantId}/business-hours/${schedule.id}`);
   }
 
   sortDays(days: any): any {

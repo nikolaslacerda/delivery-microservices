@@ -46,7 +46,7 @@ export class AddMenuCategoryModalComponent implements OnInit {
 
   addCategory(): void {
     const category = new MenuCategoryRequest(this.categoryForm.value);
-    this.menuService.addMenuCategory(category).subscribe(createdCategory => {
+    this.menuService.createCategory(1, 1, category).subscribe(createdCategory => {
       this.emitAdd(createdCategory);
       this.hide();
     });

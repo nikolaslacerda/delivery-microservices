@@ -23,7 +23,7 @@
         <select (change)="onChange($event)" class="form-select" aria-label="Default select example">
           <option selected>Choose...</option>
           <option *ngFor="let paymentMethod of allPaymentMethods"
-                  [value]="paymentMethod.paymentMethodId">{{paymentMethod.name | PaymentMethod}}</option>
+                  [value]="paymentMethod.id">{{paymentMethod.name | PaymentMethod}}</option>
         </select>
       </div>
     </div>

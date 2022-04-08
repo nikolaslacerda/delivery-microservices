@@ -2,7 +2,7 @@ export class ReviewResponse {
   id: number;
   name: string;
   createdAt: string;
-  comments: string;
+  comment: string;
   userRating: number;
   restaurantId: number;
   orderId: number;
@@ -11,7 +11,7 @@ export class ReviewResponse {
     this.id = model.id;
     this.name = model.name;
     this.createdAt = model.createdAt;
-    this.comments = model.comments;
+    this.comment = model.comment;
     this.userRating = model.userRating;
     this.restaurantId = model.restaurantId;
     this.orderId = model.orderId;

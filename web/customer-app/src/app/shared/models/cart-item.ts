@@ -11,12 +11,12 @@ export class CartItem {
   constructor(public menuItem: MenuItemResponse, public quantityy: number = 1) {
     this.menuItemId = menuItem.id;
     this.name = menuItem.name;
-    this.price = menuItem.unitOriginalPrice;
-    this.promotionalPrice = menuItem.unitPrice;
+    this.price = menuItem.promotionalPrice;
+    this.promotionalPrice = menuItem.price;
     this.quantity = quantityy;
   }
 
   value(): number {
-    return this.menuItem.unitPrice * this.quantity;
+    return this.menuItem.price * this.quantity;
   }
 }

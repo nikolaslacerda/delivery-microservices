@@ -1,8 +1,8 @@
 package com.server.deliveryrestaurantservice.controller;
 
-import com.server.deliveryrestaurantservice.model.entity.RestaurantPaymentMethod;
-import com.server.deliveryrestaurantservice.model.entity.Restaurant;
-import com.server.deliveryrestaurantservice.repository.PaymentMethodRepository;
+import com.server.deliveryrestaurantservice.model.dto.request.PaymentMethodRequest;
+import com.server.deliveryrestaurantservice.model.dto.response.PaymentMethodResponse;
+import com.server.deliveryrestaurantservice.service.PaymentMethodService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,30 +12,28 @@ import java.util.List;
 @AllArgsConstructor
 class PaymentMethodController {
 
-    private PaymentMethodRepository paymentMethodRepository;
+    private final PaymentMethodService paymentMethodService;
 
-    @PostMapping("/partners/restaurants/{idRestaurant}/payment-methods")
-    public void createRestaurantPaymentMethod(@PathVariable("idRestaurant") Long idRestaurant,
-                                              @RequestBody Long paymentMethodId) {
-        RestaurantPaymentMethod.PaymentMethodId id = new RestaurantPaymentMethod.PaymentMethodId(idRestaurant, paymentMethodId);
-        Restaurant restaurant = new Restaurant();
-        restaurant.setId(idRestaurant);
-        RestaurantPaymentMethod restaurantPaymentMethod = new RestaurantPaymentMethod(id, restaurant, paymentMethodId);
-        paymentMethodRepository.save(restaurantPaymentMethod);
+    @PostMapping("/partners/restaurants/{restaurantId}/payment-methods")
+    public PaymentMethodResponse createRestaurantPaymentMethod(@PathVariable("restaurantId") Long restaurantId,
+                                                               @RequestBody PaymentMethodRequest paymentMethod) {
+        return paymentMethodService.createRestaurantPaymentMethod(restaurantId, paymentMethod);
     }
 
-    @GetMapping("/restaurants/{idRestaurant}/payment-methods")
-    public List<Long> getRestaurantPaymentMethods(@PathVariable("idRestaurant") Long idRestaurant) {
-        Restaurant restaurant = new Restaurant();
-        restaurant.setId(idRestaurant);
-        return paymentMethodRepository.findAllByRestaurantOrderByNomeAsc(restaurant);
+    @GetMapping("/partners/restaurants/payment-methods")
+    public List<PaymentMethodResponse> getPaymentMethods() {
+        return paymentMethodService.getPaymentMethods();
     }
 
-    @DeleteMapping("/partners/restaurants/{idRestaurant}/payment-methods/{paymentMethodId}")
-    public void deleteRestaurantPaymentMethod(@PathVariable("idRestaurant") Long idRestaurant,
+    @GetMapping("/restaurants/{restaurantId}/payment-methods")
+    public List<PaymentMethodResponse> getRestaurantPaymentMethods(@PathVariable("restaurantId") Long restaurantId) {
+        return paymentMethodService.getRestaurantPaymentMethods(restaurantId);
+    }
+
+    @DeleteMapping("/partners/restaurants/{restaurantId}/payment-methods/{paymentMethodId}")
+    public void deleteRestaurantPaymentMethod(@PathVariable("restaurantId") Long restaurantId,
                                               @PathVariable("paymentMethodId") Long paymentMethodId) {
-        RestaurantPaymentMethod.PaymentMethodId id = new RestaurantPaymentMethod.PaymentMethodId(idRestaurant, paymentMethodId);
-        paymentMethodRepository.deleteById(id);
+        paymentMethodService.deleteRestaurantPaymentMethod(restaurantId, paymentMethodId);
     }
 
 }

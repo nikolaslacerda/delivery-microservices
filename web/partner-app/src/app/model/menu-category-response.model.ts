@@ -1,13 +1,15 @@
+import {MenuItemResponse} from './menu-item-response.model';
+
 export class MenuCategoryResponse {
 
   id: number;
-  menuId: number;
+  items: MenuItemResponse[];
   name: string;
   active: boolean;
 
   constructor(model: any = {}) {
     this.id = model.id;
-    this.menuId = model.menuId;
+    this.items = model.items;
     this.name = model.name;
     this.active = model.active;
   }

@@ -5,12 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -34,13 +34,8 @@ public class Restaurant {
     @Size(max = 1000)
     private String description;
 
-    @NotBlank
-    @Size(max = 9)
-    private String cep;
-
-    @NotBlank
-    @Size(max = 300)
-    private String address;
+    @Size(max = 1000)
+    private String imageUrl;
 
     @Positive
     private BigDecimal deliveryPrice;
@@ -55,10 +50,38 @@ public class Restaurant {
     @Positive
     private Integer maxDeliveryTime;
 
-    private Boolean approved;
+    @NotNull
+    private Boolean active;
 
-    private Long cuisineTypeId;
+    @NotNull
+    private LocalDate createdAt;
 
-    private Long userId;
+    private LocalDate updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name="cuisine_type_id", nullable=false)
+    private CuisineType cuisineType;
+
+    @NotNull
+    private Long partnerId;
+
+    @OneToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Menu menu;
+
+    @OneToMany(mappedBy = "restaurant")
+    private List<BusinessHours> businessHours = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "restaurant_payment_method",
+            joinColumns = @JoinColumn(name = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name = "payment_method_id"))
+    private List<PaymentMethod> paymentMethods = new ArrayList<>();
+
+    @OneToMany(mappedBy = "restaurant")
+    private List<Review> reviews = new ArrayList<>();
 
 }

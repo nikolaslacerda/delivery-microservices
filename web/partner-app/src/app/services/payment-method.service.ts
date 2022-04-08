@@ -16,28 +16,18 @@ export class PaymentMethodService {
   }
 
   addPaymentMethodToRestaurant(paymentMethodId: number, restaurantId: number): Observable<PaymentMethodResponse> {
-    return this.http.post<PaymentMethodResponse>(`${this.API}/restaurants_paymentMethods`, {restaurantId, paymentMethodId});
+    return this.http.post<PaymentMethodResponse>(`${this.API}/partners/restaurants/${restaurantId}/payment-methods`, {paymentMethodId});
   }
 
   getAllPaymentMethods(): Observable<PaymentMethodResponse[]> {
-    return this.http.get<PaymentMethodResponse[]>(`${this.API}/paymentMethods`)
-      .pipe(map((res: any) => res.map((result: any) => (new PaymentMethodResponse({
-        id: undefined,
-        paymentMethodId: result.id,
-        name: result.name
-      })))));
+    return this.http.get<PaymentMethodResponse[]>(`${this.API}/partners/restaurants/payment-methods`);
   }
 
   getRestaurantPaymentMethods(restaurantId: number): Observable<PaymentMethodResponse[]> {
-    return this.http.get<PaymentMethodResponse[]>(`${this.API}/restaurants_paymentMethods?restaurantId=${restaurantId}&_expand=paymentMethod`)
-      .pipe(map((res: any) => res.map((result: any) => (new PaymentMethodResponse({
-        id: result.id,
-        paymentMethodId: result.paymentMethod.id,
-        name: result.paymentMethod.name
-      })))));
+    return this.http.get<PaymentMethodResponse[]>(`${this.API}/restaurants/${restaurantId}/payment-methods`);
   }
 
-  deleteRestaurantPaymentMethod(paymentMethodId: number): Observable<void> {
-    return this.http.delete<void>(`${this.API}/restaurants_paymentMethods/${paymentMethodId}`);
+  deleteRestaurantPaymentMethod(restaurantId: number, paymentMethodId: number): Observable<void> {
+    return this.http.delete<void>(`${this.API}/partners/restaurants/${restaurantId}/payment-methods/${paymentMethodId}`);
   }
 }

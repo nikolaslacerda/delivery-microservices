@@ -1,10 +1,8 @@
 package com.server.deliveryrestaurantservice.controller;
 
-import com.server.deliveryrestaurantservice.exception.ResourceNotFoundException;
-import com.server.deliveryrestaurantservice.mapper.MenuItemMapper;
-import com.server.deliveryrestaurantservice.model.dto.MenuItemDto;
-import com.server.deliveryrestaurantservice.model.entity.MenuItem;
-import com.server.deliveryrestaurantservice.repository.MenuItemRepository;
+import com.server.deliveryrestaurantservice.model.dto.request.MenuItemRequest;
+import com.server.deliveryrestaurantservice.model.dto.response.MenuItemResponse;
+import com.server.deliveryrestaurantservice.service.MenuItemService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,27 +10,28 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class MenuItemController {
 
-    private MenuItemRepository menuItemRepository;
+    private final MenuItemService menuItemService;
 
-    @PostMapping("/partners/restaurants/{idRestaurant}/menu/{idMenu}/category/{idCategory}/item")
-    public MenuItemDto createMenuItem(@RequestBody MenuItem item) {
-        return MenuItemMapper.mapToDto(menuItemRepository.save(item));
+    @PostMapping("/partners/restaurants/{restaurantId}/menu/category/{categoryId}/item")
+    public MenuItemResponse createMenuItem(@PathVariable Long categoryId,
+                                           @RequestBody MenuItemRequest request) {
+        return menuItemService.createMenuItem(categoryId, request);
     }
 
-    @PutMapping("/partners/restaurants/{idRestaurant}/menu/{idMenu}/category/{idCategory}/item/{idItem}")
-    public MenuItemDto updateMenuItem(@RequestBody MenuItem item) {
-        return MenuItemMapper.mapToDto(menuItemRepository.save(item));
+    @GetMapping("/partners/restaurants/{restaurantId}/menu/category/{categoryId}/item/{itemId}")
+    public MenuItemResponse getMenuItemById(@PathVariable("itemId") Long itemId) {
+        return menuItemService.getMenuItemById(itemId);
     }
 
-    @GetMapping("/partners/restaurants/{idRestaurant}/menu/{idMenu}/category/{idCategory}/item/{idItem}")
-    public MenuItemDto getMenuItemById(@PathVariable("idItem") Long idItem) {
-        MenuItem item = menuItemRepository.findById(idItem).orElseThrow(ResourceNotFoundException::new);
-        return MenuItemMapper.mapToDto(item);
+    @PutMapping("/partners/restaurants/{restaurantId}/menu/category/{categoryId}/item/{itemId}")
+    public MenuItemResponse updateMenuItem(@PathVariable("itemId") Long itemId,
+                                           @RequestBody MenuItemRequest request) {
+        return menuItemService.updateMenuItem(itemId, request);
     }
 
-    @DeleteMapping("/partners/restaurants/{idRestaurant}/menu/{idMenu}/category/{idCategory}/item/{idItem}")
-    public void deleteMenuItem(@PathVariable("idItem") Long idItem) {
-        menuItemRepository.deleteById(idItem);
+    @DeleteMapping("/partners/restaurants/{restaurantId}/menu/category/{categoryId}/item/{itemId}")
+    public void deleteMenuItem(@PathVariable("itemId") Long itemId) {
+        menuItemService.deleteMenuItem(itemId);
     }
 
 }

@@ -4,13 +4,13 @@ export class ReviewResponse {
   userRating: number;
   name: string;
   createdAt: string;
-  comments: string;
+  comment: string;
 
   constructor(model: any = {}) {
     this.id = model.id;
     this.userRating = model.userRating;
     this.name = model.name;
     this.createdAt = model.date;
-    this.comments = model.comments;
+    this.comment = model.comment;
   }
 }

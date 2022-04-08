@@ -1,5 +1,5 @@
 <div class="col mb-2" *ngFor="let review of reviews | async">
-  <div class="card shadow-none border-0 border-top">
+  <div class="card shadow-none border-0 border-bottom" style="border-radius: 0px">
     <div class="card-body">
       <div class="row mb-1">
         <h5 class="card-title text-bold">{{review.name}}</h5>
@@ -12,7 +12,7 @@
           <span class="description text-lg text-muted float-end">{{review.createdAt | date:'dd/MM/yyyy'}}</span>
         </div>
       </div>
-      <p>{{review.comments}}</p>
+      <p>{{review.comment}}</p>
     </div>
   </div>
 </div>

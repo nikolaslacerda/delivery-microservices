@@ -1,6 +1,5 @@
 package com.server.deliveryrestaurantservice.model.entity;
 
-import com.server.deliveryrestaurantservice.model.entity.Restaurant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,24 +10,30 @@ import java.io.Serializable;
 @Data
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 public class RestaurantPaymentMethod {
 
     @EmbeddedId
-    private PaymentMethodId id;
+    private PaymentMethodIdKey id;
 
     @ManyToOne
     @MapsId("restaurantId")
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @Column(name = "payment_method_id", insertable = false, updatable = false)
-    private Long paymentMethodId;
+    @ManyToOne
+    @MapsId("paymentMethod")
+    @JoinColumn(name = "payment_method_id")
+    private PaymentMethod paymentMethod;
+
+    public RestaurantPaymentMethod(Long restaurantId, Long paymentMethodId){
+        this.id = new PaymentMethodIdKey(restaurantId, paymentMethodId);
+    }
 
     @Data
     @Embeddable
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class PaymentMethodId implements Serializable {
+    public static class PaymentMethodIdKey implements Serializable {
 
         private static final long serialVersionUID = 1L;
 

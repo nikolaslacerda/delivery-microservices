@@ -74,6 +74,8 @@ export class ShoppingCartService {
     item.quantity -= 1;
     if (item.quantity === 0) {
       this.removeItem(item);
+    } else {
+      this.items.next(this.getCartItems);
     }
   }
 

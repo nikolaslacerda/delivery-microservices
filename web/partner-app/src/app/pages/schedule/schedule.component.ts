@@ -38,15 +38,17 @@ export class ScheduleComponent implements OnInit {
   }
 
   deleteSchedule(schedule: any): void {
-    this.scheduleService.deleteRestaurantSchedule(schedule).subscribe(() => {
+    const restaurantId = this.authService.getRestaurantId();
+    this.scheduleService.deleteRestaurantSchedule(restaurantId, schedule).subscribe(() => {
       this.schedule = this.schedule.filter(h => h !== schedule);
       this.showSuccessDelete();
     });
   }
 
   updateScheduleStatus(isChecked: any, schedule: any): void {
+    const restaurantId = this.authService.getRestaurantId();
     schedule.active = isChecked.currentTarget.checked;
-    this.scheduleService.saveRestaurantSchedule(schedule)
+    this.scheduleService.editSchedule(restaurantId, schedule)
       .subscribe();
   }
 

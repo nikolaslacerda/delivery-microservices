@@ -6,6 +6,7 @@ import {EditMenuCategoryModalComponent} from './edit-menu-category-modal/edit-me
 import {ToastrService} from 'ngx-toastr';
 import {MenuCategoryResponse} from '../../../model/menu-category-response.model';
 import {MenuResponse} from '../../../model/menu-response.model';
+import {MenuCategoryRequest} from '../../../model/menu-category-request.model';
 
 @Component({
   selector: 'app-menu-category',
@@ -24,10 +25,12 @@ export class MenuCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.menuService.getCategoriesByMenu(this.menu.id)
-      .subscribe((categories: MenuCategoryResponse[]) => {
-        this.categories = categories;
-      });
+    // this.menuService.getCategoriesByMenu(this.menu.id)
+    //   .subscribe((categories: MenuCategoryResponse[]) => {
+    //     this.categories = categories;
+    //   });
+    this.categories = this.menu.categories;
+    console.log(this.categories);
   }
 
   openAddModal(): void {
@@ -56,13 +59,13 @@ export class MenuCategoryComponent implements OnInit {
   }
 
   updateCategoryStatus(category: any): void {
-    category.active = !category.active;
-    this.menuService.updateCategoryStatus(category)
-      .subscribe();
+    console.log(category);
+    this.menuService.editCategory(1, 1, category.id, new MenuCategoryRequest({active: !category.active}))
+      .subscribe(() => category.active = !category.active);
   }
 
   deleteMenuCategory(category: any): void {
-    this.menuService.deleteMenuCategory(category)
+    this.menuService.deleteCategory(1, 1, category.id)
       .subscribe(() => {
         this.categories = this.categories.filter((categories: any) => categories !== category);
         this.showSuccessDelete(category.name);

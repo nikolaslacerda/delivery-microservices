@@ -1,12 +1,14 @@
 package com.server.deliveryrestaurantservice.mapper;
 
-import com.server.deliveryrestaurantservice.model.dto.ReviewAverageDto;
+import com.server.deliveryrestaurantservice.model.dto.response.ReviewAverageResponse;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access= AccessLevel.PRIVATE)
 public class ReviewAverageMapper {
 
-    public static ReviewAverageDto mapToDto(Long restaurantId, Double average) {
-        return ReviewAverageDto.builder()
-                .restaurantId(restaurantId)
+    public static ReviewAverageResponse mapToDto(Double average) {
+        return ReviewAverageResponse.builder()
                 .average(average)
                 .build();
     }

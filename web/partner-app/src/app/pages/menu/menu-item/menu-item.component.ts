@@ -7,6 +7,7 @@ import {EditMenuItemModalComponent} from './edit-menu-item-modal/edit-menu-item-
 import {MenuItemResponse} from '../../../model/menu-item-response.model';
 import {ToastrService} from 'ngx-toastr';
 import {MenuCategoryResponse} from '../../../model/menu-category-response.model';
+import {MenuItemRequest} from '../../../model/menu-item-request.model';
 
 @Component({
   selector: 'app-menu-item',
@@ -27,17 +28,17 @@ export class MenuItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.menuService.getItemsByCategory(this.category.id)
-      .subscribe((items: MenuItemResponse[]) => this.items = items);
+    // this.menuService.getItemsByCategory(this.category.id)
+    //   .subscribe((items: MenuItemResponse[]) => this.items = items);
+    this.items = this.category.items;
   }
 
   updateItemStatus(item: MenuItemResponse): void {
-    item.active = !item.active;
-    this.menuService.updateItemStatus(item).subscribe();
+    this.menuService.editItem(item.id, new MenuItemRequest({active: !item.active})).subscribe();
   }
 
   deleteMenuItem(item: MenuItemResponse): void {
-    this.menuService.deleteMenuItem(item)
+    this.menuService.deleteItem(item)
       .subscribe(() => {
         this.items = this.items.filter((items: any) => items !== item);
         this.showSuccessDelete(item.name);
@@ -59,11 +60,11 @@ export class MenuItemComponent implements OnInit {
     this.bsModalRef.content.event.subscribe((editedItem: MenuItemResponse) => {
       item.name = editedItem.name;
       item.description = editedItem.name;
-      item.unitPrice = editedItem.unitPrice;
-      item.unitOriginalPrice = editedItem.unitOriginalPrice;
+      item.promotionalPrice = editedItem.promotionalPrice;
+      item.price = editedItem.price;
       item.imageUrl = editedItem.imageUrl;
       item.active = editedItem.active;
-      item.menuCategoryId = editedItem.menuCategoryId;
+      // this.category.id = editedItem.menuCategoryId;
       this.showSuccessUpdate();
     });
   }

@@ -1,12 +1,10 @@
 export class MenuCategoryRequest {
 
-  menuId: number;
-  name: string;
-  active: boolean;
+  name?: string;
+  active?: boolean;
 
   constructor(model: any = {}) {
-    this.menuId = model.menuId;
     this.name = model.name;
-    this.active = false;
+    this.active = model.active;
   }
 }

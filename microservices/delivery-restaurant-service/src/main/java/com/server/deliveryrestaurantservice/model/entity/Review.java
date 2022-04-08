@@ -1,20 +1,17 @@
 package com.server.deliveryrestaurantservice.model.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
-import javax.validation.constraints.Size;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import java.time.LocalDate;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Review {
@@ -23,14 +20,26 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
+    @Size(max = 255)
+    private String name;
+
     @Max(5)
     @NotNull
     @PositiveOrZero
-    private Integer score;
+    private Integer userRating;
 
+    @NotEmpty
     @Size(max = 255)
     private String comment;
 
+    @NotNull
+    private LocalDate createdAt;
+
+    @NotNull
     private Long orderId;
+
+    @ManyToOne
+    private Restaurant restaurant;
 
 }

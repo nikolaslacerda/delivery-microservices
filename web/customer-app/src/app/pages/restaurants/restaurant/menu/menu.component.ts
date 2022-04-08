@@ -24,16 +24,8 @@ export class MenuComponent implements OnInit {
     const restaurantId = this.route.parent.snapshot.params.restaurantId;
     this.menuService.getByRestaurant(restaurantId)
       .subscribe(menu => {
-        this.menu = menu[0];
-        this.menuService.getCategories(this.menu.id).subscribe(categories => {
-          for (const category of categories) {
-            this.menuService.getItems(category.id).subscribe(items => {
-              category.items = items;
-            });
-          }
-          this.menu.categories = categories;
-          this.isLoading = false;
-        });
+        this.menu = menu;
+        this.isLoading = false;
       });
   }
 

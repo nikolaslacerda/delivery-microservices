@@ -38,27 +38,26 @@ export class PaymentMethodsComponent implements OnInit {
   }
 
   onChange(event: any): void {
+    console.log(this.allPaymentMethods);
     const paymentMethodId: number = Number(event.target.value);
     const paymentMethodName = event.target.options[event.target.options.selectedIndex].text;
     this.paymentMethodService.addPaymentMethodToRestaurant(paymentMethodId, 1).subscribe(
       createdPaymentMethod => {
-        this.restaurantPaymentMethods.push(new PaymentMethodResponse({
-          id: createdPaymentMethod.id,
-          paymentMethodId,
-          name: paymentMethodName
-        }));
-        this.allPaymentMethods = this.allPaymentMethods.filter((x: any) => x.paymentMethodId !== paymentMethodId);
+        console.log(createdPaymentMethod);
+        this.restaurantPaymentMethods.push(new PaymentMethodResponse(createdPaymentMethod));
+        this.allPaymentMethods = this.allPaymentMethods.filter((x: any) => x.id !== paymentMethodId);
         this.showSuccessCreate(paymentMethodName);
       }
     );
   }
 
   deletePaymentMethod(paymentMethod: any): void {
-    this.paymentMethodService.deleteRestaurantPaymentMethod(paymentMethod.id).subscribe(
+    const restaurantId = this.authService.getRestaurantId();
+    this.paymentMethodService.deleteRestaurantPaymentMethod(restaurantId, paymentMethod.id).subscribe(
       () => {
         this.restaurantPaymentMethods = this.restaurantPaymentMethods
-          .filter((restaurantPaymentMethod: any) => restaurantPaymentMethod.paymentMethodId !== paymentMethod.paymentMethodId);
-        this.allPaymentMethods.push(new PaymentMethodResponse({paymentMethodId: paymentMethod.paymentMethodId, name: paymentMethod.name}));
+          .filter((restaurantPaymentMethod: any) => restaurantPaymentMethod.id !== paymentMethod.id);
+        this.allPaymentMethods.push(new PaymentMethodResponse({id: paymentMethod.id, name: paymentMethod.name}));
         this.showSuccessDelete(paymentMethod.name);
       }
     );

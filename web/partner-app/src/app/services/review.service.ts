@@ -15,7 +15,7 @@ export class ReviewService {
   }
 
   getReviewsByRestaurant(restaurantId: number, page: number): Observable<ReviewResponse[]> {
-    return this.http.get<ReviewResponse[]>(`${this.API}/${restaurantId}/reviews?_page=${page}`);
+    return this.http.get<ReviewResponse[]>(`${this.API}/${restaurantId}/reviews?page=${page}`);
   }
 
   getReviewsByRestaurant2(restaurantId: number): Observable<ReviewResponse[]> {

@@ -1,7 +1,7 @@
 package com.server.deliveryrestaurantservice.model.entity;
 
-import com.server.deliveryrestaurantservice.model.entity.Restaurant;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +12,7 @@ import java.time.LocalTime;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class BusinessHours {
@@ -30,8 +31,11 @@ public class BusinessHours {
     @NotNull
     private LocalTime closingTime;
 
-    @ManyToOne
-    private Restaurant restaurant;
+    @NotNull
+    private Boolean active;
 
+    @ManyToOne
+    @JoinColumn(name="restaurant_id", nullable=false)
+    private Restaurant restaurant;
 
 }

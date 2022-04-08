@@ -1,6 +1,5 @@
 package com.server.deliveryrestaurantservice.model.entity;
 
-import com.server.deliveryrestaurantservice.model.entity.MenuCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +14,7 @@ import java.math.BigDecimal;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class MenuItem {
@@ -29,12 +29,17 @@ public class MenuItem {
 
     private String description;
 
+    private String imageUrl;
+
     @NotNull
     @Positive
     private BigDecimal price;
 
     @Positive
     private BigDecimal promotionalPrice;
+
+    @NotNull
+    private Boolean active;
 
     @ManyToOne(optional = false)
     private MenuCategory category;
