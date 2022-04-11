@@ -10,4 +10,5 @@ public interface BusinessHoursRepository extends JpaRepository<BusinessHours, Lo
 
 	List<BusinessHours> findAllByRestaurant(Restaurant restaurant);
 
+    void deleteByIdAndRestaurant(Long id, Restaurant restaurant);
 }

@@ -17,6 +17,5 @@ public class BusinessHoursRequest {
 	private DayOfWeek dayOfWeek;
 	private LocalTime openingTime;
 	private LocalTime closingTime;
-	private Boolean active;
 
 }

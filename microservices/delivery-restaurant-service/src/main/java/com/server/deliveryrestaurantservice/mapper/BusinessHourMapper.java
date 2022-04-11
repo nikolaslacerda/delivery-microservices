@@ -1,5 +1,6 @@
 package com.server.deliveryrestaurantservice.mapper;
 
+import com.server.deliveryrestaurantservice.model.dto.request.BusinessHoursUpdateRequest;
 import com.server.deliveryrestaurantservice.model.dto.response.BusinessHoursResponse;
 import com.server.deliveryrestaurantservice.model.entity.BusinessHours;
 import com.server.deliveryrestaurantservice.model.entity.Restaurant;
@@ -20,7 +21,16 @@ public class BusinessHourMapper {
                 .build();
     }
 
-    public static BusinessHours mapToModel(Restaurant restaurant, BusinessHoursRequest businessHours) {
+    public static BusinessHours mapToModel(BusinessHoursRequest businessHours) {
+        return BusinessHours.builder()
+                .openingTime(businessHours.getOpeningTime())
+                .closingTime(businessHours.getClosingTime())
+                .dayOfWeek(businessHours.getDayOfWeek())
+                .active(false)
+                .build();
+    }
+
+    public static BusinessHours mapToModel(Restaurant restaurant, BusinessHoursUpdateRequest businessHours) {
         return BusinessHours.builder()
                 .openingTime(businessHours.getOpeningTime())
                 .closingTime(businessHours.getClosingTime())
