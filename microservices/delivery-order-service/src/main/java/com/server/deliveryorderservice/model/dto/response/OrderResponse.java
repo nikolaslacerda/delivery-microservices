@@ -1,12 +1,13 @@
-package com.server.deliveryorderservice.model.entity;
+package com.server.deliveryorderservice.model.dto.response;
 
+import com.server.deliveryorderservice.model.entity.Delivery;
+import com.server.deliveryorderservice.model.entity.OrderItem;
+import com.server.deliveryorderservice.model.entity.Restaurant;
 import com.server.deliveryorderservice.model.enumerations.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,22 +17,19 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "order")
-public class Order {
+public class OrderResponse {
 
-    @Id
     private UUID id;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime closedAt;
     private Status lastStatus;
     private Boolean reviewed;
-    private Customer customer;
     private Delivery delivery;
     private Restaurant restaurant;
     private List<OrderItem> items;
-    private Double subtotal;
-    private Double subtotalWithDiscount;
+    private Double subTotal;
+    private Double subTotalWithDiscount;
     private Double totalValue;
     private Double totalValueWithDiscount;
 }

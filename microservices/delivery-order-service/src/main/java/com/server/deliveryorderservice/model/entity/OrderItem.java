@@ -1,33 +1,26 @@
 package com.server.deliveryorderservice.model.entity;
 
-import com.server.deliveryorderservice.model.entity.Order;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import java.util.UUID;
 
 @Data
-@Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderItem {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotNull
-    @Positive
+    private UUID id;
+    private String name;
+    private String description;
+    private String notes;
     private Integer quantity;
-
-    private String observation;
-
-    @ManyToOne(optional = false)
-    private Order order;
-
-    private Long menuItemId;
+    private Double price;
+    private Double promotionalPrice;
+    private Double totalPrice;
+    private Double totalPriceWithDiscount;
 
 }

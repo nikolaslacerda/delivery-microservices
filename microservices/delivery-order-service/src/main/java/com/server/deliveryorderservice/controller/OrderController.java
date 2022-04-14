@@ -1,82 +1,48 @@
 package com.server.deliveryorderservice.controller;
 
-import com.server.deliveryorderservice.exception.ResourceNotFoundException;
-import com.server.deliveryorderservice.mapper.OrderMapper;
-import com.server.deliveryorderservice.model.dto.OrderDto;
-import com.server.deliveryorderservice.model.entity.Order;
-import com.server.deliveryorderservice.repository.OrderRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.messaging.support.MessageBuilder;
+import com.server.deliveryorderservice.model.dto.request.OrderRequest;
+import com.server.deliveryorderservice.model.dto.request.StatusRequest;
+import com.server.deliveryorderservice.model.dto.response.OrderResponse;
+import com.server.deliveryorderservice.service.OrderService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
+import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static com.server.deliveryorderservice.amqp.OrderConfig.UpdateOrderSource;
-import static com.server.deliveryorderservice.model.entity.Order.Status;
+import java.util.UUID;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/orders")
 public class OrderController {
 
-    private OrderRepository orderRepository;
-    private UpdateOrderSource updateOrderSource;
+    private final OrderService orderService;
 
     @PostMapping
-    public OrderDto createOrder(@RequestBody Order order) {
-        //DTO COM MAPPER DEFAULT
-        order.setDateTime(LocalDateTime.now());
-        order.setStatus(Status.SUBMITTED);
-        order.getItems().forEach(item -> item.setOrder(order));
-        order.getDelivery().setOrder(order);
-        Order savedOrder = orderRepository.save(order);
-        return OrderMapper.mapToDto(savedOrder);
+    public OrderResponse createOrder(@Valid @RequestBody OrderRequest orderRequest) {
+        return orderService.createOrder(orderRequest);
     }
 
-    @GetMapping
-    public List<OrderDto> getAllOrders() {
-        return orderRepository.findAll()
-                .stream()
-                .map(OrderMapper::mapToDto)
-                .collect(Collectors.toList());
+    @GetMapping("/customer/{customerId}")
+    public List<OrderResponse> getCustomerOrders(@PathVariable UUID customerId) {
+        return orderService.getCustomerOrders(customerId);
+    }
+
+    @GetMapping("/restaurant/{restaurantId}")
+    public List<OrderResponse> getRestaurantOrders(@PathVariable UUID restaurantId) {
+        return orderService.getRestaurantOrders(restaurantId);
     }
 
     @GetMapping("/{id}")
-    public OrderDto getOrderById(@PathVariable("id") Long id) {
-        Order order = orderRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        return OrderMapper.mapToDto(order);
+    public OrderResponse getOrderById(@PathVariable UUID id) {
+        return orderService.getOrderById(id);
     }
 
-    @PutMapping("/{id}/status")
-    public OrderDto updateStatus(@RequestBody Order order) {
-        orderRepository.updateStatus(order.getStatus(), order);
-        OrderDto dto = OrderMapper.mapToDto(order);
-        updateOrderSource.orderWithUpdatedStatus().send(MessageBuilder.withPayload(dto).build());
-        return dto;
-    }
-
-    @PutMapping("/{id}/paid")
-    public void setPaid(@PathVariable("id") Long id) {
-        Order order = orderRepository.findOrderItems(id);
-        if (order == null) {
-            throw new ResourceNotFoundException();
-        }
-        order.setStatus(Status.PAID);
-        orderRepository.updateStatus(Status.PAID, order);
-
-        OrderDto dto = OrderMapper.mapToDto(order);
-        updateOrderSource.orderWithUpdatedStatus().send(MessageBuilder.withPayload(dto).build());
-    }
-
-    @GetMapping("/pending/restaurant/{restaurantId}")
-    public List<OrderDto> getPendingOrders(@PathVariable("restaurantId") Long restaurantId) {
-        return orderRepository.findByRestaurantWithoutStatus(restaurantId, Arrays.asList(Status.SUBMITTED, Status.DELIVERED))
-                .stream()
-                .map(OrderMapper::mapToDto)
-                .collect(Collectors.toList());
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PostMapping("/{id}/status")
+    public void updateStatus(@PathVariable UUID id, @Valid @RequestBody StatusRequest statusRequest) {
+        orderService.updateStatus(id, statusRequest);
     }
 
 }

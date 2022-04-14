@@ -1,19 +1,18 @@
-package com.server.deliveryorderservice.model.dto;
+package com.server.deliveryorderservice.model.dto.request;
 
+import com.server.deliveryorderservice.model.enumerations.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeliveryDto {
+public class StatusRequest {
 
-    @Valid
     @NotNull
-    private AddressDto address;
+    private Status status;
 
 }

@@ -5,10 +5,10 @@ import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.MessageChannel;
 
-import static com.server.deliveryorderservice.amqp.OrderConfig.*;
+import static com.server.deliveryorderservice.amqp.OrderConfig.UpdateOrderSource;
 
-@EnableBinding(UpdateOrderSource.class)
 @Configuration
+@EnableBinding(UpdateOrderSource.class)
 public class OrderConfig {
 
     public static interface UpdateOrderSource {
@@ -18,3 +18,4 @@ public class OrderConfig {
     }
 
 }
+
