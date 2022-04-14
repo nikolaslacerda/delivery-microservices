@@ -1,5 +1,6 @@
-package com.server.authorizationserver;
+package com.server.authorizationserver.controller;
 
+import com.server.authorizationserver.model.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.exceptions.UnauthorizedClientException;

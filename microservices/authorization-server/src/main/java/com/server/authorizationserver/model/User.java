@@ -1,4 +1,4 @@
-package com.server.authorizationserver;
+package com.server.authorizationserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -14,8 +14,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
@@ -32,16 +32,15 @@ public class User implements UserDetails {
 
     @NotBlank
     @JsonIgnore
+    private String email;
+
+    @NotBlank
+    @JsonIgnore
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> authorities = new ArrayList<>();
-
-    public User(String name, String password) {
-        this.name = name;
-        this.password = password;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -59,7 +58,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return email;
     }
 
     @Override

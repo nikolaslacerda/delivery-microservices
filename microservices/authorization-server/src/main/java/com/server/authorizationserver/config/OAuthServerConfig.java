@@ -1,4 +1,4 @@
-package com.server.authorizationserver;
+package com.server.authorizationserver.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.OAuth2ClientProperties;
@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
@@ -15,9 +16,9 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 public class OAuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    private final AuthenticationManager authenticationManager;
-    private final OAuth2ClientProperties clientProperties;
     private final String jwtSecret;
+    private final OAuth2ClientProperties clientProperties;
+    private final AuthenticationManager authenticationManager;
 
     public OAuthServerConfig(AuthenticationManager authenticationManager,
                              OAuth2ClientProperties clientProperties,
@@ -25,6 +26,11 @@ public class OAuthServerConfig extends AuthorizationServerConfigurerAdapter {
         this.authenticationManager = authenticationManager;
         this.clientProperties = clientProperties;
         this.jwtSecret = jwtSecret;
+    }
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
     }
 
     @Override
@@ -36,9 +42,10 @@ public class OAuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore())
-                .accessTokenConverter(accessTokenConverter())
-                .authenticationManager(authenticationManager);
+        endpoints.authenticationManager(authenticationManager)
+                .tokenStore(tokenStore())
+                .accessTokenConverter(accessTokenConverter());
+
     }
 
     @Bean

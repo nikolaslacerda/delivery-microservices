@@ -1,4 +1,4 @@
-package com.server.authorizationserver;
+package com.server.authorizationserver.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

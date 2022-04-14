@@ -1,4 +1,4 @@
-package com.server.authorizationserver;
+package com.server.authorizationserver.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,8 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class Role implements GrantedAuthority {
@@ -17,7 +17,7 @@ public class Role implements GrantedAuthority {
     private static final long serialVersionUID = 1L;
 
     public enum ROLES {
-        ADMIN, PARCEIRO;
+        ADMIN, PARTNER, CUSTOMER;
 
         public String asAuthority() {
             return "ROLE_" + name();
