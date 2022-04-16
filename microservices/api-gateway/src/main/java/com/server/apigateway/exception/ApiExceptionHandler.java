@@ -1,4 +1,4 @@
-package com.server.apigateway.config;
+package com.server.apigateway.exception;
 
 import com.netflix.client.ClientException;
 import com.netflix.zuul.exception.ZuulException;
@@ -32,8 +32,16 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 Collections.singletonList(exception.getMessage()));
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleException(Exception exception) {
+        return buildResponseEntity(
+                HttpStatus.NOT_FOUND,
+                exception.getMessage(),
+                Collections.singletonList(exception.getMessage()));
+    }
+
     private ResponseEntity<Object> buildResponseEntity(HttpStatus httpStatus, String message, List<String> errors) {
-        ErrorModel apiError = ErrorModel.builder()
+        ApiError apiError = ApiError.builder()
                 .code(httpStatus.value())
                 .status(httpStatus.getReasonPhrase())
                 .message(message)

@@ -1,4 +1,4 @@
-package com.server.apigateway.config;
+package com.server.apigateway.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ErrorModel {
+public class ApiError {
 
     private int code;
 
