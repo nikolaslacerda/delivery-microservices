@@ -1,4 +1,4 @@
-package com.server.apigateway.config;
+package com.server.apigateway.filters;
 
 import com.netflix.zuul.context.RequestContext;
 import org.springframework.cloud.netflix.zuul.filters.post.LocationRewriteFilter;

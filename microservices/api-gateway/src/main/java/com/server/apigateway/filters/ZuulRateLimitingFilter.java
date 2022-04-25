@@ -1,4 +1,4 @@
-package com.server.apigateway.config;
+package com.server.apigateway.filters;
 
 import com.google.common.util.concurrent.RateLimiter;
 import com.netflix.zuul.ZuulFilter;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 //@Component
-public class RateLimitingZuulFilter extends ZuulFilter {
+public class ZuulRateLimitingFilter extends ZuulFilter {
 
     private final RateLimiter rateLimiter = RateLimiter.create(1.0 / 30.0); // permits per second
 
