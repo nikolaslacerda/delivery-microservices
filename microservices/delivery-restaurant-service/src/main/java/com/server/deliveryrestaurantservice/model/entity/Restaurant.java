@@ -69,9 +69,6 @@ public class Restaurant {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Menu menu;
-
     @OneToMany(mappedBy = "restaurant")
     private List<BusinessHours> businessHours = new ArrayList<>();
 

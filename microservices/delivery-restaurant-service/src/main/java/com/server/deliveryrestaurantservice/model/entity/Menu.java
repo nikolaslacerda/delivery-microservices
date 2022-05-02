@@ -20,7 +20,7 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(optional = false)
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "menu")

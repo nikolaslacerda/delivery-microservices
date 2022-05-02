@@ -1,0 +1,15 @@
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (1, 1);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (1, 2);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (1, 3);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (1, 4);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (1, 5);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (2, 1);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (2, 2);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (2, 3);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (2, 4);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (2, 5);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (3, 1);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (3, 2);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (3, 3);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (3, 4);
+INSERT INTO restaurant_payment_method (restaurant_id, payment_method_id) values (3, 5);

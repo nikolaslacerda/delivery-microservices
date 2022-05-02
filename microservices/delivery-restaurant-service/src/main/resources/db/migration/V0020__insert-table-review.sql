@@ -1,0 +1,1 @@
+INSERT INTO review (id, name, comment, user_rating, created_at, order_id, restaurant_id) VALUES (5, 'John Doe', 'Very Good!', 4, '2022-03-29', 3, 1);
