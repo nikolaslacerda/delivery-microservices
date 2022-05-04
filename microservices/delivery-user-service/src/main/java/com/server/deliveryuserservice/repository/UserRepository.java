@@ -1,6 +1,6 @@
-package com.server.authorizationserver.repository;
+package com.server.deliveryuserservice.repository;
 
-import com.server.authorizationserver.model.User;
+import com.server.deliveryuserservice.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -9,5 +9,4 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<User, UUID> {
 
     Optional<User> findByEmail(String email);
-
 }

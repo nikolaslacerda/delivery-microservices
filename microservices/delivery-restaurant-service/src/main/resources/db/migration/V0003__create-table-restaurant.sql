@@ -8,7 +8,7 @@ CREATE TABLE restaurant (
   max_delivery_time int(11),
   min_delivery_time int(11),
   cuisine_type_id bigint(20) NOT NULL,
-  partner_id bigint(20) NOT NULL,
+  partner_id varchar(36) NOT NULL,
   address_id bigint(20) NOT NULL,
   created_at date NOT NULL,
   updated_at date,

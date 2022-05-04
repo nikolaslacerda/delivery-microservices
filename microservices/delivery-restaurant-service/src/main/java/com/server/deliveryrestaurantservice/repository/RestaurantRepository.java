@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
@@ -19,11 +20,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
     Page<Restaurant> findAllByActive(boolean active, Pageable limit);
 
-    Restaurant findByPartnerId(Long userId);
-
-    @Query(value = "SELECT * FROM restaurant\n" +
-            "INNER JOIN user on restaurant.partner_id = user.id\n", nativeQuery = true)
-    Optional<Restaurant> findByUsername(String userId);
+    Optional<Restaurant> findByPartnerId(UUID partnerId);
 
     @Modifying(clearAutomatically = true)
     @Query("update Restaurant r set r.active = true where r.id = :id")

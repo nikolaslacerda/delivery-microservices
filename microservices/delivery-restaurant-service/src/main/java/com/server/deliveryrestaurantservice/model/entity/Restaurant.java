@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -63,7 +65,8 @@ public class Restaurant {
     private CuisineType cuisineType;
 
     @NotNull
-    private Long partnerId;
+    @Type(type = "uuid-char")
+    private UUID partnerId;
 
     @OneToOne
     @JoinColumn(name = "address_id", referencedColumnName = "id")

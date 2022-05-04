@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -22,6 +23,6 @@ public class RestaurantRequest {
     private Integer maxDeliveryTime;
     private Long cuisineTypeId;
     private AddressRequest address;
-    private Long partnerId;
+    private UUID partnerId;
 
 }

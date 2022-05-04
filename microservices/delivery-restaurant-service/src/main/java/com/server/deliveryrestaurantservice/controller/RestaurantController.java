@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -30,9 +31,9 @@ class RestaurantController {
         return restaurantService.getRestaurantById(id);
     }
 
-    @GetMapping("/partners/restaurants/user/{username}")
-    public RestaurantResponse getRestaurantByUsername(@PathVariable("username") String username) {
-        return restaurantService.getRestaurantByUsername(username);
+    @GetMapping("/partners/restaurants/user/{userUUID}")
+    public RestaurantResponse getRestaurantByUsername(@PathVariable("userUUID") UUID userUUID) {
+        return restaurantService.getRestaurantByPartner(userUUID);
     }
 
     @Transactional

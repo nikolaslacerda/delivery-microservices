@@ -2,8 +2,10 @@ package com.server.authorizationserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,10 +14,11 @@ import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Data
 @Entity
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
@@ -23,8 +26,11 @@ public class User implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Type(type = "uuid-char")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+    private UUID id;
 
     @NotBlank
     @JsonIgnore
@@ -40,15 +46,15 @@ public class User implements UserDetails {
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> authorities = new ArrayList<>();
+    private List<Role> roles = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return roles;
     }
 
     public List<String> getRoles() {
-        return authorities.stream().map(Role::getRole).collect(Collectors.toList());
+        return roles.stream().map(Role::getRole).collect(Collectors.toList());
     }
 
     @Override
@@ -58,7 +64,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return id.toString();
     }
 
     @Override
@@ -86,7 +92,8 @@ public class User implements UserDetails {
     }
 
     public void addRole(Role.ROLES role) {
-        this.authorities.add(new Role(role.asAuthority()));
+        this.roles.add(new Role(role.asAuthority()));
     }
 
 }
+
