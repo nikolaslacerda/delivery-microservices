@@ -27,8 +27,8 @@ class OAuthSecurityConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     private OAuth2WebSecurityExpressionHandler expressionHandler;
 
-    private static final String[] PUBLIC = {"/oauth", "/restaurants/**", "/cuisine-types/**", "/payment-methods/**"};
-    private static final String[] CUSTOMER = {"/oauth", "/orders/**"};
+    private static final String[] PUBLIC = {"/oauth/**", "/restaurants/**", "/cuisine-types/**", "/payment-methods/**"};
+    private static final String[] CUSTOMER = {"/orders/**"};
     private static final String[] PARTNER = {"/partner/**"};
 
     @Override
