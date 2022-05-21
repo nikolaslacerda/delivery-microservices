@@ -53,13 +53,22 @@ export class AuthenticationService {
         map((token: LoginResponse) => {
           this.currentUser.next(token);
           localStorage.setItem('session', JSON.stringify(this.getCurrentUser));
+          this.getUserId().subscribe(data => {
+            token.id = data?.username;
+            this.currentUser.next(token);
+            localStorage.setItem('session', JSON.stringify(this.getCurrentUser)); // temporary solution
+          });
           return token;
         })
       );
   }
 
+  getUserId(): Observable<any> {
+    return this.http.get<any>(`${this.API}/oauth/me`);
+  }
+
   getUserInfo(): Observable<CustomerResponse> {
-    return this.http.get<CustomerResponse>(`${this.API}/customers/${this.getCurrentUser.id}`)
+    return this.http.get<CustomerResponse>(`${this.API}/user/${this.getCurrentUser.id}`)
       .pipe(
         map((authData1: any) => {
           return authData1;

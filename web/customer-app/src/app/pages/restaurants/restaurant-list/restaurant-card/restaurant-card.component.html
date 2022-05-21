@@ -3,14 +3,17 @@
     <div class="d-flex flex-row h-100 w-100">
       <div class="d-flex align-items-center justify-content-center">
          <span class="place-info-box-icon">
-           <img src="{{'http://localhost:8083/restaurants/image/restaurant/' + restaurant.imageUrl}}" alt=""/>
+           <img src="{{'http://localhost:9999/restaurants/image/restaurant/' + restaurant.imageUrl}}" alt=""/>
          </span>
       </div>
       <div class="d-flex">
         <div class="card-body">
           <h5 class="card-title"><strong>{{restaurant.name}}</strong></h5>
           <span class="rating-yellow small">
-            <strong><em class="fa fa-star"></em> {{restaurant.userRating | number : '1.1-1'}}</strong>
+            <strong><em class="fa fa-star"></em>
+              <!--              {{restaurant.userRating | number : '1.1-1'}}</strong>-->
+              4.0
+            </strong>
           </span>
           <span class="text-muted"> • {{restaurant.mainCategory}} • {{restaurant.distance}} km</span>
           <p class="card-text"><small class="text-muted">{{restaurant.minDeliveryTime}}-{{restaurant.maxDeliveryTime}}

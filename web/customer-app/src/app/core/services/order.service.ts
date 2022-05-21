@@ -27,9 +27,6 @@ export class OrderService {
   }
 
   getCustomerOrders(customerId: string): Observable<OrderResponse[]> {
-    const params = new HttpParams()
-      .set('customerId', customerId)
-      .set('_expand', 'restaurant');
-    return this.http.get<OrderResponse[]>(`${this.API}/orders/`, {params});
+    return this.http.get<OrderResponse[]>(`${this.API}/orders/customer/${customerId}`);
   }
 }
