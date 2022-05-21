@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
@@ -15,7 +15,8 @@ import {CustomerRequest} from '../../shared/models/request/customer.request.mode
 export class AuthenticationService {
 
   private API = environment.baseUrl;
-
+  OAUTH_CLIENT = 'root';
+  OAUTH_SECRET = 'root';
   currentUser: BehaviorSubject<any>;
   currentUserObservable: Observable<any>;
   lastUrl: string;
@@ -36,7 +37,18 @@ export class AuthenticationService {
   }
 
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.API}/login`, loginRequest)
+    const HTTP_OPTIONS = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: 'Basic ' + btoa(this.OAUTH_CLIENT + ':' + this.OAUTH_SECRET)
+      })
+    };
+    const body = new HttpParams()
+      .set('username', loginRequest.email)
+      .set('password', loginRequest.password)
+      .set('grant_type', 'password')
+      .set('scope', 'any');
+    return this.http.post<LoginResponse>(`${this.API}/oauth/token`, body, HTTP_OPTIONS)
       .pipe(
         map((token: LoginResponse) => {
           this.currentUser.next(token);

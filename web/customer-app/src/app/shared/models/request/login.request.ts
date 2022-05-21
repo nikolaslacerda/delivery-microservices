@@ -1,7 +1,7 @@
 export class LoginRequest {
 
-  email: number;
-  password: number;
+  email: string;
+  password: string;
 
   constructor(model: any = {}) {
     this.email = model.email;

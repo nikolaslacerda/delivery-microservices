@@ -17,7 +17,6 @@ export class RestaurantService {
 
   getRestaurants(search?: string): Observable<RestaurantResponse[]> {
     let params: HttpParams;
-    params = new HttpParams().set('active', 'true');
     if (search) {
       params = new HttpParams().set('q', search);
     }
