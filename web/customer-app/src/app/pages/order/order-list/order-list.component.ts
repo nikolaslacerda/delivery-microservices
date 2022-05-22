@@ -25,11 +25,11 @@ export class OrderListComponent implements OnInit {
   }
 
   getProcessOrders(): OrderResponse[] {
-    return this.customerOrders.filter((order: OrderResponse) => (new OrderStatusIndexPipe().transform(order.status)) !== 4);
+    return this.customerOrders.filter((order: OrderResponse) => (new OrderStatusIndexPipe().transform(order.lastStatus)) !== 4);
   }
 
   getHistoric(): OrderResponse[] {
-    return this.customerOrders.filter((order: OrderResponse) => (new OrderStatusIndexPipe().transform(order.status)) === 4);
+    return this.customerOrders.filter((order: OrderResponse) => (new OrderStatusIndexPipe().transform(order.lastStatus)) === 4);
   }
 
 }
