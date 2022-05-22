@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -15,12 +14,11 @@ import java.util.UUID;
 public class RestaurantDto {
 
     @NotNull
-    private UUID id;
+    private Long id;
 
     @NotBlank
     private String name;
 
-    @NotBlank
     private String phoneNumber;
 
     @NotBlank
@@ -29,8 +27,5 @@ public class RestaurantDto {
     @Valid
     @NotNull
     private AddressDto address;
-
-    @NotNull
-    private Double deliveryFee;
 
 }

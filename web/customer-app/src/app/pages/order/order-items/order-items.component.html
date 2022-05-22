@@ -13,9 +13,9 @@
         </div>
       </td>
       <td>
-        <span class="fd">{{item.menuItem.name}}</span>
+        <span class="fd">{{item.name}}</span>
       </td>
-      <td class="text-right"><strong>{{item.value() | currency: 'USD': 'symbol'}}</strong></td>
+      <td class="text-right"><strong>{{item.subtotalWithDiscount() | currency: 'USD': 'symbol'}}</strong></td>
       <td class="text-right">
         <a (click)="emitRemove(item)" class="btn btn-sm"><em class="fa fa-trash"></em></a>
       </td>

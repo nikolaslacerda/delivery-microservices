@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -22,8 +23,9 @@ public class ReviewController {
 
     @GetMapping("/restaurants/{restaurantId}/reviews")
     public List<ReviewResponse> getReviewsByRestaurantId(@PathVariable("restaurantId") Long restaurantId,
-                                                         @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
-        return reviewService.getReviewsByRestaurantId(restaurantId, page);
+                                                         @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                                         @RequestParam(value = "orderId", required = false) UUID orderId) {
+        return reviewService.getReviewsByRestaurantId(restaurantId, page, orderId);
     }
 
     @GetMapping("/restaurants/{restaurantId}/rating")

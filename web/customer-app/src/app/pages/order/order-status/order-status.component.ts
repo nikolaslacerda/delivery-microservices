@@ -34,7 +34,7 @@ export class OrderStatusComponent implements OnInit {
     this.orderService.getOrderById(orderId)
       .subscribe((order: OrderResponse) => {
         this.order = order;
-        this.ratingService.getOrderReview(orderId).subscribe((review: ReviewResponse) => {
+        this.ratingService.getOrderReview(order.restaurant.id, orderId).subscribe((review: ReviewResponse) => {
           this.review = review[0];
         });
       });

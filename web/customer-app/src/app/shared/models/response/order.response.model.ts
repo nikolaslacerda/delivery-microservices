@@ -1,17 +1,19 @@
-import {AddressRequest} from '../request/address.request.model';
 import {OrderItemRequest} from '../request/order-item.request';
-import {RestaurantResponse} from './restaurant.response.model';
 import {PaymentRequest} from '../request/payment.request.model';
+import {DeliveryRequest} from '../request/delivery.request.model';
+import {RestaurantOrderRequest} from '../restaurant.order.request.model';
 
 export class OrderResponse {
   id: number;
   customerId: number;
-  restaurant: RestaurantResponse;
-  address: AddressRequest;
+  restaurant: RestaurantOrderRequest;
+  delivery: DeliveryRequest;
   payment: PaymentRequest;
   items: OrderItemRequest[] = [];
-  status: string;
+  lastStatus: string;
   deliveryFee: number;
   subtotal: number;
-  total: number;
+  subtotalWithDiscount: number;
+  totalValue: number;
+  totalValueWithDiscount: number;
 }

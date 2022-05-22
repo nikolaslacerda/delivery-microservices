@@ -1,6 +1,6 @@
 CREATE TABLE address (
   id bigint(20) NOT NULL AUTO_INCREMENT,
-  street_address varchar(100) NOT NULL,
+  street_name varchar(100) NOT NULL,
   street_number INTEGER(14) NOT NULL,
   neighborhood varchar(255) NOT NULL,
   city varchar(255) NOT NULL,

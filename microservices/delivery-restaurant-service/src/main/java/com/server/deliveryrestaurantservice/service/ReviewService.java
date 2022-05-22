@@ -13,8 +13,10 @@ import com.server.deliveryrestaurantservice.repository.ReviewRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,7 +32,13 @@ public class ReviewService {
         return ReviewMapper.mapToDto(savedReview);
     }
 
-    public List<ReviewResponse> getReviewsByRestaurantId(Long restaurantId, int page) {
+    public List<ReviewResponse> getReviewsByRestaurantId(Long restaurantId, int page, UUID orderId) {
+        if (!ObjectUtils.isEmpty(orderId)) {
+            return reviewRepository.findByOrderId(orderId)
+                    .stream()
+                    .map(ReviewMapper::mapToDto)
+                    .collect(Collectors.toList());
+        }
         return reviewRepository.findAllReviewsByRestaurant(restaurantId, PageRequest.of(page, 10))
                 .stream()
                 .map(ReviewMapper::mapToDto)

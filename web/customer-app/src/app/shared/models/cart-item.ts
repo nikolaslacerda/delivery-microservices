@@ -8,15 +8,19 @@ export class CartItem {
   promotionalPrice: number;
   quantity: number;
 
-  constructor(public menuItem: MenuItemResponse, public quantityy: number = 1) {
+  constructor(menuItem: MenuItemResponse, quantity: number = 1) {
     this.menuItemId = menuItem.id;
     this.name = menuItem.name;
-    this.price = menuItem.promotionalPrice;
-    this.promotionalPrice = menuItem.price;
-    this.quantity = quantityy;
+    this.price = menuItem.price;
+    this.promotionalPrice = menuItem.promotionalPrice;
+    this.quantity = quantity;
   }
 
-  value(): number {
-    return this.menuItem.price * this.quantity;
+  subtotal(): number {
+    return this.price * this.quantity;
+  }
+
+  subtotalWithDiscount(): number {
+    return this.promotionalPrice * this.quantity;
   }
 }

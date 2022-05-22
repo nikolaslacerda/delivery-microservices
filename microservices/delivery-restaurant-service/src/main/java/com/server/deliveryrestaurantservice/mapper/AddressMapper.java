@@ -11,7 +11,7 @@ public class AddressMapper {
 
     public static Address mapToModel(AddressRequest addressRequest) {
         return Address.builder()
-                .streetAddress(addressRequest.getStreetAddress())
+                .streetName(addressRequest.getStreetName())
                 .streetNumber(addressRequest.getStreetNumber())
                 .neighborhood(addressRequest.getNeighborhood())
                 .city(addressRequest.getCity())
@@ -25,7 +25,7 @@ public class AddressMapper {
 
     public static AddressResponse mapToDto(Address address) {
         return AddressResponse.builder()
-                .streetAddress(address.getStreetAddress())
+                .streetName(address.getStreetName())
                 .streetNumber(address.getStreetNumber())
                 .neighborhood(address.getNeighborhood())
                 .city(address.getCity())

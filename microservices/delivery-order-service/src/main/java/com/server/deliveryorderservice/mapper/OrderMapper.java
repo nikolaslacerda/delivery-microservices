@@ -20,8 +20,8 @@ public class OrderMapper {
                 .items(order.getItems())
                 .lastStatus(order.getLastStatus())
                 .reviewed(order.getReviewed())
-                .subTotal(order.getSubtotal())
-                .subTotalWithDiscount(order.getSubtotalWithDiscount())
+                .subtotal(order.getSubtotal())
+                .subtotalWithDiscount(order.getSubtotalWithDiscount())
                 .totalValue(order.getTotalValue())
                 .totalValueWithDiscount(order.getTotalValueWithDiscount())
                 .build();
@@ -29,12 +29,12 @@ public class OrderMapper {
 
     public static Order mapToModel(OrderRequest order) {
         return Order.builder()
-                .customer(CustomerMapper.mapToModel(order.getCustomer()))
+                .customerId(order.getCustomerId())
                 .delivery(DeliveryMapper.mapToModel(order.getDelivery()))
                 .restaurant(RestaurantMapper.mapToModel(order.getRestaurant()))
                 .items(ItemMapper.mapToModel(order.getItems()))
-                .subtotal(order.getSubTotal())
-                .subtotalWithDiscount(order.getSubTotalWithDiscount())
+                .subtotal(order.getSubtotal())
+                .subtotalWithDiscount(order.getSubtotalWithDiscount())
                 .totalValue(order.getTotalValue())
                 .totalValueWithDiscount(order.getTotalValueWithDiscount())
                 .build();

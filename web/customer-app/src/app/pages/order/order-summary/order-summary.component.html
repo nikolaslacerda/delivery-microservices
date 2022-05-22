@@ -7,11 +7,11 @@
           <hr>
           <p >{{ item.quantity }}x </p>
           <span>{{ item.name }}</span>
-          <span>{{ item.quantity * item.price | currency:'USD': 'symbol' }}</span><br>
+          <span>{{ item.quantity * item.promotionalPrice | currency:'USD': 'symbol' }}</span><br>
         </div>
         <hr>
-        <app-order-delivery-costs [deliveryFee]="order.deliveryFee" [subtotal]="order.subtotal"
-                                  [total]="order.total"></app-order-delivery-costs>
+        <app-order-delivery-costs [deliveryFee]="order.restaurant.deliveryFee" [subtotal]="order.subtotalWithDiscount"
+                                  [total]="order.totalValueWithDiscount"></app-order-delivery-costs>
       </div>
     </div>
   </div>

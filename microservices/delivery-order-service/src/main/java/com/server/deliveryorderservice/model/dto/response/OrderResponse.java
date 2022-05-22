@@ -28,8 +28,9 @@ public class OrderResponse {
     private Delivery delivery;
     private Restaurant restaurant;
     private List<OrderItem> items;
-    private Double subTotal;
-    private Double subTotalWithDiscount;
+    private Double subtotal;
+    private Double subtotalWithDiscount;
     private Double totalValue;
     private Double totalValueWithDiscount;
+    private Double deliveryFee;
 }

@@ -47,7 +47,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   total(): number {
-    return this.shoppingCartService.total();
+    return this.shoppingCartService.subtotal();
   }
 
   removeItem(item: CartItem): void {

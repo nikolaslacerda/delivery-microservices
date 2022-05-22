@@ -1,28 +1,32 @@
 import {OrderItemRequest} from './order-item.request';
 import {AddressRequest} from './address.request.model';
 import {PaymentRequest} from './payment.request.model';
+import {RestaurantOrderRequest} from '../restaurant.order.request.model';
+import {DeliveryRequest} from './delivery.request.model';
 
 export class OrderRequest {
 
   customerId: number;
-  restaurantId: number;
-  address: AddressRequest;
+  restaurant: RestaurantOrderRequest;
+  delivery: DeliveryRequest;
   payment: PaymentRequest;
   items: OrderItemRequest[] = [];
-  status: string;
   deliveryFee: number;
   subtotal: number;
-  total: number;
+  subtotalWithDiscount: number;
+  totalValue: number;
+  totalValueWithDiscount: number;
 
   constructor(model: any = {}) {
     this.customerId = model.customerId;
-    this.restaurantId = model.restaurantId;
-    this.address = model.address;
+    this.restaurant = model.restaurant;
+    this.delivery = model.delivery;
     this.payment = model.payment;
     this.items = model.items;
-    this.status = model.status;
     this.deliveryFee = model.deliveryFee;
     this.subtotal = model.subtotal;
-    this.total = model.total;
+    this.subtotalWithDiscount = model.subtotalWithDiscount;
+    this.totalValue = model.total;
+    this.totalValueWithDiscount = model.totalValueWithDiscount;
   }
 }

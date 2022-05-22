@@ -1,6 +1,5 @@
 package com.server.deliveryorderservice.model.dto.request;
 
-import com.server.deliveryorderservice.model.dto.CustomerDto;
 import com.server.deliveryorderservice.model.dto.DeliveryDto;
 import com.server.deliveryorderservice.model.dto.OrderItemDto;
 import com.server.deliveryorderservice.model.dto.RestaurantDto;
@@ -12,6 +11,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @CorrectOrderPrices
@@ -19,9 +19,8 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderRequest {
 
-    @Valid
     @NotNull
-    private CustomerDto customer;
+    private UUID customerId;
 
     @Valid
     @NotNull
@@ -36,14 +35,17 @@ public class OrderRequest {
     private List<OrderItemDto> items;
 
     @NotNull
-    private Double subTotal;
+    private Double subtotal;
 
     @NotNull
-    private Double subTotalWithDiscount;
+    private Double subtotalWithDiscount;
 
     @NotNull
     private Double totalValue;
 
     @NotNull
     private Double totalValueWithDiscount;
+
+    @NotNull
+    private Double deliveryFee;
 }

@@ -11,10 +11,10 @@ public class SumOrderPricesValidator implements ConstraintValidator<CorrectOrder
     public boolean isValid(OrderRequest order, ConstraintValidatorContext context) {
         double itemsSubTotal = order.getItems().stream().map(x -> x.getPrice() * x.getQuantity()).mapToDouble(x -> x).sum();
         double itemsSubTotalWithDiscount = order.getItems().stream().map(x -> x.getPromotionalPrice() * x.getQuantity()).mapToDouble(x -> x).sum();
-        return order.getSubTotal() == itemsSubTotal &&
-                order.getSubTotalWithDiscount() == itemsSubTotalWithDiscount &&
-                order.getTotalValue() == itemsSubTotal + order.getRestaurant().getDeliveryFee() &&
-                order.getTotalValueWithDiscount() == itemsSubTotalWithDiscount + order.getRestaurant().getDeliveryFee();
+        return order.getSubtotal() == itemsSubTotal &&
+                order.getSubtotalWithDiscount() == itemsSubTotalWithDiscount &&
+                order.getTotalValue() == itemsSubTotal + order.getDeliveryFee() &&
+                order.getTotalValueWithDiscount() == itemsSubTotalWithDiscount + order.getDeliveryFee();
     }
 
 }

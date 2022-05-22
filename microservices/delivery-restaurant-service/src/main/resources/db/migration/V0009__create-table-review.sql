@@ -4,7 +4,7 @@ CREATE TABLE review (
   comment varchar(255) DEFAULT NULL,
   user_rating int(5) NOT NULL,
   created_at date NOT NULL,
-  order_id bigint(20) NOT NULL,
+  order_id varchar(36) NOT NULL,
   restaurant_id bigint(20) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (restaurant_id) REFERENCES restaurant(id)

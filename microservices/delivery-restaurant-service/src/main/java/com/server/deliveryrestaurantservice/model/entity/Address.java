@@ -24,7 +24,7 @@ public class Address {
 
     @NotBlank
     @Size(max = 255)
-    private String streetAddress;
+    private String streetName;
 
     @NotNull
     @Min(1)

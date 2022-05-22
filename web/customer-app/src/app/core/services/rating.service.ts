@@ -21,9 +21,9 @@ export class RatingService {
     return this.http.post<ReviewResponse>(`${this.API}/restaurants/${restaurantId}/reviews`, review);
   }
 
-  getOrderReview(orderId: number): Observable<ReviewResponse> {
+  getOrderReview(restaurantId: number, orderId: string): Observable<ReviewResponse> {
     const params = new HttpParams().set('orderId', String(orderId));
-    return this.http.get<ReviewResponse>(`${this.API}/reviews`, {params});
+    return this.http.get<ReviewResponse>(`${this.API}/restaurants/${restaurantId}/reviews`, {params});
   }
 
   getReviewsByRestaurant(restaurantId: number): Observable<ReviewResponse[]> {

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -14,6 +16,6 @@ public class ReviewRequest {
     private String name;
     private Integer userRating;
     private String comment;
-    private Long orderId;
+    private UUID orderId;
 
 }

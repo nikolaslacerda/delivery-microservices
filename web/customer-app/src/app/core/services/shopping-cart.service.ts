@@ -38,8 +38,12 @@ export class ShoppingCartService {
     this.restaurant.next(undefined);
   }
 
-  total(): number {
-    return this.getCartItems.map(item => item.value()).reduce((prev, actual) => prev + actual, 0);
+  subtotal(): number {
+    return this.getCartItems.map(item => item.subtotal()).reduce((prev, actual) => prev + actual, 0);
+  }
+
+  subtotalWithDiscount(): number {
+    return this.getCartItems.map(item => item.subtotalWithDiscount()).reduce((prev, actual) => prev + actual, 0);
   }
 
   handleAddItem(item: MenuItemResponse) {
@@ -55,7 +59,7 @@ export class ShoppingCartService {
   }
 
   private addItem(item: MenuItemResponse) {
-    const foundItem = this.getCartItems.find((menuItem) => menuItem.menuItem.id === item.id);
+    const foundItem = this.getCartItems.find((menuItem) => menuItem.menuItemId === item.id);
     if (foundItem) {
       this.increaseQty(foundItem);
     } else {

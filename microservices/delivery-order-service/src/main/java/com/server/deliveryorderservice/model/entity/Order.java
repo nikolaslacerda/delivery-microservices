@@ -26,7 +26,7 @@ public class Order {
     private LocalDateTime closedAt;
     private Status lastStatus;
     private Boolean reviewed;
-    private Customer customer;
+    private UUID customerId;
     private Delivery delivery;
     private Restaurant restaurant;
     private List<OrderItem> items;

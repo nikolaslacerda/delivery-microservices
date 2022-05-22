@@ -13,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Restaurant {
 
-    private UUID id;
+    private Long id;
     private String name;
     private String phoneNumber;
     private String logo;

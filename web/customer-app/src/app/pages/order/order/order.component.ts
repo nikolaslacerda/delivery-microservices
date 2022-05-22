@@ -13,6 +13,8 @@ import {AddressRequest} from '../../../shared/models/request/address.request.mod
 import {PaymentRequest} from '../../../shared/models/request/payment.request.model';
 import {RestaurantResponse} from '../../../shared/models/response/restaurant.response.model';
 import {PaymentMethodResponse} from '../../../shared/models/response/payment-method.response';
+import {RestaurantOrderRequest} from '../../../shared/models/restaurant.order.request.model';
+import {DeliveryRequest} from '../../../shared/models/request/delivery.request.model';
 
 @Component({
   selector: 'app-order-order',
@@ -29,11 +31,12 @@ export class OrderComponent implements OnInit {
 
   orderForm = this.formBuilder.group({
     addressGroup: this.formBuilder.group({
-      streetAddress: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      streetName: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       streetNumber: this.formBuilder.control('', [Validators.required]),
       neighborhood: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       city: this.formBuilder.control('', [Validators.required, Validators.minLength(2)]),
       country: this.formBuilder.control('US', [Validators.required]),
+      state: this.formBuilder.control('RS', [Validators.required]),
       postalCode: this.formBuilder.control('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
       complement: this.formBuilder.control(''),
       reference: this.formBuilder.control('')
@@ -69,8 +72,8 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  get streetAddress(): AbstractControl {
-    return this.orderForm.get('addressGroup').get('streetAddress');
+  get streetName(): AbstractControl {
+    return this.orderForm.get('addressGroup').get('streetName');
   }
 
   get streetNumber(): AbstractControl {
@@ -120,19 +123,20 @@ export class OrderComponent implements OnInit {
   }
 
   getOrderTotalValue(): number {
-    return this.shoppingCard.total();
+    return this.shoppingCard.subtotal();
   }
 
   submitOrder(): void {
     this.order.customerId = this.authService.getCurrentUser.id;
-    this.order.restaurantId = this.shoppingCard.getRestaurant;
-    this.order.address = new AddressRequest(this.orderForm.controls.addressGroup.value);
+    this.order.restaurant = new RestaurantOrderRequest(this.restaurant);
+    this.order.delivery = new DeliveryRequest({address: new AddressRequest(this.orderForm.controls.addressGroup.value)});
     this.order.payment = new PaymentRequest(this.orderForm.controls.paymentGroup.value);
     this.order.items = this.cartItems().map((item: CartItem) => new OrderItemRequest(item));
-    this.order.status = 'RECEIVED';
-    this.order.subtotal = this.shoppingCard.total();
+    this.order.subtotal = this.shoppingCard.subtotal();
+    this.order.subtotalWithDiscount = this.shoppingCard.subtotalWithDiscount();
+    this.order.totalValue = this.shoppingCard.subtotal() + this.restaurant.deliveryFee;
+    this.order.totalValueWithDiscount = this.shoppingCard.subtotalWithDiscount() + this.restaurant.deliveryFee;
     this.order.deliveryFee = this.restaurant.deliveryFee;
-    this.order.total = this.shoppingCard.total() + this.restaurant.deliveryFee;
     this.orderService.createOrder(this.order).subscribe(createdOrder => {
       this.shoppingCard.clear();
       this.router.navigateByUrl(`orders/${createdOrder.id}/status`);
