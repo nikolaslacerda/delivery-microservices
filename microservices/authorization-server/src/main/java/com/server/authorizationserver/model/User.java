@@ -34,10 +34,6 @@ public class User implements UserDetails {
 
     @NotBlank
     @JsonIgnore
-    private String name;
-
-    @NotBlank
-    @JsonIgnore
     private String email;
 
     @NotBlank

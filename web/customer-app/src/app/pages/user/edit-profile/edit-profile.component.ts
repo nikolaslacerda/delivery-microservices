@@ -16,7 +16,7 @@ export class EditProfileComponent implements OnInit {
 
   userForm = this.fb.group({
     email: this.fb.control('', [Validators.required, Validators.email]),
-    phone: this.fb.control('', [Validators.required, , Validators.minLength(11)]),
+    phoneNumber: this.fb.control('', [Validators.required, , Validators.minLength(11)]),
     firstName: this.fb.control('', [Validators.required, Validators.minLength(2)]),
     lastName: this.fb.control('', [Validators.required, Validators.minLength(2)]),
     cpf: this.fb.control('', [Validators.required, Validators.minLength(11)]),
@@ -33,7 +33,7 @@ export class EditProfileComponent implements OnInit {
         this.user = user;
         this.userForm.patchValue({
           email: this.user.email,
-          phone: this.user.phone,
+          phoneNumber: this.user.phoneNumber,
           firstName: this.user.firstName,
           lastName: this.user.lastName,
           cpf: this.user.cpf,
@@ -45,8 +45,8 @@ export class EditProfileComponent implements OnInit {
     return this.userForm.get('email');
   }
 
-  get phone(): AbstractControl {
-    return this.userForm.get('phone');
+  get phoneNumber(): AbstractControl {
+    return this.userForm.get('phoneNumber');
   }
 
   get firstName(): AbstractControl {

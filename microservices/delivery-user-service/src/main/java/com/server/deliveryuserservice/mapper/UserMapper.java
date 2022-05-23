@@ -14,16 +14,22 @@ public class UserMapper {
     public static UserResponse mapToDto(User user) {
         return UserResponse.builder()
                 .id(user.getId())
-                .name(user.getName())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .roles(user.getRoles().stream().map(RoleMapper::mapToDto).collect(Collectors.toList()))
                 .email(user.getEmail())
+                .phoneNumber(user.getPhoneNumber())
+                .cpf(user.getCpf())
                 .build();
     }
 
     public static User mapToModel(UserRequest user) {
         return User.builder()
-                .name(user.getName())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .email(user.getEmail())
+                .phoneNumber(user.getPhoneNumber())
+                .cpf(user.getCpf())
                 .build();
     }
 }

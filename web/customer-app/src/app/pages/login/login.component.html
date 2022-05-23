@@ -8,6 +8,9 @@
       <div class="card w-75 border-0 shadow-sm" style="margin-left: -350px">
         <div class="card-body">
           <h5 class="card-title mb-3"><strong>Login</strong></h5>
+          <div class="alert alert-info" role="alert">
+            User for test: <strong>email</strong>: test@email.com <strong>password</strong>: 123456
+          </div>
           <form [formGroup]="loginForm" (ngSubmit)="login()">
             <div class="mb-3">
               <app-input errorMessage="Email is required" label="Email">

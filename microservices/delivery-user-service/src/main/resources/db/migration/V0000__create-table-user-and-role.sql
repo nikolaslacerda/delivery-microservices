@@ -1,7 +1,10 @@
 CREATE TABLE user (
   id varchar(36) NOT NULL,
-  name varchar(255) NOT NULL,
+  first_name varchar(30) NOT NULL,
+  last_name varchar(30) NOT NULL,
   email varchar(255) NOT NULL,
+  phone_number varchar(15) NOT NULL,
+  cpf varchar(11) NOT NULL,
   password varchar(255) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE(email)

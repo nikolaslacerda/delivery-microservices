@@ -28,14 +28,22 @@ public class User implements Persistable<UUID> {
     @Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
     private UUID id;
 
-    @NotBlank
-    private String name;
+    @Column(nullable = false)
+    private String firstName;
 
-    @NotBlank
-    @Column(unique = true)
+    @Column(nullable = false)
+    private String lastName;
+
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @NotBlank
+    @Column(nullable = false)
+    private String phoneNumber;
+
+    @Column(nullable = false, unique = true)
+    private String cpf;
+
+    @Column(nullable = false)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
