@@ -5,4 +5,4 @@ INSERT INTO menu_category (id, name, menu_id, active) VALUES (4, 'Drinks', 2, fa
 INSERT INTO menu_category (id, name, menu_id, active) VALUES (5, 'Promotions', 3, false);
 INSERT INTO menu_category (id, name, menu_id, active) VALUES (6, 'Chicken', 3, false);
 INSERT INTO menu_category (id, name, menu_id, active) VALUES (7, 'Fries', 3, false);
-INSERT INTO menu_category (id, name, menu_id, active) VALUES (14, 'Drinks', 3, false);
+INSERT INTO menu_category (id, name, menu_id, active) VALUES (8, 'Drinks', 3, false);
