@@ -22,7 +22,7 @@ public class RestaurantMapper {
                 .imageUrl(restaurant.getImageUrl())
                 .description(restaurant.getDescription())
                 .deliveryFee(restaurant.getDeliveryPrice())
-                .cuisineType(restaurant.getCuisineType().getName())
+                .mainCategory(restaurant.getCuisineType().getName())
                 .minDeliveryTime(restaurant.getMinDeliveryTime())
                 .maxDeliveryTime(restaurant.getMaxDeliveryTime())
                 .active(restaurant.getActive())
@@ -34,7 +34,7 @@ public class RestaurantMapper {
         return reviews.stream()
                 .mapToDouble(Review::getUserRating)
                 .average()
-                .orElse(Double.NaN);
+                .orElse(0);
     }
 
     public static Restaurant mapToModel(RestaurantRequest restaurantDto) {

@@ -1,1 +1,6 @@
-INSERT INTO review (id, name, comment, user_rating, created_at, order_id, restaurant_id) VALUES (5, 'John Doe', 'Very Good!', 4, '2022-03-29', 'cb8f98a9-0149-4f26-a92b-59c9fde39124', 1);
+INSERT INTO review (id, name, comment, user_rating, created_at, order_id, restaurant_id) VALUES (1, 'Richard Roe', 'Perfect and quick', 5, '2022-03-29', 'cb8f98a9-0149-4f26-a92b-59c9fde39124', 1);
+INSERT INTO review (id, name, comment, user_rating, created_at, order_id, restaurant_id) VALUES (2, 'Jane Roe', 'Nice!', 5, '2022-04-01', 'cb8f98a9-0149-4f26-a92b-59c9fde39124', 1);
+INSERT INTO review (id, name, comment, user_rating, created_at, order_id, restaurant_id) VALUES (3, 'Janie Doe', 'Fast Delivery', 4, '2022-04-02', 'cb8f98a9-0149-4f26-a92b-59c9fde39124', 2);
+INSERT INTO review (id, name, comment, user_rating, created_at, order_id, restaurant_id) VALUES (4, 'Joe Public', 'Order was made quickly, food came at a great temperature and everything was made correctly!', 5, '2022-04-04', 'cb8f98a9-0149-4f26-a92b-59c9fde39124', 2);
+INSERT INTO review (id, name, comment, user_rating, created_at, order_id, restaurant_id) VALUES (5, 'John Doe', null, 3, '2022-04-05', 'cb8f98a9-0149-4f26-a92b-59c9fde39124', 3);
+INSERT INTO review (id, name, comment, user_rating, created_at, order_id, restaurant_id) VALUES (6, 'Jane Public', 'Very Good!', 4, '2022-03-29', 'cb8f98a9-0149-4f26-a92b-59c9fde39124', 3);

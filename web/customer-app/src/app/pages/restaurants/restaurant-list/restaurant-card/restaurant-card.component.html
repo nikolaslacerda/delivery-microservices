@@ -11,11 +11,9 @@
           <h5 class="card-title"><strong>{{restaurant.name}}</strong></h5>
           <span class="rating-yellow small">
             <strong><em class="fa fa-star"></em>
-              <!--              {{restaurant.userRating | number : '1.1-1'}}</strong>-->
-              4.0
-            </strong>
+              {{restaurant.userRating | number : '1.1-1'}}</strong>
           </span>
-          <span class="text-muted"> • {{restaurant.mainCategory}} • {{restaurant.distance}} km</span>
+          <span class="text-muted"> • {{restaurant.mainCategory}}</span>
           <p class="card-text"><small class="text-muted">{{restaurant.minDeliveryTime}}-{{restaurant.maxDeliveryTime}}
             min • $ {{restaurant.deliveryFee}}</small></p>
         </div>

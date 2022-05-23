@@ -23,7 +23,7 @@ public class RestaurantResponse {
     private Integer minDeliveryTime;
     private Integer maxDeliveryTime;
     private Boolean active;
-    private String cuisineType;
+    private String mainCategory;
     private AddressResponse address;
 
 }
