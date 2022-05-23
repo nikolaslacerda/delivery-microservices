@@ -34,4 +34,5 @@ public class Order {
     private Double subtotalWithDiscount;
     private Double totalValue;
     private Double totalValueWithDiscount;
+    private Double deliveryFee;
 }

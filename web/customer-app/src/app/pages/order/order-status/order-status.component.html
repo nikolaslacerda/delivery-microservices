@@ -20,7 +20,7 @@
       </div>
     </div>
     <app-order-summary class="ccc w-50 mb-3" [order]="order"></app-order-summary>
-    <div class="card ccc w-50 mb-3" *ngIf="(order.status | OrderStatusIndex) == 4">
+    <div class="card ccc w-50 mb-3" *ngIf="(order.lastStatus | OrderStatusIndex) == 4">
       <div class="card-body" *ngIf="!review">
         <h5 class="card-title"><strong>Review your order</strong></h5>
         <form class="mb-3" [formGroup]="ratingForm" (ngSubmit)="createReview()">

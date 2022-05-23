@@ -20,6 +20,10 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
         retry(1),
         catchError((err: HttpErrorResponse) => {
           let errorMessage: string;
+          if (err.status === 401){
+            console.log('eletando token')
+            localStorage.removeItem('session');
+          }
           if (err.error instanceof ErrorEvent) {
             errorMessage = err.error.message;
           } else {

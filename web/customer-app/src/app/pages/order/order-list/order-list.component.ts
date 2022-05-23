@@ -11,6 +11,7 @@ import {OrderStatusIndexPipe} from '../../../shared/pipes/order-status-index.pip
 })
 export class OrderListComponent implements OnInit {
 
+  isLoading = true;
   customerOrders: OrderResponse[] = [];
 
   constructor(private orderService: OrderService,
@@ -21,6 +22,7 @@ export class OrderListComponent implements OnInit {
     this.orderService.getCustomerOrders(this.authService.getCurrentUser.id)
       .subscribe((orders: OrderResponse[]) => {
         this.customerOrders = orders;
+        this.isLoading = false;
       });
   }
 

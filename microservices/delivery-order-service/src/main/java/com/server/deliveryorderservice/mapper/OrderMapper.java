@@ -24,6 +24,7 @@ public class OrderMapper {
                 .subtotalWithDiscount(order.getSubtotalWithDiscount())
                 .totalValue(order.getTotalValue())
                 .totalValueWithDiscount(order.getTotalValueWithDiscount())
+                .deliveryFee(order.getDeliveryFee())
                 .build();
     }
 
@@ -37,6 +38,7 @@ public class OrderMapper {
                 .subtotalWithDiscount(order.getSubtotalWithDiscount())
                 .totalValue(order.getTotalValue())
                 .totalValueWithDiscount(order.getTotalValueWithDiscount())
+                .deliveryFee(order.getDeliveryFee())
                 .build();
     }
 }

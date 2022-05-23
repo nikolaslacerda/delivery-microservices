@@ -10,7 +10,7 @@
           <span>{{ item.quantity * item.promotionalPrice | currency:'USD': 'symbol' }}</span><br>
         </div>
         <hr>
-        <app-order-delivery-costs [deliveryFee]="order.restaurant.deliveryFee" [subtotal]="order.subtotalWithDiscount"
+        <app-order-delivery-costs [deliveryFee]="order.deliveryFee" [subtotal]="order.subtotalWithDiscount"
                                   [total]="order.totalValueWithDiscount"></app-order-delivery-costs>
       </div>
     </div>
