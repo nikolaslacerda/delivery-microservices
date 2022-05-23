@@ -1,54 +1,58 @@
-<div class="row mb-3">
-  <h3><strong>Me</strong></h3>
+<div *ngIf="isLoading">
+  <app-loading-bar></app-loading-bar>
 </div>
-<form class="mb-5" [formGroup]="userForm" (ngSubmit)="updateUser()">
+<div *ngIf="!isLoading">
   <div class="row mb-3">
-    <div class="col">
-      <label for="firstName">First Name</label>
-      <input
-        type="text"
-        class="form-control"
-        formControlName="firstName"
-        id="firstName"
-        [ngClass]="{ 'is-invalid': firstName.invalid && ( firstName.dirty ||  firstName.touched) }">
+    <h3><strong>Me</strong></h3>
+  </div>
+  <form class="mb-5" [formGroup]="userForm" (ngSubmit)="updateUser()">
+    <div class="row mb-3">
+      <div class="col">
+        <label for="firstName">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="firstName"
+          id="firstName"
+          [ngClass]="{ 'is-invalid': firstName.invalid && ( firstName.dirty ||  firstName.touched) }">
+      </div>
+      <div class="col">
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="lastName"
+          id="lastName"
+          [ngClass]="{ 'is-invalid': lastName.invalid && ( lastName.dirty ||  lastName.touched) }">
+      </div>
     </div>
-    <div class="col">
-      <label for="lastName">Last Name</label>
+    <div class="mb-3">
+      <label for="email">Email</label>
       <input
-        type="text"
         class="form-control"
-        formControlName="lastName"
-        id="lastName"
-        [ngClass]="{ 'is-invalid': lastName.invalid && ( lastName.dirty ||  lastName.touched) }">
+        formControlName="email"
+        type="text"
+        id="email"
+        [ngClass]="{ 'is-invalid': email.invalid && ( email.dirty ||  email.touched) }">
     </div>
-  </div>
-  <div class="mb-3">
-    <label for="email">Email</label>
-    <input
-      class="form-control"
-      formControlName="email"
-      type="text"
-      id="email"
-      [ngClass]="{ 'is-invalid': email.invalid && ( email.dirty ||  email.touched) }">
-  </div>
-  <div class="mb-3">
-    <label for="phone">Phone</label>
-    <input
-      class="form-control"
-      formControlName="phoneNumber"
-      type="text"
-      id="phone"
-      [ngClass]="{ 'is-invalid': phoneNumber.invalid && ( phoneNumber.dirty ||  phoneNumber.touched) }">
-  </div>
-  <div class="mb-3">
-    <label for="cpf">CPF</label>
-    <input
-      class="form-control"
-      formControlName="cpf"
-      type="text"
-      id="cpf"
-      [ngClass]="{ 'is-invalid': cpf.invalid && ( cpf.dirty ||  cpf.touched) }">
-  </div>
-  <button class="btn btn-danger w-100 btn-lg mb-3" type="submit" [disabled]="!userForm.valid">Update</button>
-</form>
-
+    <div class="mb-3">
+      <label for="phone">Phone</label>
+      <input
+        class="form-control"
+        formControlName="phoneNumber"
+        type="text"
+        id="phone"
+        [ngClass]="{ 'is-invalid': phoneNumber.invalid && ( phoneNumber.dirty ||  phoneNumber.touched) }">
+    </div>
+    <div class="mb-3">
+      <label for="cpf">CPF</label>
+      <input
+        class="form-control"
+        formControlName="cpf"
+        type="text"
+        id="cpf"
+        [ngClass]="{ 'is-invalid': cpf.invalid && ( cpf.dirty ||  cpf.touched) }">
+    </div>
+    <button class="btn btn-danger w-100 btn-lg mb-3" type="submit" [disabled]="!userForm.valid">Update</button>
+  </form>
+</div>

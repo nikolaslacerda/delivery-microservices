@@ -12,6 +12,7 @@ import {CustomerResponse} from '../../../shared/models/response/customer.respons
 })
 export class EditProfileComponent implements OnInit {
 
+  isLoading = true;
   user: CustomerResponse;
 
   userForm = this.fb.group({
@@ -38,6 +39,7 @@ export class EditProfileComponent implements OnInit {
           lastName: this.user.lastName,
           cpf: this.user.cpf,
         });
+        this.isLoading = false;
       });
   }
 

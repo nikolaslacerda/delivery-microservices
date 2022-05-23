@@ -2,18 +2,18 @@
   <div class="card ssss justify-content-center mb-4">
     <em class="text-center fa fa-check-circle mt-3 green-text fs-1"></em>
     <div class="card-body">
-      <p class="text-center green-text fs-1"><strong>Pedido entregue</strong></p>
+      <p class="text-center green-text fs-1"><strong>Order Delivered</strong></p>
       <div class="row">
         <div class="col-lg">
-          <p class="text-center">Realizado</p>
+          <p class="text-center">Placed</p>
           <p class="text-center fs-4"><strong>21:00</strong></p>
         </div>
         <div class="col-lg">
-          <p class="text-center">Entregue</p>
+          <p class="text-center">Delivered</p>
           <p class="text-center fs-4"><strong>21:30</strong></p>
         </div>
         <div class="col-lg">
-          <p class="text-center">Número do Pedido</p>
+          <p class="text-center">Order Number</p>
           <p class="text-center fs-4"><strong>1177</strong></p>
         </div>
       </div>
@@ -24,7 +24,7 @@
 <div *ngIf="(order.lastStatus | OrderStatusIndex) != 4">
   <div class="row justify-content-center mb-4">
     <span class="text-muted">
-      Previsão de entrega
+      Estimated Delivery
     </span>
     <strong class="text-lg">21:30 - 21:22</strong>
   </div>
@@ -50,15 +50,15 @@
   </div>
   <div class="mb-4" *ngIf="order.lastStatus === 'RECEIVED'">
     <div class="spinner-grow spinner-grow-sm bg-success me-2" role="status" aria-hidden="true"></div>
-    <span>Aguardando a confirmação do restaurante</span>
+    <span>Waiting for confirmation from the restaurant</span>
   </div>
   <div class="mb-4" *ngIf="order.lastStatus === 'ON_THE_WAY'">
     <div class="spinner-grow spinner-grow-sm bg-success me-2" role="status" aria-hidden="true"></div>
-    <span>Seu pedido está indo até você</span>
+    <span>Your order is coming to you</span>
   </div>
   <div class="mb-4" *ngIf="order.lastStatus === 'IN_THE_KITCHEN'">
     <div class="spinner-grow spinner-grow-sm bg-success me-2" role="status" aria-hidden="true"></div>
-    <span>O restaurante está preparando o seu pedido</span>
+    <span>The restaurant is preparing your order</span>
   </div>
 </div>
 

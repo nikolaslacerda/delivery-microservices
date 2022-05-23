@@ -2,13 +2,13 @@
   <app-loading-bar></app-loading-bar>
 </div>
 <div *ngIf="!isLoading()">
-  <h2 class="text-center mb-5">Acompanhe o Pedido</h2>
+  <h2 class="text-center mb-5">Track your order</h2>
   <div class="d-flex flex-column justify-content-center align-items-center">
     <app-order-timeline class="w-100" [order]="order"></app-order-timeline>
     <div class="card ccc mb-3 w-50">
       <div class="card-body">
         <div class="d-flex flex-column">
-          <h5 class="card-title"><strong>Entregar em</strong></h5>
+          <h5 class="card-title"><strong>Deliver at</strong></h5>
           <span
             class="card-text text-muted mt-2">{{order.delivery.address.streetName | titlecase}} {{order.delivery.address.streetNumber}}</span>
           <span class="card-text text-muted">{{order.delivery.address?.neighborhood | titlecase}}
@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="card-footer text-muted">
-        <em class="fa fa-paper-plane"></em> Entrega Rastreável
+        <em class="fa fa-paper-plane"></em> Traceable Delivery
       </div>
     </div>
     <app-order-summary class="ccc w-50 mb-3" [order]="order"></app-order-summary>
