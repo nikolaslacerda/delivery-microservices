@@ -10,9 +10,9 @@
       <p *ngIf="menuItem.description.length<100">{{menuItem.description}}</p>
       <p *ngIf="menuItem.description.length>100">{{menuItem.description.substring(0, 100) + '...'}}</p>
       <div class="" style="position: absolute;bottom: 0; right: 0;margin-bottom: 2px">
-        <span class="menu-item-info-box-price">{{menuItem.price | currency: 'USD': "symbol"}}</span>
-        <span
-          class="menu-item-info-box-original-price">{{menuItem.promotionalPrice | currency: 'USD': "symbol"}}</span>
+        <span class="menu-item-info-box-price">{{menuItem.promotionalPrice | currency: 'USD': "symbol"}}</span>
+        <span *ngIf="menuItem.price != menuItem.promotionalPrice"
+          class="menu-item-info-box-original-price">{{menuItem.price | currency: 'USD': "symbol"}}</span>
       </div>
     </div>
   </div>
