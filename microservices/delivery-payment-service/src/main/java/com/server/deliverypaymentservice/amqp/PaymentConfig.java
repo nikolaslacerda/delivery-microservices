@@ -7,11 +7,11 @@ import org.springframework.messaging.MessageChannel;
 
 import static com.server.deliverypaymentservice.amqp.PaymentConfig.PaymentSource;
 
-@EnableBinding(PaymentSource.class)
 @Configuration
+@EnableBinding(PaymentSource.class)
 class PaymentConfig {
 
-    static interface PaymentSource {
+    interface PaymentSource {
 
         @Output
         MessageChannel confirmedPayments();

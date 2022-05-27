@@ -1,8 +1,10 @@
 package com.server.deliverypaymentservice.repository;
 
-import com.server.deliverypaymentservice.model.Payment;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.server.deliverypaymentservice.model.entity.Payment;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface PaymentRepository extends JpaRepository<Payment, Long> {
+import java.util.UUID;
+
+public interface PaymentRepository extends MongoRepository<Payment, UUID> {
 
 }
