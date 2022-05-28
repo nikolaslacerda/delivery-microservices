@@ -6,6 +6,8 @@ import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {OrderResponse} from '../../../shared/models/response/order.response.model';
 import {ReviewResponse} from '../../../shared/models/response/review.response.model';
 import {ReviewRequest} from '../../../shared/models/request/review.request.model';
+import {RxStompService} from '@stomp/ng2-stompjs';
+import { Message } from '@stomp/stompjs';
 
 @Component({
   selector: 'app-order-status-order',
@@ -26,7 +28,8 @@ export class OrderStatusComponent implements OnInit {
               private fb: FormBuilder,
               private route: ActivatedRoute,
               private orderService: OrderService,
-              private ratingService: RatingService) {
+              private ratingService: RatingService,
+              private rxStompService: RxStompService) {
   }
 
   ngOnInit() {
@@ -38,6 +41,13 @@ export class OrderStatusComponent implements OnInit {
           this.review = review[0];
         });
       });
+
+    this.rxStompService.watch(`/orders/${orderId}/status`)
+      .subscribe((message: Message) => {
+        const order = JSON.parse(message.body);
+        this.order.lastStatus = order.lastStatus;
+      });
+
   }
 
   get comment(): AbstractControl {

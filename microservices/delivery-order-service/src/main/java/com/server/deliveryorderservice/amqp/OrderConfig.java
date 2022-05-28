@@ -11,10 +11,10 @@ import static com.server.deliveryorderservice.amqp.OrderConfig.UpdateOrderSource
 @EnableBinding(UpdateOrderSource.class)
 public class OrderConfig {
 
-    public static interface UpdateOrderSource {
+    interface UpdateOrderSource {
 
         @Output
-        public MessageChannel orderWithUpdatedStatus();
+        MessageChannel orderWithUpdatedStatus();
     }
 
 }

@@ -18,6 +18,9 @@ import {OrderListComponent} from './order-list/order-list.component';
 import {OrderCardComponent} from './order-list/order-card/order-card.component';
 import {OrderComponent} from './order/order.component';
 import {RatingModule} from 'ngx-bootstrap/rating';
+import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
+import {rxStompConfig} from '../../core/config/rx-stomp.config';
+
 
 @NgModule({
   declarations: [
@@ -40,6 +43,17 @@ import {RatingModule} from 'ngx-bootstrap/rating';
     SharedModule,
     ReactiveFormsModule,
     RatingModule
+  ],
+  providers: [
+    {
+      provide: InjectableRxStompConfig,
+      useValue: rxStompConfig
+    },
+    {
+      provide: RxStompService,
+      useFactory: rxStompServiceFactory,
+      deps: [InjectableRxStompConfig]
+    }
   ]
 })
 export class OrderModule {

@@ -1,5 +1,6 @@
 package com.server.deliveryorderservice.service;
 
+import com.server.deliveryorderservice.amqp.NotifierUpdatedOrderStatus;
 import com.server.deliveryorderservice.exception.EntityNotFoundException;
 import com.server.deliveryorderservice.mapper.OrderMapper;
 import com.server.deliveryorderservice.model.dto.request.OrderRequest;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    private final NotifierUpdatedOrderStatus updatedOrderStatusNotifier;
 
     public OrderResponse createOrder(OrderRequest orderRequest) {
         Order order = OrderMapper.mapToModel(orderRequest);
@@ -57,8 +59,8 @@ public class OrderService {
         validateStatus(order.getLastStatus(), statusRequest.getStatus());
         order.setLastStatus(statusRequest.getStatus());
         order.setUpdatedAt(LocalDateTime.now());
-        orderRepository.save(order);
-        //updateOrderSource.orderWithUpdatedStatus().send(MessageBuilder.withPayload(dto).build());
+        Order savedOrder = orderRepository.save(order);
+        updatedOrderStatusNotifier.notifyOrderWithUpdatedStatus(savedOrder);
     }
 
     private void validateStatus(Status lastStatus, Status newStatus) {
