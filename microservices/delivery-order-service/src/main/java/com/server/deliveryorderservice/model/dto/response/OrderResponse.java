@@ -25,6 +25,7 @@ public class OrderResponse {
     private LocalDateTime closedAt;
     private Status lastStatus;
     private Boolean reviewed;
+    private UUID paymentId;
     private Delivery delivery;
     private Restaurant restaurant;
     private List<OrderItem> items;

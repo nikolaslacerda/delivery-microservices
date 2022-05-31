@@ -2,6 +2,7 @@ package com.server.deliveryorderservice.model.dto.request;
 
 import com.server.deliveryorderservice.model.dto.DeliveryDto;
 import com.server.deliveryorderservice.model.dto.OrderItemDto;
+import com.server.deliveryorderservice.model.dto.PaymentDto;
 import com.server.deliveryorderservice.model.dto.RestaurantDto;
 import com.server.deliveryorderservice.validation.CorrectOrderPrices;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,10 @@ public class OrderRequest {
     @Valid
     @NotNull
     private RestaurantDto restaurant;
+
+    @Valid
+    @NotNull
+    private PaymentDto payment;
 
     @Valid
     @NotNull

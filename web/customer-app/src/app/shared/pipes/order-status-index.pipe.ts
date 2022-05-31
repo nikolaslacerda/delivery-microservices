@@ -7,10 +7,11 @@ export class OrderStatusIndexPipe implements PipeTransform {
 
   orderStatusIndex: any = {
     RECEIVED: 1,
-    IN_THE_KITCHEN : 2,
-    ON_THE_WAY: 3,
-    DELIVERED: 4,
-    CANCELED: 5
+    PAID: 2,
+    IN_THE_KITCHEN : 3,
+    ON_THE_WAY: 4,
+    DELIVERED: 5,
+    CANCELED: 6
   };
 
   transform(value: any): number {

@@ -37,7 +37,7 @@ public class PaymentService {
     public PaymentResponse confirmPayment(UUID paymentId) {
         Payment foundPayment = paymentRepository.findById(paymentId)
                 .orElseThrow(() -> new ResourceNotFoundException(paymentId));
-        foundPayment.setStatus(PaymentStatus.CONFIRM);
+        foundPayment.setStatus(PaymentStatus.CONFIRMED);
         paymentRepository.save(foundPayment);
         paymentNotifier.notifyConfirmedPayment(foundPayment);
         return PaymentMapper.mapToResponse(foundPayment);

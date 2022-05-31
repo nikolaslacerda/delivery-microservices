@@ -25,11 +25,11 @@ public class Payment {
 
     private String name;
 
-    private String number;
+    private String cardNumber;
 
     private String expiration;
 
-    private String code;
+    private Integer cvv;
 
     private PaymentStatus status;
 

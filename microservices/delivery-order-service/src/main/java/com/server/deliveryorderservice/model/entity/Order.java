@@ -27,6 +27,7 @@ public class Order {
     private Status lastStatus;
     private Boolean reviewed;
     private UUID customerId;
+    private UUID paymentId;
     private Delivery delivery;
     private Restaurant restaurant;
     private List<OrderItem> items;

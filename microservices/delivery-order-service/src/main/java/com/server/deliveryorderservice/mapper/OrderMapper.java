@@ -20,6 +20,7 @@ public class OrderMapper {
                 .items(order.getItems())
                 .lastStatus(order.getLastStatus())
                 .reviewed(order.getReviewed())
+                .paymentId(order.getPaymentId())
                 .subtotal(order.getSubtotal())
                 .subtotalWithDiscount(order.getSubtotalWithDiscount())
                 .totalValue(order.getTotalValue())

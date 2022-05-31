@@ -42,7 +42,11 @@ export class OrderComponent implements OnInit {
       reference: this.formBuilder.control('')
     }),
     paymentGroup: this.formBuilder.group({
-      paymentId: this.formBuilder.control('', [Validators.required])
+      paymentMethodId: this.formBuilder.control('', [Validators.required]),
+      name: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
+      cardNumber: this.formBuilder.control('', [Validators.required, Validators.maxLength(16), Validators.pattern(/[3-9]/)]),
+      expiration: this.formBuilder.control('', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]),
+      cvv: this.formBuilder.control('', [Validators.required, ,Validators.maxLength(3)])
     })
   });
 
@@ -98,6 +102,26 @@ export class OrderComponent implements OnInit {
 
   get reference(): AbstractControl {
     return this.orderForm.get('addressGroup').get('reference');
+  }
+
+  get paymentMethod(): AbstractControl {
+    return this.orderForm.get('paymentGroup').get('paymentMethodId');
+  }
+
+  get name(): AbstractControl {
+    return this.orderForm.get('paymentGroup').get('name');
+  }
+
+  get cardNumber(): AbstractControl {
+    return this.orderForm.get('paymentGroup').get('cardNumber');
+  }
+
+  get expiration(): AbstractControl {
+    return this.orderForm.get('paymentGroup').get('expiration');
+  }
+
+  get cvv(): AbstractControl {
+    return this.orderForm.get('paymentGroup').get('cvv');
   }
 
   cartItems(): CartItem[] {
