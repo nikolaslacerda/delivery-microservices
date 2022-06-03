@@ -5,12 +5,12 @@
   <div class="accordion-item" *ngFor="let category of categories; let i = index">
     <h2 class="accordion-header" id="flush-heading-1">
       <div class="d-flex justify-content-end align-items-center">
-        <a type="button" class="accordion-button aaa collapsed text-start" data-bs-toggle="collapse"
+        <a type="button" class="accordion-button collapsed text-start" data-bs-toggle="collapse"
            href="#List-{{ i }}" aria-expanded="true">
           <h5 class="content_title fw-bold w-100 text-left">{{category.name}}</h5>
         </a>
         <div class="d-flex align-items-end justify-content-end position-absolute"
-             style=" margin-right: 50px; z-index:1000;">
+             style="margin-right: 50px; z-index:1000;">
           <div class="btn-group me-2" role="group" aria-label="Basic example">
             <button (click)="updateCategoryStatus(category)" type="button" class="btn btn-sm"
                     [ngClass]="{'btn-primary': !category.active, 'btn-not-selected': category.active}">Disabled
@@ -20,10 +20,10 @@
             </button>
           </div>
           <button class="btn btn-sm me-1 mb-1 mb-lg-0">
-            <em class="bi-pen" style="color: #666666" (click)="openEditModal(category)"></em>
+            <em class="bi-pen text-secondary" (click)="openEditModal(category)"></em>
           </button>
           <button class="btn btn-sm" (click)="deleteMenuCategory(category)">
-            <em class="bi-trash" style="color: #ec1c2d"></em>
+            <em class="bi-trash color-primary"></em>
           </button>
         </div>
       </div>

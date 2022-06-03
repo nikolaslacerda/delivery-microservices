@@ -24,10 +24,15 @@
 .dropdown-menu {
   right: 0;
   left: auto;
+  width: 280px;
+  margin-right: -3px
 }
 
 .dropdown-item {
- color: #6c757d;
+  color: #6c757d;
+  height: 50px;
+  font-size: 18px;
+  font-weight: bold
 }
 
 .dropdown-item:hover {

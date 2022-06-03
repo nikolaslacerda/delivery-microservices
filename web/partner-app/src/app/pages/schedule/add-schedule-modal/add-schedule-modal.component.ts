@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {BsModalRef} from 'ngx-bootstrap/modal';
-import {ScheduleService} from '../../../services/schedule.service';
+import {ScheduleService} from '../../../core/services/schedule.service';
 import {formatDate} from '@angular/common';
-import {AuthService} from '../../../services/auth.service';
+import {AuthService} from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-add-schedule-modal',

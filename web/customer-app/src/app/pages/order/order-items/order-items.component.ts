@@ -4,7 +4,7 @@ import {CartItem} from '../../../shared/models/cart-item';
 @Component({
   selector: 'app-order-items',
   templateUrl: './order-items.component.html',
-  styleUrls: []
+  styleUrls: ['./order-items.component.css']
 })
 export class OrderItemsComponent implements OnInit {
 

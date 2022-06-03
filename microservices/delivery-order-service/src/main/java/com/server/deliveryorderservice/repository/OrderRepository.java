@@ -10,5 +10,5 @@ public interface OrderRepository extends MongoRepository<Order, UUID> {
 
     List<Order> findAllByCustomerId(UUID customerId);
 
-    List<Order> findAllByRestaurantId(UUID restaurantId);
+    List<Order> findAllByRestaurantId(Long restaurantId);
 }

@@ -6,7 +6,7 @@
   <div class="modal-body">
     <form [formGroup]="scheduleForm" (ngSubmit)="addSchedule()">
       <div class="mb-3">
-        <label for="day">Selecione o dia</label>
+        <label for="day">Select Day</label>
         <select id="day" class="form-select ml-2 mr-2" formControlName="dayOfWeek" aria-label="Default select example">
           <option value="MONDAY" selected>Monday</option>
           <option value="TUESDAY">Tuesday</option>
@@ -18,11 +18,11 @@
         </select>
       </div>
       <div class="mb-3">
-        <label class="form-label">Horario de abertura</label>
+        <label class="form-label">Opening Hour</label>
         <timepicker [formControlName]="'openingTime'" [showMeridian]="false"></timepicker>
       </div>
       <div class="mb-3">
-        <label class="form-label">Horario de fechamento</label>
+        <label class="form-label">Closing Hour</label>
         <timepicker [formControlName]="'closingTime'" [showMeridian]="false"></timepicker>
       </div>
       <div class="modal-footer mt-4">

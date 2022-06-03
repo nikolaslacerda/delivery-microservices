@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MenuService} from '../../../services/menu.service';
+import {MenuService} from '../../../core/services/menu.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {AddMenuCategoryModalComponent} from './add-menu-category-modal/add-menu-category-modal.component';
 import {EditMenuCategoryModalComponent} from './edit-menu-category-modal/edit-menu-category-modal.component';
 import {ToastrService} from 'ngx-toastr';
-import {MenuCategoryResponse} from '../../../model/menu-category-response.model';
-import {MenuResponse} from '../../../model/menu-response.model';
-import {MenuCategoryRequest} from '../../../model/menu-category-request.model';
+import {MenuCategoryResponse} from '../../../shared/model/response/menu-category-response.model';
+import {MenuResponse} from '../../../shared/model/response/menu-response.model';
+import {MenuCategoryRequest} from '../../../shared/model/request/menu-category-request.model';
 
 @Component({
   selector: 'app-menu-category',
@@ -73,19 +73,19 @@ export class MenuCategoryComponent implements OnInit {
   }
 
   showSuccessCreate(categoryName: string): void {
-    this.toastr.success('Adicionada a categoria ' + categoryName, 'Sucesso', {
+    this.toastr.success('Category ' + categoryName + ' successfully created', 'Success', {
       timeOut: 3000,
     });
   }
 
   showSuccessUpdate(): void {
-    this.toastr.success('Categoria atualizada', 'Sucesso', {
+    this.toastr.success('Category successfully updated', 'Success', {
       timeOut: 3000,
     });
   }
 
   showSuccessDelete(categoryName: string): void {
-    this.toastr.success('Removido a categoria ' + categoryName, 'Sucesso', {
+    this.toastr.success('Category deleted successfully' + categoryName, 'Success', {
       timeOut: 3000,
     });
   }

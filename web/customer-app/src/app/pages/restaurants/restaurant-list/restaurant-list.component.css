@@ -1,12 +1,8 @@
-.eee {
-  flex-direction: row;
-}
-
-.ddd {
+.w-30 {
   width: 33%;
 }
 
-.aafa {
+.cuisine-type-img {
   height: 62px;
   width: 76px;
 }
@@ -16,19 +12,13 @@
 }
 
 @media (max-width: 992px) {
-  .ddd {
+  .w-30 {
     width: 50%;
   }
 }
 
 @media (max-width: 768px) {
-  .eee {
-    flex-direction: column;
-  }
-
-  .ddd {
+  .w-30 {
     width: 100%;
   }
 }
-
-

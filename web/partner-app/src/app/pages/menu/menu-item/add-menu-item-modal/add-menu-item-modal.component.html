@@ -1,11 +1,11 @@
 <div class="modal-content">
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel"><strong>Adicione um item</strong></h5>
+    <h5 class="modal-title" id="exampleModalLabel"><strong>Add Item</strong></h5>
     <button type="button" class="btn-close btn-close-red" (click)="hide()" aria-label="Close"></button>
   </div>
   <div class="modal-body">
     <div class="d-flex justify-content-center align-items-center mb-2">
-      <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width:150px">
+      <img [src]="imageSrc" *ngIf="imageSrc">
     </div>
     <form [formGroup]="addMenuItemForm" (ngSubmit)="addItem()">
       <div class="form-group mb-3" formGroupName="image">

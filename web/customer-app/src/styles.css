@@ -34,3 +34,19 @@ table th, table td {
 .btn-primary.focus, .btn-primary:focus {
   background-color: #EC1C2D;
 }
+
+.text-gold {
+  color: #e7a74e;
+}
+
+.text-red {
+  color: #EA1D2C;
+}
+
+.bg-light-red {
+  background-color: #FDEDEE;
+}
+
+.bg-red {
+  background-color: #EA1D2C;
+}

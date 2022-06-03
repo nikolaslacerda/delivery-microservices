@@ -1,4 +1,4 @@
-.ddd {
+.order-width {
   width: 49%;
 }
 
@@ -10,7 +10,7 @@
     flex-wrap: wrap;
   }
 
-  .ddd {
+  .order-width {
     width: 100%;
   }
 }

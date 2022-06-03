@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {PaymentMethodService} from '../../services/payment-method.service';
+import {PaymentMethodService} from '../../core/services/payment-method.service';
 import {ToastrService} from 'ngx-toastr';
-import {PaymentMethodResponse} from '../../model/payment-method-response.model';
-import {AuthService} from '../../services/auth.service';
+import {PaymentMethodResponse} from '../../shared/model/response/payment-method-response.model';
+import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-payment-methods',

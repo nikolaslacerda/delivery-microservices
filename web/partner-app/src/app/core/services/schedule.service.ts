@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {DayOfWeekUtils} from '../shared/utils/dayOfWeek.utils';
+import {DayOfWeekUtils} from '../../shared/utils/dayOfWeek.utils';
 import {map} from 'rxjs/operators';
-import {ScheduleResponse} from '../model/schedule-response.model';
+import {ScheduleResponse} from '../../shared/model/response/schedule-response.model';
 
 @Injectable({
   providedIn: 'root'

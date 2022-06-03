@@ -1,3 +1,8 @@
+.card {
+  min-width: 300px;
+  height: 100px
+}
+
 .place-info-box-icon {
   position: relative;
   border-radius: 50%;

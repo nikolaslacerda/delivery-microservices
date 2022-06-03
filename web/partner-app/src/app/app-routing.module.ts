@@ -8,7 +8,7 @@ import {ScheduleComponent} from './pages/schedule/schedule.component';
 import {ReviewsComponent} from './pages/reviews/reviews.component';
 import {PaymentMethodsComponent} from './pages/payment-methods/payment-methods.component';
 import {LoginComponent} from './pages/login/login.component';
-import {AuthGuard} from './guards/auth.guard';
+import {AuthGuard} from './core/guards/auth.guard';
 import {ProfileComponent} from './pages/profile/profile.component';
 import {SignupComponent} from './pages/signup/signup.component';
 

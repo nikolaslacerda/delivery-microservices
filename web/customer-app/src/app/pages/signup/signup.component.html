@@ -1,13 +1,11 @@
-<div class="container-fluid vh-100" style="height: 100%">
-  <img class="brand-image mt-2" src="../../../../assets/img/ifood.logo.svg" alt="" height="50px"
-       style="position: absolute">
+<div class="container-fluid vh-100 h-100">
+  <img class="position-absolute brand-image mt-2" src="../../../../assets/img/ifood.logo.svg" alt="" height="50px">
   <div class="row">
-    <div class="col-8 justify-content-center align-items-center d-flex"
-         style="background-color: #FDEDEE; border-radius: 0 100% 100% 0">
-      <img src="assets/img/people-buying.svg"/>
+    <div class="col-8 justify-content-center align-items-center d-flex bg-light-red">
+      <img src="assets/img/people-buying.svg" alt="people buying"/>
     </div>
     <div class="col-4 vh-100 align-items-center justify-content-center d-flex">
-      <div class="card w-100 border-0 shadow-sm" style="margin-left: -350px">
+      <div class="card w-100 border-0 shadow-sm">
         <div class="card-body">
           <h5 class="card-title mb-3"><strong>Sign Up</strong></h5>
           <form [formGroup]="signUpForm" (ngSubmit)="signUp()">

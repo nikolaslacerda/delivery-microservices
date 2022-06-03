@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {MenuService} from '../../services/menu.service';
-import {MenuResponse} from '../../model/menu-response.model';
-import {AuthService} from '../../services/auth.service';
+import {MenuService} from '../../core/services/menu.service';
+import {MenuResponse} from '../../shared/model/response/menu-response.model';
+import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-menu',

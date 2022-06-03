@@ -1,27 +1,25 @@
-.ddd {
+.order-div {
   flex-direction: row;
 }
 
-.it {
+.order-detail {
   width: 40%;
 }
 
-.it2 {
+.order-content {
   width: 60%;
 }
 
 @media (max-width: 1200px) {
-  .ddd {
+  .order-div {
     flex-direction: column;
   }
-  .it {
+
+  .order-detail {
     width: 100%;
   }
-  .it2 {
+
+  .order-content {
     width: 100%;
-  }
-  .fd {
-    color: #e7a74e;
-    font-size: 9px;
   }
 }

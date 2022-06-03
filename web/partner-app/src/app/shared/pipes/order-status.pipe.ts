@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class OrderStatusPipe implements PipeTransform {
 
   orderStatusDescription: any = {
-    RECEIVED: 'Received',
+    PAID: 'Waiting Confirmation',
     IN_THE_KITCHEN : 'In the kitchen',
     ON_THE_WAY: 'On the way',
     DELIVERED: 'Delivered'

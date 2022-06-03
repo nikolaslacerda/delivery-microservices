@@ -1,18 +1,19 @@
-<div (click)="emitAddEvent()" class="card shadow-sm cursor mb-3" style="height: 15rem; min-width: 250px">
+<div (click)="emitAddEvent()" class="card shadow-sm cursor mb-4">
   <div class="d-flex flex-row w-100 h-100">
-    <div class="d-flex align-items-center justify-content-center" style="min-width: 30%;width: 30%">
+    <div class="card-image d-flex align-items-center justify-content-center">
       <span class="place-info-box-icon">
-           <img class="menu-item-image" src="{{'http://localhost:9999/restaurants/image/menu-item/' + menuItem.imageUrl}}" alt="...">
+           <img class="menu-item-image"
+                src="{{'http://localhost:9999/restaurants/image/menu-item/' + menuItem.imageUrl}}" alt="...">
          </span>
     </div>
     <div class="card-body d-flex flex-column">
       <span class="menu-item-info-box-text text-uppercase">{{menuItem.name}}</span>
       <p *ngIf="menuItem.description.length<100">{{menuItem.description}}</p>
       <p *ngIf="menuItem.description.length>100">{{menuItem.description.substring(0, 100) + '...'}}</p>
-      <div class="" style="position: absolute;bottom: 0; right: 0;margin-bottom: 2px">
+      <div class="position-absolute mb-2 end-0 bottom-0">
         <span class="menu-item-info-box-price">{{menuItem.promotionalPrice | currency: 'USD': "symbol"}}</span>
         <span *ngIf="menuItem.price != menuItem.promotionalPrice"
-          class="menu-item-info-box-original-price">{{menuItem.price | currency: 'USD': "symbol"}}</span>
+              class="menu-item-info-box-original-price">{{menuItem.price | currency: 'USD': "symbol"}}</span>
       </div>
     </div>
   </div>

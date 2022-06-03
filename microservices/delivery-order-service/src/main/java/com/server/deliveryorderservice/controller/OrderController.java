@@ -30,7 +30,7 @@ public class OrderController {
     }
 
     @GetMapping("/restaurant/{restaurantId}")
-    public List<OrderResponse> getRestaurantOrders(@PathVariable UUID restaurantId) {
+    public List<OrderResponse> getRestaurantOrders(@PathVariable Long restaurantId) {
         return orderService.getRestaurantOrders(restaurantId);
     }
 
@@ -40,7 +40,7 @@ public class OrderController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PostMapping("/{id}/status")
+    @PatchMapping("/{id}/status")
     public void updateStatus(@PathVariable UUID id, @Valid @RequestBody StatusRequest statusRequest) {
         orderService.updateStatus(id, statusRequest);
     }

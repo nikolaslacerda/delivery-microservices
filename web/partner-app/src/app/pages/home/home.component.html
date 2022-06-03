@@ -4,7 +4,7 @@
     <app-loading></app-loading>
   </div>
   <div class="d-flex flex-column justify-content-center mt-3" *ngIf="!isLoading">
-    <div class="card mb-4" style="width: 35rem;">
+    <div class="card w-50 mb-4">
       <div class="card-body">
         <h5 class="card-title"><strong>Daily Status</strong></h5>
         <div class="d-flex align-items-center">
@@ -15,38 +15,52 @@
         </div>
         <div class="row">
           <div class="col">
-            <p class="card-text"><span style="font-size: 24px">{{getTodayOrders().length}}</span> Daily Orders</p>
+            <p class="card-text">
+              <span class="text-span">{{getTodayOrders().length}}</span> Daily Orders
+            </p>
           </div>
           <div class="col">
-            <p class="card-text"><span style="font-size: 24px">{{getDayFatur() | currency: 'USD': 'symbol'}}</span>
-              Today Revenues</p>
+            <p class="card-text">
+              <span class="text-span">{{getDayFatur() | currency: 'USD': 'symbol'}}</span>
+              Today Revenues
+            </p>
           </div>
         </div>
       </div>
     </div>
-    <div class="card mb-4" style="width: 35rem;">
+    <div class="card w-50 mb-4">
       <div class="card-body">
         <h5 class="card-title"><em class="bi-calendar-check"></em> Monthly</h5>
         <h6 class="card-subtitle mb-2 text-muted"></h6>
         <div class="row">
           <div class="col">
-            <p class="card-text"><span style="font-size: 24px">{{getMonthyOrders().length}}</span> Monthly Orders</p>
+            <p class="card-text">
+              <span class="text-span">{{getMonthyOrders().length}}</span> Monthly Orders
+            </p>
           </div>
           <div class="col">
-            <p class="card-text"><span style="font-size: 24px">{{getMonthFatur() | currency: 'USD': 'symbol'}}</span> Revenues</p>
+            <p class="card-text">
+              <span class="text-span">{{getMonthFatur() | currency: 'USD': 'symbol'}}</span> Revenues
+            </p>
           </div>
         </div>
       </div>
     </div>
-    <div class="card mb-4" style="width: 35rem;">
+    <div class="card w-50 mb-4">
       <div class="card-body">
-        <h5 class="card-title"><em class="bi-star"></em> Reviews</h5>
+        <h5 class="card-title">
+          <em class="bi-star"></em> Reviews
+        </h5>
         <div class="row">
           <div class="col">
-            <p class="card-text"><span style="font-size: 24px">{{getWeekReviews().length}}</span> Last week reviews</p>
+            <p class="card-text">
+              <span class="text-span">{{getWeekReviews().length}}</span> Last week reviews
+            </p>
           </div>
           <div class="col">
-            <p class="card-text"><span style="font-size: 24px">{{getMonthReviewsAverage() | number : '1.2-2'}}</span> Week Average</p>
+            <p class="card-text">
+              <span class="text-span">{{getMonthReviewsAverage() | number : '1.2-2'}}</span> Week Average
+            </p>
           </div>
         </div>
       </div>

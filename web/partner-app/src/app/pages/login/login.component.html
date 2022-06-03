@@ -1,16 +1,21 @@
 <div class="container-fluid p-0">
   <div class="d-flex">
-    <div class="col-6 aaa d-flex min-vh-100">
+    <div class="col-6 d-flex min-vh-100">
       <img src="assets/img/background.jpg" class="background" alt="logo">
     </div>
     <div class="col-6 d-flex align-items-center justify-content-center ">
       <div class="d-flex w-50">
         <div class="card-body">
-          <div href="/" class="logoc d-flex align-items-center justify-content-center mt-4">
+          <div href="/" class="logo-div d-flex align-items-center justify-content-center mt-4">
             <img src="assets/img/ifood.logo.svg" class="logo" alt="logo">
           </div>
-          <h5 class="card-title mt-4"><strong>Portal do Parceiro</strong></h5>
-          <h6 class="card-subtitle mb-4 text-muted">Gerencie sua loja de forma fácil e rápida</h6>
+          <h5 class="card-title mt-4">
+            <strong>Partner Portal</strong>
+          </h5>
+          <h6 class="card-subtitle mb-4 text-muted">Manage your store quickly and easily</h6>
+          <div class="alert alert-info" role="alert">
+            User for test: <strong>email</strong>: test@email.com <strong>password</strong>: 123456
+          </div>
           <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
             <div class="form-group mb-2">
               <input type="email"
@@ -21,7 +26,7 @@
                      placeholder="Email"
                      autocomplete="on">
               <div *ngIf="email.invalid && (email.dirty || email.touched)">
-                <div class="invalid-feedbackk" *ngIf="email.errors?.required">
+                <div class="invalid-feedback" *ngIf="email.errors?.required">
                   Email is required.
                 </div>
               </div>
@@ -35,16 +40,20 @@
                      placeholder="Password"
                      autocomplete="off">
               <div *ngIf="password.invalid && (password.dirty || password.touched)">
-                <div class="invalid-feedbackk" *ngIf="password.errors?.required">
+                <div class="invalid-feedback" *ngIf="password.errors?.required">
                   Password is required.
                 </div>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary w-100" [disabled]="!loginForm.valid"><strong>Logar</strong>
+            <button type="submit" class="btn btn-primary w-100" [disabled]="!loginForm.valid"><strong>Login</strong>
             </button>
           </form>
           <div class="mt-4">
-          <span>Ainda não tem cadastro? <a [routerLink]="['/sign-up']" class="text-primary"><strong>Cadastre sua loja</strong></a></span>
+          <span>Don't have a registration yet?
+            <a [routerLink]="['/sign-up']" class="text-primary">
+              <strong>Register your store</strong>
+            </a>
+          </span>
           </div>
         </div>
       </div>

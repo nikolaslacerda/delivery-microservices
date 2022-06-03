@@ -3,6 +3,10 @@
   color: white;
 }
 
+.card-footer {
+  height: 63px;
+}
+
 .badge-received{
   background-color: #FFCB00;
   color: white;

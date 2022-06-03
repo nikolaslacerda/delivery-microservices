@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import {MenuService} from '../../../../services/menu.service';
+import {MenuService} from '../../../../core/services/menu.service';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 
 @Component({

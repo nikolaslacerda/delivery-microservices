@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {PaymentMethodResponse} from '../model/payment-method-response.model';
+import {PaymentMethodResponse} from '../../shared/model/response/payment-method-response.model';
 import {map} from 'rxjs/operators';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class PaymentMethodService {
   }
 
   getAllPaymentMethods(): Observable<PaymentMethodResponse[]> {
-    return this.http.get<PaymentMethodResponse[]>(`${this.API}/partners/restaurants/payment-methods`);
+    return this.http.get<PaymentMethodResponse[]>(`${this.API}/partners/payment-methods`);
   }
 
   getRestaurantPaymentMethods(restaurantId: number): Observable<PaymentMethodResponse[]> {

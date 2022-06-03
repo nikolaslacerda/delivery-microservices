@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ReviewService} from '../../services/review.service';
-import {ReviewResponse} from '../../model/review-response.model';
-import {AuthService} from '../../services/auth.service';
+import {ReviewService} from '../../core/services/review.service';
+import {ReviewResponse} from '../../shared/model/response/review-response.model';
+import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-reviews',

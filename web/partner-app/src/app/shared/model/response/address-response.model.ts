@@ -1,7 +1,7 @@
 export class AddressResponse {
 
   id: number;
-  streetAddress: string;
+  streetName: string;
   streetNumber: number;
   neighborhood: string;
   city: string;
@@ -13,7 +13,7 @@ export class AddressResponse {
 
   constructor(model: any = {}) {
     this.id = model.id;
-    this.streetAddress = model.streetAddress;
+    this.streetName = model.streetName;
     this.streetNumber = model.streetNumber;
     this.neighborhood = model.neighborhood;
     this.city = model.city;

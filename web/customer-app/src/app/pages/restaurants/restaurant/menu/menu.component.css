@@ -1,17 +1,9 @@
-.ddd {
-  flex-flow: row wrap;
-  flex: 50%
-}
-
-.it {
+.menu-item {
   width: 49%;
 }
 
 @media (max-width: 1200px) {
-  .ddd {
-    flex-direction: row;
-  }
-  .it {
+  .menu-item {
     width: 100%;
   }
 }

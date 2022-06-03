@@ -1,42 +1,45 @@
-<div class="container-fluid vh-100" style="height: 100%">
-  <img class="brand-image mt-2" src="../../../../assets/img/ifood.logo.svg" alt="" height="50px" style="position: absolute">
+<div class="container-fluid vh-100 h-100">
+  <img class="position-absolute brand-image mt-2" src="../../../../assets/img/ifood.logo.svg" alt="" height="50px">
   <div class="row">
-    <div class="col-8 justify-content-center align-items-center d-flex" style="background-color: #FDEDEE; border-radius: 0 100% 100% 0">
-      <img src="assets/img/people-buying.svg" />
+    <div class="d-flex col-8 justify-content-center align-items-center bg-light-red">
+      <img src="assets/img/people-buying.svg" alt="people buying"/>
     </div>
-    <div class="col-4 vh-100 align-items-center justify-content-center d-flex">
-      <div class="card w-75 border-0 shadow-sm" style="margin-left: -350px">
-        <div class="card-body">
-          <h5 class="card-title mb-3"><strong>Login</strong></h5>
+    <div class="d-flex col-4 vh-100 align-items-center justify-content-center">
+      <div class="card w-100 h-50 border-0 shadow-sm login-card">
+        <div class="d-flex flex-column p-4 h-100 align-items-center justify-content-center">
+          <h3 class="card-title mb-3"><strong>Not long to kill your hunger!</strong></h3>
+          <h4>Login</h4>
           <div class="alert alert-info" role="alert">
             User for test: <strong>email</strong>: test@email.com <strong>password</strong>: 123456
           </div>
-          <form [formGroup]="loginForm" (ngSubmit)="login()">
-            <div class="mb-3">
-              <app-input errorMessage="Email is required" label="Email">
-                <input type="email"
-                       class="form-control"
-                       id="email"
-                       formControlName="email"
-                       placeholder="Email"
-                       autocomplete="on"
-                       [ngClass]="{ 'is-invalid': email.invalid && ( email.dirty ||  email.touched) }">
-              </app-input>
-            </div>
-            <div class="mb-3">
-              <app-input errorMessage="Password is required" label="Password">
-                <input type="password"
-                       class="form-control"
-                       id="password"
-                       formControlName="password"
-                       placeholder="Password"
-                       autocomplete="off"
-                       [ngClass]="{ 'is-invalid': password.invalid && ( password.dirty ||  password.touched) }">
-              </app-input>
-            </div>
-            <button type="submit" class="btn btn-danger w-100" [disabled]="!loginForm.valid"><strong>Logar</strong>
-            </button>
-          </form>
+          <div class="d-flex w-75 align-items-center justify-content-center">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+              <div class="mb-3">
+                <app-input errorMessage="Email is required" label="Email">
+                  <input type="email"
+                         class="form-control"
+                         id="email"
+                         formControlName="email"
+                         placeholder="Email"
+                         autocomplete="on"
+                         [ngClass]="{ 'is-invalid': email.invalid && ( email.dirty ||  email.touched) }">
+                </app-input>
+              </div>
+              <div class="mb-3">
+                <app-input errorMessage="Password is required" label="Password">
+                  <input type="password"
+                         class="form-control"
+                         id="password"
+                         formControlName="password"
+                         placeholder="Password"
+                         autocomplete="off"
+                         [ngClass]="{ 'is-invalid': password.invalid && ( password.dirty ||  password.touched) }">
+                </app-input>
+              </div>
+              <button type="submit" class="btn btn-danger w-100" [disabled]="!loginForm.valid"><strong>Logar</strong>
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

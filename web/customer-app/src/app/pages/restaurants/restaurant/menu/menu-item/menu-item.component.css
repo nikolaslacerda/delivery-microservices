@@ -1,3 +1,13 @@
+.card {
+  height: 15rem;
+  min-width: 250px;
+}
+
+.card-image {
+  min-width: 30%;
+  width: 30%;
+}
+
 .menu-item-image {
   max-width:200px;
   max-height:150px;

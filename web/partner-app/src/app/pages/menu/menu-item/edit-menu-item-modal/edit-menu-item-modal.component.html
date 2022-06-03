@@ -5,7 +5,7 @@
   </div>
   <div class="modal-body">
     <div class="d-flex justify-content-center align-items-center mb-2">
-      <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width:150px">
+      <img [src]="imageSrc" *ngIf="imageSrc">
     </div>
     <form [formGroup]="editMenuItemForm" (ngSubmit)="updateMenuItem()">
       <div class="form-group mb-3" formGroupName="image">

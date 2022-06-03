@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ScheduleService} from '../../services/schedule.service';
+import {ScheduleService} from '../../core/services/schedule.service';
 import {DayOfWeekUtils} from '../../shared/utils/dayOfWeek.utils';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {EditScheduleModalComponent} from './edit-schedule-modal/edit-schedule-modal.component';
 import {AddScheduleModalComponent} from './add-schedule-modal/add-schedule-modal.component';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../core/services/auth.service';
 import {ToastrService} from 'ngx-toastr';
-import {ScheduleResponse} from '../../model/schedule-response.model';
+import {ScheduleResponse} from '../../shared/model/response/schedule-response.model';
 
 @Component({
   selector: 'app-schedule',

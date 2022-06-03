@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MenuService} from '../../../services/menu.service';
+import {MenuService} from '../../../core/services/menu.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {AddMenuItemModalComponent} from './add-menu-item-modal/add-menu-item-modal.component';
 import {EditMenuItemModalComponent} from './edit-menu-item-modal/edit-menu-item-modal.component';
-import {MenuItemResponse} from '../../../model/menu-item-response.model';
+import {MenuItemResponse} from '../../../shared/model/response/menu-item-response.model';
 import {ToastrService} from 'ngx-toastr';
-import {MenuCategoryResponse} from '../../../model/menu-category-response.model';
-import {MenuItemRequest} from '../../../model/menu-item-request.model';
+import {MenuCategoryResponse} from '../../../shared/model/response/menu-category-response.model';
+import {MenuItemRequest} from '../../../shared/model/request/menu-item-request.model';
 
 @Component({
   selector: 'app-menu-item',

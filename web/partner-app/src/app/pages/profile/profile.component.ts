@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {RestaurantService} from '../../services/restaurant.service';
-import {CategoryService} from '../../services/category.service';
-import {AuthService} from '../../services/auth.service';
-import {RestaurantImageUpdateRequest} from '../../model/restaurant-image-update-request.model';
-import {RestaurantUpdateRequest} from '../../model/restaurant-update-request.model';
-import {RestaurantResponse} from '../../model/restaurant-response.model';
-import {CuisineTypeResponse} from '../../model/cuisine-type-response.model';
+import {RestaurantService} from '../../core/services/restaurant.service';
+import {CategoryService} from '../../core/services/category.service';
+import {AuthService} from '../../core/services/auth.service';
+import {RestaurantImageUpdateRequest} from '../../shared/model/request/restaurant-image-update-request.model';
+import {RestaurantUpdateRequest} from '../../shared/model/request/restaurant-update-request.model';
+import {RestaurantResponse} from '../../shared/model/response/restaurant-response.model';
+import {CuisineTypeResponse} from '../../shared/model/response/cuisine-type-response.model';
 
 @Component({
   selector: 'app-profile',
@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
     this.authService.getRestaurantInfo()
       .subscribe((restaurant: RestaurantResponse) => {
         this.restaurant = restaurant;
-        this.imageSrc = 'https://localhost:3001/partner/profile/image/' + this.restaurant.imageUrl;
+        this.imageSrc = 'http://localhost:9999/restaurants/image/restaurant/' + this.restaurant.imageUrl;
         this.categoryService.getCuisineTypes()
           .subscribe((cuisineTypes: CuisineTypeResponse[]) => {
             this.cuisineTypes = cuisineTypes;
@@ -99,9 +99,5 @@ export class ProfileComponent implements OnInit {
           });
       }
     }
-  }
-
-  async delay(ms: number) {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then();
   }
 }

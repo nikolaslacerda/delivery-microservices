@@ -6,10 +6,14 @@
     <tbody>
     <tr *ngFor="let item of items">
       <td class="text-center">
-        <div style="min-width: 100px">
-        <a (click)="emitDecreaseQty(item)" class="btn btn-sm"><em class="fa fa-minus"></em></a>
+        <div class="item-quantity">
+        <a (click)="emitDecreaseQty(item)" class="btn btn-sm">
+          <em class="fa fa-minus"></em>
+        </a>
         {{item.quantity}}
-        <a (click)="emitIncreaseQty(item)" class="btn btn-sm"><em class="fa fa-plus"></em></a>
+        <a (click)="emitIncreaseQty(item)" class="btn btn-sm">
+          <em class="fa fa-plus"></em>
+        </a>
         </div>
       </td>
       <td>

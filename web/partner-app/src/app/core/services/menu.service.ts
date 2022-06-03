@@ -3,11 +3,11 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {environment} from 'src/environments/environment';
-import {MenuResponse} from '../model/menu-response.model';
-import {MenuCategoryResponse} from '../model/menu-category-response.model';
-import {MenuItemResponse} from '../model/menu-item-response.model';
-import {MenuCategoryRequest} from '../model/menu-category-request.model';
-import {MenuItemRequest} from '../model/menu-item-request.model';
+import {MenuResponse} from '../../shared/model/response/menu-response.model';
+import {MenuCategoryResponse} from '../../shared/model/response/menu-category-response.model';
+import {MenuItemResponse} from '../../shared/model/response/menu-item-response.model';
+import {MenuCategoryRequest} from '../../shared/model/request/menu-category-request.model';
+import {MenuItemRequest} from '../../shared/model/request/menu-item-request.model';
 
 @Injectable({
   providedIn: 'root'

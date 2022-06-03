@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {OrderService} from '../../services/order.service';
-import {OrderResponse} from '../../model/order-response.model';
-import {AuthService} from '../../services/auth.service';
+import {OrderService} from '../../core/services/order.service';
+import {OrderResponse} from '../../shared/model/response/order-response.model';
+import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-orders',
@@ -31,19 +31,19 @@ export class OrdersComponent implements OnInit {
   }
 
   getReceiveOrders(): any {
-    return this.orders.filter(x => x.status === 'RECEIVED');
+    return this.orders.filter(x => x.lastStatus === 'PAID');
   }
 
   getInTheKitchenOrders(): any {
-    return this.orders.filter(x => x.status === 'IN_THE_KITCHEN');
+    return this.orders.filter(x => x.lastStatus === 'IN_THE_KITCHEN');
   }
 
   getOnTheWayOrders(): any {
-    return this.orders.filter(x => x.status === 'ON_THE_WAY');
+    return this.orders.filter(x => x.lastStatus === 'ON_THE_WAY');
   }
 
   getDeliveredOrders(): any {
-    return this.orders.filter(x => x.status === 'DELIVERED');
+    return this.orders.filter(x => x.lastStatus === 'DELIVERED');
   }
 
   orderIsClicked(order: OrderResponse): void {

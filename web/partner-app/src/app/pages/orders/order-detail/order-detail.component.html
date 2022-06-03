@@ -4,23 +4,24 @@
   </div>
   <ng-template [ngIf]="!isLoading">
     <div class="card-body bg-light-grey" *ngIf="!isLoading">
-      <h4><em class="bi-card-list"></em> Order #{{order.id}} • Feito as <strong>19:00</strong></h4>
+      <h4><em class="bi-card-list"></em> Order #{{order.id}} • Created at <strong>19:00</strong></h4>
       <hr/>
-      <div class="d-flex p-2 flex-column border bg-white mb-4" *ngIf="(order.status | OrderStatusIndex) == 1">
-        <span class="text-primary"><strong>Confirme o pedido para ver os dados do cliente</strong></span>
-        <span class="text-muted">As informações do cliente estão ocultas até que o pedido seja confirmado</span>
+      <div class="d-flex p-2 flex-column border bg-white mb-4" *ngIf="(order.lastStatus | OrderStatusIndex) == 1">
+        <span class="text-primary"><strong>Confirm the order to see customer data</strong></span>
+        <span class="text-muted">Payment information is hidden until the order is confirmed</span>
       </div>
-      <div class="d-flex p-2 border bg-white flex-column mb-4" *ngIf="(order.status | OrderStatusIndex) != 1">
-        <span><strong>{{order.customer.firstName + ' ' + order.customer.lastName}}</strong></span>
-        <span><strong><em class="bi-phone"></em>  {{order.customer.phone}}</strong></span>
+      <div class="d-flex p-2 border bg-white flex-column mb-4" *ngIf="(order.lastStatus | OrderStatusIndex) != 1">
+<!--        <span><strong>{{order.customer.firstName + ' ' + order.customer.lastName}}</strong></span>-->
+<!--        <span><strong><em class="bi-phone"></em>  {{order.customer.phone}}</strong></span>-->
       </div>
-      <div class="d-flex bg-white border mb-4 align-items-center p-2" style="height: 60px">
-        <div class="d-flex h-50 flex-row justify-content-end align-items-center" style="font-size: 14px">
-            <span class="badge rounded-pill bg-secondary d-flex justify-content-center align-items-center ml-2 me-2"
-                  style="font-size: 14px">Entregar em</span>
-          <span> {{order.address.streetAddress + ' ' + order.address.streetNumber + ' - '}}
-            {{order.address.neighborhood + ' - ' + order.address.city}}
-            • CEP: {{order.address.postCode}}</span>
+      <div class="d-flex bg-white border mb-4 align-items-center p-3">
+        <div class="d-flex h-50 flex-row justify-content-end align-items-center">
+            <span class="badge rounded-pill bg-secondary d-flex justify-content-center align-items-center ml-2 me-2">
+              Delivery at
+            </span>
+          <span> {{order.delivery.address.streetName + ' ' + order.delivery.address.streetNumber + ' - '}}
+            {{order.delivery.address.neighborhood + ' - ' + order.delivery.address.city}}
+            • CEP: {{order.delivery.address.postCode}}</span>
         </div>
       </div>
       <table class="table table-md mb-5 bg-white">
@@ -33,31 +34,31 @@
         </tbody>
       </table>
       <div class="d-flex border bg-white">
-        <div class="d-flex flex-column p-2" *ngIf="(order.status | OrderStatusIndex) == 1">
-          <span class="text-primary"><strong>Confirme o pedido para ver a forma de pagamento</strong></span>
-          <span class="text-muted">As informações de pagamento estão ocultas até que o pedido seja confirmado</span>
+        <div class="d-flex flex-column p-2" *ngIf="(order.lastStatus | OrderStatusIndex) == 1">
+          <span class="text-primary"><strong>Confirm the order to see customer data</strong></span>
+          <span class="text-muted">Payment information is hidden until the order is confirmed</span>
         </div>
-        <div class="d-flex flex-column p-2" *ngIf="(order.status | OrderStatusIndex) != 1">
-          <div class="d-flex flex-column" *ngIf="order.payment.paymentMethodId != 5">
-            <span><strong>Pagamento realizado atraves do Aplicativo</strong></span>
-            <span class="text-muted">Não é necessário cobrar o cliente na entrega</span>
+        <div class="d-flex flex-column p-2" *ngIf="(order.lastStatus | OrderStatusIndex) != 1">
+          <div class="d-flex flex-column" *ngIf="order.paymentId != 5">
+            <span><strong>Payment made through the App</strong></span>
+            <span class="text-muted">No need to charge the customer on delivery</span>
           </div>
-          <div class="d-flex flex-column p-2" *ngIf="order.payment.paymentMethodId == 5">
-            <span><strong>Pagamento na Entrega</strong></span>
-            <span class="text-muted">Cobre o cliente no momento da entrega</span>
+          <div class="d-flex flex-column p-2" *ngIf="order.paymentId == 5">
+            <span><strong>Payment on Delivery</strong></span>
+            <span class="text-muted">Charge the customer at the time of delivery</span>
           </div>
         </div>
       </div>
     </div>
     <div class="card-footer text-muted">
-      <div class="d-flex justify-content-end" *ngIf="(order.status | OrderStatusIndex) == 1">
+      <div class="d-flex justify-content-end" *ngIf="(order.lastStatus | OrderStatusIndex) == 1">
         <button class="btn btn-outline-primary float-right" (click)="cancelOrder(order)">
           <strong>Cancel</strong>
         </button>
         <button class="btn btn-primary float-right ms-2" (click)="confirmOrder(order)"><strong>Confirm</strong>
         </button>
       </div>
-      <div class="d-flex justify-content-end" *ngIf="(order.status | OrderStatusIndex) == 2">
+      <div class="d-flex justify-content-end" *ngIf="(order.lastStatus | OrderStatusIndex) == 2">
         <button class="btn btn-primary float-right" (click)="deliveryOrder(order)">
           <strong>Out for Delivery </strong> <em class="bi-bicycle"></em></button>
       </div>

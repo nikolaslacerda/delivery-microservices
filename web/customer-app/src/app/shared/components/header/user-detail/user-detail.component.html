@@ -1,19 +1,19 @@
 <div class="dropdown" *ngIf="isLoggedIn(); else notLoggedIn">
   <div class="mr-4" type="button" data-bs-toggle="dropdown" aria-haspopup="true"
        aria-expanded="false">
-    <em style="font-size: 24px; color: #EA1D2C" data-feather="user"></em>
+    <em class="text-red" data-feather="user"></em>
   </div>
-  <div class="dropdown-menu mt-3" aria-labelledby="dropdownMenuButton" style="width: 280px; margin-right: -3px">
-    <button class="dropdown-item" style="height: 50px;font-size: 18px; font-weight: bold"
+  <div class="dropdown-menu mt-3" aria-labelledby="dropdownMenuButton">
+    <button class="dropdown-item"
             (click)="navigateToEdit()">
       <em class="fa fa-store"></em> Profile
     </button>
-    <button class="dropdown-item" style="height: 50px; font-size: 18px; font-weight: bold"
+    <button class="dropdown-item"
             (click)="navigateToOrders()">
-      <em class="far fa-sticky-note"></em>
+      <em class="fa fa-shopping-basket"></em>
       Orders
     </button>
-    <button class="dropdown-item" style="height: 50px; font-size: 18px; font-weight: bold"
+    <button class="dropdown-item"
             (click)="logout()">
       <em class="fa fa-sign-out-alt"></em> Logout
     </button>
@@ -23,7 +23,7 @@
   <a (click)="login()">
     <div class="mr-4" type="button" data-bs-toggle="dropdown" aria-haspopup="true"
          aria-expanded="false">
-      <em style="font-size: 24px; color: #EA1D2C" class="fas fa-sign-in-alt"></em>
+      <em class="fas fa-sign-in-alt text-red"></em>
     </div>
   </a>
 </ng-template>

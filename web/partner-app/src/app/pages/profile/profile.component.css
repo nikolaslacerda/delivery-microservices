@@ -66,6 +66,6 @@
   opacity: 1;
 }
 
-.aaa {
-  background-color: #FF1728;
+textarea {
+  resize: none;
 }

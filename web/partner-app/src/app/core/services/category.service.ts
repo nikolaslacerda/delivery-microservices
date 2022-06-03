@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {CuisineTypeResponse} from '../model/cuisine-type-response.model';
+import {CuisineTypeResponse} from '../../shared/model/response/cuisine-type-response.model';
 
 @Injectable({
   providedIn: 'root'

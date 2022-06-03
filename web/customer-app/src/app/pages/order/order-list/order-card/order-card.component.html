@@ -3,37 +3,40 @@
     <div class="d-flex align-items-center justify-content-center">
       <div class="d-flex align-items-center justify-content-center">
       <span class="restaurant-order-icon">
-        <img src="{{'http://localhost:9999/restaurants/image/restaurant/' + order.restaurant.logo}}" alt="restaurant logo"/>
+        <img src="{{'http://localhost:9999/restaurants/image/restaurant/' + order.restaurant.logo}}"
+             alt="restaurant logo"/>
       </span>
       </div>
-      <div class="d-flex flex-column w-100" style="height: 50px">
+      <div class="d-flex flex-column w-100 h-50">
         <div class="d-flex p-0">
           <span class="card-title ms-2">  {{order.restaurant.name}}</span>
         </div>
         <div class="d-flex p-0 w-100 justify-content-between">
-          <span *ngIf="order.lastStatus !== 'RECEIVED'" class="card-title ms-2 text-muted" style="font-size: 14px">
+          <span *ngIf="order.lastStatus !== 'RECEIVED'" class="card-title ms-2 text-muted">
             {{order.lastStatus | OrderStatus}} • Nº  {{order.id}}
           </span>
-          <span *ngIf="order.lastStatus === 'RECEIVED'" class="card-title ms-2 text-muted" style="font-size: 14px">
+          <span *ngIf="order.lastStatus === 'RECEIVED'" class="card-title ms-2 text-muted">
             Waiting for payment confirmation
           </span>
-          <div *ngIf="order.lastStatus !== 'RECEIVED' && order.lastStatus !== 'DELIVERED'" class="spinner-grow spinner-grow-sm bg-success d-flex "
+          <div *ngIf="order.lastStatus !== 'RECEIVED' && order.lastStatus !== 'DELIVERED'"
+               class="spinner-grow spinner-grow-sm bg-success d-flex "
                role="status" aria-hidden="true"></div>
         </div>
       </div>
     </div>
     <hr>
     <div *ngIf="order.items.length > 2">
-      <div class="row align-items-center" style="min-height: 50px;">
-        <div>
-          <p class="card-text">
+      <div class="row align-items-center order-items">
+        <div class="d-flex flex-column">
+          <div class="card-text">
             <span class="badge rounded-pill bg-light text-dark">{{order.items[0].quantity}}</span>
             <span class="ms-2 text-muted">{{order.items[0].name}}</span>
-          </p>
-          <p class="card-text" style="cursor: pointer; margin-top: -15px; font-size: 14px">
-            <span (click)="expandItems()" class="text-muted"><strong>more {{order.items.length - 1}}
-              items</strong></span>
-          </p>
+          </div>
+          <div class="card-text cursor">
+            <span (click)="expandItems()" class="text-muted">
+              <strong>more {{order.items.length - 1}} items</strong>
+            </span>
+          </div>
           <div *ngIf="showAllItems">
             <div *ngFor="let item of order.items">
               <p class="card-text">
@@ -46,22 +49,27 @@
       </div>
     </div>
     <div *ngIf="order.items.length <= 2">
-      <div class="d-flex align-items-center " style="min-height: 50px; max-height: 50px">
-
-        <div>
+      <div class="d-flex align-items-center order-items">
+        <div class="d-flex flex-column">
           <div class="p-0" *ngFor="let item of order.items">
             <span class="badge rounded-pill bg-light text-dark">{{item.quantity}}</span>
             <span class="ms-2 text-muted">{{item.name}}</span>
           </div>
         </div>
-
       </div>
     </div>
     <hr>
     <div class="row justify-content-center">
-      <div class="col text-center"><a class="card-link" style="color: red"><strong>Help</strong></a></div>
-      <div *ngIf="order.lastStatus === 'DELIVERED'" class="col text-center"><a class="card-link" style="color: red"><strong>Rating</strong></a></div>
+      <div class="col text-center">
+        <a class="card-link text-red">
+          <strong>Help</strong>
+        </a>
+      </div>
+      <div *ngIf="order.lastStatus === 'DELIVERED'" class="col text-center">
+        <a class="card-link text-red">
+          <strong>Rating</strong>
+        </a>
+      </div>
     </div>
   </div>
 </div>
-

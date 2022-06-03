@@ -21,21 +21,21 @@
             <div class="row w-100">
               <form class="form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
                 <div class="input-group">
-                <span class="input-group-text" style="background-color: #f2f2f2; border: none" id="basic-addon1">
-                  <em class="fa fa-search" style="color:#EA1D2C"></em>
+                <span class="input-group-text bg-light border-0" id="basic-addon1">
+                  <em class="fa fa-search text-red"></em>
                 </span>
-                  <input formControlName="restaurantName" type="text" class="form-control"
-                         style="background-color: #f2f2f2; border: none" placeholder="Search Restaurant">
+                  <input formControlName="restaurantName" type="text" class="form-control bg-light border-0"
+                         placeholder="Search Restaurant">
                 </div>
               </form>
             </div>
           </li>
         </ul>
-        <ul class="nav navbar-nav ml-auto" style="min-width: 100px">
+        <ul class="nav navbar-nav ml-auto">
           <li class="nav-item me-4">
             <app-user-detail></app-user-detail>
           </li>
-          <li class="nav-item me-4 cart" style="color: #dd4b39">
+          <li class="nav-item me-4 cart">
             <app-shopping-cart></app-shopping-cart>
           </li>
         </ul>

@@ -1,17 +1,17 @@
 <div class="container-fluid p-0">
   <div class="d-flex">
-    <div class="col-6 aaa d-flex min-vh-100">
+    <div class="col-6 d-flex min-vh-100">
       <img src="assets/img/background.jpg" class="background" alt="logo">
     </div>
     <div class="col-6 d-flex align-items-center justify-content-center ">
       <div class="d-flex w-50">
         <div class="card-body">
-          <div href="/" class="logoc d-flex align-items-center justify-content-center mt-4">
+          <div href="/" class="d-flex align-items-center justify-content-center mt-4">
             <img src="assets/img/ifood.logo.svg" class="logo" alt="logo">
           </div>
           <div *ngIf="partner">
-            <h5 class="card-title mt-4"><strong>Portal do Parceiro</strong></h5>
-            <h6 class="card-subtitle mb-4 text-muted">Faça o seu cadastro</h6>
+            <h5 class="card-title mt-4"><strong>Partner Portal</strong></h5>
+            <h6 class="card-subtitle mb-4 text-muted">Register your store</h6>
             <form class="mb-5" [formGroup]="partnerForm" (ngSubmit)="createPartner()">
               <div class="row">
                 <div class="form-group mb-2 col-md-6">
@@ -35,17 +35,15 @@
                 <label for="cpf">CPF</label>
                 <input class="form-control" formControlName="cpf" type="text" id="cpf">
               </div>
-              <button class="btn btn-primary w-100 mb-3" type="submit"
-                      [disabled]="!partnerForm.valid">Next
-              </button>
+              <button class="btn btn-primary w-100 mb-3" type="submit" [disabled]="!partnerForm.valid">Next</button>
             </form>
             <div class="mt-4">
               <span>Já tem cadastro? <a [routerLink]="['/login']" class="text-primary"><strong>Entre</strong></a></span>
             </div>
           </div>
           <div *ngIf="!partner">
-            <h5 class="card-title mt-4"><strong>Portal do Parceiro</strong></h5>
-            <h6 class="card-subtitle mb-3 text-muted">Cadastre seu restaurante</h6>
+            <h5 class="card-title mt-4"><strong>Partner Portal</strong></h5>
+            <h6 class="card-subtitle mb-3 text-muted">Register your store</h6>
             <form [formGroup]="restaurantForm" (ngSubmit)="createRestaurant()">
               <div class="form-group mb-2">
                 <label for="nome">Name</label>
@@ -56,10 +54,10 @@
                 <input class="form-control" placeholder="00.000.000/0000-00" id="cnpj" formControlName="cnpj">
               </div>
               <div class="form-group mb-2">
-<!--                <label for="cuisineType">Cuisine Type</label>-->
-<!--                <select class="form-control" id="cuisineType" formControlName="mainCategory">-->
-<!--                  <option *ngFor="let category of cuisineTypes" [value]="category.id">{{category.name}}</option>-->
-<!--                </select>-->
+                <!--                <label for="cuisineType">Cuisine Type</label>-->
+                <!--                <select class="form-control" id="cuisineType" formControlName="mainCategory">-->
+                <!--                  <option *ngFor="let category of cuisineTypes" [value]="category.id">{{category.name}}</option>-->
+                <!--                </select>-->
               </div>
               <div class="form-group mb-2">
                 <label for="description">Description:</label>

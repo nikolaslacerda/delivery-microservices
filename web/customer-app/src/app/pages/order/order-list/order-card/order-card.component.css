@@ -2,6 +2,10 @@
   background-color: #f2f2f2;
 }
 
+.order-items {
+  min-height: 50px;
+}
+
 .restaurant-order-icon {
   position: relative;
   border-radius: 50%;

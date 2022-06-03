@@ -1,8 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {OrderService} from '../../../services/order.service';
-import {OrderResponse} from '../../../model/order-response.model';
-import {MenuService} from '../../../services/menu.service';
-import {MenuItemResponse} from '../../../model/menu-item-response.model';
+import {OrderService} from '../../../core/services/order.service';
+import {OrderResponse} from '../../../shared/model/response/order-response.model';
+import {MenuService} from '../../../core/services/menu.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -12,22 +11,13 @@ import {MenuItemResponse} from '../../../model/menu-item-response.model';
 export class OrderDetailComponent implements OnInit, OnChanges {
 
   @Input() order: OrderResponse = {} as OrderResponse;
-  isLoading = true;
+  isLoading = false;
 
   constructor(private orderService: OrderService,
               private menuService: MenuService) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.isLoading = true;
-    this.order.items.forEach(item => {
-      // this.menuService.getMenuItemById(item.menuItemId)
-      //   .subscribe((menuItem: MenuItemResponse) => {
-      //     item.name = menuItem.name;
-      //     item.price = menuItem.promotionalPrice;
-      //     this.isLoading = false;
-      //   });
-    });
   }
 
   ngOnInit(): void {
@@ -36,19 +26,19 @@ export class OrderDetailComponent implements OnInit, OnChanges {
   confirmOrder(order: OrderResponse): void {
     const status = 'IN_THE_KITCHEN';
     this.orderService.updateStatus(order.id, status)
-      .subscribe(() => order.status = status);
+      .subscribe(() => order.lastStatus = status);
   }
 
   deliveryOrder(order: OrderResponse): void {
     const status = 'ON_THE_WAY';
     this.orderService.updateStatus(order.id, status)
-      .subscribe(() => order.status = status);
+      .subscribe(() => order.lastStatus = status);
   }
 
   cancelOrder(order: OrderResponse): void {
     const status = 'CANCELED';
     this.orderService.updateStatus(order.id, status)
-      .subscribe(() => order.status = status);
+      .subscribe(() => order.lastStatus = status);
   }
 
 }

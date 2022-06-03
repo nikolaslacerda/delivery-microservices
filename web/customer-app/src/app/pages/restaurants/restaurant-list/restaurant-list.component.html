@@ -3,30 +3,29 @@
 </div>
 <div *ngIf="!isLoading">
   <section class="mb-2" *ngIf="!q && cuisineTypes?.length">
-      <div class="d-flex align-items-center justify-content-center">
-        <ul class="list-inline align-items-center justify-content-center">
-          <li class="list-inline-item p-2 cursor" *ngFor="let cuisineType of cuisineTypes">
-            <div class="scale-effect" [routerLink]="['/restaurants']" [queryParams]="{'mainCategory': cuisineType.name}">
-              <div class="row">
-                <div class="col text-center">
-                  <img class="aafa" src="assets/img/food_category/{{cuisineType.name}}.jpg"/>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col text-center">
-                  <p class="text-sm">{{cuisineType.name}}</p>
-                </div>
+    <div class="d-flex align-items-center justify-content-center">
+      <ul class="list-inline align-items-center justify-content-center">
+        <li class="list-inline-item p-2 cursor" *ngFor="let cuisineType of cuisineTypes">
+          <div class="scale-effect" [routerLink]="['/restaurants']" [queryParams]="{'mainCategory': cuisineType.name}">
+            <div class="row">
+              <div class="col text-center">
+                <img class="cuisine-type-img" src="assets/img/food_category/{{cuisineType.name}}.jpg"/>
               </div>
             </div>
-          </li>
-        </ul>
-      </div>
+            <div class="row">
+              <div class="col text-center">
+                <p class="text-sm">{{cuisineType.name}}</p>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </section>
-
   <section class="content" *ngIf="allRestaurants?.length">
-    <h4><b>Restaurants</b></h4>
-    <div class="d-flex flex-wrap justify-content-start eee align-items-center">
-      <div *ngFor="let restaurant of allRestaurants" class="ddd mt-4">
+    <h4><strong>Restaurants</strong></h4>
+    <div class="d-flex flex-wrap justify-content-start align-items-center">
+      <div *ngFor="let restaurant of allRestaurants" class="w-30 mt-4">
         <app-restaurant-card [restaurant]="restaurant"></app-restaurant-card>
       </div>
     </div>

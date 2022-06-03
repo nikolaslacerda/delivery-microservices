@@ -38,19 +38,19 @@
   </div>
   <div class="d-flex mb-4">
     <div class="flex-fill me-2">
-      <div class="progress" style="position: relative; width: 100%; height: 5px">
+      <div class="position-relative w-100 progress">
         <div class="progress-bar bg-success"
              [ngClass]="{ 'indeterminate': order.lastStatus === 'PAID', 'progress-complete': (order.lastStatus | OrderStatusIndex ) > 2}"></div>
       </div>
     </div>
     <div class="flex-fill me-2">
-      <div class="progress" style="position: relative; width: 100%; height: 5px">
+      <div class="position-relative w-100 progress">
         <div class="progress-bar bg-success"
              [ngClass]="{ indeterminate: order.lastStatus === 'IN_THE_KITCHEN', 'progress-complete': (order.lastStatus | OrderStatusIndex ) > 3}"></div>
       </div>
     </div>
     <div class="flex-fill me-2">
-      <div class="progress" style="position: relative; width: 100%; height: 5px">
+      <div class="position-relative w-100 progress">
         <div class="progress-bar bg-success"
              [ngClass]="{ indeterminate: order.lastStatus === 'ON_THE_WAY', 'progress-complete': (order.lastStatus | OrderStatusIndex ) > 4}"></div>
       </div>

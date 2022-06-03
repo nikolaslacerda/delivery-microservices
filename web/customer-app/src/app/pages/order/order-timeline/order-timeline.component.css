@@ -1,3 +1,7 @@
+.progress {
+  height: 5px;
+}
+
 .progress-bar.indeterminate {
   position: relative;
   animation: progress-indeterminate 3s linear infinite;

@@ -4,8 +4,8 @@
 <div *ngIf="!isLoading">
   <div *ngFor="let category of menu.categories">
     <h2 class="mt-4">{{category.name}}</h2>
-    <div class="d-flex justify-content-between ddd mt-4">
-      <app-menu-item class="it"   *ngFor="let item of category.items"
+    <div class="d-flex flex-wrap justify-content-between mt-4">
+      <app-menu-item class="menu-item" *ngFor="let item of category.items"
                      [menuItem]="item" (add)="addItem($event)"></app-menu-item>
     </div>
   </div>

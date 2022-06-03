@@ -49,7 +49,7 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
-    public List<OrderResponse> getRestaurantOrders(UUID restaurantId) {
+    public List<OrderResponse> getRestaurantOrders(Long restaurantId) {
         return orderRepository.findAllByRestaurantId(restaurantId)
                 .stream()
                 .map(OrderMapper::mapToResponse)

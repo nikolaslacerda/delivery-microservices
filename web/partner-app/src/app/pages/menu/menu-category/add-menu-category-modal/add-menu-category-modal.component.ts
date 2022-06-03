@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {BsModalRef} from 'ngx-bootstrap/modal';
-import {MenuService} from '../../../../services/menu.service';
-import {MenuCategoryRequest} from '../../../../model/menu-category-request.model';
-import {MenuCategoryResponse} from '../../../../model/menu-category-response.model';
+import {MenuService} from '../../../../core/services/menu.service';
+import {MenuCategoryRequest} from '../../../../shared/model/request/menu-category-request.model';
+import {MenuCategoryResponse} from '../../../../shared/model/response/menu-category-response.model';
 
 @Component({
   selector: 'app-add-menu-category-modal',

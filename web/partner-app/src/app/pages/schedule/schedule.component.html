@@ -6,24 +6,25 @@
   </div>
   <div *ngIf="!isLoading">
     <div class="d-grid gap-2 d-md-block">
-      <button class="btn btn-primary" (click)="openAddModal()"><em class="bi-plus-lg"></em>
+      <button class="btn btn-primary" (click)="openAddModal()">
+        <em class="bi-plus-lg"></em>
         <strong> Add Schedule</strong>
       </button>
     </div>
-    <table class="table table-striped table-bordered text-center mt-2">
+    <table class="table table-striped table-bordered text-center mt-2" aria-describedby="schedule list">
       <thead>
       <tr>
-        <th>Ativo</th>
-        <th>Dia da semana</th>
-        <th>Horário de abertura</th>
-        <th>Horário de fechamento</th>
-        <th>Ações</th>
+        <th id="active">Active</th>
+        <th id="week_day">Week Day</th>
+        <th id="opening_hour">Opening Hour</th>
+        <th id="closing_time">Closing Time</th>
+        <th id="actions">Actions</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let schedule of schedule">
         <td>
-          <div class="form-check justify-content-center align-items-center d-flex aaa">
+          <div class="form-check justify-content-center align-items-center d-flex">
             <input type="checkbox" (change)="updateScheduleStatus($event, schedule)"
                    class="form-check-input custom-checkbox" id="exampleCheck1"
                    [checked]="schedule.active">
@@ -34,10 +35,10 @@
         <td>{{schedule.closingTime}}</td>
         <td>
           <button class="btn btn-sm mr-1 mb-1 mb-lg-0" (click)="openEditModal(schedule)">
-            <em class="bi-pen" style="color: #666666"></em>
+            <em class="bi-pen text-secondary"></em>
           </button>
           <button class="btn  btn-sm" (click)="deleteSchedule(schedule)">
-            <em class="bi-trash" style="color: #ec1c2d"></em>
+            <em class="bi-trash color-primary"></em>
           </button>
         </td>
       </tr>
