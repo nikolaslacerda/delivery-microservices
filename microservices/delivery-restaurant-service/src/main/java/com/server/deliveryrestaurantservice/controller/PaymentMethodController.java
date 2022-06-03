@@ -20,7 +20,7 @@ class PaymentMethodController {
         return paymentMethodService.createRestaurantPaymentMethod(restaurantId, paymentMethod);
     }
 
-    @GetMapping("/partners/restaurants/payment-methods")
+    @GetMapping("/partners/payment-methods")
     public List<PaymentMethodResponse> getPaymentMethods() {
         return paymentMethodService.getPaymentMethods();
     }

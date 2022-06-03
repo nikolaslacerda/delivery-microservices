@@ -14,7 +14,7 @@ public class CuisineTypeController {
 
     private final CuisineTypeService cuisineTypeService;
 
-    @GetMapping("restaurants/cuisine-types")
+    @GetMapping("/cuisine-types")
     public List<CuisineTypeResponse> getCuisineTypes() {
         return cuisineTypeService.getCuisineTypes();
     }

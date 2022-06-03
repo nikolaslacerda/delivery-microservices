@@ -29,7 +29,7 @@ class OAuthSecurityConfig extends ResourceServerConfigurerAdapter {
 
     private static final String[] PUBLIC = {"/socket/**", "/oauth/**", "/restaurants/**", "/cuisine-types/**", "/payment-methods/**"};
     private static final String[] CUSTOMER = {"/orders/**"};
-    private static final String[] PARTNER = {"/partner/**"};
+    private static final String[] PARTNER = {"/partners/**"};
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
