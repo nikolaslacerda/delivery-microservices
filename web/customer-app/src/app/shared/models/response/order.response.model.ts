@@ -4,7 +4,7 @@ import {DeliveryRequest} from '../request/delivery.request.model';
 import {RestaurantOrderRequest} from '../restaurant.order.request.model';
 
 export class OrderResponse {
-  id: number;
+  id: string;
   customerId: number;
   restaurant: RestaurantOrderRequest;
   delivery: DeliveryRequest;

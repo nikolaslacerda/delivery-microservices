@@ -7,6 +7,7 @@ import com.server.deliveryrestaurantservice.service.ReviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @PostMapping("/restaurants/{restaurantId}/reviews")
-    public ReviewResponse createReview(@PathVariable Long restaurantId, @RequestBody ReviewRequest request) {
+    public ReviewResponse createReview(@PathVariable Long restaurantId, @Valid @RequestBody ReviewRequest request) {
         return reviewService.createReview(restaurantId, request);
     }
 

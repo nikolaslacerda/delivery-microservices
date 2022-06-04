@@ -25,7 +25,7 @@
         <h5 class="card-title"><strong>Review your order</strong></h5>
         <form class="mb-3" [formGroup]="ratingForm" (ngSubmit)="createReview()">
           <div class="form-group">
-            <rating class="text-gold" required max="5" formControlName="rating"></rating>
+            <rating class="text-gold" [ngModel]="rate" required max="5" formControlName="rating"></rating>
           </div>
           <div class="form-group">
             <textarea
@@ -34,7 +34,11 @@
               formControlName="comment"
               [ngClass]="{ 'is-invalid': comment.invalid && ( comment.dirty ||  comment.touched) }">></textarea>
           </div>
-          <button class="btn btn-primary mt-2" type="submit" [disabled]="!ratingForm.valid">Review</button>
+          <button class="btn btn-primary mt-2" type="submit" [disabled]="!ratingForm.valid || isSending">
+            <span *ngIf="isSending" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span *ngIf="isSending" class="visually-hidden">Loading...</span>
+            Review
+          </button>
         </form>
         <p class="card-text text-muted">Choose between 1 or 5 stars to rate</p>
       </div>

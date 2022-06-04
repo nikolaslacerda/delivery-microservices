@@ -2,15 +2,15 @@ export class ReviewRequest {
 
   name: string;
   createdAt: string;
-  comments: string;
+  comment: string;
   userRating: number;
   restaurantId: number;
-  orderId: number;
+  orderId: string;
 
   constructor(model: any = {}) {
     this.name = model.name;
     this.createdAt = model.createdAt;
-    this.comments = model.comments;
+    this.comment = model.comment;
     this.userRating = model.userRating;
     this.restaurantId = model.restaurantId;
     this.orderId = model.orderId;

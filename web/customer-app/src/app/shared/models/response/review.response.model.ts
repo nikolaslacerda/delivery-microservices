@@ -5,7 +5,7 @@ export class ReviewResponse {
   comment: string;
   userRating: number;
   restaurantId: number;
-  orderId: number;
+  orderId: string;
 
   constructor(model: any = {}) {
     this.id = model.id;

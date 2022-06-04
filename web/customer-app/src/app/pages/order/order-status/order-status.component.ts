@@ -7,7 +7,8 @@ import {OrderResponse} from '../../../shared/models/response/order.response.mode
 import {ReviewResponse} from '../../../shared/models/response/review.response.model';
 import {ReviewRequest} from '../../../shared/models/request/review.request.model';
 import {RxStompService} from '@stomp/ng2-stompjs';
-import { Message } from '@stomp/stompjs';
+import {Message} from '@stomp/stompjs';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-order-status-order',
@@ -16,12 +17,14 @@ import { Message } from '@stomp/stompjs';
 })
 export class OrderStatusComponent implements OnInit {
 
-  order: OrderResponse = {} as OrderResponse;
-  review: ReviewResponse = {} as ReviewResponse;
+  isSending = false;
+  rate = 0;
+  order = {} as OrderResponse;
+  review = {} as ReviewResponse;
 
   ratingForm = this.fb.group({
     rating: ['', Validators.required],
-    comment: ['', Validators.required],
+    comment: ['', [Validators.required, Validators.minLength(3)]]
   });
 
   constructor(private router: Router,
@@ -37,9 +40,10 @@ export class OrderStatusComponent implements OnInit {
     this.orderService.getOrderById(orderId)
       .subscribe((order: OrderResponse) => {
         this.order = order;
-        this.ratingService.getOrderReview(order.restaurant.id, orderId).subscribe((review: ReviewResponse) => {
-          this.review = review[0];
-        });
+        this.ratingService.getOrderReview(order.restaurant.id, orderId)
+          .subscribe((review: ReviewResponse) => {
+            this.review = review[0];
+          });
       });
 
     this.rxStompService.watch(`/orders/${orderId}/status`)
@@ -55,18 +59,23 @@ export class OrderStatusComponent implements OnInit {
   }
 
   createReview(): void {
-    this.review.orderId = this.order.id;
-    this.review.restaurantId = this.order.restaurant.id;
-    this.review.createdAt = Date.now().toString();
-    this.review.name = '';
-    this.ratingService.createReview(new ReviewRequest(this.ratingForm))
-      .subscribe(review => {
-        this.review = review;
-        setTimeout(() => this.router.navigate(['']), 1500);
+    this.isSending = true;
+    const review = new ReviewRequest();
+    review.orderId = this.order.id;
+    review.restaurantId = this.order.restaurant.id;
+    review.createdAt = Date.now().toString();
+    review.name = '<username>';
+    review.userRating = this.ratingForm.get('rating').value;
+    review.comment = this.ratingForm.get('comment').value;
+    this.ratingService.createReview(review)
+      .subscribe(createReview => {
+        this.review = createReview;
+        this.isSending = false;
       });
   }
 
-  isLoading() {
+  isLoading(): boolean {
     return Object.keys(this.order).length === 0 && Object.keys(this.review).length === 0;
   }
+
 }
