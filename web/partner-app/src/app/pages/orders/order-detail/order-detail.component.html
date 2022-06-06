@@ -39,11 +39,11 @@
           <span class="text-muted">Payment information is hidden until the order is confirmed</span>
         </div>
         <div class="d-flex flex-column p-2" *ngIf="(order.lastStatus | OrderStatusIndex) != 1">
-          <div class="d-flex flex-column" *ngIf="order.paymentId != 5">
+          <div class="d-flex flex-column" *ngIf="order.paymentId != '5'">
             <span><strong>Payment made through the App</strong></span>
             <span class="text-muted">No need to charge the customer on delivery</span>
           </div>
-          <div class="d-flex flex-column p-2" *ngIf="order.paymentId == 5">
+          <div class="d-flex flex-column p-2" *ngIf="order.paymentId == '5'">
             <span><strong>Payment on Delivery</strong></span>
             <span class="text-muted">Charge the customer at the time of delivery</span>
           </div>

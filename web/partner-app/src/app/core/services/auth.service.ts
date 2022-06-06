@@ -46,13 +46,14 @@ export class AuthService {
       .pipe(map((tokenData: any) => {
         this.tokenData = tokenData;
         localStorage.setItem('session', JSON.stringify(this.tokenData));
-        this.getUserId().subscribe(data => {
-          tokenData.id = 1;
-          // this.getPartnerRestaurant(data?.username).subscribe(restaurantInfo => {
-          //   tokenData.id = restaurantInfo.id;
-          //   localStorage.setItem('session', JSON.stringify(this.tokenData)); // temporary solution
-          // });
-        });
+        tokenData.id = 1;
+        localStorage.setItem('session', JSON.stringify(this.tokenData));
+        //this.getUserId().subscribe(data => {
+        // this.getPartnerRestaurant(data?.username).subscribe(restaurantInfo => {
+        //   tokenData.id = restaurantInfo.id;
+        //   localStorage.setItem('session', JSON.stringify(this.tokenData)); // temporary solution
+        // });
+        //});
         return tokenData;
       }));
   }

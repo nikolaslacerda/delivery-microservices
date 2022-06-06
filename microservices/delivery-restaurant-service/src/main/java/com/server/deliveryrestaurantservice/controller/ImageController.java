@@ -4,9 +4,8 @@ import com.server.deliveryrestaurantservice.service.ImageService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @AllArgsConstructor
@@ -14,14 +13,24 @@ public class ImageController {
 
     private final ImageService imageService;
 
-    @GetMapping(value = "restaurants/image/restaurant/{imagePath}", produces = MediaType.IMAGE_PNG_VALUE)
-    public ResponseEntity<byte[]> getRestaurantImage(@PathVariable("imagePath") String imagePath) {
-        return imageService.getRestaurantImage(imagePath);
+    @PostMapping(value = "/partners/restaurants/{restaurantId}/image")
+    public void createRestaurantImage(@PathVariable Long restaurantId, @RequestParam MultipartFile image) {
+        imageService.createRestaurantImage(restaurantId, image);
     }
 
-    @GetMapping(value = "restaurants/image/menu-item/{imagePath}", produces = MediaType.IMAGE_PNG_VALUE)
-    public ResponseEntity<byte[]> getMenuItemImage(@PathVariable("imagePath") String imagePath) {
-        return imageService.getMenuItemImage(imagePath);
+    @GetMapping(value = "/restaurants/{restaurantId}/image", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<byte[]> getRestaurantImage(@PathVariable Long restaurantId) {
+        return imageService.getRestaurantImage(restaurantId);
+    }
+
+    @PostMapping(value = "/partners/restaurants/{restaurantId}/items/{itemId}/image")
+    public void getMenuItemImage(@PathVariable Long itemId, @RequestParam MultipartFile image) {
+        imageService.createMenuItemImage(itemId, image);
+    }
+
+    @GetMapping(value = "/restaurants/{restaurantId}/items/{itemId}/image", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<byte[]> createMenuItemImage(@PathVariable Long itemId) {
+        return imageService.getMenuItemImage(itemId);
     }
 
 }

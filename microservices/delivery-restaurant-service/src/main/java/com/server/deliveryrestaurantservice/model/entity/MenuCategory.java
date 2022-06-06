@@ -33,7 +33,7 @@ public class MenuCategory {
     @ManyToOne(optional = false)
     private Menu menu;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<MenuItem> items = new ArrayList<>();
 
 }

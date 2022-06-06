@@ -13,10 +13,14 @@
              style="margin-right: 50px; z-index:1000;">
           <div class="btn-group me-2" role="group" aria-label="Basic example">
             <button (click)="updateCategoryStatus(category)" type="button" class="btn btn-sm"
-                    [ngClass]="{'btn-primary': !category.active, 'btn-not-selected': category.active}">Disabled
+                    [ngClass]="{'btn-primary': !category.active, 'btn-not-selected': category.active}"
+                    [disabled]="!category.active">
+              Disabled
             </button>
             <button (click)="updateCategoryStatus(category)" type="button" class="btn btn-sm"
-                    [ngClass]="{'btn-primary': category.active, 'btn-not-selected': !category.active}">Active
+                    [ngClass]="{'btn-primary': category.active, 'btn-not-selected': !category.active}"
+                    [disabled]="!category.items.length || category.active">
+              Active
             </button>
           </div>
           <button class="btn btn-sm me-1 mb-1 mb-lg-0">

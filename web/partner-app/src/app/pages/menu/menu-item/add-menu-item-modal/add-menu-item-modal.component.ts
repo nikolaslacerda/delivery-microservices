@@ -23,12 +23,11 @@ export class AddMenuItemModalComponent implements OnInit {
   addMenuItemForm = this.fb.group({
     name: ['', Validators.required],
     description: ['', Validators.required],
-    menuCategoryId: ['', Validators.required],
-    unitPrice: ['', [Validators.required, Validators.min(0.1)]],
-    unitOriginalPrice: ['', [Validators.required, Validators.min(0.1)]],
+    promotionalPrice: ['', [Validators.required, Validators.min(0.1)]],
+    price: ['', [Validators.required, Validators.min(0.1)]],
     image: this.fb.group({
-      file: ['', Validators.required],
-      fileSource: ['', Validators.required]
+      file: [''],
+      fileSource: ['']
     })
   });
 
@@ -38,13 +37,6 @@ export class AddMenuItemModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._populateForm();
-  }
-
-  private _populateForm(): void {
-    this.addMenuItemForm.patchValue({
-      menuCategoryId: this.category.id
-    });
   }
 
   onFileChange(event: any): void {
@@ -76,26 +68,31 @@ export class AddMenuItemModalComponent implements OnInit {
     if (this.addMenuItemForm.valid) {
       this.buttonLoading = true;
       if (!this.addMenuItemForm.value.image.fileSource.length) {
-        this.menuService.createItem(new MenuItemRequest(this.addMenuItemForm.value))
-          .subscribe((menuItem: MenuItemResponse) => {
+        this.addItemWithoutImage();
+      } else {
+        this.addMenuItemWithImage();
+      }
+    }
+  }
+
+  private addMenuItemWithImage(): void {
+    this.menuService.createItem(1, this.category.id, new MenuItemRequest(this.addMenuItemForm.value))
+      .subscribe((menuItem: MenuItemResponse) => {
+        this.menuService.addMenuItemImage(menuItem.id, this.image)
+          .subscribe(_ => {
             this.buttonLoading = false;
             this.emitAdd(menuItem);
             this.hide();
           });
-      } else {
-        this.menuService.createItem(new MenuItemRequest(this.addMenuItemForm.value))
-          .subscribe((menuItem: MenuItemResponse) => {
-            // this.menuService.addMenuItemImage(menuItem.id, this.image)
-            //   .subscribe(res => {
-            //     menuItem.imageUrl = 'https://localhost:3001/partner/item/image/' + res.uploadedFile.filename;
-            //     this.menuService.editItem(menuItem.id, menuItem).subscribe(() => {
-            //       this.buttonLoading = false;
-            //       this.emitAdd(menuItem);
-            //       this.hide();
-            //     });
-            //   });
-          });
-      }
-    }
+      });
+  }
+
+  private addItemWithoutImage(): void {
+    this.menuService.createItem(1, this.category.id, new MenuItemRequest(this.addMenuItemForm.value))
+      .subscribe((menuItem: MenuItemResponse) => {
+        this.buttonLoading = false;
+        this.emitAdd(menuItem);
+        this.hide();
+      });
   }
 }

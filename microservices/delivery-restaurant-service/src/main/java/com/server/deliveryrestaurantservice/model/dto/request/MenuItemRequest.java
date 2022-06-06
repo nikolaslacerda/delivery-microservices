@@ -16,6 +16,7 @@ public class MenuItemRequest {
     private String imageUrl;
     private BigDecimal price;
     private BigDecimal promotionalPrice;
+    private Boolean active;
 
 }
 

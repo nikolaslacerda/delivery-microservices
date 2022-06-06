@@ -1,3 +1,13 @@
 img {
   width: 100px;
 }
+
+.btn:focus {
+  box-shadow: none;
+  opacity: 1;
+}
+
+.btn:disabled {
+  pointer-events:none;
+  opacity:1;
+}

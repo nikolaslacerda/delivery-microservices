@@ -1,20 +1,13 @@
 export class MenuItemRequest {
-
-  menuCategoryId: number;
-  imageUrl?: string;
   name: string;
   description: string;
-  unitPrice: number;
-  unitOriginalPrice: number;
-  active: boolean;
+  price: number;
+  promotionalPrice: number;
 
   constructor(model: any = {}) {
-    this.menuCategoryId = model.menuCategoryId;
     this.name = model.name;
     this.description = model.description;
-    this.unitPrice = model.unitPrice;
-    this.unitOriginalPrice = model.unitOriginalPrice;
-    this.active = model.active || false;
-    this.imageUrl = model.imageUrl || 'default.png';
+    this.price = model.price;
+    this.promotionalPrice = model.promotionalPrice;
   }
 }

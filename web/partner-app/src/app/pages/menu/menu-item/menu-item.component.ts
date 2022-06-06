@@ -7,7 +7,7 @@ import {EditMenuItemModalComponent} from './edit-menu-item-modal/edit-menu-item-
 import {MenuItemResponse} from '../../../shared/model/response/menu-item-response.model';
 import {ToastrService} from 'ngx-toastr';
 import {MenuCategoryResponse} from '../../../shared/model/response/menu-category-response.model';
-import {MenuItemRequest} from '../../../shared/model/request/menu-item-request.model';
+import {MenuItemUpdateRequest} from '../../../shared/model/request/menu-item-update-request.model';
 
 @Component({
   selector: 'app-menu-item',
@@ -28,19 +28,30 @@ export class MenuItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.menuService.getItemsByCategory(this.category.id)
-    //   .subscribe((items: MenuItemResponse[]) => this.items = items);
     this.items = this.category.items;
+    this.items.forEach(item => item.imageUrl = 'http://localhost:9999/restaurants/1/items/' + item.id + '/image');
   }
 
   updateItemStatus(item: MenuItemResponse): void {
-    this.menuService.editItem(item.id, new MenuItemRequest({active: !item.active})).subscribe();
+    this.menuService.editItem(1, 1, item.id, new MenuItemUpdateRequest({active: !item.active}))
+      .subscribe(() => {
+        item.active = !item.active;
+        if (this.category.items.filter((x: MenuItemResponse) => x.active).length === 0) {
+          if (!item.active) {
+            this.category.active = !this.category.active;
+          }
+        }
+      });
   }
 
   deleteMenuItem(item: MenuItemResponse): void {
-    this.menuService.deleteItem(item)
+    this.menuService.deleteItem(1, this.category.id, item.id)
       .subscribe(() => {
         this.items = this.items.filter((items: any) => items !== item);
+        this.category.items = this.items;
+        if (!this.items.length) {
+          this.category.active = false;
+        }
         this.showSuccessDelete(item.name);
       });
   }
@@ -49,6 +60,7 @@ export class MenuItemComponent implements OnInit {
     const initialState = {category};
     this.bsModalRef = this.modalService.show(AddMenuItemModalComponent, {initialState});
     this.bsModalRef.content.event.subscribe((item: any) => {
+      item.imageUrl = 'http://localhost:9999/restaurants/1/items/' + item.id + '/image';
       this.items.push(item);
       this.showSuccessCreate(item.name);
     });
@@ -59,32 +71,32 @@ export class MenuItemComponent implements OnInit {
     this.bsModalRef = this.modalService.show(EditMenuItemModalComponent, {initialState});
     this.bsModalRef.content.event.subscribe((editedItem: MenuItemResponse) => {
       item.name = editedItem.name;
-      item.description = editedItem.name;
+      item.description = editedItem.description;
       item.promotionalPrice = editedItem.promotionalPrice;
       item.price = editedItem.price;
-      item.imageUrl = editedItem.imageUrl;
+      if (editedItem.newImage) {
+        item.imageUrl = editedItem.newImage;
+      }
       item.active = editedItem.active;
-      // this.category.id = editedItem.menuCategoryId;
-      this.showSuccessUpdate();
+      this.showSuccessUpdate(item.name);
     });
   }
 
   showSuccessCreate(itemName: string): void {
-    this.toastr.success('Adicionado o item ' + itemName, 'Sucesso', {
+    this.toastr.success('Menu Item ' + itemName + ' Created Successfully', 'Success', {
       timeOut: 3000,
     });
   }
 
-  showSuccessUpdate(): void {
-    this.toastr.success('Categoria atualizada', 'Sucesso', {
+  showSuccessUpdate(itemName: string): void {
+    this.toastr.success('Menu Item ' + itemName + ' Updated Successfully', 'Success', {
       timeOut: 3000,
     });
   }
 
   showSuccessDelete(itemName: string): void {
-    this.toastr.success('Removido o item ' + itemName, 'Sucesso', {
+    this.toastr.success('Menu Item ' + itemName + ' Deleted Successfully!', 'Success', {
       timeOut: 3000,
     });
   }
-
 }

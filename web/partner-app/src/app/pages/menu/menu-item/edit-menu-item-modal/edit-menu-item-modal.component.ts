@@ -18,9 +18,8 @@ export class EditMenuItemModalComponent implements OnInit {
   editMenuItemForm = this.fb.group({
     name: ['', Validators.required],
     description: ['', Validators.required],
-    menuCategoryId: ['', Validators.required],
-    unitPrice: ['', Validators.required],
-    unitOriginalPrice: ['', Validators.required],
+    price: ['', Validators.required],
+    promotionalPrice: ['', Validators.required],
     image: this.fb.group({
       file: [''],
       fileSource: ['']
@@ -29,7 +28,6 @@ export class EditMenuItemModalComponent implements OnInit {
   imageSrc: any;
   image!: File;
   buttonLoading = false;
-  allCategories: any;
 
   constructor(private fb: FormBuilder,
               private menuService: MenuService,
@@ -38,16 +36,15 @@ export class EditMenuItemModalComponent implements OnInit {
 
   ngOnInit(): void {
     this._populateForm();
-    this.imageSrc = 'https://localhost:3001/partner/item/image/' + this.item.imageUrl;
-    this.menuService.getCategories(1, 1).subscribe(allMenuCategories => this.allCategories = allMenuCategories);
+    this.imageSrc = `http://localhost:9999/restaurants/1/items/${this.item.id}/image`;
   }
 
   private _populateForm(): void {
     this.editMenuItemForm.patchValue({
       name: this.item.name,
       description: this.item.description,
-      unitPrice: this.item.promotionalPrice,
-      unitOriginalPrice: this.item.price
+      price: this.item.price,
+      promotionalPrice: this.item.promotionalPrice
     });
   }
 
@@ -55,7 +52,7 @@ export class EditMenuItemModalComponent implements OnInit {
     this.bsModalRef.hide();
   }
 
-  emitAdd(item: any): void {
+  emitUpdateItemEvent(item: any): void {
     this.event.emit(item);
   }
 
@@ -63,28 +60,33 @@ export class EditMenuItemModalComponent implements OnInit {
     if (this.editMenuItemForm.valid) {
       this.buttonLoading = true;
       if (!this.editMenuItemForm.value.image.fileSource.length) {
-        this.menuService.editItem(this.item.id, new MenuItemUpdateRequest(this.editMenuItemForm.value))
-          .subscribe((menuItem: MenuItemResponse) => {
-            this.buttonLoading = false;
-            this.emitAdd(menuItem);
-            this.hide();
-          });
+        this.updateItemWithoutImage();
       } else {
-        this.menuService.editItem(this.item.id, new MenuItemUpdateRequest(this.editMenuItemForm.value))
-          .subscribe((menuItem: MenuItemResponse) => {
-            this.menuService.addMenuItemImage(menuItem.id, this.image)
-              .subscribe(res => {
-                menuItem.imageUrl = 'https://localhost:3001/partner/item/image/' + res.uploadedFile.filename;
-                // this.menuService.editItem(menuItem.id, menuItem)
-                //   .subscribe(menuItem2 => {
-                //     this.buttonLoading = false;
-                //     this.emitAdd(menuItem2);
-                //     this.hide();
-                //   });
-              });
-          });
+        this.updateImageWithImage();
       }
     }
+  }
+
+  private updateItemWithoutImage(): void {
+    this.menuService.editItem(1, 1, this.item.id, new MenuItemUpdateRequest(this.editMenuItemForm.value))
+      .subscribe((menuItem: MenuItemResponse) => {
+        this.buttonLoading = false;
+        this.emitUpdateItemEvent(menuItem);
+        this.hide();
+      });
+  }
+
+  private updateImageWithImage(): void {
+    this.menuService.editItem(1, 1, this.item.id, new MenuItemUpdateRequest(this.editMenuItemForm.value))
+      .subscribe((menuItem: MenuItemResponse) => {
+        this.menuService.addMenuItemImage(menuItem.id, this.image)
+          .subscribe(_ => {
+            this.buttonLoading = false;
+            menuItem.newImage = this.imageSrc;
+            this.emitUpdateItemEvent(menuItem);
+            this.hide();
+          });
+      });
   }
 
   onFileChange(event: any): void {

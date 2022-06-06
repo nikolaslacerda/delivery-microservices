@@ -46,6 +46,10 @@ body {
   color: #c2bfbf;
 }
 
+.btn-not-selected:disabled:hover {
+  filter: none;
+}
+
 .btn-not-selected:hover {
   filter: brightness(105%);
 }

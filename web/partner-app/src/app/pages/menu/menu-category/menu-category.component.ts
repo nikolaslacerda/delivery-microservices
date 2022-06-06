@@ -54,14 +54,21 @@ export class MenuCategoryComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(EditMenuCategoryModalComponent, {initialState});
     this.bsModalRef.content.event.subscribe(() => {
-      this.showSuccessUpdate();
+      this.showSuccessUpdate(category.name);
     });
   }
 
-  updateCategoryStatus(category: any): void {
+  updateCategoryStatus(category: MenuCategoryResponse): void {
     console.log(category);
     this.menuService.editCategory(1, 1, category.id, new MenuCategoryRequest({active: !category.active}))
-      .subscribe(() => category.active = !category.active);
+      .subscribe(() => {
+        category.active = !category.active;
+        if (!category.active) {
+          category.items.forEach(item => item.active = false);
+        } else {
+          category.items.forEach(item => item.active = true);
+        }
+      });
   }
 
   deleteMenuCategory(category: any): void {
@@ -73,19 +80,19 @@ export class MenuCategoryComponent implements OnInit {
   }
 
   showSuccessCreate(categoryName: string): void {
-    this.toastr.success('Category ' + categoryName + ' successfully created', 'Success', {
+    this.toastr.success('Category ' + categoryName + 'created successfully', 'Success', {
       timeOut: 3000,
     });
   }
 
-  showSuccessUpdate(): void {
-    this.toastr.success('Category successfully updated', 'Success', {
+  showSuccessUpdate(categoryName: string): void {
+    this.toastr.success('Category updated successfully: ' + categoryName, 'Success', {
       timeOut: 3000,
     });
   }
 
   showSuccessDelete(categoryName: string): void {
-    this.toastr.success('Category deleted successfully' + categoryName, 'Success', {
+    this.toastr.success('Category deleted successfully: ' + categoryName, 'Success', {
       timeOut: 3000,
     });
   }

@@ -3,35 +3,36 @@ package com.server.deliveryrestaurantservice.controller;
 import com.server.deliveryrestaurantservice.model.dto.request.MenuItemRequest;
 import com.server.deliveryrestaurantservice.model.dto.response.MenuItemResponse;
 import com.server.deliveryrestaurantservice.service.MenuItemService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MenuItemController {
 
     private final MenuItemService menuItemService;
 
-    @PostMapping("/partners/restaurants/{restaurantId}/menu/category/{categoryId}/item")
+    @PostMapping("/partners/restaurants/{restaurantId}/categories/{categoryId}/items")
     public MenuItemResponse createMenuItem(@PathVariable Long categoryId,
                                            @RequestBody MenuItemRequest request) {
         return menuItemService.createMenuItem(categoryId, request);
     }
 
-    @GetMapping("/partners/restaurants/{restaurantId}/menu/category/{categoryId}/item/{itemId}")
-    public MenuItemResponse getMenuItemById(@PathVariable("itemId") Long itemId) {
+    @GetMapping("/partners/restaurants/{restaurantId}/categories/{categoryId}/items/{itemId}")
+    public MenuItemResponse getMenuItemById(@PathVariable Long itemId) {
         return menuItemService.getMenuItemById(itemId);
     }
 
-    @PutMapping("/partners/restaurants/{restaurantId}/menu/category/{categoryId}/item/{itemId}")
-    public MenuItemResponse updateMenuItem(@PathVariable("itemId") Long itemId,
-                                           @RequestBody MenuItemRequest request) {
-        return menuItemService.updateMenuItem(itemId, request);
+    @PatchMapping("/partners/restaurants/{restaurantId}/categories/{categoryId}/items/{itemId}")
+    public MenuItemResponse updateMenuItem(@PathVariable Long itemId,
+                                           @RequestBody MenuItemRequest menuItemRequest) {
+        return menuItemService.updateMenuItem(itemId, menuItemRequest);
     }
 
-    @DeleteMapping("/partners/restaurants/{restaurantId}/menu/category/{categoryId}/item/{itemId}")
-    public void deleteMenuItem(@PathVariable("itemId") Long itemId) {
-        menuItemService.deleteMenuItem(itemId);
+    @DeleteMapping("/partners/restaurants/{restaurantId}/categories/{categoryId}/items/{itemId}")
+    public void deleteMenuItem(@PathVariable("categoryId") Long categoryId,
+                               @PathVariable("itemId") Long itemId) {
+        menuItemService.deleteMenuItem(categoryId, itemId);
     }
 
 }

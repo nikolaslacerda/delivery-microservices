@@ -7,6 +7,7 @@ export class MenuItemResponse {
   price: number;
   promotionalPrice: number;
   active: boolean;
+  newImage?: any;
 
   constructor(model: any = {}) {
     this.id = model.id;

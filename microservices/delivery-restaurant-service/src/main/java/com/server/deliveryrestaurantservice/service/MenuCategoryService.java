@@ -1,5 +1,6 @@
 package com.server.deliveryrestaurantservice.service;
 
+import com.server.deliveryrestaurantservice.exception.NoCategoryItemsException;
 import com.server.deliveryrestaurantservice.exception.ResourceNotFoundException;
 import com.server.deliveryrestaurantservice.mapper.MenuCategoryMapper;
 import com.server.deliveryrestaurantservice.model.dto.request.MenuCategoryRequest;
@@ -34,7 +35,7 @@ public class MenuCategoryService {
         return MenuCategoryMapper.mapToDto(createdMenuCategory);
     }
 
-    public List<MenuCategoryResponse> getMenuCategoriesByMenuId(Long menuId) {
+    public List<MenuCategoryResponse> listMenuCategoriesByMenuId(Long menuId) {
         Menu menu = menuRepository.findById(menuId)
                 .orElseThrow(ResourceNotFoundException::new);
         return menu.getCategories()
@@ -50,9 +51,10 @@ public class MenuCategoryService {
     }
 
     public MenuCategoryResponse updateMenuCategory(Long categoryId, MenuCategoryRequest request) {
-        MenuCategory category = menuCategoryRepository.findById(categoryId).orElseThrow(ResourceNotFoundException::new);
+        MenuCategory category = menuCategoryRepository.findById(categoryId)
+                .orElseThrow(ResourceNotFoundException::new);
         Optional.ofNullable(request.getName()).ifPresent(category::setName);
-        Optional.ofNullable(request.getActive()).ifPresent(category::setActive);
+        Optional.ofNullable(request.getActive()).ifPresent(active -> updateCategoryStatus(category, active));
         MenuCategory updatedRestaurant = menuCategoryRepository.save(category);
         return MenuCategoryMapper.mapToDto(updatedRestaurant);
     }
@@ -61,4 +63,16 @@ public class MenuCategoryService {
         menuCategoryRepository.deleteById(categoryId);
     }
 
+    private void updateCategoryStatus(MenuCategory category, boolean active) {
+        if (active) {
+            if (category.getItems().isEmpty()) {
+                throw new NoCategoryItemsException();
+            }
+            category.getItems().forEach(item -> item.setActive(true));
+            category.setActive(true);
+        } else {
+            category.getItems().forEach(item -> item.setActive(false));
+            category.setActive(false);
+        }
+    }
 }
