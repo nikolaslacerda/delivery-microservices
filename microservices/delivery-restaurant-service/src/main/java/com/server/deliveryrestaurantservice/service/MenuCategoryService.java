@@ -1,9 +1,9 @@
 package com.server.deliveryrestaurantservice.service;
 
 import com.server.deliveryrestaurantservice.exception.NoCategoryItemsException;
-import com.server.deliveryrestaurantservice.exception.ResourceNotFoundException;
 import com.server.deliveryrestaurantservice.mapper.MenuCategoryMapper;
 import com.server.deliveryrestaurantservice.model.dto.request.MenuCategoryRequest;
+import com.server.deliveryrestaurantservice.model.dto.request.MenuCategoryUpdateRequest;
 import com.server.deliveryrestaurantservice.model.dto.response.MenuCategoryResponse;
 import com.server.deliveryrestaurantservice.model.entity.Menu;
 import com.server.deliveryrestaurantservice.model.entity.MenuCategory;
@@ -12,6 +12,7 @@ import com.server.deliveryrestaurantservice.repository.MenuRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public class MenuCategoryService {
 
     public MenuCategoryResponse createMenuCategory(Long menuId, MenuCategoryRequest category) {
         Menu menu = menuRepository.findById(menuId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         MenuCategory menuCategory = MenuCategory.builder()
                 .name(category.getName())
                 .menu(menu)
@@ -37,7 +38,7 @@ public class MenuCategoryService {
 
     public List<MenuCategoryResponse> listMenuCategoriesByMenuId(Long menuId) {
         Menu menu = menuRepository.findById(menuId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         return menu.getCategories()
                 .stream()
                 .map(MenuCategoryMapper::mapToDto)
@@ -46,13 +47,13 @@ public class MenuCategoryService {
 
     public MenuCategoryResponse getMenuCategoryById(Long categoryId) {
         MenuCategory category = menuCategoryRepository.findById(categoryId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         return MenuCategoryMapper.mapToDto(category);
     }
 
-    public MenuCategoryResponse updateMenuCategory(Long categoryId, MenuCategoryRequest request) {
+    public MenuCategoryResponse updateMenuCategory(Long categoryId, MenuCategoryUpdateRequest request) {
         MenuCategory category = menuCategoryRepository.findById(categoryId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         Optional.ofNullable(request.getName()).ifPresent(category::setName);
         Optional.ofNullable(request.getActive()).ifPresent(active -> updateCategoryStatus(category, active));
         MenuCategory updatedRestaurant = menuCategoryRepository.save(category);

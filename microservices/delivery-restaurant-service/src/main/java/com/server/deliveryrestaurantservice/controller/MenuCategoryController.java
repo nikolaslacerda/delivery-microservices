@@ -1,11 +1,13 @@
 package com.server.deliveryrestaurantservice.controller;
 
 import com.server.deliveryrestaurantservice.model.dto.request.MenuCategoryRequest;
+import com.server.deliveryrestaurantservice.model.dto.request.MenuCategoryUpdateRequest;
 import com.server.deliveryrestaurantservice.model.dto.response.MenuCategoryResponse;
 import com.server.deliveryrestaurantservice.service.MenuCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,7 +18,7 @@ public class MenuCategoryController {
 
     @PostMapping("/partners/restaurants/{restaurantId}/menu/{menuId}/categories")
     public MenuCategoryResponse createCategory(@PathVariable Long menuId,
-                                               @RequestBody MenuCategoryRequest request) {
+                                               @Valid @RequestBody MenuCategoryRequest request) {
         return menuCategoryService.createMenuCategory(menuId, request);
     }
 
@@ -32,7 +34,7 @@ public class MenuCategoryController {
 
     @PatchMapping("/partners/restaurants/{restaurantId}/menu/{menuId}/categories/{categoryId}")
     public MenuCategoryResponse updateMenuCategory(@PathVariable Long categoryId,
-                                                   @RequestBody MenuCategoryRequest request) {
+                                                   @Valid @RequestBody MenuCategoryUpdateRequest request) {
         return menuCategoryService.updateMenuCategory(categoryId, request);
     }
 

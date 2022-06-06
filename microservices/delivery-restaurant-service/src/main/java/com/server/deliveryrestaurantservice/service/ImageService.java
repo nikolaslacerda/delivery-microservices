@@ -1,7 +1,6 @@
 package com.server.deliveryrestaurantservice.service;
 
 import com.server.deliveryrestaurantservice.exception.FileStorageException;
-import com.server.deliveryrestaurantservice.exception.ResourceNotFoundException;
 import com.server.deliveryrestaurantservice.model.entity.MenuItem;
 import com.server.deliveryrestaurantservice.model.entity.Restaurant;
 import com.server.deliveryrestaurantservice.property.ImageProperties;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class ImageService {
 
     public void createRestaurantImage(Long restaurantId, MultipartFile image) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         createFile(restaurantId, imageProperties.getRestaurantFolder(), image);
         restaurant.setImageUrl(restaurantId + ".png");
         restaurantRepository.save(restaurant);
@@ -40,7 +40,7 @@ public class ImageService {
 
     public ResponseEntity<byte[]> getRestaurantImage(Long restaurantId) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         String imagePath = imageProperties.getHomeFolder() + imageProperties.getRestaurantFolder() + restaurant.getImageUrl();
         try (InputStream initialFile = new FileInputStream(imagePath)) {
             byte[] bytes = StreamUtils.copyToByteArray(initialFile);
@@ -54,7 +54,7 @@ public class ImageService {
 
     public void createMenuItemImage(Long menuItemId, MultipartFile image) {
         MenuItem menuItem = menuItemRepository.findById(menuItemId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         createFile(menuItemId, imageProperties.getFoodFolder(), image);
         menuItem.setImageUrl(menuItemId + ".png");
         menuItemRepository.save(menuItem);
@@ -62,7 +62,7 @@ public class ImageService {
 
     public ResponseEntity<byte[]> getMenuItemImage(Long menuItemId) {
         MenuItem menuItem = menuItemRepository.findById(menuItemId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         String imagePath = imageProperties.getHomeFolder() + imageProperties.getFoodFolder() + menuItem.getImageUrl();
         try (InputStream initialFile = new FileInputStream(imagePath)) {
             byte[] bytes = StreamUtils.copyToByteArray(initialFile);

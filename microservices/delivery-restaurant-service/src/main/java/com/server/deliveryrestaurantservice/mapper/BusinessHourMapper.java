@@ -1,9 +1,7 @@
 package com.server.deliveryrestaurantservice.mapper;
 
-import com.server.deliveryrestaurantservice.model.dto.request.BusinessHoursUpdateRequest;
 import com.server.deliveryrestaurantservice.model.dto.response.BusinessHoursResponse;
 import com.server.deliveryrestaurantservice.model.entity.BusinessHours;
-import com.server.deliveryrestaurantservice.model.entity.Restaurant;
 import com.server.deliveryrestaurantservice.model.dto.request.BusinessHoursRequest;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

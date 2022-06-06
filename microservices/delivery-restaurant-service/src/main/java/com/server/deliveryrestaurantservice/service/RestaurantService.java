@@ -1,10 +1,10 @@
 package com.server.deliveryrestaurantservice.service;
 
-import com.server.deliveryrestaurantservice.exception.ResourceNotFoundException;
 import com.server.deliveryrestaurantservice.mapper.AddressMapper;
 import com.server.deliveryrestaurantservice.mapper.RestaurantMapper;
 import com.server.deliveryrestaurantservice.model.dto.request.AddressRequest;
 import com.server.deliveryrestaurantservice.model.dto.request.RestaurantRequest;
+import com.server.deliveryrestaurantservice.model.dto.request.RestaurantUpdateRequest;
 import com.server.deliveryrestaurantservice.model.dto.response.RestaurantResponse;
 import com.server.deliveryrestaurantservice.model.entity.Address;
 import com.server.deliveryrestaurantservice.model.entity.Menu;
@@ -15,6 +15,7 @@ import com.server.deliveryrestaurantservice.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -47,13 +48,13 @@ public class RestaurantService {
 
     public RestaurantResponse getRestaurantById(Long id) {
         Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         return RestaurantMapper.mapToDto(restaurant);
     }
 
     public RestaurantResponse getRestaurantByPartner(UUID partnerId) {
         Restaurant restaurant = restaurantRepository.findByPartnerId(partnerId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         return RestaurantMapper.mapToDto(restaurant);
     }
 
@@ -64,9 +65,9 @@ public class RestaurantService {
                 .collect(Collectors.toList());
     }
 
-    public RestaurantResponse updateRestaurant(Long restaurantId, RestaurantRequest restaurantRequest) {
+    public RestaurantResponse updateRestaurant(Long restaurantId, RestaurantUpdateRequest restaurantRequest) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         Optional.ofNullable(restaurantRequest.getName()).ifPresent(restaurant::setName);
         Optional.ofNullable(restaurantRequest.getDescription()).ifPresent(restaurant::setDescription);
         Optional.ofNullable(restaurantRequest.getDeliveryPrice()).ifPresent(restaurant::setDeliveryPrice);
@@ -78,7 +79,7 @@ public class RestaurantService {
 
     public void approveRestaurant(Long id) {
         restaurantRepository.findById(id)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         restaurantRepository.approveById(id);
     }
 

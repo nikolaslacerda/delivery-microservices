@@ -1,9 +1,9 @@
 package com.server.deliveryrestaurantservice.service;
 
-import com.server.deliveryrestaurantservice.exception.CategoryDesactiveException;
-import com.server.deliveryrestaurantservice.exception.ResourceNotFoundException;
+import com.server.deliveryrestaurantservice.exception.CategoryDisabledException;
 import com.server.deliveryrestaurantservice.mapper.MenuItemMapper;
 import com.server.deliveryrestaurantservice.model.dto.request.MenuItemRequest;
+import com.server.deliveryrestaurantservice.model.dto.request.MenuItemUpdateRequest;
 import com.server.deliveryrestaurantservice.model.dto.response.MenuItemResponse;
 import com.server.deliveryrestaurantservice.model.entity.MenuCategory;
 import com.server.deliveryrestaurantservice.model.entity.MenuItem;
@@ -12,6 +12,7 @@ import com.server.deliveryrestaurantservice.repository.MenuItemRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -23,7 +24,7 @@ public class MenuItemService {
 
     public MenuItemResponse createMenuItem(Long categoryId, MenuItemRequest menuItemRequest) {
         MenuCategory menuCategory = menuCategoryRepository.findById(categoryId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         MenuItem menuItem = MenuItem.builder()
                 .name(menuItemRequest.getName())
                 .description(menuItemRequest.getDescription())
@@ -39,13 +40,13 @@ public class MenuItemService {
 
     public MenuItemResponse getMenuItemById(Long itemId) {
         MenuItem item = menuItemRepository.findById(itemId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         return MenuItemMapper.mapToDto(item);
     }
 
-    public MenuItemResponse updateMenuItem(Long itemId, MenuItemRequest menuItemRequest) {
+    public MenuItemResponse updateMenuItem(Long itemId, MenuItemUpdateRequest menuItemRequest) {
         MenuItem menuItem = menuItemRepository.findById(itemId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         Optional.ofNullable(menuItemRequest.getName()).ifPresent(menuItem::setName);
         Optional.ofNullable(menuItemRequest.getDescription()).ifPresent(menuItem::setDescription);
         Optional.ofNullable(menuItemRequest.getPrice()).ifPresent(menuItem::setPrice);
@@ -59,7 +60,7 @@ public class MenuItemService {
         if (menuItem.getActive() != active) {
             if (active) {
                 if (!menuItem.getCategory().getActive()) {
-                    throw new CategoryDesactiveException();
+                    throw new CategoryDisabledException();
                 }
                 menuItem.setActive(true);
             } else {
@@ -78,7 +79,7 @@ public class MenuItemService {
 
     public void deleteMenuItem(Long categoryId, Long itemId) {
         MenuCategory category = menuCategoryRepository.findById(categoryId)
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
         menuItemRepository.deleteById(itemId);
         if (category.getItems().isEmpty()) {
             category.setActive(false);

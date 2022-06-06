@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
@@ -14,8 +15,15 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class BusinessHoursRequest {
 
-	private DayOfWeek dayOfWeek;
-	private LocalTime openingTime;
-	private LocalTime closingTime;
+    @NotNull
+    private DayOfWeek dayOfWeek;
+
+    @NotNull
+    private LocalTime openingTime;
+
+    @NotNull
+    private LocalTime closingTime;
+
+    private Boolean active;
 
 }

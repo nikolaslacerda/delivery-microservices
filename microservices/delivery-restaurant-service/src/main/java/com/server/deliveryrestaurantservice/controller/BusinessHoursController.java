@@ -1,13 +1,13 @@
 package com.server.deliveryrestaurantservice.controller;
 
 import com.server.deliveryrestaurantservice.model.dto.request.BusinessHoursRequest;
-import com.server.deliveryrestaurantservice.model.dto.request.BusinessHoursUpdateRequest;
 import com.server.deliveryrestaurantservice.model.dto.response.BusinessHoursResponse;
 import com.server.deliveryrestaurantservice.service.BusinessHoursService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,24 +18,24 @@ public class BusinessHoursController {
 
     @PostMapping("/partners/restaurants/{restaurantId}/business-hours")
     public BusinessHoursResponse createRestaurantBusinessHours(@PathVariable("restaurantId") Long restaurantId,
-                                                               @RequestBody BusinessHoursRequest request) {
+                                                               @Valid @RequestBody BusinessHoursRequest request) {
         return businessHoursService.createRestaurantBusinessHours(restaurantId, request);
     }
 
     @GetMapping("/partners/restaurants/{restaurantId}/business-hours")
-    public List<BusinessHoursResponse> getAllRestaurantBusinessHours(@PathVariable("restaurantId") Long restaurantId) {
+    public List<BusinessHoursResponse> getAllRestaurantBusinessHours(@PathVariable Long restaurantId) {
         return businessHoursService.getAllRestaurantBusinessHours(restaurantId);
     }
 
     @GetMapping("/restaurants/{restaurantId}/business-hours")
-    public List<BusinessHoursResponse> getRestaurantBusinessHours(@PathVariable("restaurantId") Long restaurantId) {
+    public List<BusinessHoursResponse> getRestaurantBusinessHours(@PathVariable Long restaurantId) {
         return businessHoursService.getRestaurantBusinessHours(restaurantId);
     }
 
     @PutMapping("/partners/restaurants/{restaurantId}/business-hours/{businessHoursId}")
     public BusinessHoursResponse updateBusinessHours(@PathVariable Long restaurantId,
                                                      @PathVariable Long businessHoursId,
-                                                     @RequestBody BusinessHoursUpdateRequest request) {
+                                                     @Valid @RequestBody BusinessHoursRequest request) {
         return businessHoursService.updateBusinessHours(restaurantId, businessHoursId, request);
     }
 

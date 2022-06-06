@@ -1,18 +1,15 @@
 package com.server.deliveryrestaurantservice.model.dto.request;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentMethodRequest {
+public class MenuCategoryUpdateRequest {
 
-    @NotNull
-    private Long paymentMethodId;
+    private String name;
+    private Boolean active;
+
 }
