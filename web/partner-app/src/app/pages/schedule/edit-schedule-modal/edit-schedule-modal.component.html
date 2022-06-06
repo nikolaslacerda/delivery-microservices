@@ -1,12 +1,12 @@
 <div class="modal-content">
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel"><strong>Edite o horário</strong></h5>
+    <h5 class="modal-title" id="exampleModalLabel"><strong>Edit Hour</strong></h5>
     <button type="button" class="btn-close btn-close-red" (click)="hide()" aria-label="Close"></button>
   </div>
   <div class="modal-body">
     <form [formGroup]="scheduleForm" (ngSubmit)="updateSchedule()">
       <div class="mb-3">
-        <label for="day">Selecione o dia</label>
+        <label for="day">Select Day</label>
         <select id="day" class="form-select ml-2 mr-2" formControlName="dayOfWeek" aria-label="Default select example">
           <option value="MONDAY" selected>Monday</option>
           <option value="TUESDAY">Tuesday</option>

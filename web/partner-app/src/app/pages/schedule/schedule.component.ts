@@ -16,7 +16,7 @@ import {ScheduleResponse} from '../../shared/model/response/schedule-response.mo
 export class ScheduleComponent implements OnInit {
 
   isLoading = true;
-  schedule: ScheduleResponse[] = [];
+  schedules: ScheduleResponse[] = [];
   daysOfWeek: Array<any> = [];
   bsModalRef: BsModalRef | undefined;
 
@@ -32,17 +32,18 @@ export class ScheduleComponent implements OnInit {
     this.daysOfWeek = this.dayOfWeekUtils.dayOfWeek;
     this.scheduleService.getRestaurantSchedule(restaurantId)
       .subscribe((schedule: ScheduleResponse[]) => {
-        this.schedule = schedule;
+        this.schedules = this.scheduleService.sortDays(schedule);
         this.isLoading = false;
       });
   }
 
   deleteSchedule(schedule: any): void {
     const restaurantId = this.authService.getRestaurantId();
-    this.scheduleService.deleteRestaurantSchedule(restaurantId, schedule).subscribe(() => {
-      this.schedule = this.schedule.filter(h => h !== schedule);
-      this.showSuccessDelete();
-    });
+    this.scheduleService.deleteRestaurantSchedule(restaurantId, schedule)
+      .subscribe(() => {
+        this.schedules = this.schedules.filter(h => h !== schedule);
+        this.showSuccessDelete();
+      });
   }
 
   updateScheduleStatus(isChecked: any, schedule: any): void {
@@ -55,8 +56,8 @@ export class ScheduleComponent implements OnInit {
   openAddModal(): void {
     this.bsModalRef = this.modalService.show(AddScheduleModalComponent);
     this.bsModalRef.content.event.subscribe((schedule: any) => {
-      this.schedule.push(schedule);
-      this.schedule = this.scheduleService.sortDays(this.schedule);
+      this.schedules.push(schedule);
+      this.schedules = this.scheduleService.sortDays(this.schedules);
       this.showSuccessCreated();
     });
   }
@@ -65,23 +66,30 @@ export class ScheduleComponent implements OnInit {
     const initialState = {schedule};
     this.bsModalRef = this.modalService.show(EditScheduleModalComponent, {initialState});
     this.bsModalRef.content.event
-      .subscribe(() => this.showSuccessUpdate());
+      .subscribe((updatedSchedule: ScheduleResponse) => {
+        schedule.dayOfWeek = updatedSchedule.dayOfWeek;
+        schedule.openingTime = updatedSchedule.openingTime;
+        schedule.closingTime = updatedSchedule.closingTime;
+        schedule.active = updatedSchedule.active;
+        this.schedules = this.scheduleService.sortDays(this.schedules);
+        this.showSuccessUpdate();
+      });
   }
 
   showSuccessCreated(): void {
-    this.toastr.success('Schedule adicionado com sucesso', 'Sucesso', {
+    this.toastr.success('Schedule created successfully', 'Success', {
       timeOut: 3000,
     });
   }
 
   showSuccessUpdate(): void {
-    this.toastr.success('Schedule atualizado com sucesso', 'Sucesso', {
+    this.toastr.success('Schedule updated successfully', 'Success', {
       timeOut: 3000,
     });
   }
 
   showSuccessDelete(): void {
-    this.toastr.success('Schedule removido com sucesso', 'Sucesso', {
+    this.toastr.success('Schedule deleted successfully', 'Success', {
       timeOut: 3000,
     });
   }

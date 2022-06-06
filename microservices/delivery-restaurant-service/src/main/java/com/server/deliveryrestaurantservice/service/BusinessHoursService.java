@@ -56,10 +56,12 @@ public class BusinessHoursService {
                 .orElseThrow(ResourceNotFoundException::new);
         BusinessHours foundBusinessHours = businessHoursRepository.findById(businessHoursId)
                 .orElseThrow(ResourceNotFoundException::new);
-        verifyIfHoursIsAlreadyRegistered(foundRestaurant.getBusinessHours(), businessHours);
-        BusinessHours businessHourToUpdate = BusinessHourMapper.mapToModel(foundBusinessHours.getRestaurant(), businessHours);
-        businessHourToUpdate.setId(foundBusinessHours.getId());
-        return BusinessHourMapper.mapToDto(businessHoursRepository.save(businessHourToUpdate));
+        verifyIfHoursIsAlreadyRegistered(foundRestaurant.getBusinessHours().stream().filter(x -> !x.getId().equals(businessHoursId)).collect(Collectors.toList()), businessHours);
+        foundBusinessHours.setDayOfWeek(businessHours.getDayOfWeek());
+        foundBusinessHours.setOpeningTime(businessHours.getOpeningTime());
+        foundBusinessHours.setClosingTime(businessHours.getClosingTime());
+        foundBusinessHours.setActive(businessHours.getActive());
+        return BusinessHourMapper.mapToDto(businessHoursRepository.save(foundBusinessHours));
     }
 
     @Transactional
@@ -70,12 +72,13 @@ public class BusinessHoursService {
     }
 
     private void verifyIfHoursIsAlreadyRegistered(List<BusinessHours> restaurantBusinessHours, BusinessHoursRequest businessHours) {
-        if (restaurantBusinessHours.stream().anyMatch(x -> isValid(x, businessHours)))
+        if (restaurantBusinessHours.stream().anyMatch(x -> !isValid(x, businessHours)))
             throw new RuntimeException("Hour already exists");
     }
 
+
     private boolean isValid(BusinessHours rb, BusinessHoursRequest businessHours) {
-        return !isHourEquals(rb, businessHours) || !isHourInInterval(rb, businessHours);
+        return !isHourEquals(rb, businessHours) && !isHourInInterval(rb, businessHours);
     }
 
     private boolean isHourEquals(BusinessHours rb, BusinessHoursRequest businessHours) {
@@ -85,8 +88,19 @@ public class BusinessHoursService {
     }
 
     private boolean isHourInInterval(BusinessHours rb, BusinessHoursRequest businessHours) {
-        return (rb.getDayOfWeek().equals(businessHours.getDayOfWeek())) &&
-                (businessHours.getOpeningTime().isAfter(rb.getOpeningTime()) || rb.getOpeningTime().equals(businessHours.getOpeningTime())) &&
-                (businessHours.getClosingTime().isBefore(rb.getClosingTime()) || rb.getClosingTime().equals(businessHours.getClosingTime()));
+        return rb.getDayOfWeek().equals(businessHours.getDayOfWeek()) &&
+                !isHourAfter(rb, businessHours) &&
+                !isHourBefore(rb, businessHours);
+
+    }
+
+    private boolean isHourBefore(BusinessHours rb, BusinessHoursRequest businessHours) {
+        return rb.getClosingTime().isBefore(businessHours.getOpeningTime()) &&
+                rb.getClosingTime().isBefore(businessHours.getClosingTime());
+    }
+
+    private boolean isHourAfter(BusinessHours rb, BusinessHoursRequest businessHours) {
+        return rb.getOpeningTime().isAfter(businessHours.getOpeningTime()) &&
+                rb.getOpeningTime().isAfter(businessHours.getClosingTime());
     }
 }

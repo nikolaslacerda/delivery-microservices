@@ -42,12 +42,11 @@ export class AddScheduleModalComponent implements OnInit {
     this.schedule.dayOfWeek = this.scheduleForm.value.dayOfWeek;
     this.schedule.openingTime = formatDate(this.scheduleForm.value.openingTime, 'HH:mm', 'en');
     this.schedule.closingTime = formatDate(this.scheduleForm.value.closingTime, 'HH:mm', 'en');
-    this.schedule.active = true;
-    this.schedule.restaurantId = 1;
-    this.scheduleService.saveRestaurantSchedule(this.authService.getRestaurantId(), this.schedule).subscribe(schedule => {
-      this.emitAdd(schedule);
-      this.hide();
-    });
+    this.scheduleService.saveRestaurantSchedule(this.authService.getRestaurantId(), this.schedule)
+      .subscribe(schedule => {
+        this.emitAdd(schedule);
+        this.hide();
+      });
   }
 
 }

@@ -2,9 +2,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {ScheduleService} from '../../../core/services/schedule.service';
-import {formatDate} from '@angular/common';
 import {ScheduleResponse} from '../../../shared/model/response/schedule-response.model';
 import {AuthService} from '../../../core/services/auth.service';
+import {ScheduleUpdateRequest} from '../../../shared/model/request/schedule-update-request.model';
 
 @Component({
   selector: 'app-edit-schedule-modal',
@@ -32,8 +32,8 @@ export class EditScheduleModalComponent implements OnInit {
     this._populateForm();
   }
 
-  emitAdd(): void {
-    this.event.emit();
+  emitUpdateBusinessHourEvent(updatedItem: any): void {
+    this.event.emit(updatedItem);
   }
 
   private _populateForm(): void {
@@ -57,13 +57,10 @@ export class EditScheduleModalComponent implements OnInit {
   }
 
   updateSchedule(): void {
-    this.schedule.dayOfWeek = this.scheduleForm.value.dayOfWeek;
-    this.schedule.openingTime = formatDate(this.scheduleForm.value.openingTime, 'HH:mm', 'en');
-    this.schedule.closingTime = formatDate(this.scheduleForm.value.closingTime, 'HH:mm', 'en');
-    this.scheduleService.editSchedule(this.authService.getRestaurantId(), this.schedule).subscribe(item => {
-      this.emitAdd();
-      this.hide();
-    });
+    this.scheduleService.editSchedule(this.authService.getRestaurantId(), new ScheduleUpdateRequest(this.scheduleForm.value))
+      .subscribe((updatedItem: ScheduleResponse) => {
+        this.emitUpdateBusinessHourEvent(updatedItem);
+        this.hide();
+      });
   }
-
 }

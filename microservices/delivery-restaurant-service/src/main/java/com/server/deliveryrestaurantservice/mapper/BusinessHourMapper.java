@@ -29,14 +29,4 @@ public class BusinessHourMapper {
                 .active(false)
                 .build();
     }
-
-    public static BusinessHours mapToModel(Restaurant restaurant, BusinessHoursUpdateRequest businessHours) {
-        return BusinessHours.builder()
-                .openingTime(businessHours.getOpeningTime())
-                .closingTime(businessHours.getClosingTime())
-                .dayOfWeek(businessHours.getDayOfWeek())
-                .restaurant(restaurant)
-                .active(businessHours.getActive())
-                .build();
-    }
 }

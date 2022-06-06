@@ -22,7 +22,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let schedule of schedule">
+      <tr *ngFor="let schedule of schedules">
         <td>
           <div class="form-check justify-content-center align-items-center d-flex">
             <input type="checkbox" (change)="updateScheduleStatus($event, schedule)"

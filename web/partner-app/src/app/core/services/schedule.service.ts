@@ -38,7 +38,13 @@ export class ScheduleService {
 
   sortDays(days: any): any {
     return days.sort(
-      (a: any, b: any) => this.dayOfWeekUtils.compare(a.dayOfWeek, b.dayOfWeek)
+      (a: any, b: any) => {
+        if (a.dayOfWeek === b.dayOfWeek) {
+          return Number(a.openingTime.split(':')[0]) - Number(b.openingTime.split(':')[0]);
+        } else {
+          return this.dayOfWeekUtils.compare(a.dayOfWeek, b.dayOfWeek);
+        }
+      }
     );
   }
 }
