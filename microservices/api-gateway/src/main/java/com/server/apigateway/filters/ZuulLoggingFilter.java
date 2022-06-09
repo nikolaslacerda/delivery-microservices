@@ -2,10 +2,7 @@ package com.server.apigateway.filters;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Component
 public class ZuulLoggingFilter extends ZuulFilter {
-
-    //private final Logger logger = LoggerFactory.getLogger(ZuulLoggingFilter.class);
 
     @Override
     public String filterType() {
@@ -32,7 +27,7 @@ public class ZuulLoggingFilter extends ZuulFilter {
     }
 
     @Override
-    public Object run() throws ZuulException {
+    public Object run() {
         HttpServletRequest request = RequestContext.getCurrentContext().getRequest();
         log.info("Request -> {} URL -> {}", request.getMethod(), request.getRequestURL());
         return null;
