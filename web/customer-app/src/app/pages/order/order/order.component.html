@@ -17,7 +17,8 @@
                        formControlName="streetName"
                        id="address"
                        placeholder="Street Name"
-                       maxlength="150"
+                       minlength="3"
+                       maxlength="50"
                        autocomplete="off"
                        [ngClass]="{ 'is-invalid': streetName.invalid && ( streetName.dirty ||  streetName.touched) }">
               </div>
@@ -29,6 +30,7 @@
                          formControlName="streetNumber"
                          placeholder="Street Number"
                          autocomplete="off"
+                         mask="0*"
                          [ngClass]="{ 'is-invalid': streetNumber.invalid && ( streetNumber.dirty ||  streetNumber.touched) }">
                 </div>
                 <div class="col mb-3">
@@ -37,6 +39,8 @@
                          id="neighborhood"
                          formControlName="neighborhood"
                          placeholder="Neighborhood"
+                         minlength="3"
+                         maxlength="30"
                          autocomplete="off"
                          [ngClass]="{ 'is-invalid': neighborhood.invalid && ( neighborhood.dirty ||  neighborhood.touched) }"
                   >
@@ -49,6 +53,8 @@
                          id="city"
                          formControlName="city"
                          placeholder="City"
+                         minlength="3"
+                         maxlength="30"
                          autocomplete="off"
                          [ngClass]="{ 'is-invalid': city.invalid && ( city.dirty ||  city.touched) }">
                 </div>
@@ -59,6 +65,8 @@
                          formControlName="postalCode"
                          placeholder="Postal Code"
                          autocomplete="off"
+                         mask="00000-000"
+                         [dropSpecialCharacters]="true"
                          [ngClass]="{ 'is-invalid': postalCode.invalid && ( postalCode.dirty ||  postalCode.touched) }"
                   >
                 </div>
@@ -70,6 +78,8 @@
                          id="complement"
                          formControlName="complement"
                          placeholder="Apartment, suite, floor, etc."
+                         minlength="3"
+                         maxlength="30"
                          autocomplete="off"
                          [ngClass]="{ 'is-invalid': complement.invalid && ( complement.dirty ||  complement.touched) }">
                 </div>
@@ -79,6 +89,8 @@
                          id="reference"
                          formControlName="reference"
                          placeholder="Reference"
+                         minlength="3"
+                         maxlength="30"
                          autocomplete="off"
                          [ngClass]="{ 'is-invalid': reference.invalid && ( reference.dirty ||  reference.touched) }"
                   >
@@ -97,7 +109,8 @@
                       <!--                          [ngClass]="{ 'is-invalid': orderForm.controls.paymentGroup.controls.paymentId.invalid && (orderForm.controls.paymentGroup.controls.paymentId.touched) }"
                       -->
                       <option value="">Select...</option>
-                      <option *ngFor="let payment of paymentMethods" value="{{payment.id}}">{{payment.name | PaymentForm}}</option>
+                      <option *ngFor="let payment of paymentMethods"
+                              value="{{payment.id}}">{{payment.name | PaymentForm}}</option>
                     </select>
                   </div>
 
@@ -108,20 +121,22 @@
                              formControlName="name"
                              id="name"
                              placeholder="Card Name"
-                             maxlength="150"
+                             minlength="3"
+                             maxlength="30"
                              autocomplete="off"
                              [ngClass]="{ 'is-invalid': name.invalid && ( name.dirty ||  name.touched) }">
                     </div>
 
-                      <div class="col mb-3">
-                        <input type="text"
-                               class="form-control"
-                               id="cardNumber"
-                               formControlName="cardNumber"
-                               placeholder="Card Number"
-                               autocomplete="off"
-                               [ngClass]="{ 'is-invalid': cardNumber.invalid && ( cardNumber.dirty ||  cardNumber.touched) }">
-                      </div>
+                    <div class="col mb-3">
+                      <input type="text"
+                             class="form-control"
+                             id="cardNumber"
+                             formControlName="cardNumber"
+                             placeholder="Card Number"
+                             autocomplete="off"
+                             mask="0000 0000 0000 0000"
+                             [ngClass]="{ 'is-invalid': cardNumber.invalid && ( cardNumber.dirty ||  cardNumber.touched) }">
+                    </div>
                     <div class="row">
                       <div class="col mb-3">
                         <input type="text"
@@ -130,6 +145,8 @@
                                formControlName="expiration"
                                placeholder="Expiration"
                                autocomplete="off"
+                               mask="00/00"
+                               [dropSpecialCharacters]="false"
                                [ngClass]="{ 'is-invalid': expiration.invalid && ( expiration.dirty ||  expiration.touched) }"
                         >
                       </div>
@@ -141,6 +158,7 @@
                                formControlName="cvv"
                                placeholder="Code"
                                autocomplete="off"
+                               mask="000"
                                [ngClass]="{ 'is-invalid': cvv.invalid && ( cvv.dirty ||  cvv.touched) }">
                       </div>
                     </div>

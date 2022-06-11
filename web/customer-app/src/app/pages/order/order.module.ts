@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import {TextMaskModule} from 'angular2-text-mask';
 import {OrderSummaryComponent} from './order-summary/order-summary.component';
 import {OrderStatusComponent} from './order-status/order-status.component';
 
@@ -20,6 +19,7 @@ import {OrderComponent} from './order/order.component';
 import {RatingModule} from 'ngx-bootstrap/rating';
 import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
 import {rxStompConfig} from '../../core/config/rx-stomp.config';
+import {NgxMaskModule} from 'ngx-mask';
 
 
 @NgModule({
@@ -36,13 +36,13 @@ import {rxStompConfig} from '../../core/config/rx-stomp.config';
   imports: [
     CommonModule,
     FormsModule,
-    TextMaskModule,
     OrderRoutingModule,
     PipesModule,
     RestaurantModule,
     SharedModule,
     ReactiveFormsModule,
-    RatingModule
+    RatingModule,
+    NgxMaskModule
   ],
   providers: [
     {

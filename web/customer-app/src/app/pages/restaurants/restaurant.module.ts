@@ -2,8 +2,6 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import {TextMaskModule} from 'angular2-text-mask';
-
 import {PipesModule} from '../../shared/pipes/pipes.module';
 
 import {RestaurantRoutingModule} from './restaurant-routing.module';
@@ -30,7 +28,6 @@ import {SharedModule} from '../../shared/shared.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    TextMaskModule,
     RestaurantRoutingModule,
     PipesModule,
     SharedModule

@@ -28,8 +28,11 @@ import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {RatingModule} from 'ngx-bootstrap/rating';
+import {IConfig, NgxMaskModule} from 'ngx-mask';
 
 registerLocaleData(localeFr, 'pt');
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [
@@ -54,6 +57,7 @@ registerLocaleData(localeFr, 'pt');
       maxOpened: 1,
       autoDismiss: true
     }),
+    NgxMaskModule.forRoot(),
     OrderModule,
     SharedModule,
     RouterModule,

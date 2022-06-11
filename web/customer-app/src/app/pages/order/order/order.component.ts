@@ -31,10 +31,10 @@ export class OrderComponent implements OnInit {
 
   orderForm = this.formBuilder.group({
     addressGroup: this.formBuilder.group({
-      streetName: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-      streetNumber: this.formBuilder.control('', [Validators.required]),
-      neighborhood: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-      city: this.formBuilder.control('', [Validators.required, Validators.minLength(2)]),
+      streetName: this.formBuilder.control('', [Validators.required]),
+      streetNumber: this.formBuilder.control('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
+      neighborhood: this.formBuilder.control('', [Validators.required]),
+      city: this.formBuilder.control('', [Validators.required]),
       country: this.formBuilder.control('US', [Validators.required]),
       state: this.formBuilder.control('RS', [Validators.required]),
       postalCode: this.formBuilder.control('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
@@ -43,10 +43,10 @@ export class OrderComponent implements OnInit {
     }),
     paymentGroup: this.formBuilder.group({
       paymentMethodId: this.formBuilder.control('', [Validators.required]),
-      name: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
-      cardNumber: this.formBuilder.control('', [Validators.required, Validators.maxLength(16), Validators.pattern(/[3-9]/)]),
+      name: this.formBuilder.control('', [Validators.required, Validators.pattern(/^[a-zA-z]*$/)]),
+      cardNumber: this.formBuilder.control('', [Validators.required, Validators.pattern(/[3-9]/)]),
       expiration: this.formBuilder.control('', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]),
-      cvv: this.formBuilder.control('', [Validators.required, ,Validators.maxLength(3)])
+      cvv: this.formBuilder.control('', [Validators.required, Validators.pattern(/^[0-9]*$/)])
     })
   });
 

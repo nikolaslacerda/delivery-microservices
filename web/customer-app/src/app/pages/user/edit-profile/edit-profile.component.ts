@@ -17,10 +17,10 @@ export class EditProfileComponent implements OnInit {
 
   userForm = this.fb.group({
     email: this.fb.control('', [Validators.required, Validators.email]),
-    phoneNumber: this.fb.control('', [Validators.required, , Validators.minLength(11)]),
-    firstName: this.fb.control('', [Validators.required, Validators.minLength(2)]),
-    lastName: this.fb.control('', [Validators.required, Validators.minLength(2)]),
-    cpf: this.fb.control('', [Validators.required, Validators.minLength(11)]),
+    phoneNumber: this.fb.control('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
+    firstName: this.fb.control('', [Validators.required, Validators.pattern(/^[a-zA-z]*$/)]),
+    lastName: this.fb.control('', [Validators.required, Validators.pattern(/^[a-zA-z]*$/)]),
+    cpf: this.fb.control('', [Validators.required]),
   });
 
   constructor(private router: Router,

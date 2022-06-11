@@ -8,7 +8,6 @@ import {ReviewResponse} from '../../../shared/models/response/review.response.mo
 import {ReviewRequest} from '../../../shared/models/request/review.request.model';
 import {RxStompService} from '@stomp/ng2-stompjs';
 import {Message} from '@stomp/stompjs';
-import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-order-status-order',
@@ -24,7 +23,7 @@ export class OrderStatusComponent implements OnInit {
 
   ratingForm = this.fb.group({
     rating: ['', Validators.required],
-    comment: ['', [Validators.required, Validators.minLength(3)]]
+    comment: ['', [Validators.required]]
   });
 
   constructor(private router: Router,
