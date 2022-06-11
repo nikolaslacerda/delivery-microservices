@@ -1,7 +1,7 @@
 package com.server.deliverypaymentservice.service;
 
 import com.server.deliverypaymentservice.amqp.NotifierConfirmedPayment;
-import com.server.deliverypaymentservice.exception.ResourceNotFoundException;
+import com.server.deliverypaymentservice.exception.PaymentNotFoundException;
 import com.server.deliverypaymentservice.mapper.PaymentMapper;
 import com.server.deliverypaymentservice.model.dto.request.PaymentRequest;
 import com.server.deliverypaymentservice.model.dto.response.PaymentResponse;
@@ -31,12 +31,12 @@ public class PaymentService {
     public PaymentResponse getPayment(UUID paymentId) {
         return paymentRepository.findById(paymentId)
                 .map(PaymentMapper::mapToResponse)
-                .orElseThrow(() -> new ResourceNotFoundException(paymentId));
+                .orElseThrow(() -> new PaymentNotFoundException(paymentId));
     }
 
     public PaymentResponse confirmPayment(UUID paymentId) {
         Payment foundPayment = paymentRepository.findById(paymentId)
-                .orElseThrow(() -> new ResourceNotFoundException(paymentId));
+                .orElseThrow(() -> new PaymentNotFoundException(paymentId));
         foundPayment.setStatus(PaymentStatus.CONFIRMED);
         paymentRepository.save(foundPayment);
         paymentNotifier.notifyConfirmedPayment(foundPayment);
@@ -45,7 +45,7 @@ public class PaymentService {
 
     public PaymentResponse cancelPayment(UUID paymentId) {
         Payment foundPayment = paymentRepository.findById(paymentId)
-                .orElseThrow(() -> new ResourceNotFoundException(paymentId));
+                .orElseThrow(() -> new PaymentNotFoundException(paymentId));
         foundPayment.setStatus(PaymentStatus.CANCELED);
         return PaymentMapper.mapToResponse(paymentRepository.save(foundPayment));
     }

@@ -1,6 +1,8 @@
 package com.server.deliveryrestaurantservice.service;
 
+import com.server.deliveryrestaurantservice.exception.BusinessHourNotFoundException;
 import com.server.deliveryrestaurantservice.exception.HourAlreadyRegisteredException;
+import com.server.deliveryrestaurantservice.exception.RestaurantNotFoundException;
 import com.server.deliveryrestaurantservice.mapper.BusinessHourMapper;
 import com.server.deliveryrestaurantservice.model.dto.request.BusinessHoursRequest;
 import com.server.deliveryrestaurantservice.model.dto.response.BusinessHoursResponse;
@@ -11,7 +13,6 @@ import com.server.deliveryrestaurantservice.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public class BusinessHoursService {
 
     public BusinessHoursResponse createRestaurantBusinessHours(Long restaurantId, BusinessHoursRequest businessHours) {
         Restaurant foundRestaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
         verifyIfHoursIsAlreadyRegistered(foundRestaurant.getBusinessHours(), businessHours);
         BusinessHours businessHoursToSave = BusinessHourMapper.mapToModel(businessHours);
         businessHoursToSave.setRestaurant(foundRestaurant);
@@ -34,7 +35,7 @@ public class BusinessHoursService {
 
     public List<BusinessHoursResponse> getAllRestaurantBusinessHours(Long restaurantId) {
         Restaurant foundRestaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
         return foundRestaurant.getBusinessHours()
                 .stream()
                 .map(BusinessHourMapper::mapToDto)
@@ -43,7 +44,7 @@ public class BusinessHoursService {
 
     public List<BusinessHoursResponse> getRestaurantBusinessHours(Long restaurantId) {
         Restaurant foundRestaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
         return foundRestaurant.getBusinessHours()
                 .stream()
                 .filter(BusinessHours::getActive) // query?
@@ -53,9 +54,9 @@ public class BusinessHoursService {
 
     public BusinessHoursResponse updateBusinessHours(Long restaurantId, Long businessHoursId, BusinessHoursRequest businessHours) {
         Restaurant foundRestaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
         BusinessHours foundBusinessHours = businessHoursRepository.findById(businessHoursId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new BusinessHourNotFoundException(businessHoursId));
         verifyIfHoursIsAlreadyRegistered(foundRestaurant.getBusinessHours().stream().filter(x -> !x.getId().equals(businessHoursId)).collect(Collectors.toList()), businessHours);
         foundBusinessHours.setDayOfWeek(businessHours.getDayOfWeek());
         foundBusinessHours.setOpeningTime(businessHours.getOpeningTime());
@@ -67,7 +68,7 @@ public class BusinessHoursService {
     @Transactional
     public void deleteBusinessHours(Long restaurantId, Long businessHoursId) {
         Restaurant foundRestaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
         businessHoursRepository.deleteByIdAndRestaurant(businessHoursId, foundRestaurant);
     }
 

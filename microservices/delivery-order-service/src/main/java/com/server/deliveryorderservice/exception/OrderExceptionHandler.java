@@ -1,6 +1,8 @@
 package com.server.deliveryorderservice.exception;
 
+import com.netflix.client.ClientException;
 import com.server.deliveryorderservice.exception.model.ApiError;
+import feign.FeignException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.util.NestedServletException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,12 +22,27 @@ import java.util.List;
 @RestControllerAdvice
 public class OrderExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException exception) {
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<Object> handleEntityNotFoundException(OrderNotFoundException exception) {
         return buildResponseEntity(
                 HttpStatus.NOT_FOUND,
                 exception.getMessage(),
                 Collections.singletonList(exception.getMessage()));
+    }
+
+    @ExceptionHandler(FeignException.class)
+    public ResponseEntity<Object> handleFeignException(FeignException exception) {
+        if (exception.status() != -1) {
+            return buildResponseEntity(
+                    HttpStatus.valueOf(exception.status()),
+                    exception.getMessage(),
+                    Collections.singletonList(exception.getMessage()));
+        } else {
+            return buildResponseEntity(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    exception.getMessage(),
+                    Collections.singletonList(exception.getMessage()));
+        }
     }
 
     @ExceptionHandler(Exception.class)

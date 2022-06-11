@@ -1,4 +1,4 @@
-package com.server.apigateway.config;
+package com.server.deliveryorderservice.config;
 
 import feign.codec.ErrorDecoder;
 import org.springframework.context.annotation.Bean;

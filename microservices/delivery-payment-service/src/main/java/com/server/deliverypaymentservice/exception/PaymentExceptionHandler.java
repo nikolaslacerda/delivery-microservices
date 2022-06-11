@@ -1,6 +1,5 @@
 package com.server.deliverypaymentservice.exception;
 
-import com.server.deliverypaymentservice.exception.ResourceNotFoundException;
 import com.server.deliverypaymentservice.exception.model.ApiError;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,8 +19,8 @@ import java.util.List;
 @RestControllerAdvice
 public class PaymentExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Object> handleEntityNotFoundException(ResourceNotFoundException exception) {
+    @ExceptionHandler(PaymentNotFoundException.class)
+    public ResponseEntity<Object> handleEntityNotFoundException(PaymentNotFoundException exception) {
         return buildResponseEntity(
                 HttpStatus.NOT_FOUND,
                 exception.getMessage(),

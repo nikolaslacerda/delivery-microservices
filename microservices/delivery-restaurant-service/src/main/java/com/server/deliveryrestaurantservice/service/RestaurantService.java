@@ -1,5 +1,7 @@
 package com.server.deliveryrestaurantservice.service;
 
+import com.server.deliveryrestaurantservice.exception.PartnerRestaurantNotFoundException;
+import com.server.deliveryrestaurantservice.exception.RestaurantNotFoundException;
 import com.server.deliveryrestaurantservice.mapper.AddressMapper;
 import com.server.deliveryrestaurantservice.mapper.RestaurantMapper;
 import com.server.deliveryrestaurantservice.model.dto.request.AddressRequest;
@@ -15,7 +17,6 @@ import com.server.deliveryrestaurantservice.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -48,13 +49,13 @@ public class RestaurantService {
 
     public RestaurantResponse getRestaurantById(Long id) {
         Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
         return RestaurantMapper.mapToDto(restaurant);
     }
 
     public RestaurantResponse getRestaurantByPartner(UUID partnerId) {
         Restaurant restaurant = restaurantRepository.findByPartnerId(partnerId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new PartnerRestaurantNotFoundException(partnerId));
         return RestaurantMapper.mapToDto(restaurant);
     }
 
@@ -67,7 +68,7 @@ public class RestaurantService {
 
     public RestaurantResponse updateRestaurant(Long restaurantId, RestaurantUpdateRequest restaurantRequest) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
         Optional.ofNullable(restaurantRequest.getName()).ifPresent(restaurant::setName);
         Optional.ofNullable(restaurantRequest.getDescription()).ifPresent(restaurant::setDescription);
         Optional.ofNullable(restaurantRequest.getDeliveryPrice()).ifPresent(restaurant::setDeliveryPrice);
@@ -79,7 +80,7 @@ public class RestaurantService {
 
     public void approveRestaurant(Long id) {
         restaurantRepository.findById(id)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
         restaurantRepository.approveById(id);
     }
 

@@ -1,6 +1,8 @@
 package com.server.deliveryrestaurantservice.service;
 
 import com.server.deliveryrestaurantservice.exception.CategoryDisabledException;
+import com.server.deliveryrestaurantservice.exception.MenuCategoryNotFoundException;
+import com.server.deliveryrestaurantservice.exception.MenuItemNotFoundException;
 import com.server.deliveryrestaurantservice.mapper.MenuItemMapper;
 import com.server.deliveryrestaurantservice.model.dto.request.MenuItemRequest;
 import com.server.deliveryrestaurantservice.model.dto.request.MenuItemUpdateRequest;
@@ -12,7 +14,6 @@ import com.server.deliveryrestaurantservice.repository.MenuItemRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -24,7 +25,7 @@ public class MenuItemService {
 
     public MenuItemResponse createMenuItem(Long categoryId, MenuItemRequest menuItemRequest) {
         MenuCategory menuCategory = menuCategoryRepository.findById(categoryId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new MenuCategoryNotFoundException(categoryId));
         MenuItem menuItem = MenuItem.builder()
                 .name(menuItemRequest.getName())
                 .description(menuItemRequest.getDescription())
@@ -40,13 +41,13 @@ public class MenuItemService {
 
     public MenuItemResponse getMenuItemById(Long itemId) {
         MenuItem item = menuItemRepository.findById(itemId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new MenuItemNotFoundException(itemId));
         return MenuItemMapper.mapToDto(item);
     }
 
     public MenuItemResponse updateMenuItem(Long itemId, MenuItemUpdateRequest menuItemRequest) {
         MenuItem menuItem = menuItemRepository.findById(itemId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new MenuItemNotFoundException(itemId));
         Optional.ofNullable(menuItemRequest.getName()).ifPresent(menuItem::setName);
         Optional.ofNullable(menuItemRequest.getDescription()).ifPresent(menuItem::setDescription);
         Optional.ofNullable(menuItemRequest.getPrice()).ifPresent(menuItem::setPrice);
@@ -79,7 +80,7 @@ public class MenuItemService {
 
     public void deleteMenuItem(Long categoryId, Long itemId) {
         MenuCategory category = menuCategoryRepository.findById(categoryId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new MenuCategoryNotFoundException(categoryId));
         menuItemRepository.deleteById(itemId);
         if (category.getItems().isEmpty()) {
             category.setActive(false);

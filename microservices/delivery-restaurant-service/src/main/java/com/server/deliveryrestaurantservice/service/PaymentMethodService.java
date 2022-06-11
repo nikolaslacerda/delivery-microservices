@@ -1,5 +1,7 @@
 package com.server.deliveryrestaurantservice.service;
 
+import com.server.deliveryrestaurantservice.exception.PaymentMethodNotFoundException;
+import com.server.deliveryrestaurantservice.exception.RestaurantNotFoundException;
 import com.server.deliveryrestaurantservice.mapper.PaymentMethodMapper;
 import com.server.deliveryrestaurantservice.model.dto.request.PaymentMethodRequest;
 import com.server.deliveryrestaurantservice.model.dto.response.PaymentMethodResponse;
@@ -12,7 +14,6 @@ import com.server.deliveryrestaurantservice.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,9 +27,9 @@ public class PaymentMethodService {
 
     public PaymentMethodResponse createRestaurantPaymentMethod(Long restaurantId, PaymentMethodRequest paymentMethod) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
         PaymentMethod paymentMethod1 = paymentMethodRepository.findById(paymentMethod.getPaymentMethodId())
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new PaymentMethodNotFoundException(paymentMethod.getPaymentMethodId()));
         RestaurantPaymentMethod restaurantPaymentMethod = new RestaurantPaymentMethod(restaurantId, paymentMethod.getPaymentMethodId());
         restaurantPaymentMethod.setPaymentMethod(paymentMethod1);
         restaurantPaymentMethod.setRestaurant(restaurant);

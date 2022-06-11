@@ -1,5 +1,7 @@
 package com.server.deliveryrestaurantservice.service;
 
+import com.server.deliveryrestaurantservice.exception.MenuCategoryNotFoundException;
+import com.server.deliveryrestaurantservice.exception.MenuNotFoundException;
 import com.server.deliveryrestaurantservice.exception.NoCategoryItemsException;
 import com.server.deliveryrestaurantservice.mapper.MenuCategoryMapper;
 import com.server.deliveryrestaurantservice.model.dto.request.MenuCategoryRequest;
@@ -12,7 +14,6 @@ import com.server.deliveryrestaurantservice.repository.MenuRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,7 +27,7 @@ public class MenuCategoryService {
 
     public MenuCategoryResponse createMenuCategory(Long menuId, MenuCategoryRequest category) {
         Menu menu = menuRepository.findById(menuId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new MenuNotFoundException(menuId));
         MenuCategory menuCategory = MenuCategory.builder()
                 .name(category.getName())
                 .menu(menu)
@@ -38,7 +39,7 @@ public class MenuCategoryService {
 
     public List<MenuCategoryResponse> listMenuCategoriesByMenuId(Long menuId) {
         Menu menu = menuRepository.findById(menuId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new MenuNotFoundException(menuId));
         return menu.getCategories()
                 .stream()
                 .map(MenuCategoryMapper::mapToDto)
@@ -47,13 +48,13 @@ public class MenuCategoryService {
 
     public MenuCategoryResponse getMenuCategoryById(Long categoryId) {
         MenuCategory category = menuCategoryRepository.findById(categoryId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new MenuCategoryNotFoundException(categoryId));
         return MenuCategoryMapper.mapToDto(category);
     }
 
     public MenuCategoryResponse updateMenuCategory(Long categoryId, MenuCategoryUpdateRequest request) {
         MenuCategory category = menuCategoryRepository.findById(categoryId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new MenuCategoryNotFoundException(categoryId));
         Optional.ofNullable(request.getName()).ifPresent(category::setName);
         Optional.ofNullable(request.getActive()).ifPresent(active -> updateCategoryStatus(category, active));
         MenuCategory updatedRestaurant = menuCategoryRepository.save(category);

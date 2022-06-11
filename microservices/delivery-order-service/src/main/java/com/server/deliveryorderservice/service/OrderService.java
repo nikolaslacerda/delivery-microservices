@@ -1,7 +1,8 @@
 package com.server.deliveryorderservice.service;
 
 import com.server.deliveryorderservice.amqp.NotifierUpdatedOrderStatus;
-import com.server.deliveryorderservice.exception.EntityNotFoundException;
+import com.server.deliveryorderservice.exception.OrderNotFoundException;
+import com.server.deliveryorderservice.exception.OrderStatusUpdateException;
 import com.server.deliveryorderservice.integration.PaymentRestClient;
 import com.server.deliveryorderservice.mapper.OrderMapper;
 import com.server.deliveryorderservice.mapper.PaymentMapper;
@@ -58,13 +59,13 @@ public class OrderService {
 
     public OrderResponse getOrderById(UUID id) {
         Order order = orderRepository.findById(id)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new OrderNotFoundException(id));
         return OrderMapper.mapToResponse(order);
     }
 
     public void updateStatus(UUID id, StatusRequest statusRequest) {
         Order order = orderRepository.findById(id)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new OrderNotFoundException(id));
         validateStatus(order.getLastStatus(), statusRequest.getStatus());
         order.setLastStatus(statusRequest.getStatus());
         order.setUpdatedAt(LocalDateTime.now());
@@ -74,6 +75,6 @@ public class OrderService {
 
     private void validateStatus(Status lastStatus, Status newStatus) {
         if (lastStatus.getId() > newStatus.getId())
-            throw new RuntimeException("Cannot change status from " + lastStatus.getValue() + " to " + newStatus.getValue());
+            throw new OrderStatusUpdateException(lastStatus.getValue(), newStatus.getValue());
     }
 }

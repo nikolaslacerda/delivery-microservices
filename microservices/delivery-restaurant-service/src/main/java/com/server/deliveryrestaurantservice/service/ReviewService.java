@@ -1,5 +1,6 @@
 package com.server.deliveryrestaurantservice.service;
 
+import com.server.deliveryrestaurantservice.exception.RestaurantNotFoundException;
 import com.server.deliveryrestaurantservice.mapper.ReviewAverageMapper;
 import com.server.deliveryrestaurantservice.mapper.ReviewMapper;
 import com.server.deliveryrestaurantservice.model.dto.request.ReviewRequest;
@@ -14,7 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -28,7 +28,7 @@ public class ReviewService {
 
     public ReviewResponse createReview(Long restaurantId, ReviewRequest review) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
         Review savedReview = reviewRepository.save(ReviewMapper.mapToModel(restaurant, review));
         return ReviewMapper.mapToDto(savedReview);
     }
