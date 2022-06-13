@@ -1,5 +1,4 @@
 export class RestaurantUpdateRequest {
-
   name: string;
   mainCategory: string;
   description: string;

@@ -7,6 +7,7 @@ import {AddMenuCategoryModalComponent} from './menu-category/add-menu-category-m
 import {EditMenuCategoryModalComponent} from './menu-category/edit-menu-category-modal/edit-menu-category-modal.component';
 import {SharedModule} from '../../shared/shared.module';
 import {MenuComponent} from './menu.component';
+import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {MenuComponent} from './menu.component';
     MenuCategoryComponent
   ],
   imports: [
-    SharedModule
+    SharedModule,
+    NgxMaskModule
   ]
 })
 export class MenuModule {

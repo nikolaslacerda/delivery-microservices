@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {MenuService} from '../../../../core/services/menu.service';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {MenuItemRequest} from '../../../../shared/model/request/menu-item-request.model';
@@ -15,13 +15,13 @@ export class AddMenuItemModalComponent implements OnInit {
 
   @Output() event = new EventEmitter<any>();
 
-  buttonLoading = false;
   imageSrc = '';
   image!: File;
-
+  buttonLoading = false;
   category = {} as MenuCategoryResponse;
+
   addMenuItemForm = this.fb.group({
-    name: ['', Validators.required],
+    name: ['', [Validators.required, Validators.pattern(/^[a-zA-z]*$/)]],
     description: ['', Validators.required],
     promotionalPrice: ['', [Validators.required, Validators.min(0.1)]],
     price: ['', [Validators.required, Validators.min(0.1)]],
@@ -39,9 +39,28 @@ export class AddMenuItemModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get name(): AbstractControl {
+    // @ts-ignore
+    return this.addMenuItemForm.get('name');
+  }
+
+  get description(): AbstractControl {
+    // @ts-ignore
+    return this.addMenuItemForm.get('description');
+  }
+
+  get price(): AbstractControl {
+    // @ts-ignore
+    return this.addMenuItemForm.get('price');
+  }
+
+  get promotionalPrice(): AbstractControl {
+    // @ts-ignore
+    return this.addMenuItemForm.get('promotionalPrice');
+  }
+
   onFileChange(event: any): void {
     const reader = new FileReader();
-
     if (event.target.files && event.target.files.length) {
       const file2: File = event.target.files[0];
       this.image = file2;
@@ -80,7 +99,6 @@ export class AddMenuItemModalComponent implements OnInit {
       .subscribe((menuItem: MenuItemResponse) => {
         this.menuService.addMenuItemImage(menuItem.id, this.image)
           .subscribe(_ => {
-            this.buttonLoading = false;
             this.emitAdd(menuItem);
             this.hide();
           });
@@ -90,7 +108,6 @@ export class AddMenuItemModalComponent implements OnInit {
   private addItemWithoutImage(): void {
     this.menuService.createItem(1, this.category.id, new MenuItemRequest(this.addMenuItemForm.value))
       .subscribe((menuItem: MenuItemResponse) => {
-        this.buttonLoading = false;
         this.emitAdd(menuItem);
         this.hide();
       });

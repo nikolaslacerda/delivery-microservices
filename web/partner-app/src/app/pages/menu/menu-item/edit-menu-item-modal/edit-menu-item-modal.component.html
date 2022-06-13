@@ -19,26 +19,55 @@
       </div>
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
-        <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
+        <input type="text"
+               formControlName="name"
+               class="form-control"
+               id="name"
+               minlength="3"
+               maxlength="50"
+               aria-describedby="emailHelp"
+               [ngClass]="{ 'is-invalid': name.invalid && ( name.dirty ||  name.touched) }">
       </div>
       <div class="mb-3">
+        {{description.value}}
         <label for="description" class="form-label">Description</label>
-        <input type="text" formControlName="description" class="form-control" id="description"
-               aria-describedby="emailHelp">
+        <input type="text"
+               formControlName="description"
+               class="form-control"
+               id="description"
+               minlength="3"
+               maxlength="100"
+               aria-describedby="emailHelp"
+               [ngClass]="{ 'is-invalid': description.invalid && ( description.dirty ||  description.touched) }">
       </div>
       <div class="mb-3">
         <label for="price" class="form-label">Price</label>
-        <input type="text" formControlName="price" class="form-control" id="price"
-               aria-describedby="emailHelp">
+        <input type="text"
+               formControlName="price"
+               class="form-control"
+               id="price"
+               mask="0*.99"
+               [dropSpecialCharacters]="false"
+               aria-describedby="emailHelp"
+               [ngClass]="{ 'is-invalid': price.invalid && ( price.dirty ||  price.touched) }">
       </div>
       <div class="mb-3">
         <label for="promotionalPrice" class="form-label">Promotional Price</label>
-        <input type="text" formControlName="promotionalPrice" class="form-control" id="promotionalPrice"
-               aria-describedby="emailHelp">
+        <input type="text"
+               formControlName="promotionalPrice"
+               class="form-control"
+               id="promotionalPrice"
+               mask="0*.99"
+               [dropSpecialCharacters]="false"
+               aria-describedby="emailHelp"
+               [ngClass]="{ 'is-invalid': promotionalPrice.invalid && ( promotionalPrice.dirty ||  promotionalPrice.touched) }">
       </div>
       <div class="modal-footer mt-4">
         <button type="button" (click)="hide()" class="btn btn-lg btn-primary-outline">Close</button>
-        <button type="submit" class="btn btn-lg btn-primary" [disabled]="!editMenuItemForm.valid">Update</button>
+        <button type="submit" class="btn btn-lg btn-primary" [disabled]="!editMenuItemForm.valid || buttonLoading">
+          <span *ngIf="buttonLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Update
+        </button>
       </div>
     </form>
   </div>

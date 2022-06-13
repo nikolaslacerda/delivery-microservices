@@ -1,12 +1,6 @@
 import {MenuCategoryResponse} from './menu-category-response.model';
 
-export class MenuResponse {
-
+export interface MenuResponse {
   id: number;
   categories: MenuCategoryResponse[];
-
-  constructor(model: any = {}) {
-    this.id = model.id;
-    this.categories = model.categories;
-  }
 }

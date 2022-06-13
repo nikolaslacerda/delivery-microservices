@@ -1,5 +1,4 @@
 export class RestaurantImageUpdateRequest {
-
   name: string;
   mainCategory: string;
   description: string;

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {MenuService} from '../../../../core/services/menu.service';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 
@@ -12,21 +12,28 @@ export class EditMenuCategoryModalComponent implements OnInit {
 
   @Output() event = new EventEmitter<any>();
 
-  categoryForm = this.fb.group({
-    name: ['', Validators.required],
-  });
+  buttonLoading = false;
   list: any[] = [];
+
+  categoryForm = this.fb.group({
+    name: ['', [Validators.required, Validators.pattern(/^[a-zA-z ]*$/)]],
+  });
 
   constructor(private fb: FormBuilder,
               private menuService: MenuService,
               public bsModalRef: BsModalRef) {
   }
 
-  ngOnInit(): void {
-    this._populateForm();
+  get name(): AbstractControl {
+    // @ts-ignore
+    return this.categoryForm.get('name');
   }
 
-  private _populateForm(): void {
+  ngOnInit(): void {
+    this.populateForm();
+  }
+
+  private populateForm(): void {
     this.categoryForm.patchValue({
       name: this.list[0].category.name
     });
@@ -41,6 +48,7 @@ export class EditMenuCategoryModalComponent implements OnInit {
   }
 
   updateMenuCategory(): void {
+    this.buttonLoading = true;
     this.list[0].category.name = this.categoryForm.value.name;
     this.menuService.editCategory(1, 1, this.list[0].category.id, this.list[0].category).subscribe(() => {
       this.emitAdd();

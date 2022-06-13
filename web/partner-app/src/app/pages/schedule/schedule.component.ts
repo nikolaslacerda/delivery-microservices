@@ -49,7 +49,7 @@ export class ScheduleComponent implements OnInit {
   updateScheduleStatus(isChecked: any, schedule: any): void {
     const restaurantId = this.authService.getRestaurantId();
     schedule.active = isChecked.currentTarget.checked;
-    this.scheduleService.editSchedule(restaurantId, schedule)
+    this.scheduleService.editSchedule(restaurantId, schedule.id, schedule)
       .subscribe();
   }
 

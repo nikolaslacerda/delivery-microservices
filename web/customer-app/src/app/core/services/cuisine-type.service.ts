@@ -16,6 +16,6 @@ export class CuisineTypeService {
   }
 
   getCuisineTypes(): Observable<CuisineTypeResponse[]> {
-    return this.http.get<CuisineTypeResponse[]>(`${this.API}/restaurants/cuisine-types`);
+    return this.http.get<CuisineTypeResponse[]>(`${this.API}/cuisine-types`);
   }
 }

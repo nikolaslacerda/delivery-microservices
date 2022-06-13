@@ -57,7 +57,7 @@ export class OrderComponent implements OnInit {
               private shoppingCard: ShoppingCartService,
               private authService: AuthenticationService,
               private restaurantService: RestaurantService,
-              private paymentMethodService: PaymentMethodService,) {
+              private paymentMethodService: PaymentMethodService) {
   }
 
   ngOnInit() {

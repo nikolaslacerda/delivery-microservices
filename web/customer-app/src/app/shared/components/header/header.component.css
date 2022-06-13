@@ -3,6 +3,10 @@ div.dropdown:last-child .dropdown-menu {
   left: auto;
 }
 
+.brand-image {
+  height: 40px;
+}
+
 .active {
   color: #dd4b39 !important;
   font-weight: bold;

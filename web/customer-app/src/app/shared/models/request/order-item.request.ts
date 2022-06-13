@@ -1,5 +1,4 @@
 export class OrderItemRequest {
-
   id: number;
   name: string;
   description: string;

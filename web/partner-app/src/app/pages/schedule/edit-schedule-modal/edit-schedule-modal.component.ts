@@ -15,11 +15,13 @@ export class EditScheduleModalComponent implements OnInit {
 
   @Output() event = new EventEmitter<any>();
 
+  buttonLoading = false;
   schedule = {} as ScheduleResponse;
   scheduleForm = this.fb.group({
     dayOfWeek: ['', Validators.required],
     openingTime: ['', Validators.required],
     closingTime: ['', Validators.required],
+    active: ['', Validators.required]
   });
 
   constructor(private fb: FormBuilder,
@@ -29,14 +31,14 @@ export class EditScheduleModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._populateForm();
+    this.populateForm();
   }
 
   emitUpdateBusinessHourEvent(updatedItem: any): void {
     this.event.emit(updatedItem);
   }
 
-  private _populateForm(): void {
+  private populateForm(): void {
     const openingHour = new Date();
     openingHour.setHours(Number(this.schedule.openingTime.split(':')[0]));
     openingHour.setMinutes(Number(this.schedule.openingTime.split(':')[1]));
@@ -49,6 +51,7 @@ export class EditScheduleModalComponent implements OnInit {
       dayOfWeek: this.schedule.dayOfWeek,
       openingTime: openingHour,
       closingTime: closingHour,
+      active: this.schedule.active
     });
   }
 
@@ -57,7 +60,8 @@ export class EditScheduleModalComponent implements OnInit {
   }
 
   updateSchedule(): void {
-    this.scheduleService.editSchedule(this.authService.getRestaurantId(), new ScheduleUpdateRequest(this.scheduleForm.value))
+    this.buttonLoading = true;
+    this.scheduleService.editSchedule(this.authService.getRestaurantId(), this.schedule.id, new ScheduleUpdateRequest(this.scheduleForm.value))
       .subscribe((updatedItem: ScheduleResponse) => {
         this.emitUpdateBusinessHourEvent(updatedItem);
         this.hide();

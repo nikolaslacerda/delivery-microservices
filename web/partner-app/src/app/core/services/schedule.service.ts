@@ -21,8 +21,8 @@ export class ScheduleService {
     return this.http.post(`${this.API}/partners/restaurants/${restaurantId}/business-hours`, schedule);
   }
 
-  editSchedule(restaurantId: number, schedule: any): Observable<any> {
-    return this.http.put(`${this.API}/partners/restaurants/${restaurantId}/business-hours/${schedule.id}`, schedule);
+  editSchedule(restaurantId: number, scheduleId: number, schedule: any): Observable<any> {
+    return this.http.put(`${this.API}/partners/restaurants/${restaurantId}/business-hours/${scheduleId}`, schedule);
   }
 
   getRestaurantSchedule(restaurantId: any): Observable<ScheduleResponse[]> {

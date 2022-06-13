@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {RestaurantService} from '../../core/services/restaurant.service';
 import {CategoryService} from '../../core/services/category.service';
 import {AuthService} from '../../core/services/auth.service';
@@ -16,14 +16,21 @@ import {CuisineTypeResponse} from '../../shared/model/response/cuisine-type-resp
 })
 export class ProfileComponent implements OnInit {
 
-  restaurantForm!: FormGroup;
   isLoading = true;
   buttonLoading = false;
   image!: File;
   imageSrc: any;
-
   restaurant = {} as RestaurantResponse;
   cuisineTypes: CuisineTypeResponse[] = [];
+
+  restaurantForm = this.fb.group({
+    name: this.fb.control('', Validators.required),
+    mainCategory: this.fb.control('', Validators.required),
+    description: this.fb.control('', Validators.required),
+    image: this.fb.group({
+      profileImage: this.fb.control('')
+    })
+  });
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -33,14 +40,6 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.restaurantForm = this.fb.group({
-      name: this.fb.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
-      mainCategory: this.fb.control('', [Validators.required]),
-      description: this.fb.control('', Validators.required),
-      image: this.fb.group({
-        profileImage: this.fb.control('')
-      })
-    });
     this.authService.getRestaurantInfo()
       .subscribe((restaurant: RestaurantResponse) => {
         this.restaurant = restaurant;
@@ -52,6 +51,21 @@ export class ProfileComponent implements OnInit {
             this.isLoading = false;
           });
       });
+  }
+
+  get name(): AbstractControl {
+    // @ts-ignore
+    return this.restaurantForm.get('name');
+  }
+
+  get description(): AbstractControl {
+    // @ts-ignore
+    return this.restaurantForm.get('description');
+  }
+
+  get mainCategory(): AbstractControl {
+    // @ts-ignore
+    return this.restaurantForm.get('mainCategory');
   }
 
   populateForm(): void {

@@ -1,5 +1,4 @@
 export class MenuCategoryRequest {
-
   name?: string;
   active?: boolean;
 

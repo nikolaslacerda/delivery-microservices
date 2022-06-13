@@ -1,5 +1,4 @@
-export class RestaurantResponse {
-
+export interface RestaurantResponse {
   id: number;
   name: string;
   mainCategory: string;
@@ -13,20 +12,4 @@ export class RestaurantResponse {
   menuId: number;
   addressId: number;
   partnerId: number;
-
-  constructor(model: any = {}) {
-    this.id = model.id;
-    this.name = model.name;
-    this.mainCategory = model.mainCategory;
-    this.minDeliveryTime = model.minDeliveryTime;
-    this.maxDeliveryTime = model.maxDeliveryTime;
-    this.deliveryFee = model.deliveryFee;
-    this.description = model.description;
-    this.userRating = model.userRating;
-    this.distance = model.distance;
-    this.imageUrl = model.imageUrl;
-    this.menuId = model.menuId;
-    this.addressId = model.addressId;
-    this.partnerId = model.partnerId;
-  }
 }

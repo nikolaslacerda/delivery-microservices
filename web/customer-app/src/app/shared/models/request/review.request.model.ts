@@ -1,5 +1,4 @@
 export class ReviewRequest {
-
   name: string;
   createdAt: string;
   comment: string;

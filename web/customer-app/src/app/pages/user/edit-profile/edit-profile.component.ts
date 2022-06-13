@@ -25,20 +25,14 @@ export class EditProfileComponent implements OnInit {
 
   constructor(private router: Router,
               private fb: FormBuilder,
-              private authService: AuthenticationService,) {
+              private authService: AuthenticationService) {
   }
 
   ngOnInit() {
     this.authService.getUserInfo()
       .subscribe(user => {
         this.user = user;
-        this.userForm.patchValue({
-          email: this.user.email,
-          phoneNumber: this.user.phoneNumber,
-          firstName: this.user.firstName,
-          lastName: this.user.lastName,
-          cpf: this.user.cpf,
-        });
+        this.populateForm();
         this.isLoading = false;
       });
   }
@@ -61,6 +55,16 @@ export class EditProfileComponent implements OnInit {
 
   get cpf(): AbstractControl {
     return this.userForm.get('cpf');
+  }
+
+  populateForm(): void {
+    this.userForm.patchValue({
+      email: this.user.email,
+      phoneNumber: this.user.phoneNumber,
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      cpf: this.user.cpf,
+    });
   }
 
   updateUser(): void {

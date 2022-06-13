@@ -1,11 +1,9 @@
 import {OrderItemRequest} from './order-item.request';
-import {AddressRequest} from './address.request.model';
 import {PaymentRequest} from './payment.request.model';
 import {RestaurantOrderRequest} from '../restaurant.order.request.model';
 import {DeliveryRequest} from './delivery.request.model';
 
 export class OrderRequest {
-
   customerId: number;
   restaurant: RestaurantOrderRequest;
   delivery: DeliveryRequest;

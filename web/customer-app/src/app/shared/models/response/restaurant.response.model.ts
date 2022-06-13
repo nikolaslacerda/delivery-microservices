@@ -1,4 +1,4 @@
-import {AddressRequest} from '../request/address.request.model';
+import {AddressResponse} from './address.response';
 
 export class RestaurantResponse {
   id: number;
@@ -10,7 +10,7 @@ export class RestaurantResponse {
   maxDeliveryTime: number;
   cep: number;
   description: string;
-  address: AddressRequest;
+  address: AddressResponse;
   deliveryFee: number;
   distance: number;
   imageUrl: string;

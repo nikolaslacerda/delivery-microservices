@@ -1,5 +1,4 @@
 export class AddressRequest {
-
   streetName: string;
   streetNumber: number;
   neighborhood: string;

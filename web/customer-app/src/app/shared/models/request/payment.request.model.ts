@@ -1,5 +1,4 @@
 export class PaymentRequest {
-
   paymentMethodId: number;
   name?: string;
   cardNumber?: string;

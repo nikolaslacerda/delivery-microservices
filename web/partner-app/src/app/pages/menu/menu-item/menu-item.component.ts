@@ -59,7 +59,7 @@ export class MenuItemComponent implements OnInit {
   openAddModal(category: MenuCategoryResponse): void {
     const initialState = {category};
     this.bsModalRef = this.modalService.show(AddMenuItemModalComponent, {initialState});
-    this.bsModalRef.content.event.subscribe((item: any) => {
+    this.bsModalRef.content.event.subscribe((item: MenuItemResponse) => {
       item.imageUrl = 'http://localhost:9999/restaurants/1/items/' + item.id + '/image';
       this.items.push(item);
       this.showSuccessCreate(item.name);

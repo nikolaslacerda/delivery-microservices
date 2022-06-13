@@ -12,14 +12,17 @@ export class MenuItemComponent implements OnInit {
   @Input() menuItem: MenuItemResponse;
   @Output() add = new EventEmitter();
 
+  restaurantId: number;
+
   constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.restaurantId = this.route.parent.snapshot.params.restaurantId
   }
 
   emitAddEvent() {
-    this.menuItem.restaurantId = this.route.parent.snapshot.params.restaurantId; //
+    this.menuItem.restaurantId = this.restaurantId; //
     this.add.emit(this.menuItem);
   }
 

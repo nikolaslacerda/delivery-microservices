@@ -11,7 +11,9 @@
         <div class="position-relative place-info-box-icon">
           <div class="place-info-box-icon2">
             <img src="{{imageSrc}}" alt="">
-            <div class="edit"><em class="bi-pen-fill"></em></div>
+            <div class="edit">
+              <em class="bi-pen-fill"></em>
+            </div>
           </div>
           <input
             formControlName="profileImage"
@@ -24,8 +26,13 @@
 
       <div class="form-group mt-3">
         <label for="name">Restaurant Name</label>
-        <input type="text" class="form-control" formControlName="name" id="name" maxlength="60"
-               [ngClass]="{ 'is-invalid': restaurantForm.controls.name.invalid && (restaurantForm.controls.name.dirty || restaurantForm.controls.name.touched) }">
+        <input type="text"
+               class="form-control"
+               formControlName="name"
+               id="name"
+               minlength="3"
+               maxlength="60"
+               [ngClass]="{ 'is-invalid': name.invalid && (name.dirty || name.touched) }">
         <small id="passwordHelpBlock" class="form-text text-muted end-0">
           <p class="float-end">{{restaurantForm.value.name.length}}/60 characters</p>
           <!--    <div *ngIf="!restaurantForm.controls.name.valid" class="invalid-feedback">-->
@@ -37,15 +44,21 @@
         <label for="mainCategory">Cuisine Type</label>
         <select class="form-select" formControlName="mainCategory" id="mainCategory" name="mainCategory"
                 aria-label="select example"
-                [ngClass]="{ 'is-invalid': restaurantForm.controls.mainCategory.invalid && (restaurantForm.controls.mainCategory.touched) }">
+                [ngClass]="{ 'is-invalid': mainCategory.invalid && (mainCategory.touched) }">
           <option *ngFor="let cuisine of cuisineTypes" value="{{cuisine.name}}">{{cuisine.name}}</option>
           <option value="Stackhouse">Stackhouse</option>
+          //
         </select>
       </div>
       <div class="form-group mt-3">
         <label for="description">Description</label>
-        <textarea class="form-control" formControlName="description" type="text" id="description" maxlength="150"
-                  [ngClass]="{ 'is-invalid': restaurantForm.controls.description.invalid && (restaurantForm.controls.description.dirty || restaurantForm.controls.description.touched) }"></textarea>
+        <textarea class="form-control"
+                  formControlName="description"
+                  type="text"
+                  id="description"
+                  minlength="3"
+                  maxlength="100"
+                  [ngClass]="{ 'is-invalid': description.invalid && (description.dirty || description.touched) }"></textarea>
         <small id="none" class="form-text text-muted end-0">
           <p class="float-end">{{restaurantForm.value.description.length}}/150 characters</p>
         </small>

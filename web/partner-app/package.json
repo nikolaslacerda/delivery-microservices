@@ -25,6 +25,7 @@
     "jsonwebtoken": "^8.5.1",
     "ngx-bootstrap": "^7.1.0",
     "ngx-infinite-scroll": "^10.0.1",
+    "ngx-mask": "^11.1.5",
     "ngx-toastr": "^13.2.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PipesModule} from './pipes/pipes.module';
 import {LoadingComponent} from './components/loading/loading.component';
 import {AppRoutingModule} from '../app-routing.module';
+import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
   declarations: [LoadingComponent],
@@ -12,7 +13,8 @@ import {AppRoutingModule} from '../app-routing.module';
     PipesModule,
     FormsModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
   ],
   exports: [
     CommonModule,

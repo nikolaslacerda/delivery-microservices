@@ -43,21 +43,20 @@ export class PaymentMethodsComponent implements OnInit {
     const paymentMethodName = event.target.options[event.target.options.selectedIndex].text;
     this.paymentMethodService.addPaymentMethodToRestaurant(paymentMethodId, 1).subscribe(
       createdPaymentMethod => {
-        console.log(createdPaymentMethod);
-        this.restaurantPaymentMethods.push(new PaymentMethodResponse(createdPaymentMethod));
+        this.restaurantPaymentMethods.push(createdPaymentMethod);
         this.allPaymentMethods = this.allPaymentMethods.filter((x: any) => x.id !== paymentMethodId);
         this.showSuccessCreate(paymentMethodName);
       }
     );
   }
 
-  deletePaymentMethod(paymentMethod: any): void {
+  deletePaymentMethod(paymentMethod: PaymentMethodResponse): void {
     const restaurantId = this.authService.getRestaurantId();
     this.paymentMethodService.deleteRestaurantPaymentMethod(restaurantId, paymentMethod.id).subscribe(
       () => {
         this.restaurantPaymentMethods = this.restaurantPaymentMethods
           .filter((restaurantPaymentMethod: any) => restaurantPaymentMethod.id !== paymentMethod.id);
-        this.allPaymentMethods.push(new PaymentMethodResponse({id: paymentMethod.id, name: paymentMethod.name}));
+        this.allPaymentMethods.push(paymentMethod);
         this.showSuccessDelete(paymentMethod.name);
       }
     );

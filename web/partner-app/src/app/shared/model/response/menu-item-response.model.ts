@@ -1,5 +1,4 @@
-export class MenuItemResponse {
-
+export interface MenuItemResponse {
   id: number;
   name: string;
   description: string;
@@ -8,14 +7,4 @@ export class MenuItemResponse {
   promotionalPrice: number;
   active: boolean;
   newImage?: any;
-
-  constructor(model: any = {}) {
-    this.id = model.id;
-    this.name = model.name;
-    this.description = model.description;
-    this.imageUrl = model.imageUrl;
-    this.price = model.price;
-    this.promotionalPrice = model.promotionalPrice;
-    this.active = model.active;
-  }
 }

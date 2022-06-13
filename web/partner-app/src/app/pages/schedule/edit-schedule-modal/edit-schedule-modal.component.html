@@ -18,16 +18,19 @@
         </select>
       </div>
       <div class="mb-3">
-        <label class="form-label">Horario de abertura</label>
+        <label class="form-label">Opening Hour</label>
         <timepicker [formControlName]="'openingTime'" [showMeridian]="false"></timepicker>
       </div>
       <div class="mb-3">
-        <label class="form-label">Horario de fechamento</label>
+        <label class="form-label">Closing Hour</label>
         <timepicker [formControlName]="'closingTime'" [showMeridian]="false"></timepicker>
       </div>
       <div class="modal-footer mt-4">
         <button type="button" (click)="hide()" class="btn btn-lg btn-primary-outline">Close</button>
-        <button type="submit" class="btn btn-lg btn-primary" [disabled]="!scheduleForm.valid">Update</button>
+        <button type="submit" class="btn btn-lg btn-primary" [disabled]="!scheduleForm.valid || buttonLoading">
+          <span *ngIf="buttonLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Update
+        </button>
       </div>
     </form>
   </div>
